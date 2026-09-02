@@ -27,19 +27,13 @@ const loginSchema = Joi.object({
   client_context: clientContextSchema
 });
 
+// Class placement is deliberately absent: it is set once via
+// PUT /me/class-placement and thereafter changes only through promotion or an
+// audited override (§1.4, §6.4, §6.5).
 const profileUpdateSchema = Joi.object({
   full_name: Joi.string().min(2).max(100).optional(),
   avatar_url: Joi.string().uri().allow('').optional(),
   location: Joi.string().max(255).allow('').optional(),
-  institution_id: Joi.string().uuid().allow(null, '').optional(),
-  institution: Joi.string().max(255).allow('').optional(),
-  affiliate_university: Joi.string().max(255).allow('').optional(),
-  programme_category: Joi.string().max(255).allow('').optional(),
-  program: Joi.string().max(255).allow('').optional(),
-  program_id: Joi.string().uuid().allow(null, '').optional(),
-  level: Joi.string().max(50).allow('').optional(),
-  semester: Joi.string().valid('1', '2').allow('').optional(),
-  index_number: Joi.string().max(80).allow('').optional(),
   country_code: Joi.string().length(2).allow('').optional(),
   phone_number: Joi.string().pattern(/^\+?[1-9]\d{1,14}$/).allow('').optional()
 });

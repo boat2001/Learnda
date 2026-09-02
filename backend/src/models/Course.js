@@ -44,12 +44,6 @@ module.exports = (sequelize) => {
   });
 
   Course.associate = (models) => {
-    if (models.CourseOffering) {
-      Course.hasMany(models.CourseOffering, {
-        foreignKey: 'course_id',
-        as: 'offerings'
-      });
-    }
   };
 
   return Course;

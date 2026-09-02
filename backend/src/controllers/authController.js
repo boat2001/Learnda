@@ -10,20 +10,30 @@ const {
   Plan,
   UserProgress,
   AcademicProfile,
-  Program,
+  LearningPathway,
   RegistrationOtp,
   RegistrationSession,
   RegistrationSecurityEvent,
   AuthSession,
-  UserContact,
-  Institution
+  UserContact
 } = require('../models');
 const rewardService = require('../services/rewardService');
+const logger = require('../config/logger');
+const { maybeAdvanceAcademicProgress } = require('../utils/academicProgression');
 const {
-  normalizeLevel,
-  normalizeSemester,
-  maybeAdvanceAcademicProgress
-} = require('../utils/academicProgression');
+  LEVEL_GROUPS,
+  LEVEL_GROUP_VALUES,
+  LEVEL_GROUP_LABELS,
+  CLASS_LEVELS,
+  CLASS_LEVELS_BY_GROUP,
+  CLASS_LEVEL_CODES,
+  ACADEMIC_TERMS,
+  ACADEMIC_PROFILE_STATUSES,
+  normalizeClassLevelCode,
+  isBannedClassCode,
+  getLevelGroup,
+  getAcademicYearLabel,
+} = require('../config/educationStructure');
 const {
   isEmailAddress,
   normalizeEmailAddress,
@@ -53,13 +63,7 @@ const subscriptionService = require('../services/subscriptionService');
 const notificationService = require('../services/notificationService');
 const config = require('../config/env');
 const { buildPaystackCallbackUrl } = require('../utils/callbackUrl');
-const { getAcademicCatalog } = require('../services/academicCatalogService');
 const { getFileUrl } = require('../config/upload');
-const {
-  normalizeProgramCategory,
-  validateStudentIndexNumber,
-  getProgramCategoryCode
-} = require('../utils/studentIdentity');
 
 const googleClientId = process.env.GOOGLE_CLIENT_ID;
 const googleClientSecret = process.env.GOOGLE_CLIENT_SECRET;
@@ -125,59 +129,33 @@ const REGISTRATION_SESSION_RESUME_TTL_DAYS = 30;
 const TRUSTED_DEVICE_TOKEN_TYPE = 'trusted_device';
 const TRUSTED_DEVICE_TOKEN_VERSION = 1;
 const PHONE_REGEX = /^(?:\+?[1-9]\d{7,14}|0\d{9})$/;
-const isUuidLike = (value) => /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(String(value || '').trim());
-const buildProgramKey = (programName, programCategory) => (
-  `${String(programCategory || '').trim()}-${String(programName || '').trim()}`
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '')
-    .slice(0, 120)
-);
 
-const syncUserAcademicColumnsFromProfile = async (user) => {
-  if (!user?.id) return user;
+// Loads the learner's academic profile and, if the academic year has turned,
+// promotes them one class (§6.4). Attaches the profile to the user instance so
+// downstream serialization can read class placement without a second query.
+const loadAndAdvanceAcademicProfile = async (user) => {
+  if (!user?.id) return null;
 
-  const academicProfileRecord = await AcademicProfile.findOne({
-    where: { user_id: user.id },
-    include: [
-      {
-        model: Program,
-        as: 'program_record',
-        required: false
-      }
-    ]
-  });
+  const profile = await AcademicProfile.findOne({ where: { user_id: user.id } });
+  if (!profile) return null;
 
-  if (!academicProfileRecord) return user;
-
-  const academicProfile = academicProfileRecord.get({ plain: true });
-  const metadata = academicProfile?.metadata && typeof academicProfile.metadata === 'object'
-    ? academicProfile.metadata
-    : {};
-  const desiredProgrammeCategory = academicProfile.programme_category || null;
-  const desiredProgramId = academicProfile.program_id || null;
-  const desiredProgramName =
-    academicProfile.program_record?.name ||
-    metadata.program_name ||
-    null;
-
-  const patch = {};
-  if (desiredProgrammeCategory && String(user.programme_category || '') !== String(desiredProgrammeCategory)) {
-    patch.programme_category = desiredProgrammeCategory;
-  }
-  if (desiredProgramId && String(user.program_id || '') !== String(desiredProgramId)) {
-    patch.program_id = desiredProgramId;
-  }
-  if (desiredProgramName && String(user.program || '') !== String(desiredProgramName)) {
-    patch.program = desiredProgramName;
+  const advance = maybeAdvanceAcademicProgress(profile.get({ plain: true }));
+  if (advance) {
+    // needs_review/years_elapsed are decision context, not columns.
+    const { needs_review: needsReview, years_elapsed: yearsElapsed, ...patch } = advance;
+    if (needsReview) {
+      logger.warn(
+        `Academic profile ${profile.id} advanced after ${yearsElapsed} academic years; flagging for review.`
+      );
+      patch.metadata = { ...(profile.metadata || {}), needs_progression_review: true };
+    }
+    await profile.update(patch);
   }
 
-  if (!Object.keys(patch).length) return user;
-
-  await user.update(patch);
-  Object.assign(user, patch);
-  return user;
+  user.academic_profile = profile;
+  return profile;
 };
+
 const buildPhonePlaceholderEmail = (phoneNumber) => `phone.${String(phoneNumber || '').replace(/\D/g, '')}@auth.learnda.app`;
 const getRegistrationChallengeKey = ({ channel, contact }) => (
   channel === 'phone'
@@ -319,13 +297,7 @@ class AuthController {
   }
 
   async loadAuthContext(user) {
-    await syncUserAcademicColumnsFromProfile(user);
-
-    const nextAcademicState = maybeAdvanceAcademicProgress(user);
-    if (nextAcademicState) {
-      await user.update(nextAcademicState);
-      Object.assign(user, nextAcademicState);
-    }
+    await loadAndAdvanceAcademicProfile(user);
 
     const [subscription, progress] = await Promise.all([
       Subscription.findOne({
@@ -1087,14 +1059,9 @@ class AuthController {
       contact_value: session.contact_value,
       otp_verified: Boolean(session.otp_verified),
       full_name: session.full_name || '',
-      institution_id: session.institution_id || '',
-      affiliate_university: session.affiliate_university || '',
-      programme_category: session.programme_category || '',
-      program_id: session.program_id || '',
-      program_name: metadata.program_name || '',
-      level: session.level || '',
-      semester: session.semester || '',
-      index_number: session.index_number || '',
+      class_level: session.class_level || '',
+      pathway_id: session.pathway_id || '',
+      is_stem_school: Boolean(session.is_stem_school),
       selected_plan_id: session.selected_plan_id || null,
       duration_months: Number(session.duration_months || 1),
       stage: session.stage,
@@ -1149,36 +1116,30 @@ class AuthController {
       password,
       full_name,
       role = 'student',
-      institution_id,
-      institution,
-      affiliate_university,
-      program,
-      level,
+      class_level,
+      pathway_id,
+      is_stem_school,
       phone_number,
-      index_number,
       referral_code
     } = payload || {};
-    const normalizedLevel = normalizeLevel(level);
-    const normalizedProgram = role === 'student'
-      ? normalizeProgramCategory(program)
-      : (typeof program === 'string' ? program.trim() : null);
-    const normalizedAffiliateUniversity = role === 'student'
-      ? String(affiliate_university || '').trim() || null
-      : null;
+
+    // §1.4: the class a learner claims at sign-up is normalized against the
+    // canonical list; anything else (including P1-P6) is rejected outright.
+    const normalizedClassLevel = normalizeClassLevelCode(class_level);
+    if (class_level && !normalizedClassLevel) {
+      throw createHttpError(
+        400,
+        isBannedClassCode(class_level)
+          ? 'Primary classes are Basic 1-6 (B1-B6). Use a Basic class code.'
+          : `Unknown class level "${class_level}". Expected one of: ${CLASS_LEVEL_CODES.join(', ')}`
+      );
+    }
+
     const normalizedPhone = normalizePhoneNumber(phone_number || '');
-    const normalizedSemester = role === 'student'
-      ? config.academic.defaultSemester
-      : null;
 
     const existingUser = await User.findOne({ where: { email } });
     if (existingUser) {
       throw createHttpError(409, 'User already exists');
-    }
-    if (role === 'student' && program != null && !normalizedProgram) {
-      throw createHttpError(
-        400,
-        'Program category must be one of: Early Childhood Education, Primary Education, JHS Education'
-      );
     }
     if (role === 'student' && !normalizedPhone) {
       throw createHttpError(400, 'Phone number is required for student registration');
@@ -1187,61 +1148,25 @@ class AuthController {
       throw createHttpError(400, 'Phone number format is invalid');
     }
 
+    // §4.4: an SHS learner needs a pathway before their subjects can be resolved.
+    const levelGroup = getLevelGroup(normalizedClassLevel);
+    if (levelGroup && levelGroup !== LEVEL_GROUPS.SHS && pathway_id) {
+      throw createHttpError(400, 'Learning pathways apply to SHS learners only');
+    }
+
     let referrer = null;
     if (referral_code) {
       referrer = await User.findOne({ where: { invite_code: referral_code } });
     }
 
-    let resolvedInstitutionId = institution_id || null;
-    let resolvedInstitutionName = institution || null;
-    let institutionRecord = null;
-
-    if (resolvedInstitutionId) {
-      institutionRecord = await Institution.findByPk(resolvedInstitutionId);
-      if (!institutionRecord) {
-        throw createHttpError(400, 'Selected college is invalid');
-      }
-      resolvedInstitutionName = institutionRecord.name;
-    }
-
-    let normalizedIndexNumber = index_number ? String(index_number).trim().toUpperCase() : null;
-    if (role === 'student' && !normalizedIndexNumber) {
-      throw createHttpError(400, 'Index number is required for student registration');
-    }
-    if (role === 'student' && normalizedIndexNumber) {
-      const canFullyValidateIndex = Boolean(
-        normalizedProgram &&
-        (institutionRecord || resolvedInstitutionName)
-      );
-
-      if (canFullyValidateIndex) {
-        const indexValidation = validateStudentIndexNumber({
-          indexNumber: normalizedIndexNumber,
-          programCategory: normalizedProgram,
-          institutionRecord,
-          institutionName: resolvedInstitutionName
-        });
-        if (!indexValidation.valid) {
-          throw createHttpError(400, indexValidation.error);
-        }
-        normalizedIndexNumber = indexValidation.normalizedIndexNumber;
-      }
-
-      const existingIndexOwner = await User.findOne({
-        where: {
-          index_number: normalizedIndexNumber
-        }
-      });
-      if (existingIndexOwner) {
-        throw createHttpError(409, 'Index number is already assigned to another account');
-      }
-    }
-
-    const hasInstitution = Boolean(resolvedInstitutionId || resolvedInstitutionName);
-    const hasAffiliateUniversity = Boolean(normalizedAffiliateUniversity);
-    const hasProgram = Boolean(normalizedProgram);
-    const hasPhoneNumber = Boolean(normalizedPhone);
-    const hasIndexNumber = Boolean(normalizedIndexNumber);
+    // Progressive onboarding (§13.6): a name and phone get a learner in; the
+    // class is required before they can open any content.
+    const hasPlacement = Boolean(
+      normalizedClassLevel && (levelGroup !== LEVEL_GROUPS.SHS || pathway_id)
+    );
+    const profileComplete = role === 'student'
+      ? Boolean(full_name && normalizedPhone && hasPlacement)
+      : true;
 
     const user = await User.create({
       email,
@@ -1253,29 +1178,34 @@ class AuthController {
       email_verified: true,
       last_active_at: new Date(),
       session_token: this.createSessionToken(),
-      institution_id: resolvedInstitutionId,
-      institution: resolvedInstitutionName || null,
-      affiliate_university: normalizedAffiliateUniversity,
-      programme_category: normalizedProgram || null,
-      program: null,
-      program_id: null,
-      level: normalizedLevel || null,
-      semester: normalizedSemester || null,
-      index_number: normalizedIndexNumber || null,
       phone_number: normalizedPhone || null,
       academic_last_progressed_at: role === 'student' ? new Date() : null,
       password_set: Boolean(password),
-      profile_complete: role === 'student'
-        ? Boolean(hasInstitution && hasAffiliateUniversity && hasProgram && normalizedLevel && hasPhoneNumber && hasIndexNumber)
-        : true,
-      onboarding_step: role === 'student' && !(hasInstitution && hasAffiliateUniversity && hasProgram && normalizedLevel && hasPhoneNumber && hasIndexNumber)
-        ? ONBOARDING_STEPS.PROFILE
-        : (password ? ONBOARDING_STEPS.PLAN : ONBOARDING_STEPS.PASSWORD),
+      profile_complete: profileComplete,
+      onboarding_step: profileComplete
+        ? (password ? ONBOARDING_STEPS.PLAN : ONBOARDING_STEPS.PASSWORD)
+        : ONBOARDING_STEPS.PROFILE,
       selected_plan_id: null,
       plan_status: PLAN_STATUSES.NONE,
       referral_code: referral_code || null,
       referred_by_user_id: referrer?.id || null
     });
+
+    // The academic profile is the single source of truth for class placement
+    // (§6.2). Created only once a class is known -- never guessed.
+    if (role === 'student' && normalizedClassLevel) {
+      await AcademicProfile.create({
+        user_id: user.id,
+        class_level: normalizedClassLevel,
+        level_group: levelGroup,
+        academic_year: getAcademicYearLabel(),
+        term: ACADEMIC_TERMS[0],
+        status: ACADEMIC_PROFILE_STATUSES.ACTIVE,
+        auto_progression: true,
+        pathway_id: levelGroup === LEVEL_GROUPS.SHS ? (pathway_id || null) : null,
+        is_stem_school: Boolean(is_stem_school)
+      });
+    }
 
     try {
       await UserProgress.create({
@@ -1349,13 +1279,6 @@ class AuthController {
       phone_verified: channel === 'phone',
       last_active_at: new Date(),
       session_token: this.createSessionToken(),
-      institution_id: null,
-      institution: null,
-      affiliate_university: null,
-      program: null,
-      level: null,
-      semester: null,
-      index_number: null,
       phone_number: phoneNumber,
       academic_last_progressed_at: null,
       password_set: true,
@@ -1448,39 +1371,27 @@ class AuthController {
       (session.contact_type === 'phone' ? session.contact_value : '')
     );
     const fullName = String(session.full_name || '').trim();
-    const affiliateUniversity = String(session.affiliate_university || '').trim();
-    const programmeCategory = normalizeProgramCategory(session.programme_category);
-    const normalizedLevel = normalizeLevel(session.level);
-    const normalizedSemester = normalizeSemester(session.semester || config.academic.defaultSemester);
-    const normalizedIndexNumber = String(session.index_number || '').trim().toUpperCase();
-    const studentIdentifierType = metadata.student_identifier_type || 'index_number';
+    const normalizedClassLevel = normalizeClassLevelCode(session.class_level);
+    const levelGroup = getLevelGroup(normalizedClassLevel);
     const selectedPlanId = options.selectedPlanId || session.selected_plan_id || null;
 
     if (!session.password_hash) {
       throw createHttpError(400, 'Create a password before finishing registration');
     }
-    if (!fullName || !session.institution_id || !affiliateUniversity || !programmeCategory || !session.program_id || !normalizedLevel || !normalizedSemester || !normalizedIndexNumber) {
+    if (!fullName || !normalizedClassLevel || (levelGroup === LEVEL_GROUPS.SHS && !session.pathway_id)) {
       throw createHttpError(400, 'Registration session is incomplete');
     }
     if (phoneNumber && !PHONE_REGEX.test(phoneNumber)) {
       throw createHttpError(400, 'Phone number format is invalid');
     }
 
-    const [existingUserByEmail, existingUserByPhone, institutionRecord, programRecord] = await Promise.all([
+    const [existingUserByEmail, existingUserByPhone] = await Promise.all([
       User.findOne({ where: { email } }),
-      phoneNumber ? User.findOne({ where: { phone_number: phoneNumber } }) : null,
-      Institution.findByPk(session.institution_id),
-      Program.findByPk(session.program_id)
+      phoneNumber ? User.findOne({ where: { phone_number: phoneNumber } }) : null
     ]);
 
     if (existingUserByEmail || existingUserByPhone) {
       throw createHttpError(409, 'User already exists');
-    }
-    if (!institutionRecord) {
-      throw createHttpError(400, 'Selected college is invalid');
-    }
-    if (!programRecord) {
-      throw createHttpError(400, 'Selected program is invalid');
     }
 
     const user = await User.create({
@@ -1494,15 +1405,6 @@ class AuthController {
       phone_verified: session.contact_type === 'phone' ? Boolean(session.otp_verified) : false,
       last_active_at: new Date(),
       session_token: this.createSessionToken(),
-      institution_id: institutionRecord.id,
-      institution: institutionRecord.name,
-      affiliate_university: affiliateUniversity,
-      programme_category: programmeCategory,
-      program: programRecord.name,
-      program_id: programRecord.id,
-      level: normalizedLevel,
-      semester: normalizedSemester,
-      index_number: normalizedIndexNumber,
       phone_number: phoneNumber || null,
       academic_last_progressed_at: new Date(),
       password_set: true,
@@ -1511,19 +1413,7 @@ class AuthController {
       selected_plan_id: selectedPlanId,
       plan_status: selectedPlanId ? PLAN_STATUSES.PENDING_PAYMENT : PLAN_STATUSES.NONE,
       invite_code: crypto.randomBytes(4).toString('hex'),
-      avatar_url: metadata.avatar_url || null,
-      preferences: {
-        academic_profile: {
-          program_name: programRecord.name,
-          program_category: programmeCategory,
-          program_category_code: getProgramCategoryCode(programmeCategory),
-          student_identifier_type: studentIdentifierType,
-          college_id: institutionRecord.id,
-          college_name: institutionRecord.name,
-          affiliate_university: affiliateUniversity,
-          program_id: programRecord.id
-        }
-      }
+      avatar_url: metadata.avatar_url || null
     }, { hooks: false });
 
     await UserProgress.create({
@@ -1536,20 +1426,14 @@ class AuthController {
 
     await AcademicProfile.create({
       user_id: user.id,
-      institution_id: institutionRecord.id,
-      affiliate_university: affiliateUniversity,
-      programme_category: programmeCategory,
-      program_id: programRecord.id,
-      level: normalizedLevel,
-      semester: normalizedSemester,
-      index_number: normalizedIndexNumber,
-      student_identifier_type: studentIdentifierType,
-      metadata: {
-        program_name: programRecord.name,
-        program_category_code: getProgramCategoryCode(programmeCategory),
-        college_id: institutionRecord.id,
-        college_name: institutionRecord.name
-      }
+      class_level: normalizedClassLevel,
+      level_group: levelGroup,
+      academic_year: getAcademicYearLabel(),
+      term: ACADEMIC_TERMS[0],
+      status: ACADEMIC_PROFILE_STATUSES.ACTIVE,
+      auto_progression: true,
+      pathway_id: levelGroup === LEVEL_GROUPS.SHS ? (session.pathway_id || null) : null,
+      is_stem_school: Boolean(session.is_stem_school)
     });
 
     await createSignupWelcomeNotification(user);
@@ -2217,15 +2101,49 @@ class AuthController {
     }
   }
 
+  // Serves the canonical K-12 structure the onboarding UI needs: the class
+  // levels in §2.3 order, and the SHS pathways a learner can be offering (§4.4).
   async getRegistrationAcademicCatalog(req, res) {
     try {
-      const catalog = await getAcademicCatalog();
-      return res.json({ success: true, data: catalog });
+      const pathways = LearningPathway
+        ? await LearningPathway.findAll({
+            where: { is_active: true },
+            order: [['sort_order', 'ASC'], ['name', 'ASC']]
+          })
+        : [];
+
+      return res.json({
+        success: true,
+        data: {
+          level_groups: LEVEL_GROUP_VALUES.map((group) => ({
+            code: group,
+            label: LEVEL_GROUP_LABELS[group],
+            class_levels: CLASS_LEVELS_BY_GROUP[group].map((l) => ({
+              code: l.code,
+              label: l.label,
+              ordinal: l.ordinal
+            }))
+          })),
+          // Flat list in mandatory UI order (§2.3) for simple pickers.
+          class_levels: CLASS_LEVELS.map((l) => ({
+            code: l.code,
+            label: l.label,
+            level_group: l.levelGroup,
+            ordinal: l.ordinal
+          })),
+          pathways: pathways.map((p) => ({
+            id: p.id,
+            slug: p.slug,
+            name: p.name,
+            is_stem_only: Boolean(p.is_stem_only)
+          }))
+        }
+      });
     } catch (error) {
       console.error('Get registration academic catalog error:', error);
       return res.status(500).json({
         success: false,
-        error: 'Failed to load academic catalog'
+        error: 'Failed to load the class catalog'
       });
     }
   }
@@ -2270,167 +2188,59 @@ class AuthController {
   async updateRegistrationProfile(req, res) {
     try {
       const session = await this.resolveRegistrationSessionAccess(req);
-      const {
-        full_name,
-        institution_id,
-        institution,
-        affiliate_university,
-        program,
-        academic_program,
-        level,
-        semester,
-        index_number
-      } = req.body || {};
+      const { full_name, class_level, pathway_id, is_stem_school } = req.body || {};
 
       const trimmedFullName = String(full_name || '').trim();
-      const normalizedProgram = normalizeProgramCategory(program);
-      const normalizedLevel = normalizeLevel(level);
-      const normalizedSemester = normalizeSemester(semester || config.academic.defaultSemester);
-      const normalizedAffiliateUniversity = String(affiliate_university || '').trim();
-      const trimmedAcademicProgram = String(academic_program || '').trim();
-      const trimmedIndexNumber = String(index_number || '').trim().toUpperCase();
+      const normalizedClassLevel = normalizeClassLevelCode(class_level);
 
-      if (!trimmedFullName || !institution_id || !normalizedAffiliateUniversity || !normalizedProgram || !trimmedAcademicProgram || !normalizedLevel || !normalizedSemester || !trimmedIndexNumber) {
+      if (!trimmedFullName) {
+        return res.status(400).json({ success: false, error: 'full_name is required' });
+      }
+
+      // §1.1: reject P1-P6 with a message that points at the right codes,
+      // rather than silently translating and hiding bad client data.
+      if (!normalizedClassLevel) {
         return res.status(400).json({
           success: false,
-          error: 'full_name, institution_id, affiliate_university, program, academic_program, level, semester and index_number are required'
+          error: isBannedClassCode(class_level)
+            ? 'Primary classes are Basic 1-6 (B1-B6). Use a Basic class code.'
+            : `class_level is required and must be one of: ${CLASS_LEVEL_CODES.join(', ')}`
         });
       }
 
-      const academicCatalog = await getAcademicCatalog();
-      const selectedCollege = academicCatalog?.colleges?.find((college) => String(college.id) === String(institution_id));
-      if (!selectedCollege) {
+      const levelGroup = getLevelGroup(normalizedClassLevel);
+
+      // §4.4: SHS learners pick a pathway; everyone else must not have one.
+      if (levelGroup === LEVEL_GROUPS.SHS && !pathway_id) {
         return res.status(400).json({
           success: false,
-          error: 'Selected college is invalid'
+          error: 'SHS learners must choose a learning area / pathway'
         });
       }
-      if (String(selectedCollege.affiliate_university || '') !== normalizedAffiliateUniversity) {
+      if (levelGroup !== LEVEL_GROUPS.SHS && pathway_id) {
         return res.status(400).json({
           success: false,
-          error: 'Affiliate university does not match the selected college'
+          error: 'Learning pathways apply to SHS learners only'
         });
-      }
-      if (!(selectedCollege.programme_categories || []).some((category) => category.name === normalizedProgram)) {
-        return res.status(400).json({
-          success: false,
-          error: 'Program category is not offered by the selected college'
-        });
-      }
-
-      const availablePrograms = academicCatalog?.programs_by_category?.[normalizedProgram] || [];
-      if (
-        availablePrograms.length &&
-        !availablePrograms.some((item) => String(item.name || '').trim().toLowerCase() === trimmedAcademicProgram.toLowerCase())
-      ) {
-        return res.status(400).json({
-          success: false,
-          error: 'Selected program is invalid for the chosen program category'
-        });
-      }
-
-      const institutionRecord = await Institution.findByPk(institution_id);
-      if (!institutionRecord) {
-        return res.status(400).json({
-          success: false,
-          error: 'Selected college is invalid'
-        });
-      }
-
-      const looksLikeStructuredIndex = /^[A-Z]{2}CE\/[A-Z]{3}\/\d{2}\/\d{4,6}$/.test(trimmedIndexNumber);
-      let validatedStudentIdentifier = trimmedIndexNumber;
-      let studentIdentifierType = 'application_number';
-      if (looksLikeStructuredIndex) {
-        const indexValidation = validateStudentIndexNumber({
-          indexNumber: trimmedIndexNumber,
-          programCategory: normalizedProgram,
-          institutionRecord,
-          institutionName: institutionRecord.name
-        });
-        if (!indexValidation.valid) {
-          return res.status(400).json({
-            success: false,
-            error: indexValidation.error
-          });
-        }
-        validatedStudentIdentifier = indexValidation.normalizedIndexNumber;
-        studentIdentifierType = 'index_number';
-      }
-
-      const existingOwner = await User.findOne({
-        where: {
-          index_number: validatedStudentIdentifier
-        }
-      });
-      if (existingOwner) {
-        return res.status(409).json({
-          success: false,
-          error: 'Index number is already assigned to another account'
-        });
-      }
-
-      const selectedProgramOption = availablePrograms.find(
-        (item) => String(item.name || '').trim().toLowerCase() === trimmedAcademicProgram.toLowerCase()
-      ) || null;
-
-      let resolvedProgramRecord = null;
-      if (selectedProgramOption?.id && isUuidLike(selectedProgramOption.id)) {
-        resolvedProgramRecord = await Program.findByPk(selectedProgramOption.id);
-      }
-      if (!resolvedProgramRecord) {
-        resolvedProgramRecord = await Program.findOne({
-          where: {
-            name: trimmedAcademicProgram,
-            category: normalizedProgram
-          }
-        });
-      }
-      if (!resolvedProgramRecord) {
-        const [createdProgram] = await Program.findOrCreate({
-          where: {
-            key: buildProgramKey(trimmedAcademicProgram, normalizedProgram)
-          },
-          defaults: {
-            name: trimmedAcademicProgram,
-            category: normalizedProgram,
-            institution_id: institutionRecord.id,
-            metadata: {
-              category: normalizedProgram,
-              source: 'auth.updateRegistrationProfile'
-            }
-          }
-        });
-        resolvedProgramRecord = createdProgram;
       }
 
       await session.update({
         full_name: trimmedFullName,
-        institution_id: institutionRecord.id,
-        affiliate_university: normalizedAffiliateUniversity,
-        programme_category: normalizedProgram,
-        program_id: resolvedProgramRecord.id,
-        level: normalizedLevel,
-        semester: normalizedSemester,
-        index_number: validatedStudentIdentifier,
+        class_level: normalizedClassLevel,
+        pathway_id: levelGroup === LEVEL_GROUPS.SHS ? pathway_id : null,
+        is_stem_school: Boolean(is_stem_school),
         stage: 'PLAN',
         expires_at: this.getRegistrationSessionExpiry(),
         metadata: {
           ...(session.metadata && typeof session.metadata === 'object' ? session.metadata : {}),
-          institution: institution || institutionRecord.name,
-          institution_name: institutionRecord.name,
-          program_name: trimmedAcademicProgram,
-          student_identifier_type: studentIdentifierType,
           onboarding_step: ONBOARDING_STEPS.PLAN
         }
       });
 
       await this.recordRegistrationSecurityEvent(session, 'academic_saved', req, {
-        institution_id: institutionRecord.id,
-        affiliate_university: normalizedAffiliateUniversity,
-        programme_category: normalizedProgram,
-        program_id: resolvedProgramRecord.id,
-        level: normalizedLevel,
-        semester: normalizedSemester
+        class_level: normalizedClassLevel,
+        level_group: levelGroup,
+        pathway_id: levelGroup === LEVEL_GROUPS.SHS ? pathway_id : null
       });
 
       return res.json({
@@ -3429,181 +3239,24 @@ class AuthController {
         });
       }
 
-      if (Object.prototype.hasOwnProperty.call(updates, 'level')) {
-        const normalizedLevel = updates.level ? normalizeLevel(updates.level) : null;
-        if (updates.level && !normalizedLevel) {
-          return res.status(400).json({
-            success: false,
-            error: 'level format is invalid'
-          });
-        }
-        updates.level = normalizedLevel;
-      }
-
-      if (Object.prototype.hasOwnProperty.call(updates, 'program')) {
-        updates.program = updates.program ? String(updates.program).trim() : null;
-      }
-
-      if (Object.prototype.hasOwnProperty.call(updates, 'programme_category')) {
-        if (user.role === 'student') {
-          const normalizedProgramCategory = updates.programme_category
-            ? normalizeProgramCategory(updates.programme_category)
-            : null;
-          if (updates.programme_category && !normalizedProgramCategory) {
-            return res.status(400).json({
-              success: false,
-              error: 'Program category must be one of: Early Childhood Education, Primary Education, JHS Education'
-            });
-          }
-          updates.programme_category = normalizedProgramCategory;
-        } else {
-          updates.programme_category = updates.programme_category
-            ? String(updates.programme_category).trim()
-            : null;
-        }
-      } else if (user.role === 'student' && Object.prototype.hasOwnProperty.call(updates, 'program')) {
-        const legacyProgramCategory = updates.program
-          ? normalizeProgramCategory(updates.program)
-          : null;
-        if (legacyProgramCategory) {
-          updates.programme_category = legacyProgramCategory;
-        }
-      }
-
-      if (Object.prototype.hasOwnProperty.call(updates, 'semester')) {
-        const normalizedSemester = updates.semester ? normalizeSemester(updates.semester) : null;
-        if (updates.semester && !normalizedSemester) {
-          return res.status(400).json({
-            success: false,
-            error: 'semester must be "1" or "2"'
-          });
-        }
-        updates.semester = normalizedSemester;
-      }
-
-      if (Object.prototype.hasOwnProperty.call(updates, 'index_number')) {
-        updates.index_number = updates.index_number
-          ? String(updates.index_number).trim().toUpperCase()
-          : null;
-      }
-
-      let selectedInstitutionRecord = null;
-      if (Object.prototype.hasOwnProperty.call(updates, 'institution_id')) {
-        if (!updates.institution_id) {
-          updates.institution_id = null;
-          updates.institution = null;
-        } else {
-          selectedInstitutionRecord = await Institution.findByPk(updates.institution_id);
-          if (!selectedInstitutionRecord) {
-            return res.status(400).json({
-              success: false,
-              error: 'Selected college is invalid'
-            });
-          }
-          updates.institution = selectedInstitutionRecord.name;
-        }
-      }
-
-      if (Object.prototype.hasOwnProperty.call(updates, 'program_id')) {
-        if (!updates.program_id) {
-          updates.program_id = null;
-        } else {
-          const selectedProgramRecord = await Program.findByPk(updates.program_id);
-          if (!selectedProgramRecord) {
-            return res.status(400).json({
-              success: false,
-              error: 'Selected program is invalid'
-            });
-          }
-          updates.program = selectedProgramRecord.name;
-          if (user.role === 'student' && !Object.prototype.hasOwnProperty.call(updates, 'programme_category')) {
-            updates.programme_category = normalizeProgramCategory(selectedProgramRecord.category);
-          }
-        }
-      }
-
-      const identityFieldsChanged = (
-        Object.prototype.hasOwnProperty.call(updates, 'index_number') ||
-        Object.prototype.hasOwnProperty.call(updates, 'programme_category') ||
-        Object.prototype.hasOwnProperty.call(updates, 'institution_id') ||
-        Object.prototype.hasOwnProperty.call(updates, 'institution')
+      // §1.4 / §6.4: a learner may never move their own class level. Class
+      // placement lives on academic_profiles and changes only through
+      // end-of-year promotion or an audited admin/parent override (§6.5).
+      const PLACEMENT_FIELDS = ['class_level', 'level_group', 'academic_year', 'term', 'pathway_id', 'auto_progression', 'status'];
+      const attemptedPlacementChange = PLACEMENT_FIELDS.filter(
+        (field) => Object.prototype.hasOwnProperty.call(updates, field)
       );
-      if (user.role === 'student' && identityFieldsChanged) {
-        const effectiveProgram = Object.prototype.hasOwnProperty.call(updates, 'programme_category')
-          ? updates.programme_category
-          : (user.programme_category || normalizeProgramCategory(user.program));
-        const effectiveIndexNumber = Object.prototype.hasOwnProperty.call(updates, 'index_number')
-          ? updates.index_number
-          : (user.index_number ? String(user.index_number).trim().toUpperCase() : null);
-        const effectiveInstitutionId = Object.prototype.hasOwnProperty.call(updates, 'institution_id')
-          ? updates.institution_id
-          : user.institution_id;
-        const effectiveInstitutionName = Object.prototype.hasOwnProperty.call(updates, 'institution')
-          ? updates.institution
-          : user.institution;
-
-        if (!effectiveProgram) {
-          return res.status(400).json({
+      if (attemptedPlacementChange.length) {
+        if (String(user.role || '').toLowerCase() === 'student') {
+          return res.status(403).json({
             success: false,
-            error: 'Program category is required for students'
+            error: 'Your class level is set by your school year and cannot be changed here. '
+                 + 'Ask a parent or administrator if it is wrong.'
           });
         }
-        if (!effectiveIndexNumber) {
-          return res.status(400).json({
-            success: false,
-            error: 'Index number is required for students'
-          });
-        }
-
-        let effectiveInstitutionRecord = selectedInstitutionRecord;
-        if (!effectiveInstitutionRecord && effectiveInstitutionId) {
-          effectiveInstitutionRecord = await Institution.findByPk(effectiveInstitutionId);
-          if (!effectiveInstitutionRecord) {
-            return res.status(400).json({
-              success: false,
-              error: 'Selected college is invalid'
-            });
-          }
-        }
-
-        const indexValidation = validateStudentIndexNumber({
-          indexNumber: effectiveIndexNumber,
-          programCategory: effectiveProgram,
-          institutionRecord: effectiveInstitutionRecord,
-          institutionName: effectiveInstitutionName
-        });
-        if (!indexValidation.valid) {
-          return res.status(400).json({
-            success: false,
-            error: indexValidation.error
-          });
-        }
-
-        const existingIndexOwner = await User.findOne({
-          where: {
-            index_number: indexValidation.normalizedIndexNumber,
-            id: { [Op.ne]: userId }
-          }
-        });
-        if (existingIndexOwner) {
-          return res.status(409).json({
-            success: false,
-            error: 'Index number is already assigned to another account'
-          });
-        }
-
-        updates.programme_category = indexValidation.normalizedProgramCategory;
-        updates.index_number = indexValidation.normalizedIndexNumber;
-      }
-
-      if (
-        user.role === 'student' &&
-        (
-          Object.prototype.hasOwnProperty.call(updates, 'level') ||
-          Object.prototype.hasOwnProperty.call(updates, 'semester')
-        )
-      ) {
-        updates.academic_last_progressed_at = new Date();
+        // Non-learner roles still must not write placement through this endpoint;
+        // it has no audit trail. Strip the fields rather than silently applying.
+        attemptedPlacementChange.forEach((field) => { delete updates[field]; });
       }
 
       await user.update(updates);

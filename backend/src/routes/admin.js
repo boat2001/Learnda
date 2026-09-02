@@ -20,7 +20,6 @@ const {
   NewsletterSubscription,
   StudyGroupMessage,
   CommunityPost,
-  Institution,
   AcademicProfile,
   AdminAuditLog,
   PushToken,
@@ -110,11 +109,11 @@ const notifyUserModeration = async (user, { title, body, action }) => {
 };
 
 const DEFAULT_ROADMAP = [
-  { id: 'v1',       label: 'Foundation', version: 'v1.0', years: '2023',        items: ['Past questions', 'Course outlines', 'Course notes', 'For Fosco'] },
-  { id: 'v2',       label: 'Growth',     version: 'v2.0', years: '2024 – 2025', items: ['All UCC colleges', 'More course files', 'Educative articles', 'Smart categorization', 'Fast access to files', 'Site upgrade', 'Funding strategies'] },
-  { id: 'platform', label: 'Platform',   version: 'v3.0', years: '2026 – 2027', items: ['Web & mobile apps', 'Personal Learning Space', 'Interactive Lessons', 'Practice tests', 'Study groups', 'Edutainment', 'Creator Access', 'Student community', 'Contribution Plans', 'Rewards & engagement', 'All COEs'] },
-  { id: 'ecosystem',label: 'Ecosystem',  version: 'v4.0', years: '2028 – 2029', items: ['Offline access', 'AI assistant', 'Live sessions & Q&A', 'Institutions onboard', 'Digital learning strategy', 'Simplified learning', 'Simulations', 'Lecturers onboard', 'Legal structure', 'Organizational recognition', 'Dominate in Ghana'] },
-  { id: 'expansion',label: 'Expansion',  version: 'v5.0', years: '2030 – 2033', items: ['Beyond Ghana', 'Anglophone Africa', 'Francophone Africa', 'Engage Partnerships', 'Add more features', 'Consider Listing', 'Support institutions', 'Explore new technologies', 'Global platform'] },
+  { id: 'v1',        label: 'Foundation', version: 'v1.0', years: '2026',        items: ['KG-SHS class structure', 'NaCCA-aligned subjects', 'Class-scoped lessons', 'Academic year progression'] },
+  { id: 'v2',        label: 'Learning',   version: 'v2.0', years: '2026 - 2027', items: ['Audio-first KG lessons', 'Animated explainers', 'Practice sets per class', 'BECE preparation', 'Offline access'] },
+  { id: 'platform',  label: 'Platform',   version: 'v3.0', years: '2027 - 2028', items: ['SHS pathways and electives', 'WASSCE preparation', 'My Space', 'Parent accounts', 'Progress reports'] },
+  { id: 'ecosystem', label: 'Ecosystem',  version: 'v4.0', years: '2028 - 2029', items: ['Schools onboard', 'Teacher content tools', 'Ghanaian language lessons', 'Live sessions', 'AI study help'] },
+  { id: 'expansion', label: 'Expansion',  version: 'v5.0', years: '2029 - 2032', items: ['Beyond Ghana', 'Anglophone Africa', 'Francophone Africa', 'Curriculum partnerships'] },
 ];
 
 const DEFAULT_SOCIAL_LINKS = [
@@ -1948,12 +1947,10 @@ router.get('/analytics/users', async (req, res) => {
         raw: true,
         limit: 90,
       }),
-      User.findAll({
-        attributes: ['affiliate_university', [fn('COUNT', col('id')), 'count']],
-        where: { affiliate_university: { [Op.and]: [{ [Op.ne]: null }, { [Op.ne]: '' }] } },
-        group: ['affiliate_university'],
+      AcademicProfile.findAll({
+        attributes: ['level_group', [fn('COUNT', col('id')), 'count']],
+        group: ['level_group'],
         order: [[fn('COUNT', col('id')), 'DESC']],
-        limit: 8,
         raw: true,
       }).catch(() => []),
       User.findAll({
@@ -2006,7 +2003,7 @@ router.get('/analytics/users', async (req, res) => {
       stickiness: mau > 0 ? Math.round((dau / mau) * 100) : 0,
       plan_breakdown: { basic, serious, master },
       by_plan: byPlan,
-      by_institution: institutionRows.map((r) => ({ label: r.affiliate_university, count: Number(r.count) })),
+      by_level_group: institutionRows.map((r) => ({ label: r.level_group, count: Number(r.count) })),
       by_level: levelRows.map((r) => ({ label: r.level, count: Number(r.count) })),
       recent_users: recentUsers,
       growth_series: growthSeries.map((r) => ({ date: r.date, count: Number(r.count) })),
@@ -2459,203 +2456,10 @@ router.get('/notifications/analytics', authenticate, checkRole(['admin']), async
   }
 });
 
-// --- College academic state management ---
-router.get('/academic-state/institutions', async (req, res) => {
-  try {
-    const institutions = await Institution.findAll({
-      order: [['name', 'ASC']],
-      attributes: ['id', 'name', 'metadata'],
-    });
+// College academic-state management removed: Learnda has no institutions.
+// Class progression is per-learner and driven by the academic year (§6.4);
+// corrections go through the audited override path in academicProgression.js (§6.5).
 
-    const studentCounts = await User.findAll({
-      attributes: ['institution_id', [fn('COUNT', col('id')), 'count']],
-      where: {
-        role: 'student',
-        institution_id: { [Op.ne]: null },
-      },
-      group: ['institution_id'],
-      raw: true,
-    });
-    const countByInstitutionId = new Map(
-      studentCounts.map((row) => [String(row.institution_id), Number(row.count) || 0])
-    );
-
-    res.json({
-      success: true,
-      institutions: institutions.map((institution) => {
-        const metadata = institution.metadata || {};
-        return {
-          id: institution.id,
-          name: institution.name,
-          student_count: countByInstitutionId.get(String(institution.id)) || 0,
-          academic_state: metadata.academic_state || null,
-        };
-      }),
-    });
-  } catch (error) {
-    console.error('Admin academic state institutions error:', error);
-    res.status(500).json({ success: false, error: 'Failed to load college academic states.' });
-  }
-});
-
-router.get('/academic-state/universities', async (req, res) => {
-  try {
-    const rows = await User.findAll({
-      attributes: ['affiliate_university', 'institution_id'],
-      where: {
-        role: 'student',
-        affiliate_university: { [Op.and]: [{ [Op.ne]: null }, { [Op.ne]: '' }] },
-        institution_id: { [Op.ne]: null },
-      },
-      group: ['affiliate_university', 'institution_id'],
-      raw: true,
-    });
-
-    const institutions = await Institution.findAll({ attributes: ['id', 'name'], raw: true });
-    const institutionMap = new Map(institutions.map((i) => [String(i.id), i.name]));
-
-    const universityMap = new Map();
-    for (const row of rows) {
-      const uName = row.affiliate_university;
-      const iId = String(row.institution_id);
-      const iName = institutionMap.get(iId);
-      if (!iName) continue;
-      if (!universityMap.has(uName)) universityMap.set(uName, new Map());
-      universityMap.get(uName).set(iId, iName);
-    }
-
-    const universities = Array.from(universityMap.entries())
-      .sort(([a], [b]) => a.localeCompare(b))
-      .map(([name, collegeMap]) => ({
-        name,
-        colleges: Array.from(collegeMap.entries())
-          .sort(([, a], [, b]) => a.localeCompare(b))
-          .map(([id, cname]) => ({ id, name: cname })),
-      }));
-
-    res.json({ success: true, universities });
-  } catch (error) {
-    console.error('Admin academic state universities error:', error);
-    res.status(500).json({ success: false, error: 'Failed to load universities.' });
-  }
-});
-
-router.post('/academic-state/apply', async (req, res) => {
-  const { scope = 'single', institutionId, universityName, action, vacationEndsOn = null } = req.body || {};
-
-  if (!ACADEMIC_STATE_ACTIONS.has(action)) {
-    return res.status(400).json({ success: false, error: 'A valid action is required.' });
-  }
-  if (scope === 'single' && !institutionId) {
-    return res.status(400).json({ success: false, error: 'institutionId is required.' });
-  }
-  if (scope === 'university' && !universityName) {
-    return res.status(400).json({ success: false, error: 'universityName is required.' });
-  }
-
-  try {
-    let institutionIds = [];
-
-    if (scope === 'single') {
-      institutionIds = [String(institutionId)];
-    } else if (scope === 'university') {
-      const rows = await User.findAll({
-        attributes: ['institution_id'],
-        where: {
-          role: 'student',
-          affiliate_university: universityName,
-          institution_id: { [Op.ne]: null },
-        },
-        group: ['institution_id'],
-        raw: true,
-      });
-      institutionIds = rows.map((r) => String(r.institution_id));
-    } else if (scope === 'all') {
-      const all = await Institution.findAll({ attributes: ['id'], raw: true });
-      institutionIds = all.map((i) => String(i.id));
-    }
-
-    if (!institutionIds.length) {
-      return res.json({ success: true, scope, action, updated_users: 0, skipped_users: 0, institutions_updated: 0, institutions: [] });
-    }
-
-    let totalUpdated = 0;
-    let totalSkipped = 0;
-    const now = new Date();
-    const updatedInstitutions = [];
-
-    for (const iId of institutionIds) {
-      const institution = await Institution.findByPk(iId);
-      if (!institution) continue;
-
-      const students = await User.findAll({
-        where: { role: 'student', institution_id: iId },
-        attributes: ['id', 'level', 'semester', 'preferences'],
-      });
-
-      let updatedUsers = 0;
-      let skippedUsers = 0;
-
-      await dbSequelize.transaction(async (transaction) => {
-        for (const student of students) {
-          if (!shouldAutoUpdateAcademicState(student.preferences)) {
-            skippedUsers += 1;
-            continue;
-          }
-
-          const currentLevelText = String(student.level || '').trim();
-          const currentLevel = Number.parseInt(currentLevelText.replace(/[^\d]/g, ''), 10);
-
-          const nextLevel = action === 'level_upgrade' && Number.isFinite(currentLevel)
-            ? String(currentLevel + 100)
-            : currentLevelText || null;
-          const nextSemester = action === 'level_upgrade' ? '1' : '2';
-
-          await student.update({ level: nextLevel, semester: nextSemester, academic_last_progressed_at: now }, { transaction });
-          if (AcademicProfile) {
-            await AcademicProfile.update({ level: nextLevel, semester: nextSemester }, { where: { user_id: student.id }, transaction });
-          }
-          updatedUsers += 1;
-        }
-
-        const metadata = institution.metadata || {};
-        await institution.update({
-          metadata: {
-            ...metadata,
-            academic_state: {
-              action,
-              current_semester: action === 'level_upgrade' ? '1' : '2',
-              applied_at: now.toISOString(),
-              applied_by: req.user?.id || null,
-              vacation_ends_on: vacationEndsOn || null,
-            },
-          },
-        }, { transaction });
-      });
-
-      totalUpdated += updatedUsers;
-      totalSkipped += skippedUsers;
-      updatedInstitutions.push({ id: iId, name: institution.name, updated: updatedUsers, skipped: skippedUsers });
-    }
-
-    res.json({
-      success: true,
-      scope,
-      action,
-      updated_users: totalUpdated,
-      skipped_users: totalSkipped,
-      institutions_updated: updatedInstitutions.length,
-      institutions: updatedInstitutions,
-      vacation_ends_on: vacationEndsOn || null,
-    });
-  } catch (error) {
-    console.error('Admin academic state apply error:', error);
-    res.status(500).json({ success: false, error: 'Failed to apply college academic state.' });
-  }
-});
-
-// ── Messages / support ─────────────────────────────────────────────────────────
-// ── Re-engagement settings ────────────────────────────────────────────────────
 router.get('/reengagement/settings', (req, res) => {
   const defaults = {
     enabled: false,

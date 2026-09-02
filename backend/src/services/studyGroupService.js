@@ -6,9 +6,47 @@ const {
   StudyGroupMessage,
   User
 } = require('../models');
-const {
-  fetchCurrentLearning
-} = require('./currentLearningService');
+const { getVisibleLearningUnits } = require('./subjectAccessService');
+const { LEVEL_GROUPS, getFeatureAccess } = require('../config/educationStructure');
+const models = require('../models');
+
+/**
+ * Adapter over the K-12 subject model, shaped like the tertiary
+ * fetchCurrentLearning it replaced.
+ *
+ * §7 gates study groups: OFF for Kindergarten and Primary, LIMITED for JHS and
+ * SHS. A learner below JHS gets an empty list, not a filtered one -- there is
+ * no group for them to be in at all.
+ */
+const fetchCurrentLearning = async ({ user }) => {
+  const { units, placement } = await getVisibleLearningUnits(models, user);
+
+  if (!placement) {
+    return { courses: [], academicProfile: null, missingProfile: true };
+  }
+
+  if (getFeatureAccess('community', placement.levelGroup) === 'off') {
+    return {
+      courses: [],
+      academicProfile: placement,
+      missingProfile: false,
+      featureUnavailable: true,
+      levelGroup: placement.levelGroup
+    };
+  }
+
+  return {
+    courses: units.map((unit) => ({
+      id: unit.id,
+      key: unit.slug,
+      title: unit.name,
+      class_level: placement.classLevel,
+      level_group: unit.level_group
+    })),
+    academicProfile: placement,
+    missingProfile: false
+  };
+};
 
 const AUTO_GROUP_SOURCE = 'general_course_auto';
 const COURSE_GROUP_SOURCE = 'course_official';

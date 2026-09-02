@@ -1,11 +1,17 @@
 const { DataTypes } = require('sequelize');
+const { CLASS_LEVEL_CODES } = require('../config/educationStructure');
 
 module.exports = (sequelize) => {
   const Lesson = sequelize.define('Lesson', {
     id: { type: DataTypes.UUID, defaultValue: DataTypes.UUIDV4, primaryKey: true },
     title: { type: DataTypes.STRING(500), allowNull: false },
     description: { type: DataTypes.TEXT, allowNull: true },
-    course_id: { type: DataTypes.UUID, allowNull: true },
+    // The subject / learning area this lesson belongs to (§4.4).
+    learning_unit_id: { type: DataTypes.UUID, allowNull: true },
+    // §5 (MANDATORY): every lesson is tied to exactly one class level. This is
+    // the column all class scoping filters on -- a lesson without it is
+    // unreachable rather than universally visible, which is the safe default.
+    class_level_code: { type: DataTypes.ENUM(...CLASS_LEVEL_CODES), allowNull: true },
     lesson_number: { type: DataTypes.INTEGER, allowNull: true },
     status: { type: DataTypes.STRING(20), defaultValue: 'published' },
     is_premium: { type: DataTypes.BOOLEAN, defaultValue: false },
@@ -17,8 +23,6 @@ module.exports = (sequelize) => {
     duration_minutes: { type: DataTypes.INTEGER, allowNull: true },
     reading_time: { type: DataTypes.INTEGER, allowNull: true },
     slug: { type: DataTypes.STRING(200), allowNull: true },
-    level: { type: DataTypes.STRING(20), allowNull: true },
-    semester: { type: DataTypes.STRING(20), allowNull: true },
     source: { type: DataTypes.STRING(100), allowNull: true },
     lesson_document: { type: DataTypes.JSONB, defaultValue: {} },
     exercises: { type: DataTypes.JSONB, defaultValue: [] },
@@ -33,7 +37,10 @@ module.exports = (sequelize) => {
     timestamps: true,
     underscored: true,
     indexes: [
-      { fields: ['course_id'] },
+      { fields: ['learning_unit_id'] },
+      // The hot path: "lessons for this subject at this class".
+      { fields: ['learning_unit_id', 'class_level_code', 'status'] },
+      { fields: ['class_level_code'] },
       { fields: ['status'] },
       { fields: ['creator_id'] },
       { fields: ['tags'], using: 'gin' },
@@ -42,7 +49,7 @@ module.exports = (sequelize) => {
 
   Lesson.associate = (models) => {
     Lesson.belongsTo(models.User, { foreignKey: 'creator_id', as: 'creator' });
-    Lesson.belongsTo(models.Course, { foreignKey: 'course_id', as: 'course', constraints: false });
+    Lesson.belongsTo(models.LearningUnit, { foreignKey: 'learning_unit_id', as: 'learning_unit', constraints: false });
     Lesson.hasOne(models.ContentStats, { foreignKey: 'content_id', as: 'stats', constraints: false });
     Lesson.hasOne(models.ContentMetadata, { foreignKey: 'content_id', as: 'metadata_details', constraints: false });
     Lesson.hasMany(models.ContentEngagement, { foreignKey: 'content_id', as: 'engagements', constraints: false });

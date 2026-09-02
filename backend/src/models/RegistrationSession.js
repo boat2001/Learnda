@@ -1,4 +1,5 @@
 const { DataTypes } = require('sequelize');
+const { CLASS_LEVEL_CODES } = require('../config/educationStructure');
 
 module.exports = (sequelize) => {
   const RegistrationSession = sequelize.define('RegistrationSession', {
@@ -32,33 +33,22 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING(255),
       allowNull: true
     },
-    institution_id: {
+    // Class placement captured during sign-up (§6.2). Nullable because
+    // onboarding is progressive: a learner enters with a name, and picks a
+    // class before opening content.
+    class_level: {
+      type: DataTypes.ENUM(...CLASS_LEVEL_CODES),
+      allowNull: true
+    },
+    // SHS only (§4.4): the pathway the learner is offering.
+    pathway_id: {
       type: DataTypes.UUID,
       allowNull: true
     },
-    affiliate_university: {
-      type: DataTypes.STRING(255),
-      allowNull: true
-    },
-    programme_category: {
-      type: DataTypes.STRING(255),
-      allowNull: true
-    },
-    program_id: {
-      type: DataTypes.UUID,
-      allowNull: true
-    },
-    level: {
-      type: DataTypes.STRING(50),
-      allowNull: true
-    },
-    semester: {
-      type: DataTypes.STRING(20),
-      allowNull: true
-    },
-    index_number: {
-      type: DataTypes.STRING(80),
-      allowNull: true
+    is_stem_school: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
     },
     selected_plan_id: {
       type: DataTypes.UUID,
@@ -94,14 +84,6 @@ module.exports = (sequelize) => {
   });
 
   RegistrationSession.associate = (models) => {
-    RegistrationSession.belongsTo(models.Institution, {
-      foreignKey: 'institution_id',
-      as: 'institution'
-    });
-    RegistrationSession.belongsTo(models.Program, {
-      foreignKey: 'program_id',
-      as: 'program_record'
-    });
     RegistrationSession.belongsTo(models.Plan, {
       foreignKey: 'selected_plan_id',
       as: 'selected_plan'

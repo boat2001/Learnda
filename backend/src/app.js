@@ -17,7 +17,7 @@ const analyticsRoutes = require('./routes/analytics');
 const paymentRoutes = require('./routes/payment');
 const gptRoutes = require('./routes/gpt');
 const revenueRoutes = require('./routes/revenue');
-const coursesRoutes = require('./routes/courses');
+const subjectsRoutes = require('./routes/subjects');
 const plsRoutes = require('./routes/pls');
 const studyGroupsRoutes = require('./routes/studyGroups');
 const gamificationRoutes = require('./routes/gamification');
@@ -137,7 +137,7 @@ if (config.features.enableAnalytics) {
 app.use('/payment', paymentRoutes);
 app.use('/gpt', gptRoutes);
 app.use('/revenue', revenueRoutes);
-app.use('/courses', coursesRoutes);
+app.use('/subjects', subjectsRoutes);
 app.use('/pls', plsRoutes);
 app.use('/study-groups', studyGroupsRoutes);
 if (config.features.enableGamification) {
@@ -173,7 +173,7 @@ if (config.features.enableAnalytics) {
 app.use('/api/payment', paymentRoutes);
 app.use('/api/gpt', gptRoutes);
 app.use('/api/revenue', revenueRoutes);
-app.use('/api/courses', coursesRoutes);
+app.use('/api/subjects', subjectsRoutes);
 app.use('/api/pls', plsRoutes);
 app.use('/api/study-groups', studyGroupsRoutes);
 if (config.features.enableGamification) {

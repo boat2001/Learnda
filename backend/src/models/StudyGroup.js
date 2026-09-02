@@ -15,10 +15,6 @@ module.exports = (sequelize) => {
       type: DataTypes.UUID,
       allowNull: true
     },
-    institution_id: {
-      type: DataTypes.UUID,
-      allowNull: true
-    },
     title: {
       type: DataTypes.STRING(255),
       allowNull: false
@@ -57,8 +53,7 @@ module.exports = (sequelize) => {
     underscored: true,
     indexes: [
       { fields: ['creator_user_id'] },
-      { fields: ['course_id', 'status'] },
-      { fields: ['institution_id', 'status'] }
+      { fields: ['course_id', 'status'] }
     ]
   });
 
@@ -73,10 +68,6 @@ module.exports = (sequelize) => {
         as: 'course'
       });
     }
-    StudyGroup.belongsTo(models.Institution, {
-      foreignKey: 'institution_id',
-      as: 'institution'
-    });
     if (models.StudyGroupMember) {
       StudyGroup.hasMany(models.StudyGroupMember, {
         foreignKey: 'group_id',

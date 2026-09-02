@@ -136,49 +136,13 @@ module.exports = (sequelize) => {
       allowNull: false,
       defaultValue: 'none',
       validate: {
-        isIn: [['none', 'pending_payment', 'active', 'institution_pending']]
+        isIn: [['none', 'pending_payment', 'active']]
       }
     },
     password_set: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
       defaultValue: true
-    },
-    institution_id: {
-      type: DataTypes.UUID,
-      allowNull: true
-    },
-    institution: {
-      type: DataTypes.STRING(255),
-      allowNull: true
-    },
-    affiliate_university: {
-      type: DataTypes.STRING(255),
-      allowNull: true
-    },
-    programme_category: {
-      type: DataTypes.STRING(255),
-      allowNull: true
-    },
-    program: {
-      type: DataTypes.STRING(255),
-      allowNull: true
-    },
-    program_id: {
-      type: DataTypes.UUID,
-      allowNull: true
-    },
-    level: {
-      type: DataTypes.STRING(50),
-      allowNull: true
-    },
-    semester: {
-      type: DataTypes.STRING(20),
-      allowNull: true
-    },
-    index_number: {
-      type: DataTypes.STRING(80),
-      allowNull: true
     },
     academic_last_progressed_at: {
       type: DataTypes.DATE,
@@ -337,10 +301,6 @@ module.exports = (sequelize) => {
       as: 'selected_plan'
     });
 
-    User.belongsTo(models.Institution, {
-      foreignKey: 'institution_id',
-      as: 'institutionProfile'
-    });
 
     if (models.AcademicProfile) {
       User.hasOne(models.AcademicProfile, {
@@ -349,12 +309,6 @@ module.exports = (sequelize) => {
       });
     }
 
-    if (models.Program) {
-      User.belongsTo(models.Program, {
-        foreignKey: 'program_id',
-        as: 'program_record'
-      });
-    }
 
     User.belongsTo(models.User, {
       foreignKey: 'referred_by_user_id',

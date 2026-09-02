@@ -1,3 +1,10 @@
+const {
+  LEVEL_GROUPS,
+  getLevelGroup,
+  isValidClassLevel,
+  normalizeClassLevelCode,
+} = require('../config/educationStructure');
+
 const ONBOARDING_STEPS = Object.freeze({
   PROFILE: 'PROFILE',
   PASSWORD: 'PASSWORD',
@@ -9,8 +16,7 @@ const ONBOARDING_STEPS = Object.freeze({
 const PLAN_STATUSES = Object.freeze({
   NONE: 'none',
   PENDING_PAYMENT: 'pending_payment',
-  ACTIVE: 'active',
-  INSTITUTION_PENDING: 'institution_pending'
+  ACTIVE: 'active'
 });
 
 const validSteps = new Set(Object.values(ONBOARDING_STEPS));
@@ -26,72 +32,65 @@ const normalizeStatus = (value) => (
 
 const nonEmpty = (value) => typeof value === 'string' && value.trim().length > 0;
 
-const normalizeProgramCategoryFromCatalog = (value) => {
-  const text = String(value || '').trim();
-  if (text === 'Primary') return 'Primary Education';
-  if (text === 'JHS') return 'JHS Education';
-  if (text === 'ECE') return 'Early Childhood Education';
-  return '';
-};
-
+// Reads a learner's place in the school timeline (§6.2). Prefers the
+// academic_profiles row; falls back to a draft held in user preferences while
+// onboarding is still in progress.
 const getStructuredAcademicProfile = (user) => {
   const rawProfile = user?.academic_profile || user?.academicProfile || null;
   if (!rawProfile || typeof rawProfile !== 'object') return null;
 
   const profile = typeof rawProfile.get === 'function' ? rawProfile.get({ plain: true }) : rawProfile;
   const metadata = profile?.metadata && typeof profile.metadata === 'object' ? profile.metadata : {};
-  const programRecord = profile?.program_record || profile?.programRecord || null;
 
   return {
-    institution_id: profile?.institution_id || null,
-    affiliate_university: profile?.affiliate_university || metadata.affiliate_university || '',
-    programme_category:
-      profile?.programme_category ||
-      profile?.program_category ||
-      metadata.programme_category ||
-      metadata.program_category ||
-      user?.programme_category ||
-      normalizeProgramCategoryFromCatalog(programRecord?.category) ||
-      '',
-    program_id: profile?.program_id || user?.program_id || null,
-    program_name: programRecord?.name || metadata.program_name || user?.program || '',
-    level: profile?.level || user?.academic_level || user?.study_level || '',
-    semester: profile?.semester || user?.current_semester || user?.semester || '',
-    index_number: profile?.index_number || '',
-    student_identifier_type: profile?.student_identifier_type || metadata.student_identifier_type || ''
+    class_level: profile?.class_level || null,
+    level_group: profile?.level_group || getLevelGroup(profile?.class_level) || null,
+    academic_year: profile?.academic_year || '',
+    term: profile?.term || '',
+    status: profile?.status || '',
+    auto_progression: profile?.auto_progression !== false,
+    pathway_id: profile?.pathway_id || null,
+    is_stem_school: Boolean(profile?.is_stem_school),
+    guardian_user_id: profile?.guardian_user_id || null,
+    metadata
   };
 };
 
 const getAcademicProfile = (user) => {
-  const structuredProfile = getStructuredAcademicProfile(user);
-  if (structuredProfile) return structuredProfile;
-  const preferences = user?.preferences;
-  if (!preferences || typeof preferences !== 'object') return {};
-  const academicProfile = preferences.academic_profile;
-  if (!academicProfile || typeof academicProfile !== 'object') {
-    return {};
-  }
+  const structured = getStructuredAcademicProfile(user);
+  if (structured) return structured;
 
+  const draft = user?.preferences?.academic_profile;
+  if (!draft || typeof draft !== 'object') return {};
+
+  const classLevel = normalizeClassLevelCode(draft.class_level);
   return {
-    ...academicProfile,
-    institution_id: academicProfile.institution_id || academicProfile.college_id || null,
-    affiliate_university: academicProfile.affiliate_university || '',
-    programme_category:
-      academicProfile.programme_category ||
-      academicProfile.program_category ||
-      '',
-    program_id: academicProfile.program_id || null,
-    program_name: academicProfile.program_name || '',
-    level: academicProfile.level || user?.level || user?.academic_level || user?.study_level || '',
-    semester: academicProfile.semester || user?.current_semester || user?.semester || '',
-    index_number: academicProfile.index_number || user?.index_number || '',
-    student_identifier_type: academicProfile.student_identifier_type || ''
+    class_level: classLevel,
+    level_group: getLevelGroup(classLevel),
+    academic_year: draft.academic_year || '',
+    term: draft.term || '',
+    status: draft.status || '',
+    auto_progression: draft.auto_progression !== false,
+    pathway_id: draft.pathway_id || null,
+    is_stem_school: Boolean(draft.is_stem_school),
+    guardian_user_id: draft.guardian_user_id || null,
+    metadata: draft.metadata && typeof draft.metadata === 'object' ? draft.metadata : {}
   };
+};
+
+// A learner can enter the app with a name, but cannot open class content until
+// their class level is known -- that is what every §5 content query scopes on.
+// SHS additionally needs a pathway before subjects can be resolved (§4.4).
+const hasClassPlacement = (user) => {
+  const profile = getAcademicProfile(user);
+  if (!isValidClassLevel(profile?.class_level)) return false;
+  if (getLevelGroup(profile.class_level) === LEVEL_GROUPS.SHS && !profile.pathway_id) return false;
+  return true;
 };
 
 // Minimum profile required to ENTER the app (progressive onboarding).
 // A student only needs a name; full academic details are collected later, the
-// first time they open programme-specific content (Learn/Courses/PLS).
+// first time they open class content (Learn / Practice).
 const hasMinimumProfile = (user) => nonEmpty(user?.full_name);
 
 
@@ -100,9 +99,6 @@ const getPlanPrice = (plan) => {
   return Number.isFinite(value) ? value : 0;
 };
 
-const isInstitutionalPlan = (plan) => (
-  /institution/i.test(String(plan?.name || ''))
-);
 
 const buildOnboardingState = (user, context = {}) => {
   let selectedPlan = context.selectedPlan || context.activeSubscription?.plan || null;
@@ -145,8 +141,6 @@ const buildOnboardingState = (user, context = {}) => {
     planStatus = PLAN_STATUSES.ACTIVE;
   } else if (explicitStatus === PLAN_STATUSES.PENDING_PAYMENT) {
     planStatus = PLAN_STATUSES.PENDING_PAYMENT;
-  } else if (isInstitutionalPlan(selectedPlan)) {
-    planStatus = PLAN_STATUSES.INSTITUTION_PENDING;
   } else if (getPlanPrice(selectedPlan) > 0) {
     planStatus = PLAN_STATUSES.PENDING_PAYMENT;
   } else if (planStatus === PLAN_STATUSES.NONE) {
@@ -211,12 +205,6 @@ const persistOnboardingState = async (user, state) => {
 };
 
 const serializeAuthUser = (user, onboardingState) => ({
-  ...(getAcademicProfile(user)?.program_name
-    ? { academic_program: getAcademicProfile(user).program_name }
-    : {}),
-  ...(getAcademicProfile(user)?.student_identifier_type
-    ? { academic_identifier_type: getAcademicProfile(user).student_identifier_type }
-    : {}),
   id: user.id,
   email: user.email,
   name: user.full_name,
@@ -227,17 +215,18 @@ const serializeAuthUser = (user, onboardingState) => ({
   contributor_applied_at: user.contributor_applied_at || null,
   contributor_approved_at: user.contributor_approved_at || null,
   avatar_url: user.avatar_url,
-  institution_id: user.institution_id,
-  institution: user.institution,
-  affiliate_university: user.affiliate_university,
-  programme_category: user.programme_category || getAcademicProfile(user)?.programme_category || null,
-  program: getAcademicProfile(user)?.program_name || user.program,
-  program_id: user.program_id || getAcademicProfile(user)?.program_id || null,
-  level: user.level,
-  semester: user.semester,
   phone_number: user.phone_number,
   country_code: user.country_code,
-  index_number: user.index_number,
+
+  // Place in the school timeline (§6.2). class_level drives all content scoping.
+  class_level: getAcademicProfile(user)?.class_level || null,
+  level_group: getAcademicProfile(user)?.level_group || null,
+  academic_year: getAcademicProfile(user)?.academic_year || null,
+  term: getAcademicProfile(user)?.term || null,
+  academic_status: getAcademicProfile(user)?.status || null,
+  pathway_id: getAcademicProfile(user)?.pathway_id || null,
+  is_stem_school: Boolean(getAcademicProfile(user)?.is_stem_school),
+  has_class_placement: hasClassPlacement(user),
   profile_complete: onboardingState.profile_complete,
   password_set: onboardingState.password_set,
   onboarding_step: onboardingState.onboarding_step,
@@ -249,8 +238,8 @@ module.exports = {
   ONBOARDING_STEPS,
   PLAN_STATUSES,
   getAcademicProfile,
-  isInstitutionalPlan,
   hasMinimumProfile,
+  hasClassPlacement,
   buildOnboardingState,
   persistOnboardingState,
   serializeAuthUser

@@ -3,9 +3,8 @@ const {
   Subscription,
   Plan,
   PlanFeature,
-  Institution,
   AcademicProfile,
-  Program,
+  LearningPathway,
   UserContact
 } = require('../models');
 const { Op } = require('sequelize');
@@ -17,18 +16,19 @@ const {
   updateRegistrationSessionForUser,
   recordRegistrationSecurityEvent
 } = require('../services/registrationSessionService');
+const { maybeAdvanceAcademicProgress } = require('../utils/academicProgression');
 const {
-  normalizeLevel,
-  normalizeSemester,
-  maybeAdvanceAcademicProgress
-} = require('../utils/academicProgression');
-const {
-  normalizeProgramCategory,
-  validateStudentIndexNumber,
-  getProgramCategoryCode
-} = require('../utils/studentIdentity');
+  LEVEL_GROUPS,
+  CLASS_LEVEL_CODES,
+  ACADEMIC_TERMS,
+  ACADEMIC_PROFILE_STATUSES,
+  normalizeClassLevelCode,
+  isBannedClassCode,
+  getClassLevel,
+  getLevelGroup,
+  getAcademicYearLabel,
+} = require('../config/educationStructure');
 const { normalizeEmailAddress, normalizePhoneNumber } = require('../utils/contact');
-const { getAcademicCatalog } = require('../services/academicCatalogService');
 const {
   buildOnboardingState,
   persistOnboardingState,
@@ -66,49 +66,29 @@ const getActiveSubscription = async (userId) => Subscription.findOne({
   order: [['created_at', 'DESC']]
 });
 
-const buildAcademicStateNotice = async (user) => {
-  if (!user || user.role !== 'student' || !user.institution_id) return null;
+// Tells a learner they have moved up a class, once, after the academic year
+// turns (§6.4). Suppressed after acknowledgement so it does not nag.
+const buildPromotionNotice = (user) => {
+  const profile = user?.academic_profile;
+  if (!profile || !profile.promoted_at) return null;
 
-  const institution = await Institution.findByPk(user.institution_id, {
-    attributes: ['id', 'name', 'metadata']
-  });
-  const academicState = institution?.metadata?.academic_state || null;
-  if (!academicState || !academicState.applied_at) {
-    return null;
-  }
+  const classLevel = getClassLevel(profile.class_level);
+  if (!classLevel) return null;
 
-  const appliedAtMs = new Date(academicState.applied_at).getTime();
-  const progressedAtMs = new Date(user.academic_last_progressed_at || 0).getTime();
-  if (!Number.isFinite(appliedAtMs) || !Number.isFinite(progressedAtMs) || progressedAtMs < appliedAtMs) {
-    return null;
-  }
-
-  const action = String(academicState.action || '');
-  const currentSemester = String(academicState.current_semester || '');
-  const userSemester = String(user.semester || '');
-  const isSemesterSwitchNotice = action === 'semester_switch' && currentSemester === '2' && userSemester === '2';
-  const isLevelUpgradeNotice = action === 'level_upgrade' && currentSemester === '1' && userSemester === '1';
-  if (!isSemesterSwitchNotice && !isLevelUpgradeNotice) return null;
-
-  const noticeKey = `academic-state:${institution.id}:${action}:${currentSemester}:${academicState.applied_at}`;
+  const noticeKey = `promotion:${profile.class_level}:${profile.academic_year}`;
   const preferences = user.preferences && typeof user.preferences === 'object' ? user.preferences : {};
-  if (preferences.academic_state_notice_seen_key === noticeKey) {
-    return null;
-  }
-
-  const levelLabel = user.level ? `Level ${user.level}` : 'your new level';
+  if (preferences.promotion_notice_seen_key === noticeKey) return null;
 
   return {
     key: noticeKey,
-    type: action,
-    semester: currentSemester,
-    level: user.level || null,
-    institution_name: institution.name,
-    applied_at: academicState.applied_at,
-    title: isLevelUpgradeNotice ? `Welcome to ${levelLabel}` : 'Welcome to Semester 2',
-    message: isLevelUpgradeNotice
-      ? `${institution.name || 'Your college'} has moved to a new level, so we have moved your Learnda courses to ${levelLabel}, Semester 1. You can change your level or semester anytime in Settings.`
-      : `${institution.name || 'Your college'} is now in Semester 2, so we have moved your Learnda courses to Semester 2 as well. You can switch back to Semester 1 anytime in Settings.`
+    type: 'class_promotion',
+    class_level: profile.class_level,
+    class_label: classLevel.label,
+    academic_year: profile.academic_year,
+    promoted_at: profile.promoted_at,
+    title: `Welcome to ${classLevel.label}`,
+    message: `A new school year has started, so your lessons and practice now come from ${classLevel.label}. `
+           + 'Everything from your earlier classes stays open for revision.'
   };
 };
 
@@ -120,39 +100,7 @@ const buildFeatureFlags = (plan) => {
   }, {});
 };
 
-const syncAcademicColumnsFromProfile = async (user) => {
-  const academicProfile = getAcademicProfile(user);
-  const patch = {};
-
-  if (
-    academicProfile.programme_category &&
-    String(user.programme_category || '') !== String(academicProfile.programme_category)
-  ) {
-    patch.programme_category = academicProfile.programme_category;
-  }
-  if (
-    academicProfile.program_name &&
-    String(user.program || '') !== String(academicProfile.program_name)
-  ) {
-    patch.program = academicProfile.program_name;
-  }
-  if (
-    academicProfile.program_id &&
-    String(user.program_id || '') !== String(academicProfile.program_id)
-  ) {
-    patch.program_id = academicProfile.program_id;
-  }
-
-  if (!Object.keys(patch).length) {
-    return user;
-  }
-
-  await user.update(patch);
-  Object.assign(user, patch);
-  return user;
-};
-
-const buildMeResponse = (user, onboarding, subscription, selectedPlan, billingIntent = null, academicStateNotice = null) => {
+const buildMeResponse = (user, onboarding, subscription, selectedPlan, billingIntent = null, promotionNotice = null) => {
   const activePlan = subscription?.plan || null;
   const featureFlags = buildFeatureFlags(activePlan);
   const academicProfile = getAcademicProfile(user);
@@ -169,24 +117,15 @@ const buildMeResponse = (user, onboarding, subscription, selectedPlan, billingIn
     success: true,
     user: {
       ...serializeAuthUser(user, onboarding),
-      institution_id: user.institution_id,
-      institution: user.institution,
-      affiliate_university: user.affiliate_university,
-      programme_category: user.programme_category || academicProfile.programme_category || null,
-      program: academicProfile.program_name || user.program,
-      program_id: user.program_id || academicProfile.program_id || null,
-      level: user.level,
-      semester: user.semester,
       phone_number: user.phone_number,
       country_code: user.country_code,
-      index_number: user.index_number,
       current_plan: user.current_plan,
       academic_profile: academicProfile,
       primary_contact: primaryContact,
       active_plan: activePlan,
       selected_plan: selectedPlan,
       billing_intent: billingIntent,
-      academic_state_notice: academicStateNotice,
+      promotion_notice: promotionNotice,
       subscription,
       feature_flags: featureFlags
     },
@@ -195,23 +134,25 @@ const buildMeResponse = (user, onboarding, subscription, selectedPlan, billingIn
 };
 
 const maybePersistAcademicProgression = async (user) => {
-  const nextAcademicState = maybeAdvanceAcademicProgress(user);
-  if (!nextAcademicState) return;
-  await user.update(nextAcademicState);
-  Object.assign(user, nextAcademicState);
+  const profile = user?.academic_profile;
+  if (!profile || typeof profile.update !== 'function') return;
+
+  const advance = maybeAdvanceAcademicProgress(profile.get({ plain: true }));
+  if (!advance) return;
+
+  const { needs_review: needsReview, years_elapsed: yearsElapsed, ...patch } = advance;
+  if (needsReview) {
+    patch.metadata = {
+      ...(profile.metadata || {}),
+      needs_progression_review: true,
+      years_elapsed: yearsElapsed
+    };
+  }
+  await profile.update(patch);
 };
 
 const PHONE_REGEX = /^(?:\+?[1-9]\d{7,14}|0\d{9})$/;
-const GENERIC_STUDENT_IDENTIFIER_REGEX = /^[A-Z0-9][A-Z0-9/-]{3,39}$/;
 
-const isUuidLike = (value) => /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(String(value || '').trim());
-const buildProgramKey = (programName, programCategory) => (
-  `${String(programCategory || '').trim()}-${String(programName || '').trim()}`
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '')
-    .slice(0, 120)
-);
 const normalizeContactValue = (type, value) => (
   type === 'email'
     ? normalizeEmailAddress(value)
@@ -375,16 +316,8 @@ module.exports = {
     }
   },
 
-  async getAcademicCatalog(req, res) {
-    try {
-      const catalog = await getAcademicCatalog();
-      return res.json({ success: true, data: catalog });
-    } catch (error) {
-      console.error('GET /me/academic-catalog error:', error);
-      return res.status(500).json({ success: false, error: 'Failed to load academic catalog' });
-    }
-  },
-
+  // Profile details a learner may edit freely. Class placement is deliberately
+  // NOT here -- see setClassPlacement (§1.4).
   async updateProfile(req, res) {
     try {
       const user = await User.findByPk(req.user.id);
@@ -392,393 +325,60 @@ module.exports = {
         return res.status(404).json({ success: false, error: 'User not found' });
       }
       const wasProfileComplete = Boolean(user.profile_complete);
+      const { full_name, avatar_url } = req.body || {};
 
-      const {
-        full_name,
-        institution_id,
-        institution,
-        affiliate_university,
-        program,
-        academic_program,
-        level,
-        semester,
-        index_number
-      } = req.body || {};
-      const effectiveRole = user.role || 'student';
-      const existingAcademicProfile = getAcademicProfile(user);
+      const updates = {};
 
-      if (effectiveRole === 'student') {
-        const hasFullName = Boolean(
-          typeof full_name === 'string'
-            ? full_name.trim()
-            : user.full_name
-        );
-        const hasInstitution = Boolean(institution_id || (typeof institution === 'string' && institution.trim()));
-        const hasAffiliateUniversity = Boolean(
-          typeof affiliate_university === 'string'
-            ? affiliate_university.trim()
-            : user.affiliate_university
-        );
-        const hasProgram = Boolean(typeof program === 'string' && program.trim());
-        const hasAcademicProgram = Boolean(
-          typeof academic_program === 'string'
-            ? academic_program.trim()
-            : existingAcademicProfile.program_name
-        );
-        const hasLevel = Boolean(typeof level === 'string' && level.trim());
-        const hasSemester = Boolean(typeof semester === 'string' && semester.trim());
-        const hasIndexNumber = Boolean(
-          typeof index_number === 'string'
-            ? index_number.trim()
-            : user.index_number
-        );
-
-        if (
-          !hasFullName ||
-          !hasInstitution ||
-          !hasAffiliateUniversity ||
-          !hasProgram ||
-          !hasAcademicProgram ||
-          !hasLevel ||
-          !hasSemester ||
-          !hasIndexNumber
-        ) {
-          return res.status(400).json({
-            success: false,
-            error: 'full_name, institution (or institution_id), affiliate_university, program, academic_program, level, semester and index_number are required for students'
-          });
+      if (full_name !== undefined) {
+        const trimmed = String(full_name || '').trim();
+        if (!trimmed) {
+          return res.status(400).json({ success: false, error: 'Name cannot be empty.' });
         }
-      }
-
-      const trimmedFullName = typeof full_name === 'string'
-        ? full_name.trim()
-        : String(user.full_name || '').trim();
-      if (effectiveRole === 'student' && !trimmedFullName) {
-        return res.status(400).json({
-          success: false,
-          error: 'Full name is required'
-        });
-      }
-
-      const normalizedLevel = effectiveRole === 'student' ? normalizeLevel(level) : null;
-      const normalizedProgram = effectiveRole === 'student'
-        ? normalizeProgramCategory(program)
-        : (typeof program === 'string' ? program.trim() : null);
-      const normalizedSemester = effectiveRole === 'student'
-        ? normalizeSemester(semester || config.academic.defaultSemester)
-        : null;
-      if (effectiveRole === 'student' && !normalizedSemester) {
-        return res.status(400).json({
-          success: false,
-          error: 'Semester must be 1 or 2'
-        });
-      }
-      if (effectiveRole === 'student' && !normalizedLevel) {
-        return res.status(400).json({
-          success: false,
-          error: 'Level format is invalid'
-        });
-      }
-      if (effectiveRole === 'student' && !normalizedProgram) {
-        return res.status(400).json({
-          success: false,
-          error: 'Program category must be one of: Early Childhood Education, Primary Education, JHS Education'
-        });
-      }
-      const normalizedAffiliateUniversity = effectiveRole === 'student'
-        ? String(affiliate_university || user.affiliate_university || '').trim()
-        : null;
-      if (effectiveRole === 'student' && !normalizedAffiliateUniversity) {
-        return res.status(400).json({
-          success: false,
-          error: 'Affiliate university is required'
-        });
-      }
-      const normalizedPhone = normalizePhoneNumber(req.body?.phone_number || user.phone_number || '');
-      if (normalizedPhone && !PHONE_REGEX.test(normalizedPhone)) {
-        return res.status(400).json({
-          success: false,
-          error: 'Phone number format is invalid'
-        });
-      }
-
-      let resolvedInstitutionId = institution_id || user.institution_id || null;
-      let resolvedInstitutionName = institution || user.institution || null;
-      let institutionRecord = null;
-      if (resolvedInstitutionId) {
-        institutionRecord = await Institution.findByPk(resolvedInstitutionId);
-        if (!institutionRecord) {
-          return res.status(400).json({
-            success: false,
-            error: 'Selected college is invalid'
-          });
+        if (trimmed.length > 255) {
+          return res.status(400).json({ success: false, error: 'Name is too long.' });
         }
-        resolvedInstitutionName = institutionRecord.name;
+        updates.full_name = trimmed;
       }
 
-      const academicCatalog = effectiveRole === 'student'
-        ? await getAcademicCatalog()
-        : null;
-      const selectedCollege = effectiveRole === 'student'
-        ? academicCatalog?.colleges?.find((college) => String(college.id) === String(resolvedInstitutionId))
-        : null;
-      if (effectiveRole === 'student' && !selectedCollege) {
-        return res.status(400).json({
+      if (avatar_url !== undefined) {
+        updates.avatar_url = avatar_url ? String(avatar_url).trim() : null;
+      }
+
+      // §1.4: reject rather than silently ignore, so a client sending class
+      // changes here learns it is the wrong door.
+      const PLACEMENT_FIELDS = ['class_level', 'level_group', 'academic_year', 'term', 'pathway_id', 'status', 'auto_progression'];
+      const attempted = PLACEMENT_FIELDS.filter((f) => Object.prototype.hasOwnProperty.call(req.body || {}, f));
+      if (attempted.length) {
+        return res.status(403).json({
           success: false,
-          error: 'Selected college is invalid'
-        });
-      }
-      if (
-        effectiveRole === 'student' &&
-        String(selectedCollege.affiliate_university || '') !== String(normalizedAffiliateUniversity || '')
-      ) {
-        return res.status(400).json({
-          success: false,
-          error: 'Affiliate university does not match the selected college'
-        });
-      }
-      if (
-        effectiveRole === 'student' &&
-        !(selectedCollege.programme_categories || []).some(
-          (category) => category.name === normalizedProgram
-        )
-      ) {
-        return res.status(400).json({
-          success: false,
-          error: 'Program category is not offered by the selected college'
+          error: 'Your class level is set by your school year and cannot be changed here.'
         });
       }
 
-      const availablePrograms = effectiveRole === 'student'
-        ? (academicCatalog?.programs_by_category?.[normalizedProgram] || [])
-        : [];
-      const trimmedAcademicProgram = effectiveRole === 'student'
-        ? String(academic_program || existingAcademicProfile.program_name || '').trim()
-        : '';
-      if (effectiveRole === 'student' && !trimmedAcademicProgram) {
-        return res.status(400).json({
-          success: false,
-          error: 'Program is required'
-        });
-      }
-      if (
-        effectiveRole === 'student' &&
-        availablePrograms.length &&
-        !availablePrograms.some(
-          (item) => String(item.name || '').trim().toLowerCase() === trimmedAcademicProgram.toLowerCase()
-        )
-      ) {
-        return res.status(400).json({
-          success: false,
-          error: 'Selected program is invalid for the chosen program category'
-        });
+      if (!Object.keys(updates).length) {
+        return res.status(400).json({ success: false, error: 'Nothing to update.' });
       }
 
-      const trimmedIndexNumber = effectiveRole === 'student'
-        ? String(index_number || user.index_number || '').trim().toUpperCase()
-        : null;
-      let validatedStudentIdentifier = null;
-      let studentIdentifierType = existingAcademicProfile.student_identifier_type || 'index_number';
-      if (effectiveRole === 'student') {
-        const looksLikeStructuredIndex = /^[A-Z]{2}CE\/[A-Z]{3}\/\d{2}\/\d{4,6}$/.test(trimmedIndexNumber);
-        if (looksLikeStructuredIndex) {
-          const indexValidation = validateStudentIndexNumber({
-            indexNumber: trimmedIndexNumber,
-            programCategory: normalizedProgram,
-            institutionRecord,
-            institutionName: resolvedInstitutionName
-          });
-          if (!indexValidation.valid) {
-            return res.status(400).json({
-              success: false,
-              error: indexValidation.error
-            });
-          }
-          validatedStudentIdentifier = indexValidation.normalizedIndexNumber;
-          studentIdentifierType = 'index_number';
-        } else if (!GENERIC_STUDENT_IDENTIFIER_REGEX.test(trimmedIndexNumber)) {
-          return res.status(400).json({
-            success: false,
-            error: 'Provide a valid index number or application number'
-          });
-        }
-        if (!validatedStudentIdentifier) {
-          validatedStudentIdentifier = trimmedIndexNumber;
-          studentIdentifierType = 'application_number';
-        }
+      await user.update(updates);
 
-        const existingOwner = await User.findOne({
-          where: {
-            index_number: validatedStudentIdentifier,
-            id: { [Op.ne]: user.id }
-          }
-        });
-        if (existingOwner) {
-          return res.status(409).json({
-            success: false,
-            error: 'Index number is already assigned to another account'
-          });
-        }
-      }
+      const onboarding = buildOnboardingState(user);
+      await persistOnboardingState(user, onboarding);
 
-      let resolvedProgramRecord = null;
-      if (effectiveRole === 'student') {
-        const selectedProgramOption = availablePrograms.find(
-          (item) => String(item.name || '').trim().toLowerCase() === trimmedAcademicProgram.toLowerCase()
-        ) || null;
-
-        if (selectedProgramOption?.id && isUuidLike(selectedProgramOption.id)) {
-          resolvedProgramRecord = await Program.findByPk(selectedProgramOption.id);
-        }
-
-        if (!resolvedProgramRecord) {
-          resolvedProgramRecord = await Program.findOne({
-            where: {
-              name: trimmedAcademicProgram,
-              category: normalizedProgram
-            }
-          });
-        }
-
-        if (!resolvedProgramRecord) {
-          const [createdProgram] = await Program.findOrCreate({
-            where: {
-              key: buildProgramKey(trimmedAcademicProgram, normalizedProgram)
-            },
-            defaults: {
-              name: trimmedAcademicProgram,
-              category: normalizedProgram,
-              institution_id: resolvedInstitutionId || null,
-              metadata: {
-                category: normalizedProgram,
-                source: 'me.updateProfile'
-              }
-            }
-          });
-          resolvedProgramRecord = createdProgram;
-        }
-      }
-
-      const academicStepChanged = effectiveRole === 'student' && (
-        String(user.level || '') !== String(normalizedLevel || '') ||
-        String(user.semester || '') !== String(normalizedSemester || '')
-      );
-
-      await user.update({
-        role: user.role,
-        institution_id: resolvedInstitutionId,
-        institution: resolvedInstitutionName || null,
-        affiliate_university: normalizedAffiliateUniversity || null,
-        phone_number: normalizedPhone || null,
-        programme_category: effectiveRole === 'student'
-          ? normalizedProgram
-          : (normalizedProgram || null),
-        program: effectiveRole === 'student'
-          ? (resolvedProgramRecord?.name || trimmedAcademicProgram || null)
-          : (normalizedProgram || null),
-        program_id: effectiveRole === 'student'
-          ? (resolvedProgramRecord?.id || null)
-          : null,
-        level: normalizedLevel || null,
-        semester: normalizedSemester || null,
-        index_number: effectiveRole === 'student' ? validatedStudentIdentifier : null,
-        full_name: trimmedFullName || null,
-        preferences: effectiveRole === 'student'
-          ? {
-            ...(user.preferences && typeof user.preferences === 'object' ? user.preferences : {}),
-            academic_profile: {
-              ...existingAcademicProfile,
-              program_name: trimmedAcademicProgram,
-              program_category: normalizedProgram,
-              program_category_code: getProgramCategoryCode(normalizedProgram),
-              student_identifier_type: studentIdentifierType,
-              college_id: resolvedInstitutionId,
-              college_name: resolvedInstitutionName,
-              affiliate_university: normalizedAffiliateUniversity,
-              program_id: resolvedProgramRecord?.id || null
-            }
-          }
-          : user.preferences,
-        academic_last_progressed_at: effectiveRole === 'student'
-          ? (academicStepChanged ? new Date() : user.academic_last_progressed_at)
-          : null,
-        profile_complete: true,
-        onboarding_step: user.selected_plan_id
-          ? user.onboarding_step
-          : (user.password_set ? ONBOARDING_STEPS.PLAN : ONBOARDING_STEPS.PASSWORD)
-      });
-
-      if (effectiveRole === 'student' && resolvedProgramRecord) {
-        await AcademicProfile.upsert({
-          user_id: user.id,
-          institution_id: resolvedInstitutionId,
-          affiliate_university: normalizedAffiliateUniversity,
-          programme_category: normalizedProgram,
-          program_id: resolvedProgramRecord.id,
-          level: normalizedLevel,
-          semester: normalizedSemester,
-          index_number: validatedStudentIdentifier,
-          student_identifier_type: studentIdentifierType,
-          metadata: {
-            program_name: trimmedAcademicProgram,
-            program_category_code: getProgramCategoryCode(normalizedProgram),
-            college_id: resolvedInstitutionId,
-            college_name: resolvedInstitutionName
-          }
-        });
-      }
-
-      await syncUserContacts(user);
-
-      const subscription = await getActiveSubscription(user.id);
+      const subscription = await findActiveSubscription(user.id);
       const selectedPlan = user.selected_plan_id
         ? await Plan.findByPk(user.selected_plan_id)
-        : (subscription?.plan || null);
-      const onboarding = buildOnboardingState(user, {
-        selectedPlan,
-        activeSubscription: subscription
+        : null;
+
+      const registrationSession = await syncRegistrationSessionFromOnboarding(user, onboarding, {
+        full_name: updates.full_name || user.full_name || null
       });
+      if (!wasProfileComplete && user.profile_complete) {
+        await recordRegistrationSecurityEvent(registrationSession, 'profile_saved', req, {
+          full_name: Boolean(updates.full_name)
+        });
+      }
 
-      await persistOnboardingState(user, onboarding);
-      if (effectiveRole === 'student' && !wasProfileComplete && user.profile_complete) {
-        try {
-          await notificationService.createWelcomeNotification(user);
-        } catch (notificationError) {
-          console.error('Welcome notification error:', notificationError);
-        }
-      }
-      const registrationSession = await syncRegistrationSessionFromOnboarding(user, onboarding, effectiveRole === 'student'
-        ? {
-          full_name: trimmedFullName || null,
-          institution_id: resolvedInstitutionId,
-          affiliate_university: normalizedAffiliateUniversity,
-          programme_category: normalizedProgram,
-          program_id: resolvedProgramRecord?.id || null,
-          level: normalizedLevel,
-          semester: normalizedSemester,
-          index_number: validatedStudentIdentifier,
-          metadata: {
-            academic_program: trimmedAcademicProgram,
-            college_name: resolvedInstitutionName,
-            student_identifier_type: studentIdentifierType
-          }
-        }
-        : {
-          full_name: trimmedFullName || null
-        });
-      if (effectiveRole === 'student') {
-        await recordRegistrationSecurityEvent(registrationSession, 'academic_saved', req, {
-          institution_id: resolvedInstitutionId,
-          affiliate_university: normalizedAffiliateUniversity,
-          programme_category: normalizedProgram,
-          program_id: resolvedProgramRecord?.id || null,
-          level: normalizedLevel,
-          semester: normalizedSemester,
-          student_identifier_type: studentIdentifierType
-        });
-      }
       const billingIntent = await resolveBillingIntent(user);
-
       return res.json(buildMeResponse(user, onboarding, subscription, selectedPlan, billingIntent));
     } catch (error) {
       console.error('PATCH /me/profile error:', error);
@@ -786,59 +386,97 @@ module.exports = {
     }
   },
 
-  async updateAcademic(req, res) {
+  // Initial class placement only. §1.4 and §6.4: once a learner has a class,
+  // they cannot move it themselves -- promotion happens when the academic year
+  // turns, and corrections go through an audited admin/parent override (§6.5).
+  async setClassPlacement(req, res) {
     try {
       const user = await User.findByPk(req.user.id);
       if (!user) {
         return res.status(404).json({ success: false, error: 'User not found' });
       }
-      const { level, semester } = req.body || {};
-      if (level === undefined && semester === undefined) {
-        return res.status(400).json({ success: false, error: 'Provide at least level or semester to update.' });
+
+      const { class_level, pathway_id, is_stem_school } = req.body || {};
+      const normalizedClassLevel = normalizeClassLevelCode(class_level);
+
+      if (!normalizedClassLevel) {
+        return res.status(400).json({
+          success: false,
+          error: isBannedClassCode(class_level)
+            ? 'Primary classes are Basic 1-6 (B1-B6). Use a Basic class code.'
+            : `class_level must be one of: ${CLASS_LEVEL_CODES.join(', ')}`
+        });
       }
 
-      const updates = {};
+      const existing = await AcademicProfile.findOne({ where: { user_id: user.id } });
+      if (existing) {
+        return res.status(409).json({
+          success: false,
+          error: 'Your class is already set. It moves up automatically each school year. '
+               + 'If it is wrong, ask a parent or administrator to correct it.',
+          class_level: existing.class_level
+        });
+      }
 
-      if (level !== undefined) {
-        const normalizedLevel = normalizeLevel(level);
-        if (!normalizedLevel) {
-          return res.status(400).json({ success: false, error: 'Invalid level. Use 100, 200, 300, 400, or graduate.' });
+      const levelGroup = getLevelGroup(normalizedClassLevel);
+
+      // §4.4: SHS learners must declare a pathway; nobody else may have one.
+      if (levelGroup === LEVEL_GROUPS.SHS && !pathway_id) {
+        return res.status(400).json({
+          success: false,
+          error: 'Choose your learning area / pathway to see your SHS subjects.'
+        });
+      }
+      if (levelGroup !== LEVEL_GROUPS.SHS && pathway_id) {
+        return res.status(400).json({
+          success: false,
+          error: 'Learning pathways apply to SHS learners only.'
+        });
+      }
+
+      // A STEM pathway is only selectable at a designated STEM school (§4.4.9).
+      if (pathway_id) {
+        const pathway = await LearningPathway.findByPk(pathway_id);
+        if (!pathway || !pathway.is_active) {
+          return res.status(400).json({ success: false, error: 'Selected pathway is invalid.' });
         }
-        updates.level = normalizedLevel;
-      }
-
-      if (semester !== undefined) {
-        const normalizedSemester = normalizeSemester(String(semester));
-        if (!normalizedSemester) {
-          return res.status(400).json({ success: false, error: 'Invalid semester. Use 1 or 2.' });
+        if (pathway.is_stem_only && !is_stem_school) {
+          return res.status(400).json({
+            success: false,
+            error: 'The STEM pathway is available only at designated STEM schools.'
+          });
         }
-        updates.semester = normalizedSemester;
       }
 
-      const levelChanged = updates.level && String(user.level || '') !== String(updates.level);
-      const semesterChanged = updates.semester && String(user.semester || '') !== String(updates.semester);
-      if (levelChanged || semesterChanged) {
-        updates.academic_last_progressed_at = new Date();
-      }
+      const profile = await AcademicProfile.create({
+        user_id: user.id,
+        class_level: normalizedClassLevel,
+        level_group: levelGroup,
+        academic_year: getAcademicYearLabel(),
+        term: ACADEMIC_TERMS[0],
+        status: ACADEMIC_PROFILE_STATUSES.ACTIVE,
+        auto_progression: true,
+        pathway_id: levelGroup === LEVEL_GROUPS.SHS ? pathway_id : null,
+        is_stem_school: Boolean(is_stem_school)
+      });
 
-      await user.update(updates);
-
-      // Sync AcademicProfile table (update only the changed fields)
-      const academicUpdates = {};
-      if (updates.level) academicUpdates.level = updates.level;
-      if (updates.semester) academicUpdates.semester = updates.semester;
-      if (Object.keys(academicUpdates).length) {
-        await AcademicProfile.update(academicUpdates, { where: { user_id: user.id } });
-      }
-
-      return res.json({ success: true, level: user.level, semester: user.semester });
+      return res.json({
+        success: true,
+        academic_profile: {
+          class_level: profile.class_level,
+          level_group: profile.level_group,
+          academic_year: profile.academic_year,
+          term: profile.term,
+          pathway_id: profile.pathway_id
+        }
+      });
     } catch (error) {
-      console.error('PATCH /me/academic error:', error);
-      return res.status(500).json({ success: false, error: 'Failed to update academic standing.' });
+      console.error('PUT /me/class-placement error:', error);
+      return res.status(500).json({ success: false, error: 'Failed to set your class.' });
     }
   },
 
-  async markAcademicStateNoticeSeen(req, res) {
+  async markPromotionNoticeSeen(req, res) {
     try {
       const user = await User.findByPk(req.user.id);
       if (!user) {
@@ -854,14 +492,14 @@ module.exports = {
       await user.update({
         preferences: {
           ...preferences,
-          academic_state_notice_seen_key: noticeKey,
-          academic_state_notice_seen_at: new Date().toISOString()
+          promotion_notice_seen_key: noticeKey,
+          promotion_notice_seen_at: new Date().toISOString()
         }
       });
 
       return res.json({ success: true });
     } catch (error) {
-      console.error('POST /me/academic-state-notice/seen error:', error);
+      console.error('POST /me/promotion-notice/seen error:', error);
       return res.status(500).json({ success: false, error: 'Failed to update notice state.' });
     }
   },

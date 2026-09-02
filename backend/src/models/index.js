@@ -9,7 +9,8 @@ const sequelize = createSequelize();
 const modelDefiners = [
   // K-12 education structure (learnda-dev-guide.md §2, §4)
   require('./LearningUnit'),
-  require('./Institution'),
+  require('./LearningPathway'),
+  require('./PathwaySubjectRule'),
   require('./User'),
   require('./UserContact'),
   require('./RegistrationSession'),
@@ -22,9 +23,7 @@ const modelDefiners = [
   require('./TextItem'),
   require('./ContentMetadata'),
   require('./ContentStats'),
-  require('./Program'),
   require('./Course'),
-  require('./CourseOffering'),
   require('./PastQuestionMode'),
   require('./Contribution'),
   require('./Plan'),
@@ -75,91 +74,6 @@ Object.keys(db).forEach((modelName) => {
 
 db.sequelize = sequelize;
 
-const USER_TO_CATALOG_PROGRAM_CATEGORY = Object.freeze({
-  'Primary Education': 'Primary',
-  'JHS Education': 'JHS',
-  'Early Childhood Education': 'ECE'
-});
-
-async function backfillLegacyAcademicColumns() {
-  const { User, AcademicProfile, Program } = db;
-  if (!User || !Program) return;
-
-  const users = await User.findAll({
-    where: { role: 'student' }
-  });
-
-  let repairedCount = 0;
-
-  for (const user of users) {
-    const academicProfileRow = AcademicProfile
-      ? await AcademicProfile.findOne({ where: { user_id: user.id } })
-      : null;
-    const profileMetadata = academicProfileRow?.metadata && typeof academicProfileRow.metadata === 'object'
-      ? academicProfileRow.metadata
-      : {};
-    const legacyAcademicProfile =
-      user.preferences?.academic_profile && typeof user.preferences.academic_profile === 'object'
-        ? user.preferences.academic_profile
-        : {};
-
-    const desiredProgrammeCategory =
-      academicProfileRow?.programme_category ||
-      legacyAcademicProfile.programme_category ||
-      legacyAcademicProfile.program_category ||
-      user.programme_category ||
-      null;
-
-    let desiredProgramId =
-      academicProfileRow?.program_id ||
-      legacyAcademicProfile.program_id ||
-      user.program_id ||
-      null;
-
-    let desiredProgramName =
-      profileMetadata.program_name ||
-      legacyAcademicProfile.program_name ||
-      user.program ||
-      null;
-
-    if (!desiredProgramId && desiredProgramName) {
-      const catalogCategory = USER_TO_CATALOG_PROGRAM_CATEGORY[desiredProgrammeCategory] || null;
-      const programWhere = { name: desiredProgramName };
-      if (catalogCategory) {
-        programWhere.category = catalogCategory;
-      }
-
-      const matchedProgram = await Program.findOne({ where: programWhere });
-      if (matchedProgram) {
-        desiredProgramId = matchedProgram.id;
-        desiredProgramName = matchedProgram.name;
-      }
-    }
-
-    const patch = {};
-    if (desiredProgrammeCategory && String(user.programme_category || '') !== String(desiredProgrammeCategory)) {
-      patch.programme_category = desiredProgrammeCategory;
-    }
-    if (desiredProgramId && String(user.program_id || '') !== String(desiredProgramId)) {
-      patch.program_id = desiredProgramId;
-    }
-    if (desiredProgramName && String(user.program || '') !== String(desiredProgramName)) {
-      patch.program = desiredProgramName;
-    }
-
-    if (Object.keys(patch).length) {
-      await user.update(patch);
-      repairedCount += 1;
-    }
-  }
-
-  if (repairedCount > 0) {
-    logger.info(`Academic user-column backfill repaired ${repairedCount} student record(s).`);
-  }
-}
-
-
-/** Adds community_replies.metadata when the model expects it but legacy DBs lack the column. */
 async function ensureCommunityReplyMetadataColumn() {
   try {
     await sequelize.query(`
@@ -191,20 +105,6 @@ async function ensureAcademicStateColumns() {
     await sequelize.query(`
 DO $$
 BEGIN
-  IF EXISTS (
-    SELECT 1 FROM information_schema.tables
-    WHERE table_schema = 'public'
-      AND table_name = 'institutions'
-  ) AND NOT EXISTS (
-    SELECT 1 FROM information_schema.columns
-    WHERE table_schema = 'public'
-      AND table_name = 'institutions'
-      AND column_name = 'metadata'
-  ) THEN
-    ALTER TABLE institutions
-      ADD COLUMN metadata JSONB NOT NULL DEFAULT '{}'::jsonb;
-  END IF;
-
   IF EXISTS (
     SELECT 1 FROM information_schema.tables
     WHERE table_schema = 'public'
@@ -426,11 +326,6 @@ async function connectAndSync() {
     logger.info('Plan seeding skipped (set SEED_DEFAULT_PLANS=true to enable).');
   }
 
-  if (config.startup.runLegacyAcademicBackfill) {
-    await backfillLegacyAcademicColumns();
-  } else {
-    logger.info('Legacy academic backfill skipped (set RUN_LEGACY_ACADEMIC_BACKFILL=true to enable).');
-  }
 }
 
 module.exports = { ...db, connectAndSync };
