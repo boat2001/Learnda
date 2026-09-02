@@ -1,0 +1,127 @@
+<svg viewBox="0 0 920 500" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Arial, sans-serif">
+  <!-- Background -->
+  <rect width="920" height="500" fill="#f8faff" rx="16"/>
+
+  <!-- Title -->
+  <text x="460" y="42" text-anchor="middle" font-size="20" font-weight="700" fill="#1a2e5a">Stages of Physical Growth and Development</text>
+  <line x1="50" y1="56" x2="870" y2="56" stroke="#d0d8f0" stroke-width="1.5"/>
+
+  <!-- Timeline base -->
+  <line x1="80" y1="420" x2="840" y2="420" stroke="#1a2e5a" stroke-width="3"/>
+  <polygon points="840,414 858,420 840,426" fill="#1a2e5a"/>
+
+  <!-- ====== INFANCY ====== -->
+  <rect x="60" y="80" width="220" height="300" rx="14" fill="#fff8e1" stroke="#f59e0b" stroke-width="2.5"/>
+  <!-- Header -->
+  <rect x="60" y="80" width="220" height="54" rx="14" fill="#f59e0b"/>
+  <rect x="60" y="118" width="220" height="16" rx="0" fill="#f59e0b"/>
+  <!-- Baby figure -->
+  <circle cx="93" cy="106" r="18" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+  <circle cx="93" cy="98" r="9" fill="#fbbf24"/>
+  <ellipse cx="93" cy="114" rx="8" ry="6" fill="#fbbf24"/>
+  <text x="170" y="100" text-anchor="middle" font-size="15" font-weight="700" fill="#fff">INFANCY</text>
+  <text x="170" y="118" text-anchor="middle" font-size="12" font-weight="600" fill="#fff">Birth – 2 Years</text>
+
+  <text x="78" y="154" font-size="11.5" fill="#92400e" font-weight="600">Physical characteristics:</text>
+  <text x="78" y="173" font-size="11" fill="#78350f">• ~3 kg &amp; 50 cm at birth</text>
+  <text x="78" y="191" font-size="11" fill="#78350f">• Bones are soft (cartilage)</text>
+  <text x="78" y="209" font-size="11" fill="#78350f">• Boys often taller/heavier</text>
+  <text x="78" y="227" font-size="11" fill="#78350f">• Rapid growth: weight</text>
+  <text x="88" y="243" font-size="11" fill="#78350f">  doubles by 4th month</text>
+  <text x="78" y="261" font-size="11" fill="#78350f">• Senses limited at birth</text>
+  <text x="78" y="279" font-size="11" fill="#78350f">• Senses reach adult level</text>
+  <text x="88" y="295" font-size="11" fill="#78350f">  by end of infancy</text>
+
+  <rect x="76" y="306" width="188" height="56" rx="8" fill="#fde68a"/>
+  <text x="170" y="324" text-anchor="middle" font-size="11" fill="#92400e" font-weight="600">Motor Milestones:</text>
+  <text x="170" y="342" text-anchor="middle" font-size="11" fill="#78350f">Sitting → Crawling → Creeping</text>
+  <text x="170" y="358" text-anchor="middle" font-size="11" fill="#78350f">Walking → Jumping</text>
+
+  <!-- Dot on timeline -->
+  <circle cx="170" cy="420" r="8" fill="#f59e0b" stroke="#fff" stroke-width="2"/>
+  <text x="170" y="445" text-anchor="middle" font-size="11" fill="#92400e" font-weight="600">0–2 yrs</text>
+
+  <!-- ====== CHILDHOOD ====== -->
+  <rect x="316" y="80" width="288" height="300" rx="14" fill="#e8f5e9" stroke="#22c55e" stroke-width="2.5"/>
+  <!-- Header -->
+  <rect x="316" y="80" width="288" height="54" rx="14" fill="#22c55e"/>
+  <rect x="316" y="118" width="288" height="16" rx="0" fill="#22c55e"/>
+  <!-- Child figure -->
+  <circle cx="349" cy="106" r="18" fill="#f0fdf4" stroke="#22c55e" stroke-width="1.5"/>
+  <circle cx="349" cy="98" r="9" fill="#4ade80"/>
+  <ellipse cx="349" cy="114" rx="9" ry="7" fill="#4ade80"/>
+  <line x1="340" y1="110" x2="333" y2="122" stroke="#4ade80" stroke-width="2" stroke-linecap="round"/>
+  <line x1="358" y1="110" x2="365" y2="122" stroke="#4ade80" stroke-width="2" stroke-linecap="round"/>
+  <text x="420" y="100" text-anchor="middle" font-size="15" font-weight="700" fill="#fff">CHILDHOOD</text>
+  <text x="420" y="118" text-anchor="middle" font-size="12" font-weight="600" fill="#fff">2 – 11 Years</text>
+
+  <!-- 3 sub-stages inside -->
+  <rect x="330" y="143" width="60" height="22" rx="6" fill="#bbf7d0"/>
+  <text x="360" y="158" text-anchor="middle" font-size="10" fill="#14532d" font-weight="700">Early: 2–6</text>
+  <rect x="396" y="143" width="62" height="22" rx="6" fill="#86efac"/>
+  <text x="427" y="158" text-anchor="middle" font-size="10" fill="#14532d" font-weight="700">Middle: 6–8</text>
+  <rect x="464" y="143" width="60" height="22" rx="6" fill="#4ade80"/>
+  <text x="494" y="158" text-anchor="middle" font-size="10" fill="#14532d" font-weight="700">Late: 8–11</text>
+
+  <text x="333" y="187" font-size="11" fill="#166534" font-weight="600">Early Childhood (2–6):</text>
+  <text x="333" y="204" font-size="11" fill="#166534">• Growth slower than infancy</text>
+  <text x="333" y="220" font-size="11" fill="#166534">• Motor control developing</text>
+
+  <text x="333" y="242" font-size="11" fill="#166534" font-weight="600">Middle Childhood (6–8):</text>
+  <text x="333" y="259" font-size="11" fill="#166534">• Limb growth accelerates</text>
+  <text x="333" y="275" font-size="11" fill="#166534">• Permanent teeth appear (~6 yrs)</text>
+
+  <text x="333" y="297" font-size="11" fill="#166534" font-weight="600">Late Childhood (8–11):</text>
+  <text x="333" y="314" font-size="11" fill="#166534">• Uniform growth until puberty</text>
+
+  <rect x="330" y="326" width="258" height="36" rx="8" fill="#bbf7d0"/>
+  <text x="459" y="344" text-anchor="middle" font-size="11" fill="#14532d" font-weight="600">Boys: excel in gross motor (running, jumping)</text>
+  <text x="459" y="358" text-anchor="middle" font-size="11" fill="#14532d">Coordination becomes smoother &amp; more varied</text>
+
+  <!-- Dot on timeline -->
+  <circle cx="460" cy="420" r="8" fill="#22c55e" stroke="#fff" stroke-width="2"/>
+  <text x="460" y="445" text-anchor="middle" font-size="11" fill="#14532d" font-weight="600">2–11 yrs</text>
+
+  <!-- ====== ADOLESCENCE ====== -->
+  <rect x="638" y="80" width="222" height="300" rx="14" fill="#ede9fe" stroke="#8b5cf6" stroke-width="2.5"/>
+  <!-- Header -->
+  <rect x="638" y="80" width="222" height="54" rx="14" fill="#8b5cf6"/>
+  <rect x="638" y="118" width="222" height="16" rx="0" fill="#8b5cf6"/>
+  <!-- Teen figure (taller) -->
+  <circle cx="671" cy="104" r="18" fill="#f5f3ff" stroke="#8b5cf6" stroke-width="1.5"/>
+  <circle cx="671" cy="96" r="10" fill="#a78bfa"/>
+  <ellipse cx="671" cy="116" rx="11" ry="9" fill="#a78bfa"/>
+  <line x1="660" y1="110" x2="651" y2="124" stroke="#a78bfa" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="682" y1="110" x2="691" y2="124" stroke="#a78bfa" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="664" y1="122" x2="658" y2="136" stroke="#a78bfa" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="678" y1="122" x2="684" y2="136" stroke="#a78bfa" stroke-width="2.5" stroke-linecap="round"/>
+  <text x="759" y="100" text-anchor="middle" font-size="15" font-weight="700" fill="#fff">ADOLESCENCE</text>
+  <text x="759" y="118" text-anchor="middle" font-size="12" font-weight="600" fill="#fff">11 – 18 Years</text>
+
+  <text x="655" y="154" font-size="11.5" fill="#5b21b6" font-weight="600">Key changes:</text>
+  <text x="655" y="173" font-size="11" fill="#4c1d95">• Rapid height growth</text>
+  <text x="655" y="191" font-size="11" fill="#4c1d95">• Voice deepens (boys)</text>
+  <text x="655" y="209" font-size="11" fill="#4c1d95">• Breast development (girls)</text>
+  <text x="655" y="227" font-size="11" fill="#4c1d95">• Body hair growth</text>
+  <text x="655" y="245" font-size="11" fill="#4c1d95">• Rounded contours (girls)</text>
+  <text x="655" y="263" font-size="11" fill="#4c1d95">• Pubescence begins</text>
+
+  <rect x="652" y="278" width="192" height="50" rx="8" fill="#ddd6fe"/>
+  <text x="748" y="296" text-anchor="middle" font-size="11" fill="#4c1d95" font-weight="600">Social-Emotional:</text>
+  <text x="748" y="312" text-anchor="middle" font-size="10.5" fill="#5b21b6">Self-conscious about appearance</text>
+  <text x="748" y="326" text-anchor="middle" font-size="10.5" fill="#5b21b6">Compares self with peers</text>
+
+  <rect x="652" y="334" width="192" height="30" rx="8" fill="#8b5cf6"/>
+  <text x="748" y="354" text-anchor="middle" font-size="11" fill="#fff" font-weight="600">Puberty = major milestone</text>
+
+  <!-- Dot on timeline -->
+  <circle cx="749" cy="420" r="8" fill="#8b5cf6" stroke="#fff" stroke-width="2"/>
+  <text x="749" y="445" text-anchor="middle" font-size="11" fill="#4c1d95" font-weight="600">11–18 yrs</text>
+
+  <!-- Age markers on line -->
+  <line x1="80" y1="416" x2="80" y2="424" stroke="#1a2e5a" stroke-width="2"/>
+  <text x="80" y="444" text-anchor="middle" font-size="11" fill="#1a2e5a">Birth</text>
+
+  <!-- Footer -->
+  <text x="460" y="488" text-anchor="middle" font-size="10" fill="#94a3b8">Sharether Learning Platform • Lesson 2: Physical Development of the Child</text>
+</svg>

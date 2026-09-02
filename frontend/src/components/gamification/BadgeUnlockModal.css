@@ -1,0 +1,207 @@
+.badge-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: 9995;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.badge-backdrop--visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.badge-modal {
+  position: relative;
+  background: #0f0e1a;
+  border: 1px solid rgba(250, 204, 21, 0.3);
+  border-radius: 1.5rem;
+  padding: 2.5rem 2rem 2rem;
+  text-align: center;
+  max-width: 320px;
+  width: 100%;
+  overflow: hidden;
+  transform: scale(0.8) translateY(30px);
+  opacity: 0;
+  transition:
+    transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+    opacity 0.3s ease;
+}
+
+.badge-modal--visible {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+}
+
+.badge-modal__shine {
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(250, 204, 21, 0.18) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.badge-modal__icon-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.55) 0%, transparent 42%),
+    linear-gradient(145deg, #fde68a 0%, #fbbf24 38%, #f59e0b 72%, #d97706 100%);
+  box-shadow:
+    inset 0 -6px 14px rgba(180, 83, 9, 0.35),
+    inset 0 2px 10px rgba(255, 255, 255, 0.35),
+    0 0 0 4px rgba(251, 191, 36, 0.22),
+    0 0 44px rgba(251, 191, 36, 0.4);
+  margin-bottom: 1.25rem;
+  animation: badge-drop 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s both;
+}
+
+/* Soft rotating highlight on the medal */
+.badge-modal__icon-ring {
+  position: absolute;
+  inset: -5px;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    rgba(255, 255, 255, 0.12) 36deg,
+    transparent 72deg,
+    transparent 180deg,
+    rgba(255, 250, 220, 0.18) 216deg,
+    transparent 252deg
+  );
+  animation: badge-medal-shine 4.5s linear infinite;
+  pointer-events: none;
+  mask: radial-gradient(farthest-side, transparent calc(100% - 5px), #000 calc(100% - 4px));
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 5px), #000 calc(100% - 4px));
+}
+
+.badge-modal__icon {
+  position: relative;
+  z-index: 1;
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.28));
+}
+
+.badge-modal__icon-fallback {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: badge-icon-reveal 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) 0.18s both;
+}
+
+.badge-modal__fallback-award {
+  width: 52px;
+  height: 52px;
+  color: #fffbeb;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.35));
+}
+
+@keyframes badge-medal-shine {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes badge-icon-reveal {
+  from {
+    transform: scale(0.35) rotate(-12deg);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) rotate(0);
+    opacity: 1;
+  }
+}
+
+.badge-modal__earned-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #fbbf24;
+  margin: 0 0 0.4rem;
+}
+
+.badge-modal__name {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #f8fafc;
+  margin: 0 0 0.5rem;
+}
+
+.badge-modal__description {
+  font-size: 0.9rem;
+  color: #94a3b8;
+  margin: 0 0 1rem;
+  line-height: 1.5;
+}
+
+.badge-modal__xp-reward {
+  display: inline-block;
+  padding: 0.3rem 0.9rem;
+  background: rgba(99, 102, 241, 0.2);
+  color: #a78bfa;
+  border-radius: 2rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.badge-modal__cta {
+  display: block;
+  width: 100%;
+  padding: 0.8rem;
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: #fff;
+  border: none;
+  border-radius: 0.75rem;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.15s;
+}
+
+.badge-modal__cta:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+@keyframes badge-drop {
+  from {
+    transform: scale(0.3) translateY(-40px) rotate(20deg);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) translateY(0) rotate(0);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .badge-modal__icon-ring {
+    animation: none;
+  }
+
+  .badge-modal__icon-fallback {
+    animation: none;
+  }
+}

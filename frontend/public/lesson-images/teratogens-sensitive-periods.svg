@@ -1,0 +1,141 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 664" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Teratogens that harm prenatal development - alcohol, tobacco, drugs, toxins, infections, malnutrition - and a chart showing vulnerability is highest during the embryonic stage">
+  <title>Teratogens and Sensitive Periods</title>
+  <style>
+    .tt-bg { fill: #f8faff; }
+    .tt-title { font-family: 'Segoe UI', system-ui, sans-serif; font-weight: 700; }
+    .tt-body { font-family: 'Segoe UI', system-ui, sans-serif; }
+    .tcard { cursor: pointer; }
+    .tcard .tcard-box { transition: stroke .18s ease, filter .18s ease; }
+    .tcard:hover .tcard-box, .tcard.is-active .tcard-box { stroke-width: 2.4; filter: brightness(1.03); }
+    .bar { cursor: pointer; transition: opacity .18s ease; }
+    .barwrap:hover .bar { opacity: .45; }
+    .barwrap:hover .bar:hover { opacity: 1; }
+    .barwrap.has-touch .bar:not(.is-active) { opacity: .45; }
+    .bar.is-active { opacity: 1; }
+  </style>
+
+  <rect class="tt-bg" x="0" y="0" width="480" height="664" rx="16"/>
+
+  <!-- Title band -->
+  <rect x="16" y="16" width="448" height="50" rx="12" fill="#1a2e5a"/>
+  <text class="tt-title" x="240" y="40" text-anchor="middle" fill="#ffffff" font-size="19">Teratogens &amp; Sensitive Periods</text>
+  <text class="tt-body" x="240" y="58" text-anchor="middle" fill="#aebfe0" font-size="12.5">Environmental agents that disrupt prenatal development</text>
+
+  <!-- Definition strip -->
+  <rect x="16" y="76" width="448" height="44" rx="10" fill="#eef2fb" stroke="#c7d2e8" stroke-width="1.2"/>
+  <text class="tt-body" x="32" y="94" fill="#1e293b" font-size="13">A <tspan font-weight="700">teratogen</tspan> is any agent that can harm a</text>
+  <text class="tt-body" x="32" y="112" fill="#1e293b" font-size="13">developing foetus. Six common types:</text>
+
+  <!-- ===== Category cards (2 x 3) ===== -->
+  <!-- Row 1 -->
+  <g class="tcard" tabindex="0">
+    <rect class="tcard-box" x="24" y="132" width="212" height="72" rx="11" fill="#ffffff" stroke="#ef4444" stroke-width="1.4"/>
+    <circle cx="56" cy="168" r="17" fill="#ef4444"/>
+    <path d="M56 159 C61 167 60 178 56 178 C52 178 51 167 56 159 Z" fill="#ffffff"/>
+    <text class="tt-title" x="84" y="162" fill="#1e293b" font-size="14.5">Alcohol</text>
+    <text class="tt-body" x="84" y="180" fill="#475569" font-size="12.5">FASD: lifelong harm</text>
+    <text class="tt-body" x="84" y="195" fill="#475569" font-size="12.5">No safe amount</text>
+  </g>
+  <g class="tcard" tabindex="0">
+    <rect class="tcard-box" x="244" y="132" width="212" height="72" rx="11" fill="#ffffff" stroke="#f97316" stroke-width="1.4"/>
+    <circle cx="276" cy="168" r="17" fill="#f97316"/>
+    <rect x="270" y="161" width="14" height="5" rx="2" fill="#ffffff"/>
+    <rect x="270" y="170" width="3" height="6" fill="#ffffff"/>
+    <text class="tt-title" x="304" y="162" fill="#1e293b" font-size="14.5">Tobacco</text>
+    <text class="tt-body" x="304" y="180" fill="#475569" font-size="12.5">Less oxygen reaches</text>
+    <text class="tt-body" x="304" y="195" fill="#475569" font-size="12.5">the foetus</text>
+  </g>
+  <!-- Row 2 -->
+  <g class="tcard" tabindex="0">
+    <rect class="tcard-box" x="24" y="214" width="212" height="72" rx="11" fill="#ffffff" stroke="#8b5cf6" stroke-width="1.4"/>
+    <circle cx="56" cy="250" r="17" fill="#8b5cf6"/>
+    <rect x="47" y="245" width="18" height="10" rx="5" fill="#ffffff"/>
+    <rect x="55" y="245" width="10" height="10" rx="5" fill="#c4b5fd"/>
+    <text class="tt-title" x="84" y="244" fill="#1e293b" font-size="14.5">Drugs</text>
+    <text class="tt-body" x="84" y="262" fill="#475569" font-size="12.5">Prescription and</text>
+    <text class="tt-body" x="84" y="277" fill="#475569" font-size="12.5">illicit substances</text>
+  </g>
+  <g class="tcard" tabindex="0">
+    <rect class="tcard-box" x="244" y="214" width="212" height="72" rx="11" fill="#ffffff" stroke="#64748b" stroke-width="1.4"/>
+    <circle cx="276" cy="250" r="17" fill="#64748b"/>
+    <path d="M276 241 L285 258 L267 258 Z" fill="#ffffff"/>
+    <text class="tt-title" x="304" y="244" fill="#1e293b" font-size="14.5">Toxins</text>
+    <text class="tt-body" x="304" y="262" fill="#475569" font-size="12.5">Lead, mercury and</text>
+    <text class="tt-body" x="304" y="277" fill="#475569" font-size="12.5">pollutants</text>
+  </g>
+  <!-- Row 3 -->
+  <g class="tcard" tabindex="0">
+    <rect class="tcard-box" x="24" y="296" width="212" height="72" rx="11" fill="#ffffff" stroke="#3b82f6" stroke-width="1.4"/>
+    <circle cx="56" cy="332" r="17" fill="#3b82f6"/>
+    <circle cx="56" cy="332" r="6" fill="#ffffff"/>
+    <line x1="56" y1="320" x2="56" y2="344" stroke="#ffffff" stroke-width="2"/>
+    <line x1="44" y1="332" x2="68" y2="332" stroke="#ffffff" stroke-width="2"/>
+    <text class="tt-title" x="84" y="326" fill="#1e293b" font-size="14.5">Infections</text>
+    <text class="tt-body" x="84" y="344" fill="#475569" font-size="12.5">Rubella, Zika cross</text>
+    <text class="tt-body" x="84" y="359" fill="#475569" font-size="12.5">the placenta</text>
+  </g>
+  <g class="tcard" tabindex="0">
+    <rect class="tcard-box" x="244" y="296" width="212" height="72" rx="11" fill="#ffffff" stroke="#22c55e" stroke-width="1.4"/>
+    <circle cx="276" cy="332" r="17" fill="#22c55e"/>
+    <path d="M267 330 A9 9 0 0 0 285 330 Z" fill="#ffffff"/>
+    <text class="tt-title" x="304" y="326" fill="#1e293b" font-size="14.5">Malnutrition</text>
+    <text class="tt-body" x="304" y="344" fill="#475569" font-size="12.5">Low folate, iodine,</text>
+    <text class="tt-body" x="304" y="359" fill="#475569" font-size="12.5">protein</text>
+  </g>
+
+  <!-- ===== Sensitive period chart ===== -->
+  <rect x="16" y="384" width="448" height="232" rx="12" fill="#ffffff" stroke="#c7d2e8" stroke-width="1.3"/>
+  <text class="tt-title" x="32" y="410" fill="#1a2e5a" font-size="15">Sensitive period: when is risk highest?</text>
+  <text class="tt-body" x="32" y="428" fill="#64748b" font-size="12.5">Risk of structural damage across the three stages</text>
+
+  <!-- baseline -->
+  <line x1="48" y1="566" x2="448" y2="566" stroke="#cbd5e1" stroke-width="1.5"/>
+
+  <g class="barwrap">
+    <!-- Germinal -->
+    <g>
+      <rect class="bar" x="78" y="522" width="76" height="44" rx="5" fill="#f59e0b"/>
+      <text class="tt-title bar-val" x="116" y="514" text-anchor="middle" fill="#b45309" font-size="12.5">Low</text>
+      <text class="tt-body" x="116" y="584" text-anchor="middle" fill="#475569" font-size="12.5">Germinal</text>
+      <text class="tt-body" x="116" y="599" text-anchor="middle" fill="#94a3b8" font-size="11">0&#8211;2 wks</text>
+    </g>
+    <!-- Embryonic (highest) -->
+    <g>
+      <rect class="bar on is-active" x="208" y="452" width="76" height="114" rx="5" fill="#f97316"/>
+      <text class="tt-title bar-val on" x="246" y="444" text-anchor="middle" fill="#c2410c" font-size="13">Highest</text>
+      <text class="tt-body" x="246" y="584" text-anchor="middle" fill="#475569" font-size="12.5" font-weight="700">Embryonic</text>
+      <text class="tt-body" x="246" y="599" text-anchor="middle" fill="#94a3b8" font-size="11">wks 3&#8211;8</text>
+    </g>
+    <!-- Fetal -->
+    <g>
+      <rect class="bar" x="338" y="496" width="76" height="70" rx="5" fill="#4f7f7b"/>
+      <text class="tt-title bar-val" x="376" y="488" text-anchor="middle" fill="#3f635f" font-size="12.5">Moderate</text>
+      <text class="tt-body" x="376" y="584" text-anchor="middle" fill="#475569" font-size="12.5">Fetal</text>
+      <text class="tt-body" x="376" y="599" text-anchor="middle" fill="#94a3b8" font-size="11">wk 9&#8211;birth</text>
+    </g>
+  </g>
+
+  <!-- Footer -->
+  <text class="tt-body" x="240" y="646" text-anchor="middle" fill="#94a3b8" font-size="11">Sharether Learning Platform &#8226; EBS 106 &#8226; Lesson 4: Prenatal Development</text>
+
+  <script><![CDATA[
+    var svg = document.currentScript.closest('svg');
+    // Touch support for category cards
+    svg.querySelectorAll('.tcard').forEach(function (el) {
+      el.addEventListener('click', function () {
+        var on = el.classList.contains('is-active');
+        svg.querySelectorAll('.tcard').forEach(function (c) { c.classList.remove('is-active'); });
+        if (!on) el.classList.add('is-active');
+      });
+    });
+    // Touch support for bars: tap a bar to spotlight it (dim the rest)
+    var wrap = svg.querySelector('.barwrap');
+    svg.querySelectorAll('.bar').forEach(function (bar) {
+      bar.addEventListener('click', function () {
+        wrap.classList.add('has-touch');
+        svg.querySelectorAll('.bar').forEach(function (b) { b.classList.remove('is-active'); });
+        bar.classList.add('is-active');
+      });
+    });
+  ]]></script>
+</svg>

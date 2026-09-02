@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 600" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Kohlberg's three levels of moral reasoning, ascending: pre-conventional (stages 1-2), conventional (stages 3-4), post-conventional (stages 5-6).">
+  <title>Kohlberg's Three Levels of Moral Reasoning</title>
+  <style>
+    .kg-title { font-family:'Segoe UI',system-ui,sans-serif; font-weight:700; }
+    .kg-body  { font-family:'Segoe UI',system-ui,sans-serif; }
+    .lvl { cursor:pointer; }
+    .lvl .ring { fill:none; opacity:0; transition:opacity .16s ease; }
+    .lvl:hover .ring, .lvl.is-active .ring { opacity:1; }
+  </style>
+
+  <rect x="0" y="0" width="480" height="600" rx="16" fill="#f8faff"/>
+  <rect x="16" y="16" width="448" height="50" rx="12" fill="#1a2e5a"/>
+  <text class="kg-title" x="240" y="40" text-anchor="middle" fill="#ffffff" font-size="18">Kohlberg: Three Levels of Moral Reasoning</text>
+  <text class="kg-body" x="240" y="58" text-anchor="middle" fill="#aebfe0" font-size="12.5">Six stages probed with dilemmas like Heinz's</text>
+
+  <!-- maturity arrow -->
+  <line x1="44" y1="556" x2="44" y2="98" stroke="#cbd5e1" stroke-width="2.5"/>
+  <path d="M44 90 L38 102 L50 102 Z" fill="#cbd5e1"/>
+  <text class="kg-body" x="26" y="330" fill="#94a3b8" font-size="11" transform="rotate(-90 26 330)" text-anchor="middle">moral maturity increases</text>
+
+  <!-- Level 3 (top) -->
+  <g class="lvl" tabindex="0">
+    <rect class="ring" x="66" y="92" width="394" height="150" rx="13" stroke="#8b5cf6" stroke-width="3"/>
+    <rect x="70" y="96" width="386" height="142" rx="12" fill="#f3effe" stroke="#c4b5fd" stroke-width="1.4"/>
+    <rect x="70" y="96" width="6" height="142" rx="3" fill="#8b5cf6"/>
+    <text class="kg-title" x="88" y="120" fill="#6d28d9" font-size="15">Level 3 &#183; Post-conventional</text>
+    <text class="kg-body" x="88" y="138" fill="#94a3b8" font-size="12">Principles above rules &#183; few reach Stage 6</text>
+    <circle cx="98" cy="166" r="12" fill="#8b5cf6"/><text class="kg-title" x="98" y="170" text-anchor="middle" fill="#fff" font-size="11">5</text>
+    <text class="kg-body" x="118" y="170" fill="#1e293b" font-size="13">Social contract &#8212; laws serve rights, can change</text>
+    <circle cx="98" cy="206" r="12" fill="#8b5cf6"/><text class="kg-title" x="98" y="210" text-anchor="middle" fill="#fff" font-size="11">6</text>
+    <text class="kg-body" x="118" y="210" fill="#1e293b" font-size="13">Universal principles &#8212; justice, human dignity</text>
+  </g>
+
+  <!-- Level 2 (mid) -->
+  <g class="lvl" tabindex="0">
+    <rect class="ring" x="66" y="252" width="394" height="150" rx="13" stroke="#3b82f6" stroke-width="3"/>
+    <rect x="70" y="256" width="386" height="142" rx="12" fill="#eaf1fe" stroke="#9cc0f7" stroke-width="1.4"/>
+    <rect x="70" y="256" width="6" height="142" rx="3" fill="#3b82f6"/>
+    <text class="kg-title" x="88" y="280" fill="#1d4ed8" font-size="15">Level 2 &#183; Conventional</text>
+    <text class="kg-body" x="88" y="298" fill="#94a3b8" font-size="12">Social rules &amp; relationships &#183; most adults</text>
+    <circle cx="98" cy="326" r="12" fill="#3b82f6"/><text class="kg-title" x="98" y="330" text-anchor="middle" fill="#fff" font-size="11">3</text>
+    <text class="kg-body" x="118" y="330" fill="#1e293b" font-size="13">&#8216;Good boy / good girl&#8217; &#8212; seek approval</text>
+    <circle cx="98" cy="366" r="12" fill="#3b82f6"/><text class="kg-title" x="98" y="370" text-anchor="middle" fill="#fff" font-size="11">4</text>
+    <text class="kg-body" x="118" y="370" fill="#1e293b" font-size="13">Law &amp; order &#8212; keep society functioning</text>
+  </g>
+
+  <!-- Level 1 (bottom) -->
+  <g class="lvl" tabindex="0">
+    <rect class="ring" x="66" y="412" width="394" height="150" rx="13" stroke="#f59e0b" stroke-width="3"/>
+    <rect x="70" y="416" width="386" height="142" rx="12" fill="#fff7e6" stroke="#fcd385" stroke-width="1.4"/>
+    <rect x="70" y="416" width="6" height="142" rx="3" fill="#f59e0b"/>
+    <text class="kg-title" x="88" y="440" fill="#b45309" font-size="15">Level 1 &#183; Pre-conventional</text>
+    <text class="kg-body" x="88" y="458" fill="#94a3b8" font-size="12">Personal consequences &#183; most young children</text>
+    <circle cx="98" cy="486" r="12" fill="#f59e0b"/><text class="kg-title" x="98" y="490" text-anchor="middle" fill="#fff" font-size="11">1</text>
+    <text class="kg-body" x="118" y="490" fill="#1e293b" font-size="13">Avoid punishment &#8212; obedience for its own sake</text>
+    <circle cx="98" cy="526" r="12" fill="#f59e0b"/><text class="kg-title" x="98" y="530" text-anchor="middle" fill="#fff" font-size="11">2</text>
+    <text class="kg-body" x="118" y="530" fill="#1e293b" font-size="13">Self-interest &#8212; follow rules when they benefit me</text>
+  </g>
+
+  <text class="kg-body" x="240" y="582" text-anchor="middle" fill="#94a3b8" font-size="11">Sharether Learning Platform &#8226; EBS 106 &#8226; Lesson 10: Moral Development</text>
+
+  <script><![CDATA[
+    (function () {
+      var svg = document.currentScript.closest('svg');
+      svg.querySelectorAll('.lvl').forEach(function (el) {
+        el.addEventListener('click', function () {
+          var on = el.classList.contains('is-active');
+          svg.querySelectorAll('.lvl').forEach(function (l) { l.classList.remove('is-active'); });
+          if (!on) el.classList.add('is-active');
+        });
+      });
+    })();
+  ]]></script>
+</svg>

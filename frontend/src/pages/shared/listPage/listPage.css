@@ -1,0 +1,38 @@
+.list-page-horizontal-slider {
+  position: relative;
+  width: fit-content;
+  max-width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  overflow-y: clip;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  contain: paint;
+}
+
+.list-page-slider-track {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  width: fit-content;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overflow-y: clip;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.list-page-slider-track > * {
+  flex-shrink: 0;
+  align-self: flex-start;
+  max-width: 100%;
+}
+
+.list-page-horizontal-slider::-webkit-scrollbar,
+.list-page-slider-track::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}

@@ -1,0 +1,358 @@
+/* Study Groups landing — re-uses Learn page rhythm with a card built for groups */
+
+.sg-redesign .sg-error {
+  color: #b91c1c;
+}
+
+/* Push the slider items flush to the section's left edge — the default
+   3.1rem reservation for inline arrows was creating an awkward indent. */
+.sg-redesign .learn-horizontal-slider {
+  --learn-track-padding: 0.18rem;
+}
+
+.sg-redesign .learn-slider-track {
+  padding-left: 0.18rem;
+  padding-right: 0.18rem;
+  align-items: stretch;
+  gap: 0.7rem;
+}
+
+.sg-redesign .learn-slider-arrow.left {
+  left: 0.2rem;
+}
+
+.sg-redesign .learn-slider-arrow.right {
+  right: 0.2rem;
+}
+
+/* ── Group card (equal sizing, internal layout uses CSS Grid rows) ──── */
+.sg-card {
+  flex: 0 0 clamp(196px, 22vw, 244px);
+  width: clamp(196px, 22vw, 244px);
+  min-width: 196px;
+  max-width: 100%;
+  display: grid;
+  grid-template-rows:
+    auto                /* avatar */
+    minmax(2.6em, auto) /* title (2 lines) */
+    minmax(1.1em, auto) /* course (optional, 1 line) */
+    minmax(1.1em, auto) /* audience (optional, 1 line) */
+    auto                /* stats */
+    auto                /* last interacted */
+    auto;               /* action */
+  gap: 0.32rem;
+  padding: 0.8rem 0.78rem 0.85rem;
+  border: 1px solid rgba(16, 102, 186, 0.16);
+  border-radius: 0.95rem;
+  background: var(--card-bg, rgba(255, 255, 255, 0.92));
+  text-decoration: none;
+  color: inherit;
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.04);
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+  scroll-snap-align: start;
+}
+
+.sg-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(31, 113, 119, 0.4);
+  box-shadow: 0 16px 28px rgba(15, 23, 42, 0.09);
+}
+
+.sg-card--joined {
+  border-color: rgba(31, 157, 110, 0.32);
+}
+
+/* Top cover image (learn-course-card style), with status pill overlay */
+.sg-card-avatar {
+  position: relative;
+  width: 100%;
+  height: 100px;
+  margin: 0 0 0.28rem;
+  border-radius: 0.62rem;
+  overflow: hidden;
+  background: linear-gradient(135deg, #1f7177, #2a6f97);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  border: 1px solid rgba(31, 111, 194, 0.22);
+  box-shadow: none;
+}
+
+.sg-card-avatar.is-joined {
+  background: linear-gradient(135deg, #1f7177, #1f9d6e);
+}
+
+.sg-card-avatar.is-custom {
+  background: linear-gradient(135deg, #f4a261, #e76f51);
+}
+
+.sg-card-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.sg-card-avatar-initials {
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-shadow: 0 1px 2px rgba(15, 23, 42, 0.25);
+}
+
+.sg-card-pill {
+  position: absolute;
+  top: 0.42rem;
+  right: 0.42rem;
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.18rem 0.45rem;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--color-success, #1f9d6e);
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.16);
+  border: 1px solid rgba(31, 157, 110, 0.3);
+}
+
+/* ── Title (2 lines, ellipsis) ──────────────────────────────────────── */
+.sg-card-title {
+  font-size: 0.94rem;
+  line-height: 1.28;
+  font-weight: 700;
+  text-align: start;
+  color: var(--text-primary, #0f172a);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
+  margin: 0;
+}
+
+/* ── Optional course / audience / stats / last-interacted ───────────── */
+.sg-card-course {
+  margin: 0;
+  font-size: 0.74rem;
+  text-align: start;
+  color: var(--text-muted, #64748b);
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sg-card-audience {
+  margin: 0;
+  font-size: 0.72rem;
+  text-align: start;
+  color: var(--text-muted, #64748b);
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.3rem;
+}
+
+.sg-card-stats {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.4rem;
+  margin: 0.1rem 0 0;
+}
+
+.sg-card-stat {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  border-radius: 999px;
+  background: rgba(31, 113, 119, 0.08);
+  color: var(--primary-color, #1f7177);
+  border: 1px solid rgba(31, 113, 119, 0.2);
+}
+
+.sg-card--joined .sg-card-stat {
+  background: rgba(31, 157, 110, 0.08);
+  color: var(--color-success, #1f9d6e);
+  border-color: rgba(31, 157, 110, 0.22);
+}
+
+.sg-card-last {
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.32rem;
+  font-size: 0.7rem;
+  color: var(--text-muted, #64748b);
+}
+
+.sg-card-last svg {
+  font-size: 0.78rem;
+}
+
+/* ── Action row ─────────────────────────────────────────────────────── */
+.sg-card-action {
+  margin-top: 0.3rem;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.sg-card-cta {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--primary-color, #1f7177);
+}
+
+.sg-card--joined .sg-card-cta {
+  color: var(--color-success, #1f9d6e);
+}
+
+.sg-card-join-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.45rem 0.95rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  border-radius: 0.55rem;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(135deg, #1f7177, #2a6f97);
+  color: #fff;
+  transition: opacity 0.15s, transform 0.12s;
+}
+
+.sg-card-join-btn:hover:not(:disabled) {
+  opacity: 0.92;
+  transform: translateY(-1px);
+}
+
+.sg-card-join-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* ── Skeleton ───────────────────────────────────────────────────────── */
+.sg-card--skeleton {
+  pointer-events: none;
+}
+
+.sg-card--skeleton .sg-card-avatar {
+  background: linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%);
+  background-size: 200% 100%;
+}
+
+.sg-skeleton-line {
+  display: block;
+  height: 0.7rem;
+  border-radius: 0.4rem;
+  background: linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%);
+  background-size: 200% 100%;
+}
+
+.sg-skeleton-line-title {
+  height: 0.95rem;
+  width: 80%;
+  margin: 0.2rem 0 0;
+}
+
+.sg-skeleton-line-meta {
+  width: 60%;
+  margin: 0.2rem 0 0;
+}
+
+.sg-skeleton-stats span {
+  width: 4rem;
+  height: 1.1rem;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%);
+  background-size: 200% 100%;
+  display: inline-block;
+}
+
+/* ── Dark mode ──────────────────────────────────────────────────────── */
+[data-theme='dark'] .sg-card {
+  background: rgba(15, 23, 42, 0.7);
+  border-color: rgba(148, 163, 184, 0.16);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.28);
+}
+
+[data-theme='dark'] .sg-card:hover {
+  border-color: rgba(79, 179, 173, 0.45);
+}
+
+[data-theme='dark'] .sg-card-title {
+  color: #f1f5f9;
+}
+
+[data-theme='dark'] .sg-card-course,
+[data-theme='dark'] .sg-card-audience,
+[data-theme='dark'] .sg-card-last {
+  color: #94a3b8;
+}
+
+[data-theme='dark'] .sg-card-stat {
+  background: rgba(79, 179, 173, 0.18);
+  color: #a8e1dd;
+  border-color: rgba(79, 179, 173, 0.32);
+}
+
+[data-theme='dark'] .sg-card--joined .sg-card-stat {
+  background: rgba(31, 157, 110, 0.22);
+  color: #7be0b3;
+  border-color: rgba(31, 157, 110, 0.4);
+}
+
+[data-theme='dark'] .sg-card-pill {
+  background: rgba(15, 23, 42, 0.95);
+  color: #7be0b3;
+  border-color: rgba(31, 157, 110, 0.5);
+}
+
+[data-theme='dark'] .sg-card-cta {
+  color: #a8e1dd;
+}
+
+[data-theme='dark'] .sg-card--joined .sg-card-cta {
+  color: #7be0b3;
+}
+
+/* ── Responsive ─────────────────────────────────────────────────────── */
+@media (max-width: 720px) {
+  .sg-redesign .learn-slider-track {
+    gap: 0.58rem;
+    padding-inline: 0.1rem;
+  }
+
+  .sg-card {
+    flex-basis: clamp(182px, 78vw, 232px);
+    width: clamp(182px, 78vw, 232px);
+    padding: 0.72rem;
+  }
+
+  .sg-card-avatar {
+    height: 88px;
+  }
+
+  .sg-card-stats {
+    gap: 0.32rem;
+    flex-wrap: wrap;
+  }
+
+  .sg-card-stat {
+    padding: 0.22rem 0.44rem;
+  }
+
+  .sg-card-join-btn {
+    min-height: 2.35rem;
+    width: 100%;
+    justify-content: center;
+  }
+}

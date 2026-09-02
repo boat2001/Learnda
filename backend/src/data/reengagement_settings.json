@@ -1,0 +1,10 @@
+{
+  "enabled": false,
+  "inactivityDays": 14,
+  "channels": {
+    "push": true,
+    "sms": true,
+    "email": true
+  },
+  "messageTemplate": "Hey {name}! 👋 We miss you at Sharether. Your courses, study groups and community are waiting. Come back and keep learning!"
+}

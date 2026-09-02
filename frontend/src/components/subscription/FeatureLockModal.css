@@ -1,0 +1,96 @@
+.feature-lock-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(12, 16, 24, 0.58);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: var(--z-modal);
+}
+
+.feature-lock-modal {
+  width: min(100%, 480px);
+  background: var(--color-bg-light);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  padding: 26px 22px 22px;
+  position: relative;
+  display: grid;
+  gap: 12px;
+}
+
+.feature-lock-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  border: 1px solid var(--border-color);
+  background: transparent;
+  color: var(--color-text-secondary);
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.feature-lock-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: rgba(31, 113, 119, 0.12);
+  color: var(--primary-color);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+.feature-lock-modal h3 {
+  margin: 4px 0 0;
+}
+
+.feature-lock-modal p {
+  margin: 0;
+  color: var(--color-text-secondary);
+}
+
+.feature-lock-plan {
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-color);
+}
+
+.feature-lock-actions {
+  margin-top: 4px;
+  display: flex;
+  gap: 10px;
+}
+
+.feature-lock-btn {
+  flex: 1;
+  min-height: 44px;
+  border-radius: var(--radius-full);
+  border: 1px solid transparent;
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+}
+
+.feature-lock-btn.primary {
+  background: var(--primary-color);
+  color: var(--color-text-on-primary);
+}
+
+.feature-lock-btn.secondary {
+  background: transparent;
+  border-color: var(--border-color);
+  color: var(--color-text-secondary);
+}
+
+@media (max-width: 640px) {
+  .feature-lock-actions {
+    flex-direction: column;
+  }
+}

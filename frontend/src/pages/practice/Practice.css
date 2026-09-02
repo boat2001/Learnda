@@ -1,0 +1,492 @@
+.practice-redesign {
+  --learn-accent: #1f6abd;
+  --learn-accent-strong: #174f8d;
+  --learn-accent-soft: rgba(31, 106, 189, 0.12);
+  --learn-accent-border: rgba(31, 106, 189, 0.24);
+  --learn-success: #1fb36f;
+  --learn-tone-a-rgb: 34, 166, 103;
+  --learn-tone-b-rgb: 231, 139, 45;
+}
+
+.practice-redesign .learn-shell-header {
+  background: var(--learn-surface-strong);
+}
+
+.practice-redesign .learn-course-card {
+  border-color: rgba(31, 106, 189, 0.24);
+}
+
+.practice-redesign .learn-course-image {
+  border-color: rgba(31, 106, 189, 0.26);
+}
+
+.practice-redesign .learn-course-pills span {
+  border-color: rgba(31, 106, 189, 0.2);
+  background: linear-gradient(120deg, rgba(var(--learn-tone-a-rgb), 0.18), rgba(var(--learn-tone-b-rgb), 0.16));
+  color: #244d73;
+  font-weight: 700;
+}
+
+.practice-trending-section .learn-horizontal-slider {
+  --learn-track-padding: 0.12rem;
+}
+
+.practice-trending-section .learn-slider-track {
+  padding-left: 0.12rem;
+  padding-right: 0.12rem;
+}
+
+[data-theme='dark'] .practice-redesign .learn-shell-header {
+  background: rgba(18, 29, 42, 0.95);
+  box-shadow: var(--card-shadow);
+}
+
+[data-theme='dark'] .practice-redesign .learn-course-card {
+  border-color: rgba(122, 177, 231, 0.34);
+  background: linear-gradient(160deg, rgba(20, 34, 47, 0.95), rgba(15, 27, 39, 0.93));
+  box-shadow: var(--card-shadow);
+}
+
+[data-theme='dark'] .practice-redesign .learn-course-card:hover {
+  border-color: rgba(143, 202, 252, 0.54);
+}
+
+[data-theme='dark'] .practice-redesign .learn-course-image {
+  border-color: rgba(122, 177, 231, 0.42);
+  background: rgba(26, 42, 57, 0.86);
+}
+
+[data-theme='dark'] .practice-redesign .learn-section-head h2 {
+  border-left-color: rgba(34, 166, 103, 0.9);
+}
+
+[data-theme='dark'] .practice-redesign .learn-section-head span {
+  border-color: rgba(122, 177, 231, 0.34);
+  background: rgba(20, 36, 50, 0.86);
+  color: #d8edff;
+}
+
+[data-theme='dark'] .practice-redesign .learn-course-pills span {
+  border-color: rgba(142, 198, 245, 0.3);
+  background: linear-gradient(120deg, rgba(var(--learn-tone-a-rgb), 0.38), rgba(var(--learn-tone-b-rgb), 0.34));
+  color: #e5f4ff;
+}
+
+.practice-course-detail-page {
+  --practice-ink: #16324d;
+  --practice-accent: #1f6abd;
+  --practice-accent-soft: rgba(31, 106, 189, 0.12);
+  --practice-accent-border: rgba(31, 106, 189, 0.2);
+  --practice-mint: #1d8f77;
+  --practice-mint-soft: rgba(29, 143, 119, 0.12);
+  --practice-warm: #d97d2f;
+  --practice-warm-soft: rgba(217, 125, 47, 0.12);
+  gap: clamp(1.7rem, 2.4vw, 2.5rem);
+}
+
+.practice-course-detail-page::before {
+  background:
+    radial-gradient(circle at 10% 10%, rgba(31, 106, 189, 0.08), transparent 38%),
+    radial-gradient(circle at 90% 14%, rgba(29, 143, 119, 0.08), transparent 36%),
+    radial-gradient(circle at 18% 88%, rgba(217, 125, 47, 0.06), transparent 34%);
+}
+
+.practice-course-detail-page .course-page-breadcrumb {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.36rem 0.8rem;
+  border-radius: 999px;
+  background: rgba(247, 252, 255, 0.88);
+  border: 1px solid rgba(31, 106, 189, 0.14);
+  box-shadow: 0 10px 22px rgba(13, 47, 79, 0.06);
+}
+
+.practice-course-detail-page .course-page-breadcrumb + .course-hero {
+  margin-top: -0.9rem;
+}
+
+.practice-course-detail-page .course-hero {
+  border-radius: 1.55rem;
+  border-color: rgba(31, 106, 189, 0.16);
+  background:
+    radial-gradient(circle at top right, rgba(31, 106, 189, 0.14), transparent 32%),
+    radial-gradient(circle at bottom left, rgba(29, 143, 119, 0.12), transparent 36%),
+    linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(240, 248, 253, 0.95) 58%, rgba(236, 247, 244, 0.94));
+  box-shadow:
+    0 20px 36px rgba(13, 47, 79, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.84);
+}
+
+.practice-course-detail-page .course-hero-image {
+  border-color: rgba(31, 106, 189, 0.18);
+}
+
+.practice-hero-kicker {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  padding: 0.34rem 0.72rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(29, 143, 119, 0.14), rgba(31, 106, 189, 0.12));
+  color: #225968;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.practice-hero-copy {
+  margin: 0.5rem 0 0;
+  max-width: 40rem;
+  color: rgba(22, 50, 77, 0.78);
+  font-size: 0.96rem;
+  line-height: 1.7;
+}
+
+.practice-course-detail-page .course-progress {
+  border-color: rgba(31, 106, 189, 0.12);
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.94), rgba(239, 248, 255, 0.88));
+}
+
+.practice-course-detail-page .course-covered-item {
+  border-color: rgba(31, 106, 189, 0.14);
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.94), rgba(243, 250, 255, 0.9));
+}
+
+.practice-course-detail-page .course-section {
+  border-radius: 1.45rem;
+}
+
+.practice-course-detail-page .course-section.course-prelims,
+.practice-course-detail-page .practice-collection-section,
+.practice-course-detail-page .course-section.course-links-section {
+  background: rgba(252, 254, 255, 0.76);
+  border: 1px solid rgba(31, 106, 189, 0.1);
+  box-shadow: 0 18px 32px rgba(13, 47, 79, 0.06);
+  padding: clamp(1rem, 1.7vw, 1.35rem);
+  border-radius: 1.45rem;
+}
+
+.practice-course-detail-page .practice-collection-section-exams {
+  border-color: rgba(29, 143, 119, 0.14);
+  background:
+    linear-gradient(180deg, rgba(249, 255, 253, 0.92), rgba(245, 252, 250, 0.88));
+}
+
+.practice-course-detail-page .practice-collection-section-quizzes {
+  border-color: rgba(31, 106, 189, 0.14);
+  background:
+    linear-gradient(180deg, rgba(248, 252, 255, 0.92), rgba(242, 248, 255, 0.88));
+}
+
+.practice-course-detail-page .course-section.course-links-section {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.practice-course-detail-page .course-section-header.with-divider {
+  gap: 0.72rem;
+}
+
+.practice-course-detail-page .course-section-title {
+  gap: 0.62rem;
+}
+
+.practice-course-detail-page .course-section-title svg {
+  color: var(--practice-accent);
+}
+
+.practice-course-detail-page .course-videos-section .course-section-title svg,
+.practice-course-detail-page .course-links-section .course-section-title svg {
+  color: var(--practice-mint);
+}
+
+.practice-course-detail-page .course-section-count {
+  border-color: rgba(31, 106, 189, 0.14);
+  background: rgba(255, 255, 255, 0.82);
+}
+
+.practice-course-detail-page .course-slider .list-page-slider-track {
+  gap: 1.15rem;
+  padding-bottom: 0.25rem;
+}
+
+.practice-course-detail-page .practice-prelim-card {
+  width: 15.25rem;
+  min-width: 15.25rem;
+  min-height: 12.2rem;
+  padding: 1.05rem;
+  border-radius: 1.25rem;
+  border: 1px solid rgba(31, 106, 189, 0.14);
+  background:
+    linear-gradient(150deg, rgba(255, 255, 255, 0.98), rgba(242, 250, 255, 0.92));
+  box-shadow: 0 16px 28px rgba(13, 47, 79, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.practice-course-detail-page .course-prelim-card-top {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.practice-course-detail-page .course-prelim-card-step {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(31, 106, 189, 0.1);
+  color: #275d8b;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.practice-course-detail-page .practice-prelim-card h3 {
+  margin: 0;
+  color: var(--practice-ink);
+  font-size: 1.08rem;
+}
+
+.practice-prelim-card-copy {
+  margin: 0;
+  color: rgba(22, 50, 77, 0.76);
+  line-height: 1.65;
+  font-size: 0.92rem;
+}
+
+.practice-course-detail-page .practice-item-card {
+  width: 14rem;
+  min-height: 15.1rem;
+  border-radius: 1.18rem;
+  border: 1px solid rgba(31, 106, 189, 0.14);
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.98), rgba(243, 249, 255, 0.92));
+  box-shadow: 0 16px 28px rgba(13, 47, 79, 0.08);
+  overflow: hidden;
+}
+
+.practice-course-detail-page .practice-item-card-exam {
+  border-color: rgba(29, 143, 119, 0.16);
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.98), rgba(242, 252, 248, 0.92));
+}
+
+.practice-course-detail-page .practice-item-card:hover:not(:disabled) {
+  transform: translateY(-5px);
+  box-shadow: 0 22px 34px rgba(13, 47, 79, 0.13);
+}
+
+.practice-course-detail-page .practice-item-card .course-lesson-thumb {
+  aspect-ratio: 1 / 0.8;
+}
+
+.practice-course-detail-page .practice-item-card .course-lesson-icon {
+  width: 2.15rem;
+  height: 2.15rem;
+}
+
+.practice-course-detail-page .practice-item-card-quiz .course-lesson-icon {
+  background: rgba(31, 106, 189, 0.9);
+}
+
+.practice-course-detail-page .practice-item-card-exam .course-lesson-icon {
+  background: rgba(29, 143, 119, 0.92);
+}
+
+.practice-course-detail-page .practice-item-card .course-lesson-title {
+  min-height: 5.65rem;
+  padding: 0.92rem 0.78rem 1rem;
+  gap: 0.42rem;
+}
+
+.practice-item-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  padding: 0.22rem 0.56rem;
+  border-radius: 999px;
+  background: rgba(31, 106, 189, 0.09);
+  color: #2a6395;
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.practice-item-card-exam .practice-item-eyebrow {
+  background: rgba(29, 143, 119, 0.1);
+  color: #246d5e;
+}
+
+.practice-course-detail-page .practice-item-card .course-lesson-title-text {
+  font-size: 0.95rem;
+  line-height: 1.42;
+  color: var(--practice-ink);
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+}
+
+.practice-item-helper {
+  display: block;
+  color: rgba(22, 50, 77, 0.64);
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
+.practice-course-detail-page .course-links-card {
+  min-height: 15.5rem;
+  border-radius: 1.3rem;
+}
+
+.practice-course-detail-page .course-links-card.practice {
+  background:
+    radial-gradient(circle at 12% 18%, rgba(31, 106, 189, 0.14), transparent 56%),
+    radial-gradient(circle at 86% 0%, rgba(29, 143, 119, 0.12), transparent 60%),
+    linear-gradient(145deg, rgba(252, 254, 255, 0.98), rgba(242, 249, 255, 0.94));
+  border-color: rgba(31, 106, 189, 0.16);
+}
+
+.practice-course-detail-page .course-links-card.relax {
+  background:
+    radial-gradient(circle at 12% 24%, rgba(217, 125, 47, 0.12), transparent 52%),
+    radial-gradient(circle at 88% 0%, rgba(244, 184, 97, 0.12), transparent 56%),
+    linear-gradient(145deg, rgba(255, 252, 246, 0.98), rgba(255, 248, 238, 0.94));
+  border-color: rgba(217, 125, 47, 0.16);
+}
+
+.practice-course-detail-page .course-links-button {
+  min-width: 0;
+}
+
+@media (max-width: 860px) {
+  .practice-course-detail-page .course-section.course-links-section {
+    grid-template-columns: 1fr;
+  }
+
+  .practice-course-detail-page .practice-prelim-card,
+  .practice-course-detail-page .practice-item-card {
+    width: min(14rem, 76vw);
+    min-width: min(14rem, 76vw);
+  }
+}
+
+@media (max-width: 560px) {
+  .practice-course-detail-page {
+    gap: 1.55rem;
+  }
+
+  .practice-course-detail-page .course-page-breadcrumb {
+    padding: 0.3rem 0.68rem;
+  }
+
+  .practice-course-detail-page .course-page-breadcrumb + .course-hero {
+    margin-top: -0.45rem;
+  }
+
+  .practice-hero-kicker {
+    font-size: 0.66rem;
+  }
+
+  .practice-hero-copy {
+    font-size: 0.88rem;
+    line-height: 1.62;
+  }
+
+  .practice-course-detail-page .course-section.course-prelims,
+  .practice-course-detail-page .practice-collection-section,
+  .practice-course-detail-page .course-section.course-links-section {
+    padding: 0.95rem;
+    border-radius: 1.2rem;
+  }
+
+  .practice-course-detail-page .practice-prelim-card,
+  .practice-course-detail-page .practice-item-card {
+    width: min(13.1rem, 82vw);
+    min-width: min(13.1rem, 82vw);
+  }
+
+  .practice-course-detail-page .practice-item-card .course-lesson-title {
+    min-height: 5.15rem;
+    padding-inline: 0.72rem;
+  }
+
+  .practice-course-detail-page .course-links-card {
+    min-height: 0;
+  }
+}
+
+[data-theme='dark'] .practice-course-detail-page .course-page-breadcrumb {
+  background: rgba(18, 31, 46, 0.9);
+  border-color: rgba(122, 177, 231, 0.18);
+  box-shadow: var(--card-shadow);
+}
+
+[data-theme='dark'] .practice-course-detail-page .course-hero {
+  border-color: rgba(79, 179, 173, 0.18);
+  background:
+    radial-gradient(circle at top right, rgba(63, 133, 197, 0.18), transparent 34%),
+    radial-gradient(circle at bottom left, rgba(79, 179, 173, 0.16), transparent 38%),
+    linear-gradient(150deg, rgba(18, 29, 42, 0.98), rgba(20, 34, 49, 0.96) 58%, rgba(15, 24, 36, 0.98));
+  box-shadow: var(--elevated-shadow);
+}
+
+[data-theme='dark'] .practice-hero-kicker {
+  background: linear-gradient(135deg, rgba(79, 179, 173, 0.16), rgba(92, 170, 228, 0.14));
+  color: #cfeeff;
+}
+
+[data-theme='dark'] .practice-hero-copy {
+  color: rgba(220, 235, 255, 0.72);
+}
+
+[data-theme='dark'] .practice-course-detail-page .course-progress,
+[data-theme='dark'] .practice-course-detail-page .course-covered-item {
+  border-color: rgba(79, 179, 173, 0.14);
+}
+
+[data-theme='dark'] .practice-course-detail-page .course-section.course-prelims,
+[data-theme='dark'] .practice-course-detail-page .practice-collection-section,
+[data-theme='dark'] .practice-course-detail-page .course-section.course-links-section {
+  background: rgba(13, 20, 29, 0.78);
+  border-color: rgba(92, 170, 228, 0.14);
+  box-shadow: var(--elevated-shadow);
+}
+
+[data-theme='dark'] .practice-course-detail-page .practice-collection-section-exams {
+  border-color: rgba(79, 179, 173, 0.18);
+}
+
+[data-theme='dark'] .practice-course-detail-page .practice-prelim-card,
+[data-theme='dark'] .practice-course-detail-page .practice-item-card {
+  background: linear-gradient(160deg, rgba(18, 28, 40, 0.96), rgba(15, 24, 35, 0.94));
+  border-color: rgba(122, 177, 231, 0.18);
+  box-shadow: var(--card-shadow);
+}
+
+[data-theme='dark'] .practice-course-detail-page .practice-item-card-exam {
+  border-color: rgba(79, 179, 173, 0.2);
+  background: linear-gradient(160deg, rgba(16, 29, 28, 0.96), rgba(12, 22, 21, 0.94));
+}
+
+[data-theme='dark'] .practice-course-detail-page .practice-item-card .course-lesson-title-text,
+[data-theme='dark'] .practice-course-detail-page .practice-prelim-card h3 {
+  color: #e6f4ff;
+}
+
+[data-theme='dark'] .practice-prelim-card-copy,
+[data-theme='dark'] .practice-item-helper {
+  color: rgba(220, 235, 255, 0.7);
+}
+
+[data-theme='dark'] .practice-item-eyebrow {
+  background: rgba(92, 170, 228, 0.14);
+  color: #d8edff;
+}
+
+[data-theme='dark'] .practice-item-card-exam .practice-item-eyebrow {
+  background: rgba(79, 179, 173, 0.14);
+  color: #cceee4;
+}

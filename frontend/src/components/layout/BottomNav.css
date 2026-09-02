@@ -1,0 +1,168 @@
+@import "../../styles/variables.css";
+
+.bottom-nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: var(--z-fixed);
+  display: flex;
+  align-items: stretch;
+  background: var(--color-bg-light);
+  border-top: 1px solid var(--border-color);
+  box-shadow: 0 -8px 24px rgba(15, 23, 42, 0.08);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.bottom-nav-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  padding: 0.65rem 0.3rem;
+  min-height: 4.4rem;
+  color: var(--color-text-light);
+  text-decoration: none;
+  background: none;
+  border: none;
+  font-family: inherit;
+}
+
+.bottom-nav-icon {
+  font-size: 1.6rem;
+  display: inline-flex;
+}
+
+.bottom-nav-label {
+  font-size: 0.74rem;
+  font-weight: var(--font-weight-medium);
+  white-space: nowrap;
+}
+
+.bottom-nav-item.active {
+  color: var(--primary-color);
+  font-weight: var(--font-weight-semibold);
+}
+
+.bottom-nav-sheet-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.5);
+  z-index: var(--z-modal);
+  display: flex;
+  align-items: flex-end;
+  animation: bottomNavFadeIn var(--transition-fast);
+}
+
+@keyframes bottomNavFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.bottom-nav-sheet {
+  width: 100%;
+  background: var(--color-bg-light);
+  border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
+  box-shadow: var(--shadow-xl);
+  padding: var(--space-4) var(--space-4) calc(var(--space-5) + env(safe-area-inset-bottom));
+  animation: bottomNavSlideUp var(--transition-base);
+}
+
+@keyframes bottomNavSlideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+.bottom-nav-sheet-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-base);
+  color: var(--text-color);
+  margin-bottom: var(--space-4);
+}
+
+.bottom-nav-sheet-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  border: none;
+  background: rgba(31, 113, 119, 0.1);
+  color: var(--text-color);
+  font-size: 1.1rem;
+}
+
+.bottom-nav-sheet-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+
+.bottom-nav-sheet-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: var(--space-4) var(--space-2);
+  border-radius: var(--radius-lg);
+  background: rgba(31, 113, 119, 0.06);
+  border: 1px solid rgba(31, 113, 119, 0.12);
+  color: var(--text-color);
+  text-decoration: none;
+  text-align: center;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+.bottom-nav-sheet-item.active {
+  background: rgba(31, 113, 119, 0.16);
+  color: var(--primary-color);
+  border-color: rgba(31, 113, 119, 0.28);
+}
+
+.bottom-nav-sheet-item-icon {
+  font-size: 1.65rem;
+  display: inline-flex;
+}
+
+[data-theme="dark"] .bottom-nav {
+  background: var(--color-bg-light);
+  border-top-color: var(--border-color);
+  box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .bottom-nav-sheet {
+  background: var(--color-bg-light);
+  box-shadow: var(--modal-shadow, var(--shadow-xl));
+}
+
+[data-theme="dark"] .bottom-nav-sheet-item {
+  background: rgba(79, 179, 173, 0.1);
+  border-color: rgba(79, 179, 173, 0.18);
+}
+
+[data-theme="dark"] .bottom-nav-sheet-item.active {
+  background: rgba(79, 179, 173, 0.2);
+  border-color: rgba(79, 179, 173, 0.3);
+}
+
+[data-theme="dark"] .bottom-nav-sheet-close {
+  background: rgba(79, 179, 173, 0.14);
+  color: var(--text-color);
+}
+
+/* Failsafe — Layout only mounts BottomNav on phones (<=768px), but keep this
+   in sync in case CSS and JS breakpoints ever drift. */
+@media (min-width: 769px) {
+  .bottom-nav,
+  .bottom-nav-sheet-overlay {
+    display: none;
+  }
+}

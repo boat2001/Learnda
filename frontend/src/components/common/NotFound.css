@@ -1,0 +1,57 @@
+@import "../../styles/variables.css";
+
+.not-found {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-8) var(--space-4);
+}
+
+.not-found-content {
+  max-width: 520px;
+  text-align: center;
+  background: var(--color-bg-light);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-7);
+  box-shadow: var(--shadow-sm);
+}
+
+.not-found-content h1 {
+  font-size: clamp(3rem, 6vw, 4.5rem);
+  color: var(--primary-color);
+}
+
+.not-found-content h2 {
+  margin-top: var(--space-2);
+}
+
+.not-found-actions {
+  margin-top: var(--space-5);
+  display: flex;
+  justify-content: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.back-btn,
+.home-btn {
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-full);
+  font-weight: var(--font-weight-semibold);
+  border: 1px solid var(--border-color);
+  background: var(--color-bg-light);
+}
+
+.home-btn {
+  background: var(--primary-color);
+  color: var(--color-text-on-primary);
+  border-color: transparent;
+}
+
+[data-theme="dark"] .not-found-content {
+  background: rgba(15, 20, 28, 0.94);
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.35);
+}

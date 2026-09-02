@@ -1,0 +1,228 @@
+import { useEffect, useState } from 'react';
+import { useAnalyticsWithContext } from '../hooks/useAnalytics';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import { FiMail, FiMessageSquare, FiPhone } from 'react-icons/fi';
+import { FaWhatsapp } from 'react-icons/fa6';
+import { useAuth } from '../hooks/useAuth';
+import api from '../services/api';
+import FormContactIdentity from '../components/common/FormContactIdentity';
+import FormModal from '../components/common/FormModal';
+import './SharedPages.css';
+
+
+const getDisplayName = (user) =>
+  user?.full_name || user?.name ||
+  [user?.first_name, user?.last_name].filter(Boolean).join(' ') || '';
+
+export default function Contact() {
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const { user, isAuthenticated } = useAuth();
+  const { trackEvent } = useAnalyticsWithContext();
+const [showModal, setShowModal] = useState(false);
+  const [formState, setFormState] = useState({ name: '', email: '', topic: 'General', message: '' });
+  const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    const topic = searchParams.get('topic');
+    const message = searchParams.get('message');
+    setFormState((prev) => ({
+      ...prev,
+      topic: topic || prev.topic,
+      message: message || prev.message,
+    }));
+    if (topic || message) setShowModal(true);
+  }, [searchParams]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormState((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
+    try {
+      const response = await api.support.submitReport({
+        name: isAuthenticated ? (getDisplayName(user) || user?.email) : formState.name,
+        email: isAuthenticated ? user?.email : formState.email,
+        subject: formState.topic,
+        category: 'Support',
+        message: formState.message,
+      });
+      if (response?.success) {
+        setSubmitted(true);
+        trackEvent('contact_form_submitted', { topic: formState.topic });
+      } else {
+        setError(response?.error || 'Unable to send your message right now.');
+      }
+    } catch (err) {
+      setError(err.message || 'Unable to send your message right now.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+    setSubmitted(false);
+    setError('');
+  };
+
+  return (
+    <div className="page-shell">
+      <FormModal
+        isOpen={showModal}
+        onClose={closeModal}
+        title="Send us a message"
+        subtitle="We'll reply with the next steps or resources you need."
+      >
+        {submitted ? (
+          <div className="fm-success">
+            <div className="fm-success-icon">✓</div>
+            <p>Message received. We aim to reply within 24–48 hours.</p>
+            <button className="btn btn-primary" type="button" onClick={closeModal}>Done</button>
+          </div>
+        ) : (
+          <form onSubmit={handleSubmit}>
+            {isAuthenticated && user ? (
+              <FormContactIdentity user={user} />
+            ) : (
+              <>
+                <div className="form-row">
+                  <label htmlFor="c-name">Full name</label>
+                  <input id="c-name" name="name" type="text" value={formState.name} onChange={handleChange} placeholder="Your name" required />
+                </div>
+                <div className="form-row">
+                  <label htmlFor="c-email">Email</label>
+                  <input id="c-email" name="email" type="email" value={formState.email} onChange={handleChange} placeholder="name@email.com" required />
+                </div>
+              </>
+            )}
+            <div className="form-row">
+              <label htmlFor="c-topic">Topic</label>
+              <select id="c-topic" name="topic" value={formState.topic} onChange={handleChange}>
+                <option>General</option>
+                <option>Plans and billing</option>
+                <option>Creator support</option>
+                <option>Partnerships</option>
+              </select>
+            </div>
+            <div className="form-row">
+              <label htmlFor="c-message">Message</label>
+              <textarea id="c-message" name="message" rows="4" value={formState.message} onChange={handleChange} placeholder="Tell us how we can help" required disabled={loading} />
+            </div>
+            {error && <p className="fm-feedback error">{error}</p>}
+            <div className="fm-actions">
+              <button className="btn btn-primary" type="submit" disabled={loading}>
+                {loading ? 'Sending...' : 'Send message'}
+              </button>
+              <button className="btn btn-secondary" type="button" onClick={closeModal}>Cancel</button>
+            </div>
+          </form>
+        )}
+      </FormModal>
+
+      <section className="page-hero page-hero-compact page-hero-lean hero-theme-support">
+        <div className="hero-grid">
+          <div>
+            <span className="hero-tag">Support and outreach</span>
+            <h1 className="hero-title">Get answers, raise issues, or start the conversation that moves things forward.</h1>
+            <p className="hero-subtitle">
+              This page combines direct contact, quick support answers, and the main paths for reaching the Sharether team.
+            </p>
+            <div className="hero-actions">
+              <button className="btn btn-primary" type="button" onClick={() => setShowModal(true)}>
+                Send us a message
+              </button>
+              <button className="btn btn-secondary" type="button" onClick={() => navigate('/contribute')}>
+                Chip in to Sharether
+              </button>
+            </div>
+            <div className="stat-grid">
+              <div className="stat-card">
+                <span className="stat-value">Direct contact</span>
+                <span className="stat-label">Support, partnerships, billing, and account questions.</span>
+              </div>
+<div className="stat-card">
+                <span className="stat-value">Issue-ready</span>
+                <span className="stat-label">When something is broken, jump straight to the bug-report path.</span>
+              </div>
+            </div>
+          </div>
+          <div className="hero-panel">
+            <p className="panel-title">Support highlights</p>
+            <div className="panel-list">
+              <div className="panel-list-item">
+                <span className="panel-dot" />
+                <div>
+                  <strong>Fast replies</strong>
+                  <p>Average response time under 6 hours.</p>
+                </div>
+              </div>
+              <div className="panel-list-item">
+                <span className="panel-dot" />
+                <div>
+                  <strong>Guided setup</strong>
+                  <p>Step-by-step help for learners getting started.</p>
+                </div>
+              </div>
+              <div className="panel-list-item">
+                <span className="panel-dot" />
+                <div>
+                  <strong>Safety</strong>
+                  <p>Clear flow for reporting community issues.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="page-section">
+        <div className="section-heading">
+          <h2>Reach us directly</h2>
+          <p>Pick the channel that works best for you.</p>
+        </div>
+        <div className="contact-grid">
+          <a className="contact-box" href="mailto:support@sharether.com">
+            <div className="contact-box__icon"><FiMail /></div>
+            <div className="contact-box__body">
+              <span className="contact-box__label">Email</span>
+              <span className="contact-box__value">support@sharether.com</span>
+              <span className="contact-box__desc">For support, billing, and partnerships.</span>
+            </div>
+          </a>
+          <a className="contact-box" href="https://wa.me/233591661816" target="_blank" rel="noopener noreferrer">
+            <div className="contact-box__icon contact-box__icon--whatsapp"><FaWhatsapp /></div>
+            <div className="contact-box__body">
+              <span className="contact-box__label">WhatsApp</span>
+              <span className="contact-box__value">+233 591 661 816</span>
+              <span className="contact-box__desc">Quick messages and community announcements.</span>
+            </div>
+          </a>
+          <a className="contact-box" href="tel:+233591661816">
+            <div className="contact-box__icon contact-box__icon--phone"><FiPhone /></div>
+            <div className="contact-box__body">
+              <span className="contact-box__label">Phone</span>
+              <span className="contact-box__value">+233 591 661 816</span>
+              <span className="contact-box__desc">Call us during business hours.</span>
+            </div>
+          </a>
+          <button className="contact-box" type="button" onClick={() => setShowModal(true)}>
+            <div className="contact-box__icon contact-box__icon--message"><FiMessageSquare /></div>
+            <div className="contact-box__body">
+              <span className="contact-box__label">Send a message</span>
+              <span className="contact-box__value">Contact form</span>
+              <span className="contact-box__desc">For detailed enquiries that need a written response.</span>
+            </div>
+          </button>
+        </div>
+      </section>
+
+    </div>
+  );
+}

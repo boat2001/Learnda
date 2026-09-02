@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 524" preserveAspectRatio="xMidYMid meet" role="img" aria-label="How computers are classified: by purpose (special-purpose vs general-purpose) and by type (analog, digital, hybrid), with examples.">
+  <title>Classifying Computers: Purpose and Type</title>
+  <style>
+    .cc-title { font-family:'Segoe UI',system-ui,sans-serif; font-weight:700; }
+    .cc-body  { font-family:'Segoe UI',system-ui,sans-serif; }
+    .ccard { cursor:pointer; }
+    .ccard .ring { fill:none; opacity:0; transition:opacity .16s ease; }
+    .ccard:hover .ring, .ccard.is-active .ring { opacity:1; }
+  </style>
+
+  <rect x="0" y="0" width="480" height="524" rx="16" fill="#f8faff"/>
+
+  <!-- Title -->
+  <rect x="16" y="16" width="448" height="50" rx="12" fill="#1a2e5a"/>
+  <text class="cc-title" x="240" y="40" text-anchor="middle" fill="#ffffff" font-size="18">Two Ways to Classify Computers</text>
+  <text class="cc-body" x="240" y="58" text-anchor="middle" fill="#aebfe0" font-size="12.5">Hover or tap a card to highlight it</text>
+
+  <!-- Section 1: By Purpose -->
+  <text class="cc-title" x="24" y="88" fill="#1a2e5a" font-size="14.5">1 &#183; By Purpose</text>
+
+  <g class="ccard" tabindex="0">
+    <rect class="ring" x="20" y="92" width="220" height="96" rx="13" stroke="#f97316" stroke-width="3"/>
+    <rect x="24" y="96" width="212" height="88" rx="11" fill="#fff1e8" stroke="#fbb78a" stroke-width="1.4"/>
+    <rect x="24" y="96" width="6" height="88" rx="3" fill="#f97316"/>
+    <text class="cc-title" x="42" y="120" fill="#1e293b" font-size="14.5">Special-purpose</text>
+    <text class="cc-body" x="42" y="140" fill="#475569" font-size="13">One fixed job; cannot</text>
+    <text class="cc-body" x="42" y="157" fill="#475569" font-size="13">be reprogrammed</text>
+    <text class="cc-body" x="42" y="176" fill="#94a3b8" font-size="12">e.g. microwave chip, car</text>
+  </g>
+  <g class="ccard" tabindex="0">
+    <rect class="ring" x="240" y="92" width="220" height="96" rx="13" stroke="#3b82f6" stroke-width="3"/>
+    <rect x="244" y="96" width="212" height="88" rx="11" fill="#eaf1fe" stroke="#9cc0f7" stroke-width="1.4"/>
+    <rect x="244" y="96" width="6" height="88" rx="3" fill="#3b82f6"/>
+    <text class="cc-title" x="262" y="120" fill="#1e293b" font-size="14.5">General-purpose</text>
+    <text class="cc-body" x="262" y="140" fill="#475569" font-size="13">Runs many different</text>
+    <text class="cc-body" x="262" y="157" fill="#475569" font-size="13">programs</text>
+    <text class="cc-body" x="262" y="176" fill="#94a3b8" font-size="12">e.g. laptop, phone, tablet</text>
+  </g>
+
+  <!-- Section 2: By Type -->
+  <text class="cc-title" x="24" y="212" fill="#1a2e5a" font-size="14.5">2 &#183; By Type (operating principle)</text>
+
+  <g class="ccard" tabindex="0">
+    <rect class="ring" x="20" y="220" width="440" height="68" rx="13" stroke="#f59e0b" stroke-width="3"/>
+    <rect x="24" y="224" width="432" height="60" rx="11" fill="#fff7e6" stroke="#fcd385" stroke-width="1.4"/>
+    <rect x="24" y="224" width="6" height="60" rx="3" fill="#f59e0b"/>
+    <text class="cc-title" x="42" y="246" fill="#1e293b" font-size="14">Analog</text>
+    <text class="cc-body" x="110" y="246" fill="#475569" font-size="13">&#8212; measures continuous quantities (temperature, voltage)</text>
+    <text class="cc-body" x="42" y="270" fill="#94a3b8" font-size="12">e.g. thermometer, speedometer &#183; fast but low precision</text>
+  </g>
+  <g class="ccard" tabindex="0">
+    <rect class="ring" x="20" y="296" width="440" height="68" rx="13" stroke="#3b82f6" stroke-width="3"/>
+    <rect x="24" y="300" width="432" height="60" rx="11" fill="#eaf1fe" stroke="#9cc0f7" stroke-width="1.4"/>
+    <rect x="24" y="300" width="6" height="60" rx="3" fill="#3b82f6"/>
+    <text class="cc-title" x="42" y="322" fill="#1e293b" font-size="14">Digital</text>
+    <text class="cc-body" x="104" y="322" fill="#475569" font-size="13">&#8212; counts in binary, only 0s and 1s &#183; very accurate</text>
+    <text class="cc-body" x="42" y="346" fill="#94a3b8" font-size="12">e.g. laptop, smartphone, calculator</text>
+  </g>
+  <g class="ccard" tabindex="0">
+    <rect class="ring" x="20" y="372" width="440" height="68" rx="13" stroke="#8b5cf6" stroke-width="3"/>
+    <rect x="24" y="376" width="432" height="60" rx="11" fill="#f3effe" stroke="#c4b5fd" stroke-width="1.4"/>
+    <rect x="24" y="376" width="6" height="60" rx="3" fill="#8b5cf6"/>
+    <text class="cc-title" x="42" y="398" fill="#1e293b" font-size="14">Hybrid</text>
+    <text class="cc-body" x="104" y="398" fill="#475569" font-size="13">&#8212; analog collects the data, digital stores it</text>
+    <text class="cc-body" x="42" y="422" fill="#94a3b8" font-size="12">e.g. ATM, fuel pump</text>
+  </g>
+
+  <!-- note -->
+  <rect x="24" y="452" width="432" height="34" rx="9" fill="#eef2fb" stroke="#c7d2e8" stroke-width="1.2"/>
+  <text class="cc-body" x="240" y="473" text-anchor="middle" fill="#1a2e5a" font-size="12.5">Same machine, different programs &#8212; that is general-purpose power.</text>
+
+  <!-- footer -->
+  <text class="cc-body" x="240" y="508" text-anchor="middle" fill="#94a3b8" font-size="11">Sharether Learning Platform &#8226; EBS 107 &#8226; Lesson 2: What Is a Computer?</text>
+
+  <script><![CDATA[
+    (function () {
+      var svg = document.currentScript.closest('svg');
+      svg.querySelectorAll('.ccard').forEach(function (el) {
+        el.addEventListener('click', function () {
+          var on = el.classList.contains('is-active');
+          svg.querySelectorAll('.ccard').forEach(function (c) { c.classList.remove('is-active'); });
+          if (!on) el.classList.add('is-active');
+        });
+      });
+    })();
+  ]]></script>
+</svg>

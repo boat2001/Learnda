@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 540" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Classical conditioning: before, during and after Pavlov's experiment. Before: food causes salivation, bell does nothing. During: bell is paired with food. After: the bell alone causes salivation.">
+  <title>Classical Conditioning: Pavlov's Dogs</title>
+  <style>
+    .pv-title { font-family:'Segoe UI',system-ui,sans-serif; font-weight:700; }
+    .pv-body  { font-family:'Segoe UI',system-ui,sans-serif; }
+    .phase { display:none; }
+    .phase.show { display:block; }
+    .tab { cursor:pointer; }
+    .tab .tbx { fill:#ffffff; stroke:#1a2e5a; stroke-width:1.4; }
+    .tab .ttx { fill:#1a2e5a; }
+    .tab.is-active .tbx { fill:#1a2e5a; }
+    .tab.is-active .ttx { fill:#ffffff; }
+  </style>
+
+  <rect x="0" y="0" width="480" height="540" rx="16" fill="#f8faff"/>
+  <rect x="16" y="16" width="448" height="50" rx="12" fill="#1a2e5a"/>
+  <text class="pv-title" x="240" y="40" text-anchor="middle" fill="#ffffff" font-size="18">Classical Conditioning: Pavlov's Dogs</text>
+  <text class="pv-body" x="240" y="58" text-anchor="middle" fill="#aebfe0" font-size="12.5">Tap a phase to see how the bell gains meaning</text>
+
+  <!-- Tabs -->
+  <g class="tab" data-ph="before" tabindex="0">
+    <rect class="tbx" x="40" y="82" width="124" height="34" rx="9"/>
+    <text class="ttx pv-title" x="102" y="104" text-anchor="middle" font-size="13.5">1 · Before</text>
+  </g>
+  <g class="tab" data-ph="during" tabindex="0">
+    <rect class="tbx" x="178" y="82" width="124" height="34" rx="9"/>
+    <text class="ttx pv-title" x="240" y="104" text-anchor="middle" font-size="13.5">2 · During</text>
+  </g>
+  <g class="tab" data-ph="after" tabindex="0">
+    <rect class="tbx" x="316" y="82" width="124" height="34" rx="9"/>
+    <text class="ttx pv-title" x="378" y="104" text-anchor="middle" font-size="13.5">3 · After</text>
+  </g>
+
+  <!-- ===== BEFORE ===== -->
+  <g id="ph-before" class="phase">
+    <!-- bell row -->
+    <rect x="40" y="150" width="158" height="54" rx="11" fill="#fff7e6" stroke="#fcd385" stroke-width="1.5"/>
+    <g transform="translate(58,166)"><path d="M0 12 C0 4 4 0 8 0 C12 0 16 4 16 12 L18 15 L-2 15 Z" fill="#f59e0b"/><circle cx="8" cy="18" r="2" fill="#f59e0b"/></g>
+    <text class="pv-body" x="86" y="173" fill="#1e293b" font-size="13.5">Bell</text>
+    <text class="pv-body" x="86" y="190" fill="#94a3b8" font-size="12">neutral (NS)</text>
+    <path d="M206 177 L244 177" stroke="#94a3b8" stroke-width="2"/><path d="M252 177 L242 172 L242 182 Z" fill="#94a3b8"/>
+    <rect x="262" y="150" width="178" height="54" rx="11" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text class="pv-body" x="351" y="182" text-anchor="middle" fill="#64748b" font-size="13.5">No response</text>
+    <!-- food row -->
+    <rect x="40" y="232" width="158" height="54" rx="11" fill="#fff1e8" stroke="#fbb78a" stroke-width="1.5"/>
+    <g transform="translate(56,250)"><path d="M0 2 Q9 16 18 2" fill="none" stroke="#f97316" stroke-width="2.4"/><ellipse cx="9" cy="3" rx="11" ry="3" fill="#f97316"/></g>
+    <text class="pv-body" x="86" y="255" fill="#1e293b" font-size="13.5">Food</text>
+    <text class="pv-body" x="86" y="272" fill="#94a3b8" font-size="12">natural (UCS)</text>
+    <path d="M206 259 L244 259" stroke="#3b82f6" stroke-width="2"/><path d="M252 259 L242 254 L242 264 Z" fill="#3b82f6"/>
+    <rect x="262" y="232" width="178" height="54" rx="11" fill="#eaf1fe" stroke="#9cc0f7" stroke-width="1.5"/>
+    <g transform="translate(280,250)"><path d="M8 0 C13 8 12 17 8 17 C4 17 3 8 8 0 Z" fill="#3b82f6"/></g>
+    <text class="pv-body" x="300" y="263" fill="#1e293b" font-size="13.5">Salivation (UCR)</text>
+    <text class="pv-body" x="40" y="318" fill="#475569" font-size="13">The bell means nothing yet. Food naturally</text>
+    <text class="pv-body" x="40" y="338" fill="#475569" font-size="13">causes salivation, with no learning required.</text>
+  </g>
+
+  <!-- ===== DURING ===== -->
+  <g id="ph-during" class="phase">
+    <rect x="40" y="190" width="200" height="76" rx="11" fill="#fff7e6" stroke="#fcd385" stroke-width="1.5"/>
+    <g transform="translate(58,214)"><path d="M0 12 C0 4 4 0 8 0 C12 0 16 4 16 12 L18 15 L-2 15 Z" fill="#f59e0b"/><circle cx="8" cy="18" r="2" fill="#f59e0b"/></g>
+    <text class="pv-body" x="86" y="221" fill="#1e293b" font-size="13.5">Bell (NS)</text>
+    <text class="pv-title" x="120" y="246" fill="#0f172a" font-size="15">+</text>
+    <g transform="translate(150,236)"><path d="M0 2 Q9 16 18 2" fill="none" stroke="#f97316" stroke-width="2.4"/><ellipse cx="9" cy="3" rx="11" ry="3" fill="#f97316"/></g>
+    <text class="pv-body" x="178" y="247" fill="#1e293b" font-size="13.5">Food (UCS)</text>
+    <path d="M248 228 L286 228" stroke="#3b82f6" stroke-width="2"/><path d="M294 228 L284 223 L284 233 Z" fill="#3b82f6"/>
+    <rect x="300" y="190" width="140" height="76" rx="11" fill="#eaf1fe" stroke="#9cc0f7" stroke-width="1.5"/>
+    <g transform="translate(316,218)"><path d="M8 0 C13 8 12 17 8 17 C4 17 3 8 8 0 Z" fill="#3b82f6"/></g>
+    <text class="pv-body" x="336" y="231" fill="#1e293b" font-size="13.5">Salivation</text>
+    <text class="pv-body" x="336" y="248" fill="#94a3b8" font-size="12">(UCR)</text>
+    <text class="pv-body" x="40" y="318" fill="#475569" font-size="13">The bell rings just before the food &#8212; over and</text>
+    <text class="pv-body" x="40" y="338" fill="#475569" font-size="13">over. The dog links the two together.</text>
+  </g>
+
+  <!-- ===== AFTER ===== -->
+  <g id="ph-after" class="phase">
+    <rect x="40" y="190" width="180" height="76" rx="11" fill="#ecfdf5" stroke="#86efac" stroke-width="1.6"/>
+    <g transform="translate(64,214)"><path d="M0 12 C0 4 4 0 8 0 C12 0 16 4 16 12 L18 15 L-2 15 Z" fill="#16a34a"/><circle cx="8" cy="18" r="2" fill="#16a34a"/></g>
+    <text class="pv-body" x="92" y="221" fill="#1e293b" font-size="13.5">Bell</text>
+    <text class="pv-body" x="92" y="238" fill="#16a34a" font-size="12" font-weight="700">now CS</text>
+    <path d="M228 228 L286 228" stroke="#16a34a" stroke-width="2.4"/><path d="M294 228 L283 222 L283 234 Z" fill="#16a34a"/>
+    <rect x="300" y="190" width="140" height="76" rx="11" fill="#ecfdf5" stroke="#86efac" stroke-width="1.6"/>
+    <g transform="translate(316,218)"><path d="M8 0 C13 8 12 17 8 17 C4 17 3 8 8 0 Z" fill="#16a34a"/></g>
+    <text class="pv-body" x="336" y="231" fill="#1e293b" font-size="13.5">Salivation</text>
+    <text class="pv-body" x="336" y="248" fill="#16a34a" font-size="12" font-weight="700">now CR</text>
+    <text class="pv-body" x="40" y="318" fill="#475569" font-size="13">The bell <tspan font-weight="700" fill="#166534">alone</tspan> now triggers salivation &#8212;</text>
+    <text class="pv-body" x="40" y="338" fill="#475569" font-size="13">a brand-new, learned response.</text>
+  </g>
+
+  <!-- legend -->
+  <rect x="40" y="360" width="400" height="74" rx="11" fill="#eef2fb" stroke="#c7d2e8" stroke-width="1.2"/>
+  <text class="pv-body" x="56" y="382" fill="#475569" font-size="12"><tspan font-weight="700" fill="#1a2e5a">UCS</tspan> unconditioned stimulus &#183; <tspan font-weight="700" fill="#1a2e5a">UCR</tspan> unconditioned response</text>
+  <text class="pv-body" x="56" y="402" fill="#475569" font-size="12"><tspan font-weight="700" fill="#1a2e5a">CS</tspan> conditioned stimulus &#183; <tspan font-weight="700" fill="#1a2e5a">CR</tspan> conditioned response</text>
+  <text class="pv-body" x="56" y="424" fill="#64748b" font-size="12">Classroom: a subject paired with shame becomes a CS for anxiety.</text>
+
+  <text class="pv-body" x="240" y="520" text-anchor="middle" fill="#94a3b8" font-size="11">Sharether Learning Platform &#8226; EBS 106 &#8226; Lesson 15: Classical Conditioning</text>
+
+  <script><![CDATA[
+    (function () {
+      var svg = document.currentScript.closest('svg');
+      function show(ph) {
+        svg.querySelectorAll('.phase').forEach(function (g) { g.classList.remove('show'); });
+        var el = svg.querySelector('#ph-' + ph); if (el) el.classList.add('show');
+        svg.querySelectorAll('.tab').forEach(function (t) { t.classList.toggle('is-active', t.getAttribute('data-ph') === ph); });
+      }
+      svg.querySelectorAll('.tab').forEach(function (t) {
+        var ph = t.getAttribute('data-ph');
+        t.addEventListener('click', function () { show(ph); });
+        t.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); show(ph); } });
+      });
+      show('before');
+    })();
+  ]]></script>
+</svg>

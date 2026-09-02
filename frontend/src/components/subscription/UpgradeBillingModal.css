@@ -1,0 +1,720 @@
+@import "../../styles/variables.css";
+
+.upgrade-billing-page {
+  min-height: 100dvh;
+  padding: clamp(14px, 4vw, 42px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(circle at 16% 12%, rgba(79, 179, 173, 0.2), transparent 28%),
+    radial-gradient(circle at 82% 78%, rgba(244, 162, 97, 0.18), transparent 30%),
+    linear-gradient(135deg, #f6faf9 0%, #f8f4ed 100%);
+}
+
+.upgrade-billing-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: calc(var(--z-modal) + 4);
+  height: 100%;
+  overflow-y: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(16px, 3vw, 34px);
+  background:
+    radial-gradient(circle at 22% 12%, rgba(79, 179, 173, 0.24), transparent 28%),
+    radial-gradient(circle at 78% 78%, rgba(244, 162, 97, 0.2), transparent 30%),
+    rgba(9, 15, 24, 0.68);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+}
+
+.upgrade-billing-modal {
+  width: min(600px, 100%);
+  max-height: min(90vh, 820px);
+  overflow: auto;
+  border: 1px solid rgba(31, 113, 119, 0.2);
+  border-radius: 28px;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 252, 251, 0.98) 52%, rgba(255, 248, 239, 0.98) 100%);
+  box-shadow: 0 34px 90px rgba(15, 23, 42, 0.28);
+  padding: clamp(16px, 2.6vw, 26px);
+  display: grid;
+  gap: 14px;
+  color: var(--text-color);
+}
+
+.upgrade-billing-modal-page-panel {
+  width: min(600px, 100%);
+  max-height: none;
+  overflow: visible;
+}
+
+.upgrade-billing-modal-page-panel .upgrade-billing-modal-close {
+  left: 16px;
+  right: auto;
+}
+
+.upgrade-billing-modal-page-panel .upgrade-billing-modal-hero-copy {
+  padding-left: 44px;
+}
+
+.upgrade-billing-modal-hero {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(180px, 0.4fr);
+  gap: clamp(14px, 2.2vw, 20px);
+  align-items: center;
+  min-height: 168px;
+  border-radius: 24px;
+  padding: clamp(18px, 2.8vw, 26px);
+  background:
+    radial-gradient(circle at 86% 20%, rgba(244, 162, 97, 0.34), transparent 26%),
+    radial-gradient(circle at 14% 18%, rgba(91, 123, 154, 0.28), transparent 30%),
+    linear-gradient(135deg, #0f2f33 0%, #195c61 48%, #2d8785 100%);
+  color: #f8fafc;
+}
+
+.upgrade-billing-modal-hero::after {
+  content: "";
+  position: absolute;
+  inset: auto -12% -42% 42%;
+  height: 78%;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  transform: rotate(-9deg);
+  pointer-events: none;
+}
+
+.upgrade-billing-modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 2;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 999px;
+  background: rgba(6, 13, 22, 0.24);
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--transition-fast), background-color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.upgrade-billing-modal-close:hover:not(:disabled) {
+  transform: translateY(-1px);
+  background: rgba(6, 13, 22, 0.4);
+  border-color: rgba(255, 255, 255, 0.36);
+}
+
+.upgrade-billing-modal-hero-copy {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+  padding-right: 22px;
+}
+
+.upgrade-billing-modal-kicker {
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 32px;
+  padding: 0 13px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.13);
+  color: #bff4ef;
+  border: 1px solid rgba(191, 244, 239, 0.22);
+  font-size: 0.8rem;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0;
+}
+
+.upgrade-billing-modal-hero h3 {
+  margin: 0;
+  max-width: 11ch;
+  color: #ffffff;
+  font-family: var(--font-family-heading);
+  font-size: clamp(2rem, 4.6vw, 3.7rem);
+  line-height: 0.98;
+  letter-spacing: 0;
+}
+
+.upgrade-billing-modal-hero p {
+  margin: 0;
+  max-width: 44rem;
+  color: rgba(248, 250, 252, 0.82);
+  font-size: clamp(0.96rem, 1.8vw, 1.08rem);
+  line-height: 1.58;
+}
+
+.upgrade-billing-modal-price-card {
+  position: relative;
+  z-index: 1;
+  align-self: end;
+  display: grid;
+  gap: 8px;
+  min-height: 154px;
+  padding: 22px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+.upgrade-billing-modal-price-card span,
+.upgrade-billing-modal-price-card small,
+.upgrade-billing-modal-card-label {
+  color: var(--color-text-secondary);
+  font-size: 0.78rem;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.upgrade-billing-modal-price-card span {
+  color: rgba(248, 250, 252, 0.76);
+}
+
+.upgrade-billing-modal-price-card strong {
+  color: #ffffff;
+  font-size: clamp(2rem, 3.4vw, 2.8rem);
+  line-height: 1;
+}
+
+.upgrade-billing-modal-price-card small {
+  color: rgba(248, 250, 252, 0.72);
+  text-transform: none;
+}
+
+.upgrade-billing-modal-summary {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: 12px;
+}
+
+.upgrade-billing-modal-plan-chip,
+.upgrade-billing-modal-benefits,
+.upgrade-billing-modal-card {
+  border: 1px solid rgba(31, 113, 119, 0.16);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.74);
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
+}
+
+.upgrade-billing-modal-plan-chip {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+}
+
+.upgrade-billing-modal-plan-step {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+  min-height: 76px;
+  padding: 14px;
+  border-radius: 16px;
+  background: rgba(31, 113, 119, 0.06);
+}
+
+.upgrade-billing-modal-plan-step small {
+  color: var(--color-text-secondary);
+  font-size: 0.76rem;
+  font-weight: var(--font-weight-bold);
+}
+
+.upgrade-billing-modal-plan-step strong {
+  color: var(--text-color);
+  font-size: 1rem;
+  line-height: 1.22;
+}
+
+.upgrade-billing-modal-plan-step.is-target {
+  background: linear-gradient(135deg, rgba(31, 113, 119, 0.13), rgba(244, 162, 97, 0.1));
+}
+
+.upgrade-billing-modal-plan-arrow {
+  width: 38px;
+  height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: var(--primary-color);
+  color: var(--color-text-on-primary);
+}
+
+.upgrade-billing-modal-benefits {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  padding: 14px;
+}
+
+.upgrade-billing-modal-benefits span {
+  min-width: 0;
+  min-height: 76px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 16px;
+  padding: 12px;
+  background: rgba(31, 113, 119, 0.06);
+  color: var(--color-text-secondary);
+  font-size: 0.82rem;
+  font-weight: var(--font-weight-semibold);
+  text-align: center;
+}
+
+.upgrade-billing-modal-benefits svg {
+  align-self: center;
+  color: var(--primary-color);
+  font-size: 1.18rem;
+}
+
+.upgrade-billing-modal-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 12px;
+}
+
+.upgrade-billing-modal-card {
+  display: grid;
+  gap: 14px;
+  padding: 18px;
+}
+
+.upgrade-billing-modal-card-heading {
+  display: grid;
+  gap: 4px;
+}
+
+.upgrade-billing-modal-card-heading strong,
+.upgrade-billing-modal-toggle strong {
+  color: var(--text-color);
+  font-size: 1rem;
+  line-height: 1.4;
+  font-weight: var(--font-weight-bold);
+}
+
+.upgrade-billing-modal-duration-options {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.upgrade-billing-modal-duration-option {
+  min-height: 76px;
+  border: 1px solid rgba(31, 113, 119, 0.18);
+  border-radius: 16px;
+  background: rgba(31, 113, 119, 0.05);
+  color: var(--text-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  cursor: pointer;
+  transition: transform var(--transition-fast), border-color var(--transition-fast), background-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.upgrade-billing-modal-duration-option strong {
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.upgrade-billing-modal-duration-option span {
+  color: var(--color-text-secondary);
+  font-size: 0.74rem;
+  font-weight: var(--font-weight-semibold);
+}
+
+.upgrade-billing-modal-duration-option:hover:not(:disabled) {
+  transform: translateY(-1px);
+  border-color: rgba(31, 113, 119, 0.38);
+}
+
+.upgrade-billing-modal-duration-option.is-selected {
+  background: var(--primary-color);
+  color: var(--color-text-on-primary);
+  border-color: var(--primary-color);
+  box-shadow: 0 12px 24px rgba(31, 113, 119, 0.22);
+}
+
+.upgrade-billing-modal-duration-option.is-selected span {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.upgrade-billing-modal-toggle {
+  width: 100%;
+  border: none;
+  background: transparent;
+  padding: 0;
+  color: inherit;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.upgrade-billing-modal-toggle span {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+}
+
+.upgrade-billing-modal-toggle svg {
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  padding: 8px;
+  border-radius: 999px;
+  background: rgba(31, 113, 119, 0.08);
+  color: var(--primary-color);
+  transition: transform var(--transition-fast), background-color var(--transition-fast);
+}
+
+.upgrade-billing-modal-toggle.is-open svg {
+  transform: rotate(180deg);
+}
+
+.upgrade-billing-modal-card p {
+  margin: 0;
+  color: var(--color-text-secondary);
+  line-height: 1.55;
+}
+
+.upgrade-billing-modal-fee-note {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+
+.upgrade-billing-modal-payment-note {
+  gap: 10px;
+  padding: 14px 18px;
+}
+
+.upgrade-billing-modal-payment-note > p {
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--color-text-secondary);
+  line-height: 1.55;
+}
+
+.upgrade-billing-modal-card-accent {
+  background:
+    radial-gradient(circle at top right, rgba(244, 162, 97, 0.16), transparent 34%),
+    linear-gradient(135deg, rgba(31, 113, 119, 0.1), rgba(255, 255, 255, 0.82));
+}
+
+.upgrade-billing-modal-credit,
+.upgrade-billing-modal-window {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  color: var(--color-text-secondary);
+  font-size: 0.88rem;
+}
+
+.upgrade-billing-modal-credit {
+  align-items: center;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: rgba(31, 157, 110, 0.12);
+  color: #147452;
+  font-weight: var(--font-weight-semibold);
+}
+
+.upgrade-billing-modal-window svg,
+.upgrade-billing-modal-credit svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.upgrade-billing-modal-rule-list {
+  display: grid;
+  gap: 8px;
+}
+
+.upgrade-billing-modal-rule-list p {
+  position: relative;
+  padding-left: 18px;
+  font-size: 0.9rem;
+}
+
+.upgrade-billing-modal-rule-list p::before {
+  content: "";
+  position: absolute;
+  top: 0.72em;
+  left: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: var(--primary-color);
+}
+
+.upgrade-billing-modal-error {
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: 16px;
+  background: var(--error-light);
+  color: var(--error-color);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+}
+
+.upgrade-billing-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding-top: 2px;
+}
+
+.upgrade-billing-modal-btn {
+  min-height: 46px;
+  border-radius: 999px;
+  padding: 0 20px;
+  font-weight: var(--font-weight-bold);
+  cursor: pointer;
+  border: 1px solid var(--border-color);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.upgrade-billing-modal-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.upgrade-billing-modal-btn-secondary {
+  background: rgba(255, 255, 255, 0.68);
+  color: var(--text-color);
+}
+
+.upgrade-billing-modal-btn-primary {
+  min-width: min(100%, 280px);
+  background: var(--primary-color);
+  color: var(--color-text-on-primary);
+  border-color: var(--primary-color);
+  box-shadow: 0 14px 30px rgba(31, 113, 119, 0.24);
+}
+
+.upgrade-billing-modal-btn:disabled,
+.upgrade-billing-modal-close:disabled,
+.upgrade-billing-modal-duration-option:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+[data-theme="dark"] .upgrade-billing-modal-overlay {
+  background:
+    radial-gradient(circle at 18% 16%, rgba(79, 179, 173, 0.18), transparent 28%),
+    radial-gradient(circle at 80% 76%, rgba(242, 163, 101, 0.14), transparent 30%),
+    rgba(3, 7, 12, 0.74);
+}
+
+[data-theme="dark"] .upgrade-billing-page {
+  background:
+    radial-gradient(circle at 18% 16%, rgba(79, 179, 173, 0.16), transparent 28%),
+    radial-gradient(circle at 80% 76%, rgba(242, 163, 101, 0.12), transparent 30%),
+    linear-gradient(135deg, #0f151d 0%, #17202b 100%);
+}
+
+[data-theme="dark"] .upgrade-billing-modal {
+  border-color: rgba(119, 230, 220, 0.18);
+  background:
+    linear-gradient(145deg, rgba(21, 31, 42, 0.98) 0%, rgba(16, 25, 34, 0.98) 48%, rgba(30, 38, 42, 0.98) 100%);
+  box-shadow: 0 34px 90px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="dark"] .upgrade-billing-modal-plan-chip,
+[data-theme="dark"] .upgrade-billing-modal-benefits,
+[data-theme="dark"] .upgrade-billing-modal-card {
+  border-color: rgba(119, 230, 220, 0.14);
+  background: rgba(17, 27, 37, 0.82);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .upgrade-billing-modal-plan-step,
+[data-theme="dark"] .upgrade-billing-modal-benefits span,
+[data-theme="dark"] .upgrade-billing-modal-duration-option {
+  background: rgba(79, 179, 173, 0.1);
+  border-color: rgba(119, 230, 220, 0.14);
+}
+
+[data-theme="dark"] .upgrade-billing-modal-plan-step.is-target,
+[data-theme="dark"] .upgrade-billing-modal-card-accent {
+  background:
+    radial-gradient(circle at top right, rgba(242, 163, 101, 0.14), transparent 32%),
+    linear-gradient(135deg, rgba(79, 179, 173, 0.14), rgba(17, 27, 37, 0.86));
+}
+
+[data-theme="dark"] .upgrade-billing-modal-duration-option.is-selected {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+[data-theme="dark"] .upgrade-billing-modal-toggle svg {
+  background: rgba(79, 179, 173, 0.14);
+}
+
+[data-theme="dark"] .upgrade-billing-modal-credit {
+  background: rgba(31, 157, 110, 0.18);
+  color: #8ce7bf;
+}
+
+[data-theme="dark"] .upgrade-billing-modal-btn-secondary {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: var(--color-text-primary);
+}
+
+@media (max-width: 760px) {
+  .upgrade-billing-page {
+    align-items: stretch;
+    padding: 0;
+  }
+
+  .upgrade-billing-modal-page-panel {
+    min-height: 100dvh;
+    border-radius: 0;
+    overflow: visible;
+  }
+
+  .upgrade-billing-modal-overlay {
+    height: 100dvh;
+    padding: 10px;
+    align-items: flex-end;
+    overscroll-behavior: contain;
+  }
+
+  .upgrade-billing-modal {
+    width: 100%;
+    max-height: calc(100dvh - 20px);
+    border-radius: 24px 24px 18px 18px;
+    padding: 12px;
+    padding-bottom: max(12px, env(safe-area-inset-bottom));
+    gap: 12px;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .upgrade-billing-modal-page-panel {
+    max-height: none;
+    min-height: 100dvh;
+    border-radius: 0;
+    overflow: visible;
+  }
+
+  .upgrade-billing-modal-hero {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    padding: 22px 18px 18px;
+  }
+
+  .upgrade-billing-modal-close {
+    top: 12px;
+    right: 12px;
+  }
+
+  .upgrade-billing-modal-page-panel .upgrade-billing-modal-close {
+    top: 18px;
+    left: 24px;
+    right: auto;
+    width: 46px;
+    height: 46px;
+  }
+
+  .upgrade-billing-modal-hero-copy {
+    padding-right: 42px;
+  }
+
+  .upgrade-billing-modal-page-panel .upgrade-billing-modal-hero-copy {
+    padding-left: 0;
+    padding-top: 62px;
+    padding-right: 0;
+  }
+
+  .upgrade-billing-modal-hero h3 {
+    max-width: 12ch;
+    font-size: clamp(2rem, 11vw, 3rem);
+  }
+
+  .upgrade-billing-modal-price-card {
+    min-height: auto;
+    padding: 16px;
+  }
+
+  .upgrade-billing-modal-duration-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .upgrade-billing-modal-duration-option {
+    flex: 1 1 auto;
+    flex-direction: row;
+    min-height: 40px;
+    height: 40px;
+    padding: 0 16px;
+    border-radius: 999px;
+    gap: 5px;
+  }
+
+  .upgrade-billing-modal-duration-option strong {
+    font-size: 1rem;
+  }
+
+  .upgrade-billing-modal-duration-option span {
+    font-size: 0.8rem;
+  }
+
+  .upgrade-billing-modal-actions {
+    flex-direction: column-reverse;
+  }
+
+  .upgrade-billing-modal-btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 460px) {
+  .upgrade-billing-modal-overlay {
+    padding: 0;
+  }
+
+  .upgrade-billing-modal {
+    width: 100%;
+    height: 100dvh;
+    max-height: 100dvh;
+    min-height: 0;
+    border-radius: 0;
+    padding-bottom: max(14px, env(safe-area-inset-bottom));
+  }
+
+  .upgrade-billing-modal-page-panel {
+    height: auto;
+    max-height: none;
+    min-height: 100dvh;
+  }
+
+}

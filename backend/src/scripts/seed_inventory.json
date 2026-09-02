@@ -1,0 +1,420 @@
+{
+  "generated_at": "2026-03-25T08:12:48.166Z",
+  "counts": {
+    "programs": 0,
+    "courses": 0,
+    "course_offerings": 0,
+    "resource_files": 0,
+    "blogs": 0,
+    "quotes": 0,
+    "site_sections": 0,
+    "team_members": 0,
+    "colleges": 0,
+    "cadl_units": 0,
+    "lesson_schema_lessons": 3
+  },
+  "programs": [],
+  "courses": [],
+  "course_offerings": [],
+  "resource_files": [],
+  "blogs": [],
+  "quotes": [],
+  "site_sections": {},
+  "team_members": [],
+  "colleges": [],
+  "cadl_units": [],
+  "lesson_schema_lessons": [
+    {
+      "order": 1,
+      "mainTopic": "The Concept of Growth and Development",
+      "chunks": [
+        {
+          "id": "chunk_0",
+          "heading": "The Meaning of Growth",
+          "paragraphs": [
+            {
+              "id": "par_0",
+              "body_html": "Growth is described as the increase in size and structure of parts of the body. It refers to the permanent increase in the number of cells acquired by an organism during development. For example, an increase in size, height, or weight of any body part can be called growth.",
+              "illustration": {
+                "image_url": "",
+                "alt": "",
+                "caption": "",
+                "credit": "",
+                "placement": "after"
+              }
+            },
+            {
+              "id": "par_1",
+              "body_html": "Growth is usually physical, and therefore, it can be observed, compared, and measured. For instance, you often hear people say, \"Kojo has grown tall,\" or \"Ama is not growing.\" Growth is quantitative in nature and is often measured in grams (gm) or centimeters (cm).",
+              "illustration": {
+                "image_url": "",
+                "alt": "",
+                "caption": "",
+                "credit": "",
+                "placement": "after"
+              }
+            }
+          ]
+        },
+        {
+          "id": "chunk_1",
+          "heading": "The Meaning of Development",
+          "paragraphs": [
+            {
+              "id": "par_0",
+              "body_html": "Development refers to the qualitative changes an individual undergoes over the course of their lifespan. Simply put, development implies an increase in ones ability to function efficiently. For example:\n<ul data-aos=\"fade-up\">\n<li data-aos=\"fade-up\">A baby who could only crawl and can now walk demonstrates a qualitative change in functionality - this is development.</li>\n<li data-aos=\"fade-up\">A child who used to babble but now utters words shows development in speech.</li>\n</ul>",
+              "illustration": {
+                "image_url": "",
+                "alt": "",
+                "caption": "",
+                "credit": "",
+                "placement": "after"
+              }
+            },
+            {
+              "id": "par_1",
+              "body_html": "Development is a broader term that involves both qualitative and quantitative changes. For example, a childs ability to walk or speak depends on a certain level of physical growth or maturation.",
+              "illustration": {
+                "image_url": "",
+                "alt": "",
+                "caption": "",
+                "credit": "",
+                "placement": "after"
+              }
+            }
+          ]
+        },
+        {
+          "id": "chunk_2",
+          "heading": "Differences Between Growth and Development",
+          "paragraphs": [
+            {
+              "id": "par_0",
+              "body_html": "<ol data-aos=\"fade-up\">\n<li data-aos=\"fade-up\"> Growth is quantitative and can be measured, while development involves both qualitative and quantitative changes.</li>\n<li data-aos=\"fade-up\">Growth can be observed and measured. While development can also be observed, it cannot always be measured.</li>\n</ol>",
+              "illustration": {
+                "image_url": "",
+                "alt": "",
+                "caption": "",
+                "credit": "",
+                "placement": "after"
+              }
+            }
+          ]
+        },
+        {
+          "id": "chunk_3",
+          "heading": "The Meaning of Maturation",
+          "paragraphs": [
+            {
+              "id": "par_0",
+              "body_html": "Maturation may be defined as the process of gradually bringing an individual's physical, physiological, and psychological features to full development. Different maturation processes occur for various body parts and traits:\n<ul data-aos=\"fade-up\">\n<li data-aos=\"fade-up\">Sense organs</li>\n<li data-aos=\"fade-up\">Nervous system</li>\n<li data-aos=\"fade-up\">Psychomotor abilities</li>\n<li data-aos=\"fade-up\">Intellectual functions</li>\n<li data-aos=\"fade-up\">Emotional responses</li>\n</ul>",
+              "illustration": {
+                "image_url": "",
+                "alt": "",
+                "caption": "",
+                "credit": "",
+                "placement": "after"
+              }
+            },
+            {
+              "id": "par_1",
+              "body_html": "Maturation leads to increasingly complex behaviors as the bodys organs and systems develop in structure and function. For instance:\n<ul data-aos=\"fade-up\">\n<li data-aos=\"fade-up\">At birth, childrens organs are sufficiently developed to adjust to their environment. However, behavioral patterns emerge gradually as the child matures.</li>\n</ul>",
+              "illustration": {
+                "image_url": "",
+                "alt": "",
+                "caption": "",
+                "credit": "",
+                "placement": "after"
+              }
+            }
+          ]
+        },
+        {
+          "id": "chunk_4",
+          "heading": "Key Notes for Teachers",
+          "paragraphs": [
+            {
+              "id": "par_0",
+              "body_html": "<ol data-aos=\"fade-up\">\n<li data-aos=\"fade-up\">Maturation and Learning: Maturation influences readiness for learning and activity performance. Teachers must ensure that their teaching aligns with the child's developmental stage.</li>\n<li data-aos=\"fade-up\">Recognizing Readiness: Signs include: \n<ul data-aos=\"fade-up\">\n<li data-aos=\"fade-up\">Frustration or anger when the child is presented with tasks they are not ready for.</li>\n<li data-aos=\"fade-up\">Rapid progress once they are ready and learning begins.</li>\n</ul>\n<li data-aos=\"fade-up\">Educational Strategies: \n<ul data-aos=\"fade-up\">\n<li data-aos=\"fade-up\">Avoid introducing tasks the child is not mature enough to handle.</li>\n<li data-aos=\"fade-up\">Provide exercises and learning materials that match the childs maturity and development level.</li>\n</ul>\n</ol>",
+              "illustration": {
+                "image_url": "",
+                "alt": "",
+                "caption": "",
+                "credit": "",
+                "placement": "after"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 2,
+      "mainTopic": "Physical Development of the Child",
+      "chunks": [
+        {
+          "id": "chunk_0",
+          "heading": "Physical Development",
+          "paragraphs": [
+            {
+              "id": "par_0",
+              "body_html": "Physical development refers to the changes in: height, weight, bone thickness, muscles, teeth, hair, brain, sense organs (e.g., eyes, ears, nose, etc.). Motor skills such as learning to walk and write are also part of physical development.",
+              "illustration": {
+                "image_url": "",
+                "alt": "",
+                "caption": "",
+                "credit": "",
+                "placement": "after"
+              }
+            }
+          ]
+        },
+        {
+          "id": "chunk_1",
+          "heading": "Motor Development",
+          "paragraphs": [
+            {
+              "id": "par_0",
+              "body_html": "Motor development involves the childs ability to control and coordinate movements of different body parts. It includes two main types of skills:\n<ol data-aos=\"fade-up\"><li data-aos=\"fade-up\">Gross Motor Skills: These involve large muscles and are used in activities like: Running, Jumping, Throwing, Climbing, etc.</li>\n<li data-aos=\"fade-up\">Fine Motor Skills: These involve smaller muscles, such as those in the fingers and toes, used for: Writing, Knitting, Lacing shoes, Threading beads, Typing, etc.",
+              "illustration": {
+                "image_url": "",
+                "alt": "",
+                "caption": "",
+                "credit": "",
+                "placement": "after"
+              }
+            }
+          ]
+        },
+        {
+          "id": "chunk_2",
+          "heading": "Stages in Physical Growth and Changes",
+          "paragraphs": [
+            {
+              "id": "par_0",
+              "body_html": "During Infancy (Birth2 Years) - Key Characteristics",
+              "illustration": {
+                "image_url": "",
+                "alt": "",
+                "caption": "",
+                "credit": "",
+                "placement": "after"
+              }
+            },
+            {
+              "id": "par_1",
+              "body_html": "<ol data-aos=\"fade-up\">\n<li data-aos=\"fade-up\">At birth, the average infant weighs about 3 kilograms and measures around 50 centimeters in length. Bones are soft and flexible, consisting of cartilage.</li>\n<li data-aos=\"fade-up\">Boys are typically taller and heavier than girls at birth. Growth during the first two years is rapid - Weight and height often double by the fourth month.</li>\n<li data-aos=\"fade-up\">Senses: \n<ul data-aos=\"fade-up\">\n<li data-aos=\"fade-up\">Newborns can see and hear but with limited accuracy.</li>\n<li data-aos=\"fade-up\">The sense of smell is well-developed, and infants prefer sweet liquids.</li>\n<li data-aos=\"fade-up\">By the end of infancy, the senses reach adult levels.</li>\n</ul>\n<li data-aos=\"fade-up\">Motor milestones include sitting, crawling, creeping, walking, and jumping.</li>\n</ol>",
+              "illustration": {
+                "image_url": "",
+                "alt": "",
+                "caption": "",
+                "credit": "",
+                "placement": "after"
+              }
+            },
+            {
+              "id": "par_2",
+              "body_html": "Childhood Stage (211 Years)",
+              "illustration": {
+                "image_url": "",
+                "alt": "",
+                "caption": "",
+                "credit": "",
+                "placement": "after"
+              }
+            },
+            {
+              "id": "par_3",
+              "body_html": "The childhood stage begins at approximately age 2 and ends with sexual maturity. It is divided into:\n<ol data-aos=\"fade-up\"><li data-aos=\"fade-up\">Early Childhood (26 years)</li>\n<li data-aos=\"fade-up\">Middle Childhood (68 years)</li>\n<li data-aos=\"fade-up\">Late Childhood (811 years)</li></ol>",
+              "illustration": {
+                "image_url": "",
+                "alt": "",
+                "caption": "",
+                "credit": "",
+                "placement": "after"
+              }
+            },
+            {
+              "id": "par_4",
+              "body_html": "Key Characteristics:",
+              "illustration": {
+                "image_url": "",
+                "alt": "",
+                "caption": "",
+                "credit": "",
+                "placement": "after"
+              }
+            },
+            {
+              "id": "par_5",
+              "body_html": "<ol data-aos=\"fade-up\"><li data-aos=\"fade-up\">Growth during early childhood is slower compared to infancy.</li>\n<li data-aos=\"fade-up\">Limb growth accelerates during middle childhood, and permanent teeth begin to appear around age six.</li>\n<li data-aos=\"fade-up\">Late childhood sees relatively uniform growth until the rapid development of puberty.</li>\nMotor Development:<ul data-aos=\"fade-up\">\n<li data-aos=\"fade-up\">Boys tend to excel in gross motor activities like running and jumping.</li>\n<li data-aos=\"fade-up\">Children develop smoother and more varied physical coordination.</li></ul></ol>",
+              "illustration": {
+                "image_url": "",
+                "alt": "",
+                "caption": "",
+                "credit": "",
+                "placement": "after"
+              }
+            },
+            {
+              "id": "par_6",
+              "body_html": "Adolescence Stage (11-18 Years)",
+              "illustration": {
+                "image_url": "",
+                "alt": "",
+                "caption": "",
+                "credit": "",
+                "placement": "after"
+              }
+            },
+            {
+              "id": "par_7",
+              "body_html": "Adolescence is a transitional period between childhood and adulthood, starting around 11 years and ending around 18 years. <u>Pubescence</u> is a stage where significant physical changes occur, marking the transition from child to adult.\nKey Characteristics:\n<ol data-aos=\"fade-up\"><li data-aos=\"fade-up\">Rapid growth in height, though weight may not yet reach its maximum.</li>\n<li data-aos=\"fade-up\">Boys develop deeper voices; girls develop breasts and rounded body contours.</li>\n<li data-aos=\"fade-up\">Hair grows in different parts of the body for both boys and girls.</li>\n<li data-aos=\"fade-up\">Adolescents often become self-conscious about their appearance, comparing themselves with peers.</li></ol>",
+              "illustration": {
+                "image_url": "",
+                "alt": "",
+                "caption": "",
+                "credit": "",
+                "placement": "after"
+              }
+            },
+            {
+              "id": "par_8",
+              "body_html": "Educational Implications of Physical Development",
+              "illustration": {
+                "image_url": "",
+                "alt": "",
+                "caption": "",
+                "credit": "",
+                "placement": "after"
+              }
+            },
+            {
+              "id": "par_9",
+              "body_html": "<ol data-aos=\"fade-up\"><li data-aos=\"fade-up\">Recognize individual differences in height, weight, and strength when assigning tasks to children.</li>\n<li data-aos=\"fade-up\">Provide opportunities for regular exercise like running, jumping, and climbing to promote physical and motor development.</li>\n<li data-aos=\"fade-up\">Consider maturity of vision - For young children, use large fonts and ensure proper lighting during activities to prevent eye strain.</li>\n<li data-aos=\"fade-up\">Provide age-appropriate materials for activities, such as soft chalk or crayons for writing and drawing.</li></ol>",
+              "illustration": {
+                "image_url": "",
+                "alt": "",
+                "caption": "",
+                "credit": "",
+                "placement": "after"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 3,
+      "mainTopic": "Cognitive Development (Jean Piaget, 1896-1980)",
+      "chunks": [
+        {
+          "id": "chunk_0",
+          "heading": "Cognitive Development",
+          "paragraphs": [
+            {
+              "id": "par_0",
+              "body_html": "Cognitive development refers to the progression of a childs ability to process and use information to adapt to their environment. This includes:",
+              "illustration": {
+                "image_url": "",
+                "alt": "",
+                "caption": "",
+                "credit": "",
+                "placement": "after"
+              }
+            },
+            {
+              "id": "par_1",
+              "body_html": "<ul><li>Attention</li>\n<li>Perceiving</li>\n<li>Observing</li>\n<li>Remembering</li>\n<li>Imagining</li>\n<li>Thinking</li>\n<li>Problem-solving</li>\n<li>Growth of intelligence and language</li></ul>",
+              "illustration": {
+                "image_url": "",
+                "alt": "",
+                "caption": "",
+                "credit": "",
+                "placement": "after"
+              }
+            },
+            {
+              "id": "par_2",
+              "body_html": "Jean Piaget, a renowned psychologist, delineated cognitive development into four main stages:\n<ol><li>Sensorimotor</li>\n<li>Pre-operational</li>\n<li>Concrete operational</li>\n<li>Formal operational</li></ol>",
+              "illustration": {
+                "image_url": "",
+                "alt": "",
+                "caption": "",
+                "credit": "",
+                "placement": "after"
+              }
+            }
+          ]
+        },
+        {
+          "id": "chunk_1",
+          "heading": "Stages of Intellectual Development",
+          "paragraphs": [
+            {
+              "id": "par_0",
+              "body_html": "<ol><li>Sensorimotor Stage (Birth  2 Years)</li>In this stage, children primarily learn through their sensory organs (eyes, ears, nose, mouth, skin) and bodily movements. Initially, their actions are reflexive, but as they grow, their movements become more purposeful.\n<ul><li>Object permanence: The realization that objects continue to exist even if they cannot be seen or heard.</li>\n<li>Children begin to understand cause-and-effect relationships and use symbols to represent objects, showing early language skills.</li></ul>",
+              "illustration": {
+                "image_url": "",
+                "alt": "",
+                "caption": "",
+                "credit": "",
+                "placement": "after"
+              }
+            },
+            {
+              "id": "par_1",
+              "body_html": "<li>Pre-Operational Stage (2  7 Years)</li>Children in this stage begin to move beyond sensory input and develop the ability to store images, expand vocabulary, and understand language. Their thinking evolves from concrete actions to more abstract thoughts, but they are still egocentric, meaning they see the world only from their perspective.\n<ul><li>Symbolic functioning: Children begin to create mental images of objects that are not present.</li>\n<li>Egocentrism: They struggle to understand other peoples perspectives.\n<li>Animism: They attribute life-like qualities to inanimate objects (e.g., believing the sun can smile).</li>\n<li>Artificialism: They believe all phenomena, including natural occurrences, are created by humans.</li></ul>\nAt this stage, they still struggle with concepts like conservation (the idea that quantity remains the same even if its appearance changes).",
+              "illustration": {
+                "image_url": "",
+                "alt": "",
+                "caption": "",
+                "credit": "",
+                "placement": "after"
+              }
+            },
+            {
+              "id": "par_2",
+              "body_html": "<li>Concrete Operational Stage (7  11 Years)</li>At this stage, childrens thinking becomes more logical and they start to understand the principles of conservation, reversibility, and grouping.\n<ul><li>Conservation: Understanding that physical properties (like mass and volume) do not change even when their form or appearance changes.</li>\n<li>Reversibility: The ability to reverse an operation and understand that things can return to their original state.</li>\n<li>Seriation: The ability to arrange objects in a series based on a common attribute (e.g., size, weight, or color).</li></ul>\nChildren can also understand functional relationships better and can perform tasks such as addition, subtraction, and categorization.",
+              "illustration": {
+                "image_url": "",
+                "alt": "",
+                "caption": "",
+                "credit": "",
+                "placement": "after"
+              }
+            },
+            {
+              "id": "par_3",
+              "body_html": "<li>Formal Operational Stage (11 Years and Older)</li>In this stage, adolescents develop the ability to think abstractly and logically. They begin to:\n<ul><li>Form hypotheses</li>\n<li>Think about future possibilities</li>\n<li>Apply deductive reasoning</li>\n<li>Engage in debates and complex thinking</li>\n<li>Consider both the form and content of arguments (metacognition)</li></ul>\nThis stage marks the development of logical thought and the ability to analyze situations that have not been directly encountered.",
+              "illustration": {
+                "image_url": "",
+                "alt": "",
+                "caption": "",
+                "credit": "",
+                "placement": "after"
+              }
+            }
+          ]
+        },
+        {
+          "id": "chunk_2",
+          "heading": "Educational Implications of Piagets Cognitive Development",
+          "paragraphs": [
+            {
+              "id": "par_0",
+              "body_html": "<ol><li>Perceptual activities: Teachers should engage children in activities that involve sensory discrimination, such as sorting objects based on size or color, to enhance cognitive development.</li><br>\n<li>Concrete learning: For younger children, use concrete objects and hands-on activities to support learning. Children at this stage benefit from activities that stress learning by doing.</li><br>\n<li>Developmental levels: Teachers should consider the childs cognitive level when designing tasks. Avoid asking children to engage in abstract thinking before they are ready.</li><br>\n<li>Learning environments: Provide a rich learning environment, especially in preschool and primary grades, to stimulate intellectual growth through interaction with objects and social experiences.</li><br>\n<li>Language development: Engage children in verbal activities, encouraging them to express themselves to enhance their language and cognitive skills.</li><br>\n<li>Promote independence: Allow children to discover solutions for themselves, fostering creativity and problem-solving skills.</li></ol>",
+              "illustration": {
+                "image_url": "",
+                "alt": "",
+                "caption": "",
+                "credit": "",
+                "placement": "after"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

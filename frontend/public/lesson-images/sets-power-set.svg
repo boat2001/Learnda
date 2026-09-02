@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 560" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Power sets: the set {1,2} has four subsets, and a set of n elements has 2 to the power n subsets. A chart shows the count doubling as n grows from 1 to 5.">
+  <title>Power Sets and the 2 to the n Rule</title>
+  <style>
+    .ps-title { font-family:'Segoe UI',system-ui,sans-serif; font-weight:700; }
+    .ps-body  { font-family:'Segoe UI',system-ui,sans-serif; }
+    .pbar { cursor:pointer; transition:opacity .15s ease; }
+    .barwrap.touched .pbar:not(.sel) { opacity:.4; }
+    .pbar.sel { opacity:1; }
+  </style>
+
+  <rect x="0" y="0" width="480" height="560" rx="16" fill="#f8faff"/>
+
+  <!-- Title -->
+  <rect x="16" y="16" width="448" height="50" rx="12" fill="#1a2e5a"/>
+  <text class="ps-title" x="240" y="40" text-anchor="middle" fill="#ffffff" font-size="18">Power Sets: every possible subset</text>
+  <text class="ps-body" x="240" y="58" text-anchor="middle" fill="#aebfe0" font-size="12.5">P(A) = the set of ALL subsets of A</text>
+
+  <!-- Start small -->
+  <text class="ps-title" x="40" y="90" fill="#1e293b" font-size="14.5">Start small &#8212; A = {1, 2}</text>
+  <g class="ps-body" font-size="13.5">
+    <rect x="40" y="100" width="64" height="30" rx="8" fill="#ede9fe" stroke="#8b5cf6" stroke-width="1.3"/>
+    <text x="72" y="120" text-anchor="middle" fill="#5b21b6">{ }</text>
+    <rect x="114" y="100" width="64" height="30" rx="8" fill="#ede9fe" stroke="#8b5cf6" stroke-width="1.3"/>
+    <text x="146" y="120" text-anchor="middle" fill="#5b21b6">{1}</text>
+    <rect x="188" y="100" width="64" height="30" rx="8" fill="#ede9fe" stroke="#8b5cf6" stroke-width="1.3"/>
+    <text x="220" y="120" text-anchor="middle" fill="#5b21b6">{2}</text>
+    <rect x="262" y="100" width="78" height="30" rx="8" fill="#ede9fe" stroke="#8b5cf6" stroke-width="1.3"/>
+    <text x="301" y="120" text-anchor="middle" fill="#5b21b6">{1, 2}</text>
+  </g>
+  <text class="ps-body" x="40" y="152" fill="#475569" font-size="13">That is <tspan font-weight="700" fill="#5b21b6">4 subsets</tspan> &#8212; including the empty set { } and A itself.</text>
+
+  <!-- Formula band -->
+  <rect x="40" y="166" width="400" height="46" rx="11" fill="#1a2e5a"/>
+  <text class="ps-title" x="240" y="195" text-anchor="middle" fill="#ffffff" font-size="17">n elements  &#8594;  2&#8319; subsets</text>
+
+  <!-- Interactive chart -->
+  <text class="ps-title" x="40" y="240" fill="#1e293b" font-size="14">Tap a bar &#8212; watch it double</text>
+
+  <line x1="48" y1="430" x2="440" y2="430" stroke="#cbd5e1" stroke-width="1.5"/>
+
+  <g class="barwrap">
+    <!-- n=1 : 2 -->
+    <g>
+      <rect class="pbar" data-n="1" data-v="2" x="60" y="420" width="56" height="10" rx="4" fill="#8b5cf6"/>
+      <text class="ps-title" x="88" y="412" text-anchor="middle" fill="#5b21b6" font-size="13">2</text>
+      <text class="ps-body" x="88" y="448" text-anchor="middle" fill="#475569" font-size="12.5">n=1</text>
+    </g>
+    <!-- n=2 : 4 -->
+    <g>
+      <rect class="pbar sel" data-n="2" data-v="4" x="140" y="411" width="56" height="19" rx="4" fill="#8b5cf6"/>
+      <text class="ps-title" x="168" y="403" text-anchor="middle" fill="#5b21b6" font-size="13">4</text>
+      <text class="ps-body" x="168" y="448" text-anchor="middle" fill="#475569" font-size="12.5">n=2</text>
+    </g>
+    <!-- n=3 : 8 -->
+    <g>
+      <rect class="pbar" data-n="3" data-v="8" x="220" y="392" width="56" height="38" rx="4" fill="#8b5cf6"/>
+      <text class="ps-title" x="248" y="384" text-anchor="middle" fill="#5b21b6" font-size="13">8</text>
+      <text class="ps-body" x="248" y="448" text-anchor="middle" fill="#475569" font-size="12.5">n=3</text>
+    </g>
+    <!-- n=4 : 16 -->
+    <g>
+      <rect class="pbar" data-n="4" data-v="16" x="300" y="355" width="56" height="75" rx="4" fill="#8b5cf6"/>
+      <text class="ps-title" x="328" y="347" text-anchor="middle" fill="#5b21b6" font-size="13">16</text>
+      <text class="ps-body" x="328" y="448" text-anchor="middle" fill="#475569" font-size="12.5">n=4</text>
+    </g>
+    <!-- n=5 : 32 -->
+    <g>
+      <rect class="pbar" data-n="5" data-v="32" x="380" y="280" width="56" height="150" rx="4" fill="#8b5cf6"/>
+      <text class="ps-title" x="408" y="272" text-anchor="middle" fill="#5b21b6" font-size="13">32</text>
+      <text class="ps-body" x="408" y="448" text-anchor="middle" fill="#475569" font-size="12.5">n=5</text>
+    </g>
+  </g>
+
+  <!-- result -->
+  <rect x="40" y="464" width="400" height="58" rx="11" fill="#f3effe" stroke="#c4b5fd" stroke-width="1.3"/>
+  <text id="ps-res" class="ps-body" x="56" y="487" fill="#1e293b" font-size="13.5">A set with <tspan font-weight="700" fill="#5b21b6">n = 2</tspan> elements has 2&#178; = <tspan font-weight="700" fill="#5b21b6">4</tspan> subsets.</text>
+  <text class="ps-body" x="56" y="509" fill="#64748b" font-size="12.5">It doubles every time &#8212; n = 10 already gives 1,024!</text>
+
+  <!-- footer -->
+  <text class="ps-body" x="240" y="544" text-anchor="middle" fill="#94a3b8" font-size="11">Sharether Learning Platform &#8226; EBS 210 &#8226; Lesson 4: The Algebra of Sets</text>
+
+  <script><![CDATA[
+    (function () {
+      var svg = document.currentScript.closest('svg');
+      var wrap = svg.querySelector('.barwrap');
+      var res = svg.querySelector('#ps-res');
+      var sup = {1:"¹",2:"²",3:"³",4:"⁴",5:"⁵"};
+      function pick(bar) {
+        wrap.classList.add('touched');
+        svg.querySelectorAll('.pbar').forEach(function (b) { b.classList.remove('sel'); });
+        bar.classList.add('sel');
+        var n = bar.getAttribute('data-n'), v = bar.getAttribute('data-v');
+        res.textContent = "A set with n = " + n + " elements has 2" + sup[n] + " = " + v + " subsets.";
+      }
+      svg.querySelectorAll('.pbar').forEach(function (b) {
+        b.addEventListener('click', function () { pick(b); });
+      });
+    })();
+  ]]></script>
+</svg>

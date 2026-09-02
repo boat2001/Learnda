@@ -1,0 +1,32 @@
+[
+  {
+    "id": "trig_1778899645661",
+    "triggerId": "sem2_start",
+    "label": "Second Semester Begins",
+    "message": "Welcome to Semester 2! 💪 New courses, new opportunities. Pick up where you left off and push harder. Your study tools are waiting.",
+    "cta": "Jump In",
+    "sentTo": 10,
+    "sentAt": "2026-05-16T02:47:25.661Z",
+    "sentBy": "0a9877c1-28cc-4a05-b6e2-3a22b50a042f"
+  },
+  {
+    "id": "trig_1778855966724",
+    "triggerId": "sem2_start",
+    "label": "Second Semester Begins",
+    "message": "Welcome to Semester 2! 💪 New courses, new opportunities. Pick up where you left off and push harder. Your study tools are waiting.",
+    "cta": "Jump In",
+    "sentTo": 0,
+    "sentAt": "2026-05-15T14:39:26.724Z",
+    "sentBy": "0a9877c1-28cc-4a05-b6e2-3a22b50a042f"
+  },
+  {
+    "id": "trig_1778855961239",
+    "triggerId": "sem2_start",
+    "label": "Second Semester Begins",
+    "message": "Welcome to Semester 2! 💪 New courses, new opportunities. Pick up where you left off and push harder. Your study tools are waiting.",
+    "cta": "Jump In",
+    "sentTo": 0,
+    "sentAt": "2026-05-15T14:39:21.239Z",
+    "sentBy": "0a9877c1-28cc-4a05-b6e2-3a22b50a042f"
+  }
+]

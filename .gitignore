@@ -1,0 +1,118 @@
+# Logs
+logs
+logs/
+*.log
+*.log.*
+*.logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+firebase-debug.log
+firestore-debug.log
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Local dependencies and build output in nested apps
+**/node_modules/
+**/dist/
+**/dist-ssr/
+
+# Local environment files
+.env
+.env.*
+**/.env
+**/.env.*
+!.env.example
+!**/.env.example
+!**/.env.*.example
+
+# App data and local tooling
+backend/uploads/
+backend/uploads_dedupe_quarantine/
+backend/uploads_filename_quarantine/
+backend/uploads_size_duplicate_quarantine/
+backend/tmp/
+backend/src/data/lecturer_invites.json
+backend/src/data/reengagement_log.json
+mobile/.expo/
+.qodo/
+.claude/
+
+# Keep internal docs and the mobile app out of this public repo for now
+docs/
+downloads/
+mobile/
+ASSETS_GUIDE.md
+DEVELOPMENT_COMPLETE.md
+DEVELOPMENT_INDEX.md
+DOCUMENTATION_INDEX.md
+IMPLEMENTATION_REPORT.md
+MOBILE_IMPLEMENTATION_SUMMARY.md
+MOBILE_SCREENS_GUIDE.md
+UPDATE_NOTES.md
+UPDATE_NOTES_SUMMARY.md
+VERSION_COMPARISON.md
+VERSION_COMPARISON_SUMMARY.md
+auth-update.md
+sharether-dev-guide
+backend/API_DOCUMENTATION.md
+backend/README.md
+frontend/README.md
+
+# ── Scrap / dumps / “not needed in repo” (do not ignore all *.html *.md — app & README need those) ──
+# Ad-hoc saved pages, exports, scratch trees
+**/dump/**/*.html
+**/dumps/**/*.html
+**/scraped/**/*.html
+**/*.saved.html
+**/*.dump.html
+**/*.export.html
+**/*.local.html
+
+# Scratch / personal notes markdown (explicit names only)
+**/scratch/**
+**/notes.local/**
+**/NOTES.local.md
+**/SCRATCH*.md
+
+# Coverage, caches, temp artifacts
+coverage/
+**/coverage/
+.cache/
+.temp/
+.tmp/
+.parcel-cache/
+.eslintcache
+*.tsbuildinfo
+
+# Backup / swap / archives
+*.bak
+*.bak.*
+*~
+*.tmp
+*.swp
+*.swo
+
+# Repo accidentals / reserved-name junk (Windows)
+NUL
+nul
+NUL.*
+
+# ── Claude / Cursor local (keep shared rules; drop machine-specific) ──
+.claude/settings.local.json
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

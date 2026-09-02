@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 560" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Computers classified by size from largest to smallest: supercomputer, mainframe, minicomputer, microcomputer, each with typical uses.">
+  <title>Classifying Computers by Size</title>
+  <style>
+    .cs-title { font-family:'Segoe UI',system-ui,sans-serif; font-weight:700; }
+    .cs-body  { font-family:'Segoe UI',system-ui,sans-serif; }
+    .tier { cursor:pointer; }
+    .tier .ring { fill:none; opacity:0; transition:opacity .16s ease; }
+    .tier:hover .ring, .tier.is-active .ring { opacity:1; }
+  </style>
+
+  <rect x="0" y="0" width="480" height="560" rx="16" fill="#f8faff"/>
+
+  <!-- Title -->
+  <rect x="16" y="16" width="448" height="50" rx="12" fill="#1a2e5a"/>
+  <text class="cs-title" x="240" y="40" text-anchor="middle" fill="#ffffff" font-size="18">From Room-Sized Giants to Pocket Devices</text>
+  <text class="cs-body" x="240" y="58" text-anchor="middle" fill="#aebfe0" font-size="12.5">Classifying computers by size &#8212; largest to smallest</text>
+
+  <!-- note -->
+  <rect x="24" y="78" width="432" height="30" rx="9" fill="#eef2fb" stroke="#c7d2e8" stroke-width="1.2"/>
+  <text class="cs-body" x="240" y="98" text-anchor="middle" fill="#1a2e5a" font-size="12.5">Size once meant power &#8212; today it doesn't, but the names stuck.</text>
+
+  <!-- size arrow -->
+  <line x1="40" y1="126" x2="40" y2="494" stroke="#cbd5e1" stroke-width="2.5"/>
+  <path d="M40 502 L34 490 L46 490 Z" fill="#cbd5e1"/>
+  <text class="cs-body" x="22" y="150" fill="#94a3b8" font-size="11" transform="rotate(-90 22 150)" text-anchor="end">SMALLER &#8594; physical size &#8594; BIGGER</text>
+
+  <!-- Tier 1: Supercomputer -->
+  <g class="tier" tabindex="0">
+    <rect class="ring" x="60" y="120" width="400" height="92" rx="13" stroke="#1a2e5a" stroke-width="3"/>
+    <rect x="64" y="124" width="392" height="84" rx="11" fill="#e9edf6" stroke="#9aa9c8" stroke-width="1.4"/>
+    <rect x="76" y="153" width="26" height="26" rx="4" fill="#1a2e5a"/>
+    <text class="cs-title" x="120" y="150" fill="#1e293b" font-size="15">Supercomputer</text>
+    <text class="cs-body" x="120" y="170" fill="#475569" font-size="13">Trillions of instructions per second</text>
+    <text class="cs-body" x="120" y="190" fill="#94a3b8" font-size="12">Weather forecasting, nuclear &amp; space research</text>
+  </g>
+
+  <!-- Tier 2: Mainframe -->
+  <g class="tier" tabindex="0">
+    <rect class="ring" x="60" y="216" width="400" height="92" rx="13" stroke="#3b82f6" stroke-width="3"/>
+    <rect x="64" y="220" width="392" height="84" rx="11" fill="#eaf1fe" stroke="#9cc0f7" stroke-width="1.4"/>
+    <rect x="79" y="251" width="20" height="20" rx="4" fill="#3b82f6"/>
+    <text class="cs-title" x="120" y="246" fill="#1e293b" font-size="15">Mainframe</text>
+    <text class="cs-body" x="120" y="266" fill="#475569" font-size="13">Serves thousands of users at once</text>
+    <text class="cs-body" x="120" y="286" fill="#94a3b8" font-size="12">Banks, airlines, universities, government</text>
+  </g>
+
+  <!-- Tier 3: Minicomputer -->
+  <g class="tier" tabindex="0">
+    <rect class="ring" x="60" y="312" width="400" height="76" rx="13" stroke="#4f7f7b" stroke-width="3"/>
+    <rect x="64" y="316" width="392" height="68" rx="11" fill="#eef6f5" stroke="#a7cfca" stroke-width="1.4"/>
+    <rect x="82" y="341" width="15" height="15" rx="3" fill="#4f7f7b"/>
+    <text class="cs-title" x="120" y="340" fill="#1e293b" font-size="15">Minicomputer</text>
+    <text class="cs-body" x="120" y="360" fill="#475569" font-size="13">Scaled-down mainframe; still multi-user</text>
+    <text class="cs-body" x="120" y="378" fill="#94a3b8" font-size="12">For smaller organisations</text>
+  </g>
+
+  <!-- Tier 4: Microcomputer -->
+  <g class="tier" tabindex="0">
+    <rect class="ring" x="60" y="392" width="400" height="96" rx="13" stroke="#f97316" stroke-width="3"/>
+    <rect x="64" y="396" width="392" height="88" rx="11" fill="#fff1e8" stroke="#fbb78a" stroke-width="1.4"/>
+    <rect x="84" y="429" width="11" height="11" rx="2" fill="#f97316"/>
+    <text class="cs-title" x="120" y="420" fill="#1e293b" font-size="15">Microcomputer (PC)</text>
+    <text class="cs-body" x="120" y="440" fill="#475569" font-size="13">What you and I use every day</text>
+    <text class="cs-body" x="120" y="458" fill="#94a3b8" font-size="12">Desktop &#183; laptop &#183; tablet &#183; smartphone</text>
+    <text class="cs-body" x="120" y="476" fill="#94a3b8" font-size="12">Families: Windows PCs (Dell, HP) &#183; Apple Macs</text>
+  </g>
+
+  <!-- footer -->
+  <text class="cs-body" x="240" y="540" text-anchor="middle" fill="#94a3b8" font-size="11">Sharether Learning Platform &#8226; EBS 107 &#8226; Lesson 2: What Is a Computer?</text>
+
+  <script><![CDATA[
+    (function () {
+      var svg = document.currentScript.closest('svg');
+      svg.querySelectorAll('.tier').forEach(function (el) {
+        el.addEventListener('click', function () {
+          var on = el.classList.contains('is-active');
+          svg.querySelectorAll('.tier').forEach(function (t) { t.classList.remove('is-active'); });
+          if (!on) el.classList.add('is-active');
+        });
+      });
+    })();
+  ]]></script>
+</svg>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Lesson 4 illustrations — responsive preview</title>
+<style>
+  body { font-family: 'Segoe UI', system-ui, sans-serif; margin: 0; background: #eef2fb; color: #1e293b; }
+  header { background: #1a2e5a; color: #fff; padding: 18px 24px; }
+  header h1 { margin: 0 0 4px; font-size: 20px; }
+  header p { margin: 0; color: #aebfe0; font-size: 13px; }
+  .controls { padding: 14px 24px; background: #fff; border-bottom: 1px solid #d8e0f0; position: sticky; top: 0; z-index: 5; }
+  .controls button { font: inherit; font-size: 13px; border: 1px solid #4f7f7b; background: #fff; color: #1a2e5a; padding: 6px 12px; border-radius: 8px; cursor: pointer; margin-right: 6px; }
+  .controls button.active { background: #4f7f7b; color: #fff; }
+  .controls span { font-size: 13px; color: #64748b; margin-left: 8px; }
+  .grid { display: flex; flex-wrap: wrap; gap: 28px; padding: 28px 24px; align-items: flex-start; }
+  .panel { background: #fff; border: 1px solid #d8e0f0; border-radius: 14px; padding: 16px; }
+  .panel h2 { font-size: 14px; margin: 0 0 12px; color: #1a2e5a; }
+  .frame { border: 1px dashed #b8c4dd; border-radius: 12px; overflow: hidden; resize: horizontal; }
+  .frame object { width: 100%; display: block; }
+  .note { font-size: 12.5px; color: #64748b; margin-top: 10px; max-width: 320px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>EBS&nbsp;106 · Lesson 4 — Prenatal Development</h1>
+  <p>Responsive preview of the two lesson illustrations. Hover (desktop) or tap (mobile) the stages, cards, and bars.</p>
+</header>
+
+<div class="controls">
+  <strong style="font-size:13px;">Render width:</strong>
+  <button data-w="280">280px · small desktop column</button>
+  <button data-w="360" class="active">360px · mobile</button>
+  <button data-w="480">480px · tablet / full</button>
+  <span>Tip: drag the bottom-right corner of a frame to resize freely.</span>
+</div>
+
+<div class="grid">
+  <div class="panel">
+    <h2>chunk_1 — Three Stages of Prenatal Development</h2>
+    <div class="frame" style="width:360px;">
+      <object type="image/svg+xml" data="./prenatal-stages-timeline.svg" aria-label="Prenatal stages timeline"></object>
+    </div>
+    <p class="note">Each stage card shows its essentials at all times; hover or tap reveals a short teacher's note. Embryonic is flagged as the highest-risk window.</p>
+  </div>
+
+  <div class="panel">
+    <h2>chunk_2 — Teratogens &amp; Sensitive Periods</h2>
+    <div class="frame" style="width:360px;">
+      <object type="image/svg+xml" data="./teratogens-sensitive-periods.svg" aria-label="Teratogens and sensitive periods"></object>
+    </div>
+    <p class="note">Six teratogen cards plus a risk chart. Hover or tap a bar to spotlight a stage; tap a card to highlight it.</p>
+  </div>
+</div>
+
+<script>
+  var btns = document.querySelectorAll('.controls button');
+  var frames = document.querySelectorAll('.frame');
+  btns.forEach(function (b) {
+    b.addEventListener('click', function () {
+      btns.forEach(function (x) { x.classList.remove('active'); });
+      b.classList.add('active');
+      frames.forEach(function (f) { f.style.width = b.dataset.w + 'px'; });
+    });
+  });
+</script>
+</body>
+</html>

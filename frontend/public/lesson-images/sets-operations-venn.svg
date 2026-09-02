@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 600" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Interactive Venn diagram of two sets: Science Club S and Debate Club D, with buttons to show Union, Intersection, Difference and Complement.">
+  <title>Set Operations: Union, Intersection, Complement</title>
+  <defs>
+    <clipPath id="clipS"><circle cx="180" cy="232" r="92"/></clipPath>
+    <mask id="maskNotD">
+      <rect x="40" y="92" width="400" height="292" fill="#fff"/>
+      <circle cx="300" cy="232" r="92" fill="#000"/>
+    </mask>
+    <mask id="maskNotS">
+      <rect x="40" y="92" width="400" height="292" fill="#fff"/>
+      <circle cx="180" cy="232" r="92" fill="#000"/>
+    </mask>
+    <style>
+      .vn-title { font-family:'Segoe UI',system-ui,sans-serif; font-weight:700; }
+      .vn-body  { font-family:'Segoe UI',system-ui,sans-serif; }
+      .hl { display:none; }
+      .hl.show { display:block; }
+      .opbtn { cursor:pointer; }
+      .opbtn .obx { fill:#ffffff; stroke:#1a2e5a; stroke-width:1.4; transition:fill .15s ease; }
+      .opbtn .otx { fill:#1a2e5a; }
+      .opbtn.is-active .obx { fill:#1a2e5a; }
+      .opbtn.is-active .otx { fill:#ffffff; }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="480" height="600" rx="16" fill="#f8faff"/>
+
+  <!-- Title -->
+  <rect x="16" y="16" width="448" height="50" rx="12" fill="#1a2e5a"/>
+  <text class="vn-title" x="240" y="40" text-anchor="middle" fill="#ffffff" font-size="18">Set Operations on Two Clubs</text>
+  <text class="vn-body" x="240" y="58" text-anchor="middle" fill="#aebfe0" font-size="12.5">Tap an operation to highlight the answer region</text>
+
+  <!-- Universe -->
+  <rect x="40" y="92" width="400" height="292" rx="14" fill="#ffffff" stroke="#c7d2e8" stroke-width="1.5"/>
+  <text class="vn-body" x="52" y="110" fill="#64748b" font-size="12.5">U = all students in the school</text>
+
+  <!-- base circle fills -->
+  <circle cx="180" cy="232" r="92" fill="#3b82f6" fill-opacity="0.16"/>
+  <circle cx="300" cy="232" r="92" fill="#f97316" fill-opacity="0.16"/>
+
+  <!-- highlight layers (toggled) -->
+  <g id="hl-union" class="hl">
+    <circle cx="180" cy="232" r="92" fill="#16a34a" fill-opacity="0.42"/>
+    <circle cx="300" cy="232" r="92" fill="#16a34a" fill-opacity="0.42"/>
+  </g>
+  <g id="hl-inter" class="hl">
+    <circle cx="300" cy="232" r="92" fill="#16a34a" fill-opacity="0.55" clip-path="url(#clipS)"/>
+  </g>
+  <g id="hl-diff" class="hl">
+    <circle cx="180" cy="232" r="92" fill="#16a34a" fill-opacity="0.5" mask="url(#maskNotD)"/>
+  </g>
+  <g id="hl-comp" class="hl">
+    <rect x="40" y="92" width="400" height="292" rx="14" fill="#16a34a" fill-opacity="0.4" mask="url(#maskNotS)"/>
+  </g>
+
+  <!-- circle outlines -->
+  <circle cx="180" cy="232" r="92" fill="none" stroke="#3b82f6" stroke-width="2.2"/>
+  <circle cx="300" cy="232" r="92" fill="none" stroke="#f97316" stroke-width="2.2"/>
+
+  <!-- set labels -->
+  <text class="vn-title" x="118" y="134" text-anchor="middle" fill="#1d4ed8" font-size="13.5">S &#183; Science</text>
+  <text class="vn-title" x="362" y="134" text-anchor="middle" fill="#c2410c" font-size="13.5">D &#183; Debate</text>
+
+  <!-- members -->
+  <text class="vn-body" x="128" y="216" text-anchor="middle" fill="#1e293b" font-size="13.5">Ama</text>
+  <text class="vn-body" x="128" y="252" text-anchor="middle" fill="#1e293b" font-size="13.5">Yaa</text>
+  <text class="vn-body" x="240" y="218" text-anchor="middle" fill="#0f172a" font-size="13.5" font-weight="700">Kofi</text>
+  <text class="vn-body" x="240" y="252" text-anchor="middle" fill="#0f172a" font-size="13.5" font-weight="700">Mensah</text>
+  <text class="vn-body" x="352" y="216" text-anchor="middle" fill="#1e293b" font-size="13.5">Adjoa</text>
+  <text class="vn-body" x="352" y="252" text-anchor="middle" fill="#1e293b" font-size="13.5">Kweku</text>
+
+  <!-- buttons -->
+  <g class="opbtn" data-op="union" tabindex="0">
+    <rect class="obx" x="40" y="398" width="196" height="36" rx="9"/>
+    <text class="otx vn-title" x="138" y="421" text-anchor="middle" font-size="13.5">Union  S &#8746; D</text>
+  </g>
+  <g class="opbtn" data-op="inter" tabindex="0">
+    <rect class="obx" x="244" y="398" width="196" height="36" rx="9"/>
+    <text class="otx vn-title" x="342" y="421" text-anchor="middle" font-size="13.5">Intersection  S &#8745; D</text>
+  </g>
+  <g class="opbtn" data-op="diff" tabindex="0">
+    <rect class="obx" x="40" y="442" width="196" height="36" rx="9"/>
+    <text class="otx vn-title" x="138" y="465" text-anchor="middle" font-size="13.5">Difference  S \ D</text>
+  </g>
+  <g class="opbtn" data-op="comp" tabindex="0">
+    <rect class="obx" x="244" y="442" width="196" height="36" rx="9"/>
+    <text class="otx vn-title" x="342" y="465" text-anchor="middle" font-size="13.5">Complement  S&#8242;</text>
+  </g>
+
+  <!-- result -->
+  <rect x="40" y="490" width="400" height="68" rx="11" fill="#eef6f1" stroke="#9fd6b6" stroke-width="1.3"/>
+  <text id="res-desc" class="vn-body" x="56" y="516" fill="#166534" font-size="13" font-weight="700">Who is in EITHER club?</text>
+  <text id="res-set" class="vn-body" x="56" y="540" fill="#1e293b" font-size="13">{Ama, Kofi, Yaa, Mensah, Adjoa, Kweku}</text>
+
+  <!-- footer -->
+  <text class="vn-body" x="240" y="582" text-anchor="middle" fill="#94a3b8" font-size="11">Sharether Learning Platform &#8226; EBS 210 &#8226; Lesson 4: The Algebra of Sets</text>
+
+  <script><![CDATA[
+    (function () {
+      var svg = document.currentScript.closest('svg');
+      var data = {
+        union: { desc: "Who is in EITHER club?", set: "{Ama, Kofi, Yaa, Mensah, Adjoa, Kweku}" },
+        inter: { desc: "Who is in BOTH clubs?", set: "{Kofi, Mensah}" },
+        diff:  { desc: "In Science but NOT Debate", set: "{Ama, Yaa}" },
+        comp:  { desc: "Everyone NOT in Science (S′)", set: "All students outside circle S" }
+      };
+      var descEl = svg.querySelector('#res-desc');
+      var setEl = svg.querySelector('#res-set');
+      function select(op) {
+        svg.querySelectorAll('.hl').forEach(function (g) { g.classList.remove('show'); });
+        var grp = svg.querySelector('#hl-' + op);
+        if (grp) grp.classList.add('show');
+        svg.querySelectorAll('.opbtn').forEach(function (b) { b.classList.toggle('is-active', b.getAttribute('data-op') === op); });
+        descEl.textContent = data[op].desc;
+        setEl.textContent = data[op].set;
+      }
+      svg.querySelectorAll('.opbtn').forEach(function (b) {
+        var op = b.getAttribute('data-op');
+        b.addEventListener('click', function () { select(op); });
+        b.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); select(op); } });
+      });
+      select('union');
+    })();
+  ]]></script>
+</svg>

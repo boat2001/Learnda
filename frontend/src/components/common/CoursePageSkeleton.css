@@ -1,0 +1,337 @@
+.course-page-skeleton {
+  pointer-events: none;
+  user-select: none;
+}
+
+.course-page-skeleton .course-hero,
+.course-page-skeleton .course-section,
+.course-page-skeleton .course-links-card {
+  transition: none;
+}
+
+.course-page-skeleton-breadcrumb {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  width: fit-content;
+  max-width: 100%;
+}
+
+.course-page-skeleton-breadcrumb-separator {
+  width: 0.38rem;
+  height: 0.38rem;
+  border-radius: 999px;
+  background: rgba(126, 153, 176, 0.42);
+}
+
+.course-page-skeleton-block {
+  display: block;
+  border-radius: 999px;
+  background: linear-gradient(
+    110deg,
+    rgba(214, 229, 237, 0.68),
+    rgba(245, 250, 252, 0.98),
+    rgba(214, 229, 237, 0.68)
+  );
+  background-size: 220% 100%;
+  animation: course-page-skeleton-shimmer 1.2s linear infinite;
+}
+
+.course-page-skeleton-breadcrumb-chip {
+  width: 5.4rem;
+  max-width: 32vw;
+  height: 0.82rem;
+}
+
+.course-page-skeleton-breadcrumb-title {
+  width: min(11rem, 42vw);
+  height: 0.82rem;
+}
+
+.course-page-skeleton-hero {
+  transform: none;
+}
+
+.course-page-skeleton-hero:hover {
+  transform: none;
+}
+
+.course-page-skeleton-hero-main {
+  min-width: 0;
+}
+
+.course-page-skeleton-hero-image {
+  width: clamp(3.4rem, 5vw, 4.4rem);
+  height: clamp(3.4rem, 5vw, 4.4rem);
+  border-radius: 1rem;
+  flex-shrink: 0;
+}
+
+.course-page-skeleton-hero-copy {
+  display: grid;
+  gap: 0.72rem;
+  width: min(100%, 26rem);
+  min-width: 0;
+}
+
+.course-page-skeleton-title {
+  width: min(100%, 24rem);
+  height: 1.4rem;
+  border-radius: 0.72rem;
+}
+
+.course-page-skeleton-meta {
+  width: min(12rem, 58%);
+  height: 0.88rem;
+}
+
+.course-page-skeleton-hero-right {
+  align-items: stretch;
+}
+
+.course-page-skeleton-progress-card,
+.course-page-skeleton-covered-card {
+  flex: 1 1 0;
+  min-width: min(16rem, 100%);
+  padding: 0.86rem 0.94rem;
+  border-radius: 1.15rem;
+  border: 1px solid rgba(31, 113, 119, 0.12);
+  background: rgba(255, 255, 255, 0.74);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.68);
+  display: grid;
+  gap: 0.75rem;
+}
+
+.course-page-skeleton-progress-top,
+.course-page-skeleton-covered-copy {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.course-page-skeleton-progress-label {
+  width: 6rem;
+  height: 0.72rem;
+}
+
+.course-page-skeleton-progress-value {
+  width: 3rem;
+  height: 1rem;
+}
+
+.course-page-skeleton-progress-track {
+  width: 100%;
+  height: 0.72rem;
+}
+
+.course-page-skeleton-progress-copy {
+  width: min(12rem, 82%);
+  height: 0.76rem;
+}
+
+.course-page-skeleton-covered-title {
+  width: 7.8rem;
+  height: 0.84rem;
+}
+
+.course-page-skeleton-covered-list {
+  display: grid;
+  gap: 0.72rem;
+}
+
+.course-page-skeleton-covered-item {
+  display: grid;
+  gap: 0.42rem;
+}
+
+.course-page-skeleton-covered-label {
+  width: 4.8rem;
+  height: 0.68rem;
+}
+
+.course-page-skeleton-covered-count {
+  width: 2.8rem;
+  height: 0.68rem;
+}
+
+.course-page-skeleton-covered-bar {
+  width: 100%;
+  height: 0.56rem;
+}
+
+.course-page-skeleton-section {
+  gap: 1rem;
+}
+
+.course-page-skeleton-section-head {
+  margin-bottom: 0;
+}
+
+.course-page-skeleton-section-title-wrap {
+  width: 100%;
+}
+
+.course-page-skeleton-section-title {
+  width: 10.2rem;
+  height: 1rem;
+}
+
+.course-page-skeleton-count {
+  width: 2.25rem;
+  height: 1.7rem;
+  border-radius: 999px;
+}
+
+.course-page-skeleton-card-row {
+  display: flex;
+  gap: 0.9rem;
+  overflow: hidden;
+}
+
+.course-page-skeleton-card {
+  display: grid;
+  gap: 0.78rem;
+  flex: 0 0 clamp(188px, 22vw, 246px);
+}
+
+.course-page-skeleton-card-image {
+  width: 100%;
+  aspect-ratio: 1 / 0.76;
+  border-radius: 0.95rem;
+}
+
+.course-page-skeleton-card-copy {
+  display: grid;
+  gap: 0.44rem;
+}
+
+.course-page-skeleton-card-title {
+  width: 82%;
+  height: 0.96rem;
+  border-radius: 0.54rem;
+}
+
+.course-page-skeleton-card-helper {
+  width: 64%;
+  height: 0.72rem;
+  border-radius: 0.48rem;
+}
+
+.course-page-skeleton-card-helper.short {
+  width: 48%;
+}
+
+.course-page-skeleton-links {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.course-page-skeleton-link-card {
+  min-height: 11rem;
+  display: grid;
+  align-content: start;
+  gap: 0.82rem;
+}
+
+.course-page-skeleton-link-tag {
+  width: 5.2rem;
+  height: 1.68rem;
+}
+
+.course-page-skeleton-link-copy {
+  width: 84%;
+  height: 0.88rem;
+  border-radius: 0.52rem;
+}
+
+.course-page-skeleton-link-copy.short {
+  width: 62%;
+}
+
+.course-page-skeleton-link-button {
+  width: 7.6rem;
+  height: 2.4rem;
+  margin-top: 0.42rem;
+}
+
+@keyframes course-page-skeleton-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+[data-theme='dark'] .course-page-skeleton-block {
+  background: linear-gradient(
+    110deg,
+    rgba(255, 255, 255, 0.04),
+    rgba(255, 255, 255, 0.09),
+    rgba(255, 255, 255, 0.04)
+  );
+  background-size: 220% 100%;
+}
+
+[data-theme='dark'] .course-page-skeleton-progress-card,
+[data-theme='dark'] .course-page-skeleton-covered-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(148, 163, 184, 0.1);
+  box-shadow: none;
+}
+
+[data-theme='dark'] .course-page-skeleton-breadcrumb-separator {
+  background: rgba(148, 163, 184, 0.25);
+}
+
+@media (max-width: 1200px) {
+  .course-page-skeleton-hero-right {
+    width: 100%;
+  }
+
+  .course-page-skeleton-progress-card,
+  .course-page-skeleton-covered-card {
+    min-width: 0;
+  }
+}
+
+@media (max-width: 900px) {
+  .course-page-skeleton-links {
+    grid-template-columns: 1fr;
+  }
+
+  .course-page-skeleton-card {
+    flex-basis: min(64vw, 236px);
+  }
+}
+
+@media (max-width: 640px) {
+  .course-page-skeleton-breadcrumb {
+    width: 100%;
+  }
+
+  .course-page-skeleton-breadcrumb-chip {
+    max-width: 5.2rem;
+  }
+
+  .course-page-skeleton-title {
+    width: 100%;
+    height: 1.22rem;
+  }
+
+  .course-page-skeleton-meta {
+    width: 68%;
+  }
+
+  .course-page-skeleton-progress-card,
+  .course-page-skeleton-covered-card {
+    padding: 0.78rem 0.82rem;
+  }
+
+  .course-page-skeleton-card {
+    flex-basis: min(72vw, 224px);
+  }
+}

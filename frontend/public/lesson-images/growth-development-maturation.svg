@@ -1,0 +1,84 @@
+<svg viewBox="0 0 860 480" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Arial, sans-serif" role="img" aria-labelledby="gdm-title">
+  <title id="gdm-title">Growth, Development and Maturation: Key Differences</title>
+  <!-- Background -->
+  <rect width="860" height="480" fill="#f8faff" rx="16"/>
+
+  <!-- Title -->
+  <text x="430" y="42" text-anchor="middle" font-size="20" font-weight="700" fill="#1a2e5a">Growth, Development &amp; Maturation: Key Differences</text>
+  <line x1="50" y1="56" x2="810" y2="56" stroke="#d0d8f0" stroke-width="1.5"/>
+
+  <!-- Column 1: GROWTH -->
+  <rect x="50" y="76" width="230" height="362" rx="14" fill="#fff7ed" stroke="#f97316" stroke-width="2.5"/>
+  <rect x="50" y="76" width="230" height="56" rx="14" fill="#f97316"/>
+  <rect x="50" y="112" width="230" height="20" rx="0" fill="#f97316"/>
+  <text x="165" y="110" text-anchor="middle" font-size="17" font-weight="700" fill="#fff">📏 GROWTH</text>
+  <text x="165" y="150" text-anchor="middle" font-size="12" font-weight="600" fill="#c2410c">Physical &amp; Measurable</text>
+
+  <rect x="68" y="162" width="194" height="36" rx="8" fill="#fed7aa"/>
+  <text x="165" y="178" text-anchor="middle" font-size="11.5" font-weight="600" fill="#7c2d12">Definition</text>
+  <text x="165" y="192" text-anchor="middle" font-size="10.5" fill="#7c2d12">Increase in size &amp; structure</text>
+
+  <text x="68" y="222" font-size="11.5" fill="#9a3412">✔ Quantitative (can be counted)</text>
+  <text x="68" y="244" font-size="11.5" fill="#9a3412">✔ Observable &amp; measurable</text>
+  <text x="68" y="266" font-size="11.5" fill="#9a3412">✔ Measured in cm/kg/grams</text>
+  <text x="68" y="288" font-size="11.5" fill="#9a3412">✔ Refers to body parts</text>
+  <text x="68" y="310" font-size="11.5" fill="#9a3412">✔ Has a stopping point</text>
+  <text x="68" y="332" font-size="11.5" fill="#9a3412">✘ NOT always permanent</text>
+
+  <rect x="68" y="348" width="194" height="80" rx="8" fill="#fed7aa"/>
+  <text x="78" y="368" font-size="11" fill="#7c2d12" font-weight="600">Examples:</text>
+  <text x="78" y="386" font-size="11" fill="#7c2d12">• "Kojo grew 5 cm taller"</text>
+  <text x="78" y="403" font-size="11" fill="#7c2d12">• Baby's weight doubled</text>
+  <text x="78" y="420" font-size="11" fill="#7c2d12">• Bone size increased</text>
+
+  <!-- Column 2: DEVELOPMENT -->
+  <rect x="310" y="76" width="240" height="362" rx="14" fill="#f0fdf4" stroke="#16a34a" stroke-width="2.5"/>
+  <rect x="310" y="76" width="240" height="56" rx="14" fill="#16a34a"/>
+  <rect x="310" y="112" width="240" height="20" rx="0" fill="#16a34a"/>
+  <text x="430" y="110" text-anchor="middle" font-size="17" font-weight="700" fill="#fff">🌱 DEVELOPMENT</text>
+  <text x="430" y="150" text-anchor="middle" font-size="12" font-weight="600" fill="#14532d">Qualitative &amp; Functional</text>
+
+  <rect x="328" y="162" width="204" height="36" rx="8" fill="#bbf7d0"/>
+  <text x="430" y="178" text-anchor="middle" font-size="11.5" font-weight="600" fill="#14532d">Definition</text>
+  <text x="430" y="192" text-anchor="middle" font-size="10.5" fill="#14532d">Increase in ability to function</text>
+
+  <text x="328" y="222" font-size="11.5" fill="#166534">✔ Qualitative changes</text>
+  <text x="328" y="244" font-size="11.5" fill="#166534">✔ Also quantitative (broader)</text>
+  <text x="328" y="266" font-size="11.5" fill="#166534">✔ Not always measurable</text>
+  <text x="328" y="288" font-size="11.5" fill="#166534">✔ Covers whole lifespan</text>
+  <text x="328" y="310" font-size="11.5" fill="#166534">✔ Continuous process</text>
+  <text x="328" y="332" font-size="11.5" fill="#166534">✔ Involves Growth</text>
+
+  <rect x="328" y="348" width="204" height="80" rx="8" fill="#bbf7d0"/>
+  <text x="338" y="368" font-size="11" fill="#14532d" font-weight="600">Examples:</text>
+  <text x="338" y="386" font-size="11" fill="#14532d">• Baby crawls → then walks</text>
+  <text x="338" y="403" font-size="11" fill="#14532d">• Child babbles → speaks</text>
+  <text x="338" y="420" font-size="11" fill="#14532d">• Writing improves with age</text>
+
+  <!-- Column 3: MATURATION -->
+  <rect x="580" y="76" width="230" height="362" rx="14" fill="#faf5ff" stroke="#9333ea" stroke-width="2.5"/>
+  <rect x="580" y="76" width="230" height="56" rx="14" fill="#9333ea"/>
+  <rect x="580" y="112" width="230" height="20" rx="0" fill="#9333ea"/>
+  <text x="695" y="110" text-anchor="middle" font-size="17" font-weight="700" fill="#fff">🦋 MATURATION</text>
+  <text x="695" y="150" text-anchor="middle" font-size="12" font-weight="600" fill="#581c87">Internal &amp; Biological</text>
+
+  <rect x="598" y="162" width="194" height="36" rx="8" fill="#e9d5ff"/>
+  <text x="695" y="178" text-anchor="middle" font-size="11.5" font-weight="600" fill="#581c87">Definition</text>
+  <text x="695" y="192" text-anchor="middle" font-size="10.5" fill="#581c87">Full biological development</text>
+
+  <text x="598" y="222" font-size="11.5" fill="#6b21a8">✔ Biologically driven</text>
+  <text x="598" y="244" font-size="11.5" fill="#6b21a8">✔ Unfolds naturally</text>
+  <text x="598" y="266" font-size="11.5" fill="#6b21a8">✔ Affects readiness to learn</text>
+  <text x="598" y="288" font-size="11.5" fill="#6b21a8">✔ Cannot be forced</text>
+  <text x="598" y="310" font-size="11.5" fill="#6b21a8">✔ Varies per individual</text>
+  <text x="598" y="332" font-size="11.5" fill="#6b21a8">✔ Prerequisite to learning</text>
+
+  <rect x="598" y="348" width="194" height="80" rx="8" fill="#e9d5ff"/>
+  <text x="608" y="368" font-size="11" fill="#581c87" font-weight="600">Examples:</text>
+  <text x="608" y="386" font-size="11" fill="#581c87">• Puberty changes</text>
+  <text x="608" y="403" font-size="11" fill="#581c87">• Nervous system develops</text>
+  <text x="608" y="420" font-size="11" fill="#581c87">• Emotional responses grow</text>
+
+  <!-- Footer -->
+  <text x="430" y="468" text-anchor="middle" font-size="10" fill="#94a3b8">Sharether Learning Platform • Child Development Studies</text>
+</svg>

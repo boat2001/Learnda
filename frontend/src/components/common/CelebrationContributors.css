@@ -1,0 +1,427 @@
+/* ═══════════════════════════════════════════════
+   Celebration Contributors
+   Light mode by default — dark mode via [data-theme='dark']
+   ═══════════════════════════════════════════════ */
+
+/* ── Stage ─────────────────────────────────────── */
+
+.cc-stage {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-2xl, 1.5rem);
+  padding: 3rem 1.5rem 2rem;
+  /* Light mode: warm champagne with soft colour blooms */
+  background:
+    radial-gradient(ellipse at 10% 20%,  rgba(245, 158, 11, 0.13) 0%, transparent 42%),
+    radial-gradient(ellipse at 90% 80%,  rgba(56,  189, 248, 0.11) 0%, transparent 42%),
+    radial-gradient(ellipse at 55% 0%,   rgba(249, 115,  22, 0.10) 0%, transparent 50%),
+    radial-gradient(ellipse at 20% 100%, rgba(129, 140, 248, 0.09) 0%, transparent 40%),
+    radial-gradient(ellipse at 80% 10%,  rgba(52,  211, 153, 0.09) 0%, transparent 40%),
+    linear-gradient(160deg, #fffbef 0%, #f0f9ff 48%, #f0fdf4 100%);
+  border: 1px solid rgba(245, 158, 11, 0.18);
+  box-shadow: 0 4px 32px rgba(245, 158, 11, 0.08), 0 1px 4px rgba(0,0,0,0.04);
+}
+
+/* ── Canvas fireworks — stays in background ────────
+   z-index: 0 so GPU-layer promotion in dark mode
+   cannot push it above the content wrapper.        */
+
+.cc-fireworks {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Foreground content wrapper ─────────────────────
+   isolation: isolate forces a new stacking context
+   so the canvas can never composite above it,
+   even when the browser promotes the canvas to its
+   own GPU layer (which happens in dark mode due to
+   the ::before star-field creating extra layers).  */
+
+.cc-content {
+  position: relative;
+  z-index: 3;
+  isolation: isolate;
+}
+
+/* ── Falling confetti ───────────────────────────── */
+
+.cc-confetti-wrap {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+@keyframes cc-fall {
+  0%   { transform: translateY(-12px) rotate(0deg);    opacity: 0.95; }
+  80%  { opacity: 0.8; }
+  100% { transform: translateY(1000px) rotate(720deg); opacity: 0; }
+}
+
+/* ── Header ─────────────────────────────────────── */
+
+.cc-header {
+  position: relative;
+  z-index: 4;
+  text-align: center;
+  margin-bottom: 2.25rem;
+}
+
+.cc-header__emoji {
+  display: block;
+  font-size: 2.8rem;
+  line-height: 1;
+  margin-bottom: 0.6rem;
+  animation: cc-bounce 2.2s ease-in-out infinite;
+}
+
+@keyframes cc-bounce {
+  0%, 100% { transform: translateY(0)     scale(1);    }
+  50%       { transform: translateY(-10px) scale(1.12); }
+}
+
+/* Light mode title — deep amber so it reads on cream */
+.cc-header__title {
+  margin: 0 0 0.5rem;
+  font-size: clamp(1.4rem, 4vw, 2.4rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  background: linear-gradient(130deg, #92400e 0%, #d97706 25%, #b45309 50%, #d97706 75%, #92400e 100%);
+  background-size: 220% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: cc-gold-shine 3.5s linear infinite;
+}
+
+@keyframes cc-gold-shine {
+  0%   { background-position: 0%   center; }
+  100% { background-position: 220% center; }
+}
+
+.cc-header__subtitle {
+  margin: 0 0 1.5rem;
+  font-size: 0.95rem;
+  color: rgba(15, 23, 42, 0.62);
+  line-height: 1.6;
+}
+
+/* ── Stats pill ─────────────────────────────────── */
+
+.cc-stats {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  background: rgba(245, 158, 11, 0.09);
+  border: 1px solid rgba(245, 158, 11, 0.28);
+  border-radius: 50px;
+  padding: 0.65rem 1.75rem;
+  box-shadow: 0 2px 12px rgba(245, 158, 11, 0.1);
+}
+
+.cc-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.05rem;
+}
+
+.cc-stat__num {
+  font-size: 1.35rem;
+  font-weight: 900;
+  color: #b45309;
+  line-height: 1.2;
+}
+
+.cc-stat__label {
+  font-size: 0.65rem;
+  color: rgba(15, 23, 42, 0.48);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
+.cc-stat-divider {
+  width: 1px;
+  height: 2rem;
+  background: rgba(245, 158, 11, 0.3);
+  border-radius: 1px;
+}
+
+/* ── Ticker ─────────────────────────────────────── */
+
+.cc-ticker {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  gap: 0.85rem;
+  overflow-x: auto;
+  padding: 0.5rem 0 1rem;
+  cursor: grab;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(245, 158, 11, 0.3) transparent;
+}
+
+.cc-ticker:active { cursor: grabbing; }
+
+.cc-ticker::-webkit-scrollbar        { height: 3px; }
+.cc-ticker::-webkit-scrollbar-track  { background: transparent; }
+.cc-ticker::-webkit-scrollbar-thumb  { background: rgba(245, 158, 11, 0.35); border-radius: 2px; }
+
+/* ── Cards (light mode) ─────────────────────────── */
+
+.cc-card {
+  flex-shrink: 0;
+  min-width: 145px;
+  max-width: 165px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.3rem;
+  padding: 1.25rem 0.85rem 1rem;
+  background: #fff;
+  border: 1px solid rgba(245, 158, 11, 0.22);
+  border-top: 2px solid var(--cc-accent, #f59e0b);
+  border-radius: var(--radius-xl, 1rem);
+  box-shadow:
+    0 2px 8px  rgba(245, 158, 11, 0.08),
+    0 4px 20px rgba(0, 0, 0, 0.06);
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+  animation: cc-card-glow 3s ease-in-out var(--cc-delay, 0s) infinite;
+}
+
+.cc-card:hover {
+  transform: translateY(-5px) scale(1.03);
+  box-shadow:
+    0 0 0 2px rgba(245, 158, 11, 0.28),
+    0 10px 28px rgba(0, 0, 0, 0.10),
+    0 0 24px rgba(245, 158, 11, 0.14);
+}
+
+@keyframes cc-card-glow {
+  0%, 100% { box-shadow: 0 2px 8px rgba(245,158,11,0.08), 0 4px 20px rgba(0,0,0,0.06); }
+  50%       { box-shadow: 0 2px 8px rgba(245,158,11,0.18), 0 4px 20px rgba(0,0,0,0.06), 0 0 18px rgba(245,158,11,0.12); }
+}
+
+/* Shimmer */
+.cc-card__shine {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(245,158,11,0.07) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: cc-shimmer 2.8s linear var(--cc-delay, 0s) infinite;
+  pointer-events: none;
+}
+
+@keyframes cc-shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+
+/* Avatar */
+.cc-card__avatar {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: #92400e;
+  background: linear-gradient(135deg, rgba(245,158,11,0.15) 0%, rgba(56,189,248,0.10) 100%);
+  border: 2px solid rgba(245, 158, 11, 0.45);
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.10);
+  margin-bottom: 0.15rem;
+}
+
+.cc-card__name {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #0f172a;
+  line-height: 1.35;
+}
+
+.cc-card__from {
+  font-size: 0.63rem;
+  color: #b45309;
+  line-height: 1.3;
+}
+
+.cc-card__amount {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #1f7177;
+  background: rgba(31, 113, 119, 0.1);
+  border: 1px solid rgba(31, 113, 119, 0.2);
+  border-radius: 999px;
+  padding: 0.1rem 0.5rem;
+  margin-top: 0.15rem;
+}
+
+/* ── Bottom sparkles ─────────────────────────────── */
+
+.cc-sparkles {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  justify-content: center;
+  gap: 1.25rem;
+  margin-top: 1.25rem;
+}
+
+.cc-sparkle {
+  font-size: 1.1rem;
+  animation: cc-twinkle 1.8s ease-in-out infinite;
+  display: inline-block;
+}
+
+@keyframes cc-twinkle {
+  0%, 100% { opacity: 1;   transform: scale(1)    rotate(0deg);  }
+  50%       { opacity: 0.3; transform: scale(0.75) rotate(15deg); }
+}
+
+/* ═══════════════════════════════════════════════
+   Dark mode
+   ═══════════════════════════════════════════════ */
+
+[data-theme='dark'] .cc-stage {
+  background:
+    radial-gradient(ellipse at 12% 25%,  rgba(245, 158, 11, 0.22) 0%, transparent 42%),
+    radial-gradient(ellipse at 88% 75%,  rgba(56,  189, 248, 0.18) 0%, transparent 42%),
+    radial-gradient(ellipse at 50% 0%,   rgba(249, 115,  22, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 25% 90%,  rgba(129, 140, 248, 0.13) 0%, transparent 40%),
+    radial-gradient(ellipse at 75% 10%,  rgba(52,  211, 153, 0.13) 0%, transparent 40%),
+    linear-gradient(160deg, #0c0a1e 0%, #09131f 45%, #091a0e 100%);
+  border-color: rgba(245, 158, 11, 0.15);
+  box-shadow: none;
+}
+
+/* Stars in dark mode */
+[data-theme='dark'] .cc-stage::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle 1px   at  6% 10%, rgba(255,255,255,0.7) 0%, transparent 50%),
+    radial-gradient(circle 1.5px at 14% 38%, rgba(255,255,255,0.5) 0%, transparent 50%),
+    radial-gradient(circle 1px   at 22% 17%, rgba(255,255,255,0.8) 0%, transparent 50%),
+    radial-gradient(circle 1px   at 31% 52%, rgba(255,255,255,0.4) 0%, transparent 50%),
+    radial-gradient(circle 1.5px at 41%  7%, rgba(255,255,255,0.6) 0%, transparent 50%),
+    radial-gradient(circle 1px   at 48% 34%, rgba(255,255,255,0.7) 0%, transparent 50%),
+    radial-gradient(circle 1px   at 57% 62%, rgba(255,255,255,0.5) 0%, transparent 50%),
+    radial-gradient(circle 1.5px at 65% 20%, rgba(255,255,255,0.8) 0%, transparent 50%),
+    radial-gradient(circle 1px   at 73% 48%, rgba(255,255,255,0.6) 0%, transparent 50%),
+    radial-gradient(circle 1px   at 82% 13%, rgba(255,255,255,0.7) 0%, transparent 50%),
+    radial-gradient(circle 1.5px at 90% 44%, rgba(255,255,255,0.5) 0%, transparent 50%),
+    radial-gradient(circle 1px   at 96% 28%, rgba(255,255,255,0.6) 0%, transparent 50%),
+    radial-gradient(circle 1px   at  3% 68%, rgba(255,255,255,0.4) 0%, transparent 50%),
+    radial-gradient(circle 1.5px at 18% 78%, rgba(255,255,255,0.6) 0%, transparent 50%),
+    radial-gradient(circle 1px   at 35% 86%, rgba(255,255,255,0.5) 0%, transparent 50%),
+    radial-gradient(circle 1px   at 54% 74%, rgba(255,255,255,0.5) 0%, transparent 50%),
+    radial-gradient(circle 1.5px at 70% 82%, rgba(255,255,255,0.6) 0%, transparent 50%),
+    radial-gradient(circle 1px   at 86% 70%, rgba(255,255,255,0.4) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+[data-theme='dark'] .cc-header__title {
+  background: linear-gradient(130deg, #fef3c7 0%, #fbbf24 20%, #fff 45%, #fbbf24 70%, #fef3c7 100%);
+  background-size: 220% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+[data-theme='dark'] .cc-header__subtitle {
+  color: rgba(255, 255, 255, 0.68);
+}
+
+[data-theme='dark'] .cc-stats {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(245, 158, 11, 0.3);
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.1);
+}
+
+[data-theme='dark'] .cc-stat__num {
+  color: #fbbf24;
+  text-shadow: 0 0 12px rgba(251, 191, 36, 0.6);
+}
+
+[data-theme='dark'] .cc-stat__label {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+[data-theme='dark'] .cc-stat-divider {
+  background: rgba(245, 158, 11, 0.28);
+}
+
+[data-theme='dark'] .cc-card {
+  background: linear-gradient(
+    160deg,
+    rgba(245, 158, 11, 0.14) 0%,
+    rgba(255, 255, 255, 0.04) 50%,
+    rgba(56, 189, 248, 0.09) 100%
+  );
+  border-color: rgba(245, 158, 11, 0.26);
+  box-shadow: 0 4px 18px rgba(0,0,0,0.35), 0 0 20px rgba(245,158,11,0.06);
+}
+
+[data-theme='dark'] .cc-card:hover {
+  box-shadow: 0 0 0 1px rgba(245,158,11,0.4), 0 10px 28px rgba(0,0,0,0.4), 0 0 32px rgba(245,158,11,0.2);
+}
+
+[data-theme='dark'] .cc-card__shine {
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.06) 50%, transparent 100%);
+  background-size: 200% 100%;
+}
+
+[data-theme='dark'] .cc-card__avatar {
+  color: #fbbf24;
+  background: linear-gradient(135deg, rgba(245,158,11,0.25), rgba(56,189,248,0.15));
+  border-color: rgba(245,158,11,0.5);
+  box-shadow: 0 0 0 3px rgba(245,158,11,0.12), 0 0 14px rgba(245,158,11,0.28);
+}
+
+[data-theme='dark'] .cc-card__name {
+  color: #fff;
+  text-shadow: 0 1px 5px rgba(0,0,0,0.5);
+}
+
+[data-theme='dark'] .cc-card__from {
+  color: rgba(251, 191, 36, 0.82);
+}
+
+/* ═══════════════════════════════════════════════
+   Responsive
+   ═══════════════════════════════════════════════ */
+
+@media (max-width: 600px) {
+  .cc-stage { padding: 2.25rem 1rem 1.5rem; }
+
+  .cc-header__title { font-size: 1.4rem; }
+
+  .cc-stats {
+    gap: 0.75rem;
+    padding: 0.5rem 1.25rem;
+  }
+
+  .cc-stat__num { font-size: 1.1rem; }
+
+  .cc-card {
+    min-width: 128px;
+    max-width: 145px;
+    padding: 1rem 0.7rem 0.85rem;
+  }
+
+  .cc-sparkles { gap: 0.85rem; }
+}

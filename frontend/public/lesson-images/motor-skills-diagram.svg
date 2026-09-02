@@ -1,0 +1,116 @@
+<svg viewBox="0 0 860 500" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Arial, sans-serif" role="img" aria-labelledby="msd-title">
+  <title id="msd-title">Motor Development in Children: Gross and Fine Motor Skills</title>
+  <!-- Background -->
+  <rect width="860" height="500" fill="#f8faff" rx="16"/>
+
+  <!-- Title -->
+  <text x="430" y="42" text-anchor="middle" font-size="20" font-weight="700" fill="#1a2e5a">Motor Development in Children</text>
+  <line x1="50" y1="56" x2="810" y2="56" stroke="#d0d8f0" stroke-width="1.5"/>
+
+  <!-- Center title box -->
+  <rect x="330" y="70" width="200" height="52" rx="26" fill="#1a2e5a"/>
+  <text x="430" y="92" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">MOTOR</text>
+  <text x="430" y="112" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">DEVELOPMENT</text>
+
+  <!-- Arrow to Gross -->
+  <line x1="330" y1="96" x2="244" y2="96" stroke="#ea580c" stroke-width="2.5" stroke-dasharray="5,3"/>
+  <polygon points="246,90 232,96 246,102" fill="#ea580c"/>
+
+  <!-- Arrow to Fine -->
+  <line x1="530" y1="96" x2="616" y2="96" stroke="#0284c7" stroke-width="2.5" stroke-dasharray="5,3"/>
+  <polygon points="614,90 628,96 614,102" fill="#0284c7"/>
+
+  <!-- LEFT: Gross Motor -->
+  <rect x="34" y="68" width="196" height="56" rx="12" fill="#ea580c"/>
+  <text x="132" y="92" text-anchor="middle" font-size="15" font-weight="700" fill="#fff">💪 GROSS</text>
+  <text x="132" y="112" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">MOTOR SKILLS</text>
+
+  <rect x="34" y="132" width="196" height="52" rx="10" fill="#fff7ed"/>
+  <text x="132" y="150" text-anchor="middle" font-size="11.5" fill="#7c2d12" font-weight="600">Large muscles involved</text>
+  <text x="132" y="168" text-anchor="middle" font-size="11" fill="#9a3412">Arms, legs, core body</text>
+
+  <!-- Gross motor examples with icons -->
+  <rect x="34" y="192" width="196" height="270" rx="10" fill="#fff7ed"/>
+
+  <rect x="46" y="204" width="172" height="36" rx="8" fill="#fed7aa"/>
+  <text x="66" y="226" font-size="20">🏃</text>
+  <text x="96" y="220" font-size="12" fill="#7c2d12" font-weight="600">Running</text>
+  <text x="96" y="234" font-size="10.5" fill="#9a3412">Whole body coordination</text>
+
+  <rect x="46" y="248" width="172" height="36" rx="8" fill="#fed7aa"/>
+  <text x="66" y="270" font-size="20">🦘</text>
+  <text x="96" y="264" font-size="12" fill="#7c2d12" font-weight="600">Jumping</text>
+  <text x="96" y="278" font-size="10.5" fill="#9a3412">Leg strength &amp; balance</text>
+
+  <rect x="46" y="292" width="172" height="36" rx="8" fill="#fed7aa"/>
+  <text x="66" y="314" font-size="20">⚽</text>
+  <text x="96" y="308" font-size="12" fill="#7c2d12" font-weight="600">Throwing</text>
+  <text x="96" y="322" font-size="10.5" fill="#9a3412">Arm coordination</text>
+
+  <rect x="46" y="336" width="172" height="36" rx="8" fill="#fed7aa"/>
+  <text x="66" y="358" font-size="20">🧗</text>
+  <text x="96" y="352" font-size="12" fill="#7c2d12" font-weight="600">Climbing</text>
+  <text x="96" y="366" font-size="10.5" fill="#9a3412">Full body strength</text>
+
+  <rect x="46" y="380" width="172" height="36" rx="8" fill="#fed7aa"/>
+  <text x="66" y="402" font-size="20">🏊</text>
+  <text x="96" y="396" font-size="12" fill="#7c2d12" font-weight="600">Swimming</text>
+  <text x="96" y="410" font-size="10.5" fill="#9a3412">Full body movement</text>
+
+  <rect x="46" y="424" width="172" height="28" rx="8" fill="#f97316"/>
+  <text x="132" y="442" text-anchor="middle" font-size="11" fill="#fff" font-weight="600">Develop in early childhood</text>
+
+  <!-- RIGHT: Fine Motor -->
+  <rect x="630" y="68" width="196" height="56" rx="12" fill="#0284c7"/>
+  <text x="728" y="92" text-anchor="middle" font-size="15" font-weight="700" fill="#fff">✍️ FINE</text>
+  <text x="728" y="112" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">MOTOR SKILLS</text>
+
+  <rect x="630" y="132" width="196" height="52" rx="10" fill="#e0f2fe"/>
+  <text x="728" y="150" text-anchor="middle" font-size="11.5" fill="#075985" font-weight="600">Small muscles involved</text>
+  <text x="728" y="168" text-anchor="middle" font-size="11" fill="#0369a1">Fingers, hands, wrists</text>
+
+  <!-- Fine motor examples with icons -->
+  <rect x="630" y="192" width="196" height="270" rx="10" fill="#e0f2fe"/>
+
+  <rect x="642" y="204" width="172" height="36" rx="8" fill="#bae6fd"/>
+  <text x="662" y="226" font-size="20">✏️</text>
+  <text x="692" y="220" font-size="12" fill="#075985" font-weight="600">Writing</text>
+  <text x="692" y="234" font-size="10.5" fill="#0369a1">Finger &amp; wrist control</text>
+
+  <rect x="642" y="248" width="172" height="36" rx="8" fill="#bae6fd"/>
+  <text x="662" y="270" font-size="20">🧵</text>
+  <text x="692" y="264" font-size="12" fill="#075985" font-weight="600">Threading Beads</text>
+  <text x="692" y="278" font-size="10.5" fill="#0369a1">Hand-eye coordination</text>
+
+  <rect x="642" y="292" width="172" height="36" rx="8" fill="#bae6fd"/>
+  <text x="662" y="314" font-size="20">👟</text>
+  <text x="692" y="308" font-size="12" fill="#075985" font-weight="600">Lacing Shoes</text>
+  <text x="692" y="322" font-size="10.5" fill="#0369a1">Dexterity &amp; precision</text>
+
+  <rect x="642" y="336" width="172" height="36" rx="8" fill="#bae6fd"/>
+  <text x="662" y="358" font-size="20">🧶</text>
+  <text x="692" y="352" font-size="12" fill="#075985" font-weight="600">Knitting</text>
+  <text x="692" y="366" font-size="10.5" fill="#0369a1">Repetitive fine control</text>
+
+  <rect x="642" y="380" width="172" height="36" rx="8" fill="#bae6fd"/>
+  <text x="662" y="402" font-size="20">⌨️</text>
+  <text x="692" y="396" font-size="12" fill="#075985" font-weight="600">Typing</text>
+  <text x="692" y="410" font-size="10.5" fill="#0369a1">Independent finger use</text>
+
+  <rect x="642" y="424" width="172" height="28" rx="8" fill="#0284c7"/>
+  <text x="728" y="442" text-anchor="middle" font-size="11" fill="#fff" font-weight="600">Refined through practice</text>
+
+  <!-- Teacher note in centre column (no overlap with side columns) -->
+  <line x1="430" y1="122" x2="430" y2="210" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <rect x="252" y="210" width="356" height="180" rx="12" fill="#f0fdf4" stroke="#22c55e" stroke-width="1.5"/>
+  <text x="430" y="238" text-anchor="middle" font-size="13" font-weight="700" fill="#14532d">📚 Teacher's Note</text>
+  <text x="430" y="264" text-anchor="middle" font-size="11" fill="#166534">Boys often excel in gross motor skills;</text>
+  <text x="430" y="282" text-anchor="middle" font-size="11" fill="#166534">girls may excel in fine motor skills.</text>
+  <text x="430" y="308" text-anchor="middle" font-size="11" fill="#166534">Both skill types require targeted</text>
+  <text x="430" y="326" text-anchor="middle" font-size="11" fill="#166534">classroom activities and age-appropriate</text>
+  <text x="430" y="344" text-anchor="middle" font-size="11" fill="#166534">materials to support healthy</text>
+  <text x="430" y="362" text-anchor="middle" font-size="11" fill="#166534">motor development.</text>
+
+  <!-- Footer -->
+  <text x="430" y="490" text-anchor="middle" font-size="10" fill="#94a3b8">Sharether Learning Platform • Physical Development — Motor Skills</text>
+</svg>

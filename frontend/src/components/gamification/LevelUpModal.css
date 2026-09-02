@@ -1,0 +1,133 @@
+.levelup-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 9995;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.levelup-backdrop--visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.levelup-modal {
+  position: relative;
+  background: #0f0e1a;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1.5rem;
+  padding: 3rem 2rem 2rem;
+  text-align: center;
+  max-width: 340px;
+  width: 100%;
+  overflow: hidden;
+  transform: scale(0.85) translateY(20px);
+  opacity: 0;
+  transition:
+    transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
+    opacity 0.3s ease;
+}
+
+.levelup-modal--visible {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+}
+
+.levelup-glow {
+  position: absolute;
+  top: -40%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--level-color) 0%, transparent 70%);
+  opacity: 0.25;
+  pointer-events: none;
+}
+
+.levelup-badge {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--level-color), color-mix(in srgb, var(--level-color) 60%, #000));
+  box-shadow:
+    0 0 0 4px rgba(255, 255, 255, 0.1),
+    0 0 30px var(--level-color);
+  margin-bottom: 1.5rem;
+  animation: levelup-pop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.15s both;
+}
+
+.levelup-badge__initial {
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: #fff;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.levelup-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #a78bfa;
+  margin: 0 0 0.35rem;
+}
+
+.levelup-title {
+  font-size: 1.75rem;
+  font-weight: 800;
+  margin: 0 0 0.75rem;
+  line-height: 1.1;
+}
+
+.levelup-subtitle {
+  font-size: 0.95rem;
+  color: #94a3b8;
+  margin: 0 0 2rem;
+  line-height: 1.5;
+}
+
+.levelup-cta {
+  display: inline-block;
+  padding: 0.75rem 2rem;
+  background: linear-gradient(135deg, #7c3aed, #4f46e5);
+  color: #fff;
+  border: none;
+  border-radius: 0.75rem;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.15s;
+}
+
+.levelup-cta:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.levelup-cta:active {
+  transform: translateY(0);
+}
+
+@keyframes levelup-pop {
+  from {
+    transform: scale(0.5) rotate(-15deg);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}

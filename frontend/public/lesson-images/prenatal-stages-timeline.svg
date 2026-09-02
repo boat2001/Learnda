@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 664" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Vertical timeline of the three prenatal stages: Germinal (0-2 weeks), Embryonic (weeks 3-8), and Fetal (week 9 to birth)">
+  <title>Three Stages of Prenatal Development</title>
+  <style>
+    .pt-bg { fill: #f8faff; }
+    .pt-title { font-family: 'Segoe UI', system-ui, sans-serif; font-weight: 700; }
+    .pt-body { font-family: 'Segoe UI', system-ui, sans-serif; }
+    .stage { cursor: pointer; }
+    .ring { fill: none; opacity: 0; transition: opacity .18s ease; }
+    .node { transition: r .18s ease, fill .18s ease; }
+    .extra-grp { opacity: 0; transition: opacity .2s ease; }
+    .hint { opacity: .55; }
+    .stage:hover .ring, .stage.is-active .ring { opacity: 1; }
+    .stage:hover .extra-grp, .stage.is-active .extra-grp { opacity: 1; }
+    .stage:hover .hint, .stage.is-active .hint { opacity: 0; }
+  </style>
+
+  <rect class="pt-bg" x="0" y="0" width="480" height="664" rx="16"/>
+
+  <!-- Title band -->
+  <rect x="16" y="16" width="448" height="58" rx="12" fill="#1a2e5a"/>
+  <text class="pt-title" x="240" y="42" text-anchor="middle" fill="#ffffff" font-size="19">Three Stages of Prenatal Development</text>
+  <text class="pt-body" x="240" y="62" text-anchor="middle" fill="#aebfe0" font-size="13">Conception to birth &#8226; about 40 weeks</text>
+
+  <!-- Spine -->
+  <line x1="78" y1="118" x2="78" y2="612" stroke="#cbd5e1" stroke-width="3"/>
+
+  <!-- ============ STAGE 1: GERMINAL ============ -->
+  <g class="stage" tabindex="0">
+    <rect class="ring" x="104" y="92" width="356" height="150" rx="13" stroke="#f59e0b" stroke-width="3"/>
+    <rect x="108" y="96" width="348" height="142" rx="12" fill="#fff7e6" stroke="#fcd385" stroke-width="1.5"/>
+    <rect x="108" y="96" width="6" height="142" rx="3" fill="#f59e0b"/>
+    <circle class="node" cx="78" cy="167" r="11" fill="#f59e0b"/>
+    <text class="pt-title" x="78" y="172" text-anchor="middle" fill="#ffffff" font-size="14">1</text>
+
+    <text class="pt-title" x="128" y="124" fill="#1e293b" font-size="17">Germinal</text>
+    <rect x="218" y="110" width="92" height="20" rx="10" fill="#f59e0b"/>
+    <text class="pt-body" x="264" y="124" text-anchor="middle" fill="#ffffff" font-size="13" font-weight="700">0&#8211;2 weeks</text>
+
+    <text class="pt-body" x="128" y="150" fill="#1e293b" font-size="14">&#8226; Zygote divides rapidly and implants</text>
+    <text class="pt-body" x="138" y="170" fill="#1e293b" font-size="14">in the uterine wall</text>
+    <text class="pt-body" x="128" y="192" fill="#1e293b" font-size="14">&#8226; No differentiated structures yet</text>
+
+    <text class="pt-body hint" x="128" y="220" fill="#64748b" font-size="12.5" font-style="italic">Tap or hover for the teacher note</text>
+    <g class="extra-grp">
+      <text class="pt-body" x="128" y="220" fill="#4f7f7b" font-size="12.5" font-weight="600">&#9656; Implantation taps the mother's nutrients</text>
+    </g>
+  </g>
+
+  <!-- ============ STAGE 2: EMBRYONIC ============ -->
+  <g class="stage" tabindex="0">
+    <rect class="ring" x="104" y="254" width="356" height="172" rx="13" stroke="#f97316" stroke-width="3"/>
+    <rect x="108" y="258" width="348" height="164" rx="12" fill="#fff1e8" stroke="#fbb78a" stroke-width="1.5"/>
+    <rect x="108" y="258" width="6" height="164" rx="3" fill="#f97316"/>
+    <circle class="node" cx="78" cy="340" r="11" fill="#f97316"/>
+    <text class="pt-title" x="78" y="345" text-anchor="middle" fill="#ffffff" font-size="14">2</text>
+
+    <text class="pt-title" x="128" y="286" fill="#1e293b" font-size="17">Embryonic</text>
+    <rect x="226" y="272" width="92" height="20" rx="10" fill="#f97316"/>
+    <text class="pt-body" x="272" y="286" text-anchor="middle" fill="#ffffff" font-size="13" font-weight="700">weeks 3&#8211;8</text>
+
+    <text class="pt-body" x="128" y="312" fill="#1e293b" font-size="14">&#8226; All major organs begin to form</text>
+    <text class="pt-body" x="128" y="332" fill="#1e293b" font-size="14">&#8226; Week 6: the heart starts beating</text>
+    <text class="pt-body" x="128" y="352" fill="#1e293b" font-size="14">&#8226; Week 8: essential structures present</text>
+
+    <!-- Warning badge (geometric, no emoji) -->
+    <g transform="translate(128,366)">
+      <rect x="0" y="0" width="232" height="24" rx="12" fill="#fee2e2" stroke="#ef4444" stroke-width="1.2"/>
+      <path d="M14 5 L21 18 L7 18 Z" fill="#ef4444"/>
+      <text class="pt-title" x="14" y="16.5" text-anchor="middle" fill="#ffffff" font-size="11">!</text>
+      <text class="pt-body" x="30" y="16" fill="#b91c1c" font-size="12.5" font-weight="700">Greatest teratogen risk</text>
+    </g>
+
+    <text class="pt-body hint" x="128" y="408" fill="#64748b" font-size="12.5" font-style="italic">Tap or hover for the teacher note</text>
+    <g class="extra-grp">
+      <text class="pt-body" x="128" y="408" fill="#4f7f7b" font-size="12.5" font-weight="600">&#9656; Neural tube forms &#8594; brain &amp; spinal cord</text>
+    </g>
+  </g>
+
+  <!-- ============ STAGE 3: FETAL ============ -->
+  <g class="stage" tabindex="0">
+    <rect class="ring" x="104" y="438" width="356" height="166" rx="13" stroke="#4f7f7b" stroke-width="3"/>
+    <rect x="108" y="442" width="348" height="158" rx="12" fill="#eef6f5" stroke="#a7cfca" stroke-width="1.5"/>
+    <rect x="108" y="442" width="6" height="158" rx="3" fill="#4f7f7b"/>
+    <circle class="node" cx="78" cy="521" r="11" fill="#4f7f7b"/>
+    <text class="pt-title" x="78" y="526" text-anchor="middle" fill="#ffffff" font-size="14">3</text>
+
+    <text class="pt-title" x="128" y="470" fill="#1e293b" font-size="17">Fetal</text>
+    <rect x="196" y="456" width="120" height="20" rx="10" fill="#4f7f7b"/>
+    <text class="pt-body" x="256" y="470" text-anchor="middle" fill="#ffffff" font-size="13" font-weight="700">week 9 &#8211; birth</text>
+
+    <text class="pt-body" x="128" y="496" fill="#1e293b" font-size="14">&#8226; Rapid growth; organs mature</text>
+    <text class="pt-body" x="128" y="516" fill="#1e293b" font-size="14">&#8226; Week 24: can hear sounds &amp; voices</text>
+    <text class="pt-body" x="128" y="536" fill="#1e293b" font-size="14">&#8226; Week 28: brain's cortical folds form</text>
+
+    <text class="pt-body hint" x="128" y="570" fill="#64748b" font-size="12.5" font-style="italic">Tap or hover for the teacher note</text>
+    <g class="extra-grp">
+      <text class="pt-body" x="128" y="570" fill="#4f7f7b" font-size="12.5" font-weight="600">&#9656; Builds the neural base for future learning</text>
+    </g>
+  </g>
+
+  <!-- Footer -->
+  <text class="pt-body" x="240" y="646" text-anchor="middle" fill="#94a3b8" font-size="11">Sharether Learning Platform &#8226; EBS 106 &#8226; Lesson 4: Prenatal Development</text>
+
+  <script><![CDATA[
+    // Progressive enhancement: tap-to-toggle for touch devices (hover handles desktop).
+    document.currentScript.closest('svg').querySelectorAll('.stage').forEach(function (el) {
+      var toggle = function () {
+        var on = el.classList.contains('is-active');
+        el.parentNode.querySelectorAll('.stage').forEach(function (s) { s.classList.remove('is-active'); });
+        if (!on) el.classList.add('is-active');
+      };
+      el.addEventListener('click', toggle);
+      el.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+      });
+    });
+  ]]></script>
+</svg>

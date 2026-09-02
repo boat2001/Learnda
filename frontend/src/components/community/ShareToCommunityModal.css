@@ -1,0 +1,102 @@
+.cm-share-preview {
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(59, 130, 246, 0.06));
+  border: 1px solid rgba(16, 185, 129, 0.18);
+  margin-bottom: 1rem;
+}
+
+.cm-share-preview__tag {
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #10b981;
+}
+
+.cm-share-preview__title {
+  margin: 0.35rem 0 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary, #0f172a);
+  line-height: 1.35;
+}
+
+.cm-share-preview__sub {
+  margin: 0.25rem 0 0;
+  font-size: 0.8rem;
+  color: var(--text-muted, #64748b);
+}
+
+.cm-share-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-secondary, #475569);
+  margin-bottom: 0.35rem;
+}
+
+.cm-share-note {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.6rem 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--border-color, rgba(15, 23, 42, 0.12));
+  font-size: 0.875rem;
+  font-family: inherit;
+  resize: vertical;
+  margin-bottom: 1rem;
+  background: var(--card-bg, #fff);
+  color: var(--text-primary, #0f172a);
+}
+
+.cm-share-send-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.25rem;
+  border-radius: 0.65rem;
+  border: none;
+  background: linear-gradient(135deg, #10b981, #3b82f6);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: opacity 0.15s, box-shadow 0.15s;
+}
+
+.cm-share-send-btn:hover:not(:disabled) {
+  opacity: 0.9;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.25);
+}
+
+.cm-share-send-btn:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+.cm-share-send-btn__arrow {
+  margin-left: auto;
+  opacity: 0.75;
+}
+
+.cm-share-status {
+  margin: 0.75rem 0 0;
+  font-size: 0.85rem;
+  color: #dc2626;
+}
+
+.cm-share-status.is-ok {
+  color: #059669;
+}
+
+[data-theme='dark'] .cm-share-note {
+  background: rgba(15, 23, 42, 0.55);
+  border-color: rgba(148, 163, 184, 0.12);
+}
+
+[data-theme='dark'] .cm-share-preview__title {
+  color: #e2e8f0;
+}

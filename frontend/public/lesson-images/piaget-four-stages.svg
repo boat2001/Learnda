@@ -1,0 +1,128 @@
+<svg viewBox="0 0 900 520" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Arial, sans-serif" role="img" aria-labelledby="pfs-title">
+  <title id="pfs-title">Piaget's Four Stages of Cognitive Development</title>
+  <!-- Background -->
+  <rect width="900" height="520" fill="#f8faff" rx="16"/>
+
+  <!-- Title -->
+  <text x="450" y="42" text-anchor="middle" font-size="20" font-weight="700" fill="#1a2e5a">Piaget's Four Stages of Cognitive Development</text>
+  <line x1="60" y1="55" x2="840" y2="55" stroke="#d0d8f0" stroke-width="1.5"/>
+
+  <!-- Timeline arrow -->
+  <line x1="80" y1="466" x2="820" y2="466" stroke="#4a6fa5" stroke-width="2.5"/>
+  <polygon points="820,460 836,466 820,472" fill="#4a6fa5"/>
+  <text x="845" y="470" font-size="12" fill="#4a6fa5" font-weight="600">Age</text>
+
+  <!-- Stage 1: Sensorimotor -->
+  <rect x="60" y="80" width="175" height="352" rx="12" fill="#fff3e0" stroke="#f59e0b" stroke-width="2"/>
+  <rect x="60" y="80" width="175" height="44" rx="12" fill="#f59e0b"/>
+  <rect x="60" y="110" width="175" height="14" rx="0" fill="#f59e0b"/>
+  <text x="147" y="108" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">1. Sensorimotor</text>
+  <text x="147" y="142" text-anchor="middle" font-size="11.5" font-weight="600" fill="#92400e">Birth – 2 Years</text>
+  <text x="83" y="170" font-size="11" fill="#78350f">• Learns through senses</text>
+  <text x="83" y="190" font-size="11" fill="#78350f">• Reflexive actions →</text>
+  <text x="93" y="206" font-size="11" fill="#78350f">  purposeful movement</text>
+  <text x="83" y="226" font-size="11" fill="#78350f">• Object permanence</text>
+  <text x="93" y="242" font-size="11" fill="#78350f">  develops</text>
+  <text x="83" y="262" font-size="11" fill="#78350f">• Cause-and-effect</text>
+  <text x="93" y="278" font-size="11" fill="#78350f">  understanding begins</text>
+  <text x="83" y="298" font-size="11" fill="#78350f">• Early language skills</text>
+  <text x="83" y="318" font-size="11" fill="#78350f">• Symbol use starts</text>
+  <!-- Icon: baby -->
+  <circle cx="147" cy="382" r="28" fill="#fff3e0" stroke="#f59e0b" stroke-width="1.5"/>
+  <circle cx="147" cy="369" r="11" fill="#fbbf24"/>
+  <ellipse cx="147" cy="396" rx="13" ry="9" fill="#fbbf24"/>
+  <text x="147" y="425" text-anchor="middle" font-size="10" fill="#92400e" font-weight="600">Infant</text>
+  <!-- Age marker -->
+  <line x1="147" y1="466" x2="147" y2="452" stroke="#f59e0b" stroke-width="2"/>
+  <text x="147" y="486" text-anchor="middle" font-size="11" fill="#92400e" font-weight="600">0–2 yrs</text>
+
+  <!-- Stage 2: Pre-Operational -->
+  <rect x="252" y="80" width="185" height="352" rx="12" fill="#e8f5e9" stroke="#22c55e" stroke-width="2"/>
+  <rect x="252" y="80" width="185" height="44" rx="12" fill="#22c55e"/>
+  <rect x="252" y="110" width="185" height="14" rx="0" fill="#22c55e"/>
+  <text x="344" y="108" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">2. Pre-Operational</text>
+  <text x="344" y="142" text-anchor="middle" font-size="11.5" font-weight="600" fill="#14532d">2 – 7 Years</text>
+  <text x="270" y="170" font-size="11" fill="#166534">• Language expands</text>
+  <text x="270" y="190" font-size="11" fill="#166534">• Symbolic thinking</text>
+  <text x="270" y="210" font-size="11" fill="#166534">• Egocentrism – sees</text>
+  <text x="280" y="226" font-size="11" fill="#166534">  own perspective only</text>
+  <text x="270" y="246" font-size="11" fill="#166534">• Animism (objects</text>
+  <text x="280" y="262" font-size="11" fill="#166534">  have feelings)</text>
+  <text x="270" y="282" font-size="11" fill="#166534">• No conservation yet</text>
+  <text x="270" y="302" font-size="11" fill="#166534">• Artificialism</text>
+  <text x="270" y="322" font-size="11" fill="#166534">• Magical thinking</text>
+  <!-- Icon: young child -->
+  <circle cx="344" cy="380" r="28" fill="#e8f5e9" stroke="#22c55e" stroke-width="1.5"/>
+  <circle cx="344" cy="366" r="11" fill="#4ade80"/>
+  <ellipse cx="344" cy="392" rx="13" ry="11" fill="#4ade80"/>
+  <line x1="331" y1="388" x2="323" y2="400" stroke="#4ade80" stroke-width="3" stroke-linecap="round"/>
+  <line x1="357" y1="388" x2="365" y2="400" stroke="#4ade80" stroke-width="3" stroke-linecap="round"/>
+  <text x="344" y="425" text-anchor="middle" font-size="10" fill="#14532d" font-weight="600">Toddler/Child</text>
+  <!-- Age marker -->
+  <line x1="344" y1="466" x2="344" y2="452" stroke="#22c55e" stroke-width="2"/>
+  <text x="344" y="486" text-anchor="middle" font-size="11" fill="#14532d" font-weight="600">2–7 yrs</text>
+
+  <!-- Stage 3: Concrete Operational -->
+  <rect x="454" y="80" width="185" height="352" rx="12" fill="#e0f2fe" stroke="#3b82f6" stroke-width="2"/>
+  <rect x="454" y="80" width="185" height="44" rx="12" fill="#3b82f6"/>
+  <rect x="454" y="110" width="185" height="14" rx="0" fill="#3b82f6"/>
+  <text x="546" y="101" text-anchor="middle" font-size="12.5" font-weight="700" fill="#fff">3. Concrete</text>
+  <text x="546" y="116" text-anchor="middle" font-size="12.5" font-weight="700" fill="#fff">Operational</text>
+  <text x="546" y="142" text-anchor="middle" font-size="11.5" font-weight="600" fill="#1e3a5f">7 – 11 Years</text>
+  <text x="472" y="170" font-size="11" fill="#1e40af">• Logical thinking</text>
+  <text x="472" y="190" font-size="11" fill="#1e40af">• Conservation mastered</text>
+  <text x="472" y="210" font-size="11" fill="#1e40af">• Reversibility – can</text>
+  <text x="482" y="226" font-size="11" fill="#1e40af">  undo operations</text>
+  <text x="472" y="246" font-size="11" fill="#1e40af">• Seriation (ordering)</text>
+  <text x="472" y="266" font-size="11" fill="#1e40af">• Classification skills</text>
+  <text x="472" y="286" font-size="11" fill="#1e40af">• Math: add, subtract</text>
+  <text x="472" y="306" font-size="11" fill="#1e40af">• Less egocentric</text>
+  <text x="472" y="326" font-size="11" fill="#1e40af">• Needs concrete</text>
+  <text x="482" y="342" font-size="11" fill="#1e40af">  objects to think</text>
+  <!-- Icon: older child -->
+  <circle cx="546" cy="384" r="27" fill="#e0f2fe" stroke="#3b82f6" stroke-width="1.5"/>
+  <circle cx="546" cy="371" r="11" fill="#60a5fa"/>
+  <ellipse cx="546" cy="397" rx="13" ry="11" fill="#60a5fa"/>
+  <line x1="533" y1="392" x2="524" y2="405" stroke="#60a5fa" stroke-width="3" stroke-linecap="round"/>
+  <line x1="559" y1="392" x2="568" y2="405" stroke="#60a5fa" stroke-width="3" stroke-linecap="round"/>
+  <text x="546" y="426" text-anchor="middle" font-size="10" fill="#1e3a5f" font-weight="600">School Child</text>
+  <!-- Age marker -->
+  <line x1="546" y1="466" x2="546" y2="452" stroke="#3b82f6" stroke-width="2"/>
+  <text x="546" y="486" text-anchor="middle" font-size="11" fill="#1e3a5f" font-weight="600">7–11 yrs</text>
+
+  <!-- Stage 4: Formal Operational -->
+  <rect x="656" y="80" width="184" height="352" rx="12" fill="#f3e8ff" stroke="#8b5cf6" stroke-width="2"/>
+  <rect x="656" y="80" width="184" height="44" rx="12" fill="#8b5cf6"/>
+  <rect x="656" y="110" width="184" height="14" rx="0" fill="#8b5cf6"/>
+  <text x="748" y="101" text-anchor="middle" font-size="12.5" font-weight="700" fill="#fff">4. Formal</text>
+  <text x="748" y="116" text-anchor="middle" font-size="12.5" font-weight="700" fill="#fff">Operational</text>
+  <text x="748" y="142" text-anchor="middle" font-size="11.5" font-weight="600" fill="#3b0764">11+ Years</text>
+  <text x="674" y="170" font-size="11" fill="#581c87">• Abstract thinking</text>
+  <text x="674" y="190" font-size="11" fill="#581c87">• Hypothetical reasoning</text>
+  <text x="674" y="210" font-size="11" fill="#581c87">• Deductive logic</text>
+  <text x="674" y="230" font-size="11" fill="#581c87">• Future possibilities</text>
+  <text x="674" y="250" font-size="11" fill="#581c87">• Metacognition –</text>
+  <text x="684" y="266" font-size="11" fill="#581c87">  thinking about thinking</text>
+  <text x="674" y="286" font-size="11" fill="#581c87">• Complex debates</text>
+  <text x="674" y="306" font-size="11" fill="#581c87">• Systematic problem</text>
+  <text x="684" y="322" font-size="11" fill="#581c87">  solving</text>
+  <text x="674" y="342" font-size="11" fill="#581c87">• Moral reasoning</text>
+  <!-- Icon: adolescent -->
+  <circle cx="748" cy="384" r="27" fill="#f3e8ff" stroke="#8b5cf6" stroke-width="1.5"/>
+  <circle cx="748" cy="370" r="12" fill="#a78bfa"/>
+  <ellipse cx="748" cy="398" rx="14" ry="12" fill="#a78bfa"/>
+  <line x1="734" y1="392" x2="723" y2="406" stroke="#a78bfa" stroke-width="3" stroke-linecap="round"/>
+  <line x1="762" y1="392" x2="773" y2="406" stroke="#a78bfa" stroke-width="3" stroke-linecap="round"/>
+  <text x="748" y="426" text-anchor="middle" font-size="10" fill="#3b0764" font-weight="600">Adolescent</text>
+  <!-- Age marker -->
+  <line x1="748" y1="466" x2="748" y2="452" stroke="#8b5cf6" stroke-width="2"/>
+  <text x="748" y="486" text-anchor="middle" font-size="11" fill="#3b0764" font-weight="600">11+ yrs</text>
+
+  <!-- Connecting arrows between stages (pointing forward, left to right) -->
+  <polygon points="237,243 248,248 237,253" fill="#94a3b8"/>
+  <polygon points="439,243 450,248 439,253" fill="#94a3b8"/>
+  <polygon points="641,243 652,248 641,253" fill="#94a3b8"/>
+
+  <!-- Credit -->
+  <text x="450" y="510" text-anchor="middle" font-size="10" fill="#94a3b8">Based on Jean Piaget's Theory of Cognitive Development (1936) • Sharether Learning Platform</text>
+</svg>

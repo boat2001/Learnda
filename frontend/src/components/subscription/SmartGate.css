@@ -1,0 +1,65 @@
+.smart-gate {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 2rem 1.5rem;
+  gap: 1rem;
+}
+
+.smart-gate__icon {
+  font-size: 2.5rem;
+  line-height: 1;
+}
+
+.smart-gate__title {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.smart-gate__body {
+  font-size: 0.88rem;
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+  max-width: 36rem;
+  margin: 0;
+}
+
+.smart-gate__plans {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  max-width: 48rem;
+}
+
+.smart-gate__plans .plan-card {
+  flex: 1 1 220px;
+  max-width: 280px;
+  text-align: left;
+}
+
+.smart-gate__tomorrow {
+  font-size: 0.82rem;
+  color: var(--color-text-secondary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  padding: 0;
+  margin-top: 0.5rem;
+}
+
+.smart-gate__tomorrow:hover {
+  color: var(--color-text-primary);
+}
+
+@media (max-width: 520px) {
+  .smart-gate__plans .plan-card {
+    max-width: 100%;
+  }
+}

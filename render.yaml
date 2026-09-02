@@ -1,0 +1,168 @@
+services:
+  - type: web
+    name: sharether-api
+    runtime: node
+    # Paid: avoids free-tier spin-down; smallest web instance type.
+    plan: starter
+    rootDir: backend
+    buildFilter:
+      paths:
+        - backend/**
+    buildCommand: npm ci
+    startCommand: npm start
+    healthCheckPath: /health
+    autoDeployTrigger: commit
+    envVars:
+      - key: NODE_VERSION
+        value: 20.19.0
+      - key: NODE_ENV
+        value: production
+      # Set this in the Render dashboard to the target database's internal URL.
+      # Internal Render URLs intentionally use private-network hostnames such as "dpg-...-a".
+      - key: DATABASE_URL
+        sync: false
+      - key: DB_SYNC
+        value: none
+      - key: SEED_DEFAULT_PLANS
+        value: "false"
+      - key: DEFAULT_SEMESTER
+        value: "1"
+      # Canonical public SPA URL (links, emails). Keep in sync with VITE_SITE_URL on sharether-web.
+      - key: APP_PUBLIC_URL
+        value: https://beta.sharether.com
+      # Comma-separated frontend origins only (no paths). Required for Google OAuth redirectUri validation.
+      # Add https://sharether.com when apex DNS points at sharether-web. See docs/deploy/GOOGLE_OAUTH_RENDER.md.
+      - key: CORS_ORIGIN
+        value: https://beta.sharether.com,https://sharether-web-r74a.onrender.com,https://sharether.com
+      - key: JWT_EXPIRES_IN
+        value: 24h
+      - key: JWT_REFRESH_EXPIRES_IN
+        value: 7d
+      - key: JWT_RESET_EXPIRES_IN
+        value: 1h
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_REFRESH_SECRET
+        generateValue: true
+      - key: JWT_RESET_SECRET
+        generateValue: true
+      # Same OAuth Web Client ID as sharether-web VITE_GOOGLE_CLIENT_ID (Google Cloud Web client).
+      - key: GOOGLE_CLIENT_ID
+        sync: false
+      - key: GOOGLE_CLIENT_SECRET
+        sync: false
+      # Leave unset in production; the SPA sends redirectUri from /auth/google/callback. If set, must be a
+      # full callback URL whose origin is listed in CORS_ORIGIN. See docs/deploy/GOOGLE_OAUTH_RENDER.md.
+      - key: GOOGLE_REDIRECT_URI
+        sync: false
+      - key: YOUTUBE_API_KEY
+        sync: false
+      - key: PAYSTACK_SECRET_KEY
+        sync: false
+      - key: PAYSTACK_PLAN_CODE_MAP
+        sync: false
+      - key: PAYSTACK_CHARGE_PERCENT
+        value: "1.95"
+      - key: PAYSTACK_CHARGE_FLAT
+        value: "0"
+      - key: PAYSTACK_CHARGE_CAP
+        value: "0"
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: GPT_MODEL
+        sync: false
+      - key: R2_ACCESS_KEY_ID
+        sync: false
+      - key: R2_SECRET_ACCESS_KEY
+        sync: false
+      - key: R2_ACCOUNT_ID
+        sync: false
+      - key: R2_BUCKET
+        sync: false
+      - key: R2_ENDPOINT
+        sync: false
+      - key: R2_PUBLIC_URL
+        sync: false
+      # Resend (https://resend.com) — create an API key and verify your domain
+      - key: RESEND_API_KEY
+        sync: false
+      # "Name <address@yourdomain.com>" — must be from a verified Resend domain
+      - key: EMAIL_FROM
+        sync: false
+      - key: SUPPORT_EMAIL_RECIPIENTS
+        sync: false
+      - key: SMS_PROVIDER
+        value: arkesel
+      # Arkesel SMS (https://arkesel.com) - create an API key in the dashboard.
+      - key: ARKESEL_API_KEY
+        sync: false
+      # Sender ID registered with Arkesel (max 11 chars, no spaces)
+      - key: ARKESEL_SENDER_ID
+        value: Sharether
+      - key: BETA_GATE_ENABLED
+        value: "true"
+      - key: BETA_CODE_LENGTH
+        value: "4"
+      - key: BETA_CODE_POOL_SIZE
+        value: "300"
+      - key: DISABLE_REGISTRATION_OTP_VERIFICATION
+        value: "false"
+      - key: REWARD_PAYOUT_THRESHOLD
+        value: "10"
+      - key: REWARD_INVITE_DOWNLOAD_AMOUNT
+        value: "0.5"
+      - key: REWARD_INVITE_REGISTER_AMOUNT
+        value: "0.5"
+      - key: REWARD_STREAK_AMOUNT
+        value: "1"
+      - key: REWARD_CONTRIBUTE_AMOUNT
+        value: "1"
+      - key: ENABLE_CONTRIBUTIONS
+        value: "true"
+      - key: ENABLE_GAMIFICATION
+        value: "true"
+      - key: ENABLE_ANALYTICS
+        value: "true"
+      - key: ENABLE_SOCIAL_SUBSCRIPTION_POPUP
+        value: "false"
+      - key: ENABLE_SPOTLIGHT_POPUP
+        value: "false"
+
+  - type: web
+    name: sharether-web
+    runtime: static
+    rootDir: frontend
+    buildFilter:
+      paths:
+        - frontend/**
+    buildCommand: npm ci && npm run build
+    staticPublishPath: dist
+    autoDeployTrigger: commit
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: NODE_VERSION
+        value: 20.19.0
+      - key: VITE_API_BASE_URL
+        value: https://api.sharether.com/api
+      # Canonical SPA URL; should match APP_PUBLIC_URL and primary Google OAuth origins.
+      - key: VITE_SITE_URL
+        value: https://beta.sharether.com
+      # Required for Google sign-in. Set in Render dashboard (sync: false), then redeploy — Vite embeds at build time.
+      - key: VITE_GOOGLE_CLIENT_ID
+        sync: false
+      - key: VITE_ANDROID_APP_URL
+        sync: false
+      - key: VITE_IOS_APP_URL
+        sync: false
+      - key: VITE_PLACEHOLDER_MODE
+        value: ""
+
+databases:
+  - name: sharether-db
+    # Paid Postgres: no 30-day free DB expiry; smallest flexible instance.
+    plan: basic-256mb
+    databaseName: sharether
+    user: sharether

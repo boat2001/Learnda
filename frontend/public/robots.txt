@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+Disallow: /admin
+Disallow: /settings
+Disallow: /pls
+Disallow: /onboarding
+Disallow: /login
+Disallow: /register
+Disallow: /notifications
+Sitemap: https://sharether.com/sitemap.xml

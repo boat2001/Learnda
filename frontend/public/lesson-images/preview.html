@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson Images Preview — Sharether</title>
+<style>
+  body { font-family: 'Segoe UI', Arial, sans-serif; background:#eef2f9; margin:0; padding:24px; }
+  h1 { color:#1a2e5a; font-size:22px; }
+  .controls { margin-bottom:20px; display:flex; gap:8px; }
+  .controls button { padding:8px 16px; border:1px solid #c7d2e8; background:#fff; border-radius:8px; cursor:pointer; font-size:13px; }
+  .controls button.active { background:#1a2e5a; color:#fff; border-color:#1a2e5a; }
+  .grid { display:flex; flex-direction:column; gap:28px; }
+  .card { background:#fff; border-radius:12px; padding:16px; box-shadow:0 2px 8px rgba(26,46,90,.08); }
+  .card h2 { font-size:14px; color:#475569; margin:0 0 12px; font-weight:600; }
+  .frame { margin:0 auto; transition:max-width .25s; }
+  .frame img, .frame object { width:100%; height:auto; display:block; }
+  body.w-mobile .frame { max-width:380px; }
+  body.w-tablet .frame { max-width:720px; }
+  body.w-desktop .frame { max-width:1100px; }
+</style>
+</head>
+<body class="w-desktop">
+<h1>Lesson Images Preview</h1>
+<div class="controls">
+  <button data-w="mobile">Mobile (380px)</button>
+  <button data-w="tablet">Tablet (720px)</button>
+  <button data-w="desktop" class="active">Desktop</button>
+</div>
+<div class="grid" id="grid"></div>
+<script>
+  const files = [
+    'growth-development-maturation.svg',
+    'maturation-readiness-teachers.svg',
+    'physical-development-stages.svg',
+    'motor-skills-diagram.svg',
+    'piaget-four-stages.svg',
+    'piaget-object-permanence.svg',
+    'piaget-conservation-experiment.svg',
+  ];
+  const grid = document.getElementById('grid');
+  files.forEach(f => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = '<h2>' + f + '</h2><div class="frame"><img src="' + f + '" alt="' + f + '"></div>';
+    grid.appendChild(card);
+  });
+  document.querySelectorAll('.controls button').forEach(b => {
+    b.onclick = () => {
+      document.body.className = 'w-' + b.dataset.w;
+      document.querySelectorAll('.controls button').forEach(x => x.classList.toggle('active', x === b));
+    };
+  });
+</script>
+</body>
+</html>

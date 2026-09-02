@@ -1,0 +1,162 @@
+.rewards-page {
+  padding: 3rem 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.rewards-hero {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  background: var(--card-bg, var(--color-bg-light));
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  background: linear-gradient(135deg, var(--color-bg-light), var(--color-bg-default));
+}
+
+.hero-text h1 {
+  margin: 0.5rem 0;
+  font-size: 2rem;
+  color: var(--text-color);
+}
+
+.hero-tag {
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  color: var(--primary-color);
+}
+
+.hero-text p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.hero-card {
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.9);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+[data-theme='dark'] .hero-card {
+  background: rgba(15, 20, 28, 0.9);
+}
+
+.hero-card-label {
+  color: var(--text-light);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.hero-card-value {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  word-break: break-all;
+}
+
+.hero-card-note {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.rewards-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+  min-width: 220px;
+}
+
+.reward-breakdown {
+  background: var(--card-bg, var(--color-bg-light));
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+}
+
+.streak-card {
+  background: rgba(79, 179, 173, 0.08);
+}
+
+.reward-breakdown h2 {
+  margin-top: 0;
+  color: var(--text-color);
+}
+
+.reward-breakdown ul {
+  padding-left: 1.25rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.reward-breakdown strong {
+  color: var(--primary-color);
+}
+
+.reward-breakdown ol {
+  padding-left: 1.25rem;
+  color: var(--text-secondary);
+}
+
+.status-message {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.stage-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.stage-card {
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 1rem;
+  background: var(--color-bg-light);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.stage-status {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+}
+
+.stage-status.ready {
+  color: #0f766e;
+}
+
+.stage-status.locked {
+  color: var(--text-secondary);
+}
+
+.stage-status.claimed {
+  color: #16a34a;
+}
+
+[data-theme='dark'] .stage-card {
+  background: rgba(15, 20, 28, 0.9);
+}
+
+@media (max-width: 600px) {
+  .rewards-actions {
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,182 @@
+.page-skeleton {
+  min-height: 100vh;
+  min-height: 100svh;
+  background:
+    radial-gradient(circle at top left, rgba(40, 82, 67, 0.14), transparent 34%),
+    linear-gradient(180deg, #f7fbf8 0%, #edf5ef 100%);
+  padding: 2rem 1.25rem 3rem;
+}
+
+.page-skeleton.compact {
+  min-height: 60vh;
+}
+
+.page-skeleton-shell {
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.page-skeleton-hero,
+.page-skeleton-toolbar,
+.page-skeleton-card {
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(24, 61, 46, 0.08);
+  box-shadow: 0 20px 48px rgba(17, 41, 31, 0.08);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.page-skeleton-hero {
+  border-radius: 28px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.page-skeleton-toolbar {
+  display: grid;
+  grid-template-columns: minmax(0, 2.2fr) repeat(3, minmax(0, 1fr));
+  gap: 0.9rem;
+  border-radius: 22px;
+  padding: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.page-skeleton-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.page-skeleton-card {
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+.page-skeleton-card-image {
+  aspect-ratio: 16 / 10;
+}
+
+.page-skeleton-card-lines {
+  padding: 1rem;
+}
+
+.page-skeleton-chip,
+.page-skeleton-title,
+.page-skeleton-subtitle,
+.page-skeleton-input,
+.page-skeleton-filter,
+.page-skeleton-line {
+  display: block;
+  border-radius: 999px;
+}
+
+.page-skeleton-chip {
+  width: 6rem;
+  height: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+.page-skeleton-title {
+  width: min(24rem, 78%);
+  height: 2.2rem;
+  margin-bottom: 0.8rem;
+}
+
+.page-skeleton-subtitle {
+  width: min(32rem, 92%);
+  height: 1rem;
+  margin-bottom: 1rem;
+}
+
+.page-skeleton-copy,
+.page-skeleton-caption {
+  margin: 0;
+  color: #264638;
+}
+
+.page-skeleton-copy {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.page-skeleton-caption {
+  margin-top: 0.35rem;
+  color: #4f6d60;
+}
+
+.page-skeleton-input {
+  height: 3rem;
+}
+
+.page-skeleton-filter {
+  height: 3rem;
+}
+
+.page-skeleton-line {
+  height: 0.9rem;
+  margin-bottom: 0.7rem;
+}
+
+.page-skeleton-line.long {
+  width: 88%;
+}
+
+.page-skeleton-line.medium {
+  width: 68%;
+}
+
+.page-skeleton-line.short {
+  width: 44%;
+  margin-bottom: 0;
+}
+
+.shimmer-block {
+  /* Utility must win over any component background it is layered onto,
+     otherwise the tile renders as a static block instead of shimmering. */
+  background: linear-gradient(90deg, #dce9e1 0%, #eef5f0 45%, #dce9e1 100%) !important;
+  background-size: 240% 100% !important;
+  border-color: transparent !important;
+  animation: page-skeleton-shimmer 1.25s linear infinite;
+}
+
+@keyframes page-skeleton-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@media (max-width: 840px) {
+  .page-skeleton-toolbar {
+    grid-template-columns: 1fr;
+  }
+}
+
+[data-theme='dark'] .page-skeleton {
+  background:
+    radial-gradient(circle at top left, rgba(31, 113, 119, 0.12), transparent 34%),
+    linear-gradient(180deg, #0d1117 0%, #0f1923 100%);
+}
+
+[data-theme='dark'] .page-skeleton-hero,
+[data-theme='dark'] .page-skeleton-toolbar,
+[data-theme='dark'] .page-skeleton-card {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(148, 163, 184, 0.1);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme='dark'] .shimmer-block {
+  background: linear-gradient(90deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.09) 45%, rgba(255,255,255,0.04) 100%) !important;
+  background-size: 240% 100% !important;
+}
+
+[data-theme='dark'] .page-skeleton-copy {
+  color: rgba(226, 232, 240, 0.9);
+}
+
+[data-theme='dark'] .page-skeleton-caption {
+  color: rgba(148, 163, 184, 0.75);
+}

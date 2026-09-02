@@ -1,0 +1,71 @@
+<svg viewBox="0 0 760 410" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Arial, sans-serif" role="img" aria-labelledby="pop-title">
+  <title id="pop-title">Object Permanence in the Sensorimotor Stage</title>
+  <!-- Background -->
+  <rect width="760" height="410" fill="#f8faff" rx="16"/>
+
+  <!-- Title -->
+  <text x="380" y="36" text-anchor="middle" font-size="18" font-weight="700" fill="#1a2e5a">Object Permanence — Sensorimotor Stage</text>
+  <text x="380" y="56" text-anchor="middle" font-size="12.5" fill="#64748b">The understanding that objects exist even when out of sight</text>
+  <line x1="50" y1="66" x2="710" y2="66" stroke="#d0d8f0" stroke-width="1.5"/>
+
+  <!-- LEFT PANEL: Before Object Permanence (Younger infant) -->
+  <rect x="30" y="80" width="320" height="276" rx="12" fill="#fef2f2" stroke="#ef4444" stroke-width="2"/>
+  <rect x="30" y="80" width="320" height="44" rx="12" fill="#ef4444"/>
+  <rect x="30" y="110" width="320" height="14" rx="0" fill="#ef4444"/>
+  <text x="190" y="107" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">❌ No Object Permanence</text>
+  <text x="190" y="126" text-anchor="middle" font-size="11.5" fill="#fecaca">Infant under ~8 months</text>
+
+  <!-- Blanket covering the (hidden) toy -->
+  <path d="M 100,190 Q 140,200 180,190 L 185,212 Q 140,222 95,212 Z" fill="#93c5fd" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="140" y="209" text-anchor="middle" font-size="10" fill="#1e40af">blanket (toy under)</text>
+
+  <!-- Thought bubble showing "gone" -->
+  <ellipse cx="268" cy="178" rx="52" ry="34" fill="#fff" stroke="#ef4444" stroke-width="1.5"/>
+  <circle cx="226" cy="203" r="6" fill="#fff" stroke="#ef4444" stroke-width="1.5"/>
+  <circle cx="216" cy="214" r="4" fill="#fff" stroke="#ef4444" stroke-width="1.5"/>
+  <text x="268" y="173" text-anchor="middle" font-size="22">😶</text>
+  <text x="268" y="192" text-anchor="middle" font-size="10" fill="#b91c1c">"It's gone!"</text>
+
+  <!-- Baby face not searching -->
+  <circle cx="140" cy="280" r="26" fill="#fde68a" stroke="#f59e0b" stroke-width="2"/>
+  <circle cx="132" cy="274" r="4" fill="#1a2e5a"/>
+  <circle cx="148" cy="274" r="4" fill="#1a2e5a"/>
+  <path d="M 130,288 Q 140,284 150,288" fill="none" stroke="#1a2e5a" stroke-width="2"/>
+  <text x="190" y="330" text-anchor="middle" font-size="11" fill="#b91c1c" font-weight="600">Does NOT search for the toy</text>
+  <text x="190" y="346" text-anchor="middle" font-size="11" fill="#b91c1c">Believes it no longer exists</text>
+
+  <!-- RIGHT PANEL: With Object Permanence (Older infant) -->
+  <rect x="410" y="80" width="320" height="276" rx="12" fill="#f0fdf4" stroke="#22c55e" stroke-width="2"/>
+  <rect x="410" y="80" width="320" height="44" rx="12" fill="#22c55e"/>
+  <rect x="410" y="110" width="320" height="14" rx="0" fill="#22c55e"/>
+  <text x="570" y="107" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">✅ Object Permanence</text>
+  <text x="570" y="126" text-anchor="middle" font-size="11.5" fill="#bbf7d0">Infant ~8–12 months +</text>
+
+  <!-- Toy hidden under blanket -->
+  <path d="M 490,190 Q 530,200 570,190 L 575,212 Q 530,222 485,212 Z" fill="#86efac" stroke="#22c55e" stroke-width="1.5"/>
+  <text x="530" y="209" text-anchor="middle" font-size="10" fill="#14532d">blanket (toy under)</text>
+
+  <!-- Thought bubble showing toy still remembered -->
+  <ellipse cx="648" cy="178" rx="52" ry="34" fill="#fff" stroke="#22c55e" stroke-width="1.5"/>
+  <circle cx="606" cy="203" r="6" fill="#fff" stroke="#22c55e" stroke-width="1.5"/>
+  <circle cx="596" cy="214" r="4" fill="#fff" stroke="#22c55e" stroke-width="1.5"/>
+  <text x="648" y="172" text-anchor="middle" font-size="18">🧸</text>
+  <text x="648" y="192" text-anchor="middle" font-size="10" fill="#14532d">"Still there!"</text>
+
+  <!-- Baby face looking/searching -->
+  <circle cx="520" cy="280" r="26" fill="#fde68a" stroke="#f59e0b" stroke-width="2"/>
+  <circle cx="512" cy="274" r="4" fill="#1a2e5a"/>
+  <circle cx="528" cy="274" r="4" fill="#1a2e5a"/>
+  <path d="M 510,286 Q 520,294 530,286" fill="none" stroke="#1a2e5a" stroke-width="2"/>
+  <!-- Hand reaching toward blanket -->
+  <path d="M 546,285 Q 562,270 567,222" fill="none" stroke="#f59e0b" stroke-width="2.5" stroke-dasharray="5,3"/>
+  <polygon points="563,225 569,212 573,225" fill="#f59e0b"/>
+  <text x="570" y="330" text-anchor="middle" font-size="11" fill="#14532d" font-weight="600">Lifts the blanket to find the toy!</text>
+  <text x="570" y="346" text-anchor="middle" font-size="11" fill="#14532d">Knows it still exists</text>
+
+  <!-- Footer explanation -->
+  <rect x="30" y="366" width="700" height="26" rx="8" fill="#e0f2fe"/>
+  <text x="380" y="383" text-anchor="middle" font-size="11.5" fill="#0369a1" font-weight="600">Object permanence is a major cognitive milestone in the Sensorimotor Stage (Birth–2 years)</text>
+
+  <text x="380" y="406" text-anchor="middle" font-size="10" fill="#94a3b8">Sharether Learning Platform • Lesson 3: Piaget's Cognitive Development</text>
+</svg>

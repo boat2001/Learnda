@@ -1,0 +1,101 @@
+<svg viewBox="0 0 780 420" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Arial, sans-serif" role="img" aria-labelledby="pce-title">
+  <title id="pce-title">Piaget's Conservation of Liquid Experiment</title>
+  <!-- Background -->
+  <rect width="780" height="420" fill="#f8faff" rx="16"/>
+
+  <!-- Title -->
+  <text x="390" y="36" text-anchor="middle" font-size="18" font-weight="700" fill="#1a2e5a">Piaget's Conservation of Liquid Experiment</text>
+  <text x="390" y="56" text-anchor="middle" font-size="13" fill="#64748b">Concrete Operational Stage (Ages 7–11)</text>
+  <line x1="50" y1="66" x2="730" y2="66" stroke="#d0d8f0" stroke-width="1.5"/>
+
+  <!-- STEP 1 -->
+  <rect x="30" y="80" width="200" height="280" rx="12" fill="#fff" stroke="#e2e8f0" stroke-width="1.5"/>
+  <rect x="30" y="80" width="200" height="36" rx="12" fill="#3b82f6"/>
+  <rect x="30" y="100" width="200" height="16" rx="0" fill="#3b82f6"/>
+  <text x="130" y="104" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">Step 1</text>
+  <text x="130" y="120" text-anchor="middle" font-size="11" fill="#fff">Two equal glasses</text>
+
+  <!-- Glass A -->
+  <polygon points="58,145 73,230 113,230 128,145" fill="none" stroke="#64748b" stroke-width="2"/>
+  <polygon points="60,190 73,230 113,230 126,190" fill="#93c5fd" opacity="0.7"/>
+  <text x="93" y="250" text-anchor="middle" font-size="11" fill="#1e40af" font-weight="600">Glass A</text>
+
+  <!-- Glass B -->
+  <polygon points="132,145 147,230 187,230 202,145" fill="none" stroke="#64748b" stroke-width="2"/>
+  <polygon points="134,190 147,230 187,230 200,190" fill="#93c5fd" opacity="0.7"/>
+  <text x="167" y="250" text-anchor="middle" font-size="11" fill="#1e40af" font-weight="600">Glass B</text>
+
+  <text x="130" y="270" text-anchor="middle" font-size="11" fill="#374151">Child agrees: same amount</text>
+  <rect x="46" y="282" width="168" height="32" rx="6" fill="#dbeafe"/>
+  <text x="130" y="296" text-anchor="middle" font-size="11" fill="#1e40af">💬 "Yes, they're the same!"</text>
+  <text x="130" y="310" text-anchor="middle" font-size="10" fill="#3b82f6">(Child confirms equal levels)</text>
+
+  <rect x="46" y="322" width="168" height="28" rx="6" fill="#bfdbfe"/>
+  <text x="130" y="340" text-anchor="middle" font-size="10.5" fill="#1e3a5f" font-weight="600">Water is EQUAL in both</text>
+
+  <!-- Arrow to Step 2 (pointing right) -->
+  <line x1="234" y1="220" x2="260" y2="220" stroke="#6366f1" stroke-width="2.5"/>
+  <polygon points="258,214 268,220 258,226" fill="#6366f1"/>
+  <text x="250" y="208" text-anchor="middle" font-size="10" fill="#6366f1" font-weight="600">Pour</text>
+
+  <!-- STEP 2 -->
+  <rect x="270" y="80" width="220" height="280" rx="12" fill="#fff" stroke="#e2e8f0" stroke-width="1.5"/>
+  <rect x="270" y="80" width="220" height="36" rx="12" fill="#6366f1"/>
+  <rect x="270" y="100" width="220" height="16" rx="0" fill="#6366f1"/>
+  <text x="380" y="104" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">Step 2</text>
+  <text x="380" y="120" text-anchor="middle" font-size="11" fill="#fff">Pour into a different shape</text>
+
+  <!-- Original glass (same as A) -->
+  <polygon points="295,145 315,230 355,230 375,145" fill="none" stroke="#64748b" stroke-width="2"/>
+  <polygon points="297,190 315,230 355,230 373,190" fill="#93c5fd" opacity="0.7"/>
+  <text x="335" y="250" text-anchor="middle" font-size="10.5" fill="#374151">Original</text>
+
+  <!-- Wide flat container -->
+  <rect x="395" y="195" width="80" height="38" rx="4" fill="none" stroke="#64748b" stroke-width="2"/>
+  <rect x="395" y="215" width="80" height="18" rx="2" fill="#93c5fd" opacity="0.7"/>
+  <text x="435" y="250" text-anchor="middle" font-size="10.5" fill="#374151">Poured into</text>
+  <text x="435" y="263" text-anchor="middle" font-size="10.5" fill="#374151">wide container</text>
+
+  <!-- Pour arrow -->
+  <path d="M 375 185 Q 385 185 395 205" fill="none" stroke="#93c5fd" stroke-width="2.5" stroke-dasharray="4,3"/>
+  <polygon points="392,200 400,210 402,199" fill="#93c5fd"/>
+
+  <text x="380" y="285" text-anchor="middle" font-size="11" fill="#374151">Water looks LOWER now</text>
+  <rect x="282" y="298" width="196" height="22" rx="6" fill="#e0e7ff"/>
+  <text x="380" y="313" text-anchor="middle" font-size="11" fill="#4338ca">(Same amount, different shape)</text>
+
+  <rect x="282" y="326" width="196" height="28" rx="6" fill="#c7d2fe"/>
+  <text x="380" y="344" text-anchor="middle" font-size="10.5" fill="#312e81" font-weight="600">Amount is STILL THE SAME</text>
+
+  <!-- Arrow to Step 3 (pointing right) -->
+  <line x1="494" y1="220" x2="518" y2="220" stroke="#16a34a" stroke-width="2.5"/>
+  <polygon points="516,214 526,220 516,226" fill="#16a34a"/>
+  <text x="510" y="208" text-anchor="middle" font-size="10" fill="#16a34a" font-weight="600">Ask</text>
+
+  <!-- STEP 3 -->
+  <rect x="530" y="80" width="220" height="280" rx="12" fill="#fff" stroke="#e2e8f0" stroke-width="1.5"/>
+  <rect x="530" y="80" width="220" height="36" rx="12" fill="#16a34a"/>
+  <rect x="530" y="100" width="220" height="16" rx="0" fill="#16a34a"/>
+  <text x="640" y="104" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">Step 3</text>
+  <text x="640" y="120" text-anchor="middle" font-size="11" fill="#fff">Which has more water?</text>
+
+  <!-- Pre-operational child response -->
+  <rect x="545" y="145" width="190" height="70" rx="10" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="640" y="165" text-anchor="middle" font-size="12" font-weight="700" fill="#92400e">Pre-Operational Child</text>
+  <text x="640" y="182" text-anchor="middle" font-size="11" fill="#78350f">(Ages 2–7)</text>
+  <text x="640" y="200" text-anchor="middle" font-size="12" fill="#b45309">❌ "The tall glass has more!"</text>
+
+  <!-- Concrete operational child response -->
+  <rect x="545" y="226" width="190" height="70" rx="10" fill="#f0fdf4" stroke="#22c55e" stroke-width="1.5"/>
+  <text x="640" y="246" text-anchor="middle" font-size="12" font-weight="700" fill="#14532d">Concrete Operational Child</text>
+  <text x="640" y="263" text-anchor="middle" font-size="11" fill="#166534">(Ages 7–11)</text>
+  <text x="640" y="281" text-anchor="middle" font-size="12" fill="#15803d">✅ "They're the same amount!"</text>
+
+  <rect x="545" y="308" width="190" height="42" rx="8" fill="#dcfce7"/>
+  <text x="640" y="326" text-anchor="middle" font-size="11" fill="#14532d" font-weight="600">Key Concept: Conservation</text>
+  <text x="640" y="342" text-anchor="middle" font-size="10.5" fill="#166534">Quantity doesn't change with form</text>
+
+  <!-- Footer -->
+  <text x="390" y="388" text-anchor="middle" font-size="11" fill="#64748b" font-style="italic">Piaget used this experiment to show that young children lack conservation understanding.</text>
+  <text x="390" y="406" text-anchor="middle" font-size="10" fill="#94a3b8">Sharether Learning Platform • Lesson 3: Cognitive Development</text>
+</svg>

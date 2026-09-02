@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 540" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Operant conditioning 2 by 2 matrix: adding or removing a pleasant or aversive stimulus gives positive reinforcement, positive punishment, negative punishment, and negative reinforcement.">
+  <title>Operant Conditioning: Reinforcement and Punishment</title>
+  <style>
+    .oc-title { font-family:'Segoe UI',system-ui,sans-serif; font-weight:700; }
+    .oc-body  { font-family:'Segoe UI',system-ui,sans-serif; }
+    .cell { cursor:pointer; }
+    .cell .ring { fill:none; opacity:0; transition:opacity .16s ease; }
+    .cell:hover .ring, .cell.is-active .ring { opacity:1; }
+  </style>
+
+  <rect x="0" y="0" width="480" height="540" rx="16" fill="#f8faff"/>
+  <rect x="16" y="16" width="448" height="50" rx="12" fill="#1a2e5a"/>
+  <text class="oc-title" x="240" y="40" text-anchor="middle" fill="#ffffff" font-size="18">Reinforcement vs Punishment</text>
+  <text class="oc-body" x="240" y="58" text-anchor="middle" fill="#aebfe0" font-size="12.5">Defined by their effect, not the teacher's intention</text>
+
+  <!-- column headers -->
+  <text class="oc-title" x="180" y="108" text-anchor="middle" fill="#166534" font-size="13.5">Pleasant stimulus</text>
+  <text class="oc-title" x="368" y="108" text-anchor="middle" fill="#b91c1c" font-size="13.5">Aversive stimulus</text>
+  <!-- row labels -->
+  <text class="oc-title" x="34" y="225" text-anchor="middle" fill="#1a2e5a" font-size="13.5" transform="rotate(-90 34 225)">ADD  (+)</text>
+  <text class="oc-title" x="34" y="375" text-anchor="middle" fill="#1a2e5a" font-size="13.5" transform="rotate(-90 34 375)">REMOVE  (&#8722;)</text>
+
+  <!-- TL: Positive Reinforcement -->
+  <g class="cell" tabindex="0">
+    <rect class="ring" x="84" y="116" width="192" height="146" rx="13" stroke="#16a34a" stroke-width="3"/>
+    <rect x="88" y="120" width="184" height="138" rx="11" fill="#ecfdf5" stroke="#86efac" stroke-width="1.5"/>
+    <text class="oc-title" x="102" y="144" fill="#166534" font-size="14">Positive</text>
+    <text class="oc-title" x="102" y="162" fill="#166534" font-size="14">Reinforcement</text>
+    <text class="oc-body" x="102" y="184" fill="#475569" font-size="12.5">Add something pleasant</text>
+    <text class="oc-body" x="102" y="204" fill="#64748b" font-size="12">e.g. praise for finishing</text>
+    <text class="oc-body" x="102" y="219" fill="#64748b" font-size="12">homework</text>
+    <path d="M102 238 L110 228 L118 238 Z" fill="#16a34a"/>
+    <text class="oc-title" x="124" y="240" fill="#166534" font-size="12.5">Behaviour increases</text>
+  </g>
+
+  <!-- TR: Positive Punishment -->
+  <g class="cell" tabindex="0">
+    <rect class="ring" x="276" y="116" width="192" height="146" rx="13" stroke="#dc2626" stroke-width="3"/>
+    <rect x="280" y="120" width="184" height="138" rx="11" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.5"/>
+    <text class="oc-title" x="294" y="144" fill="#b91c1c" font-size="14">Positive</text>
+    <text class="oc-title" x="294" y="162" fill="#b91c1c" font-size="14">Punishment</text>
+    <text class="oc-body" x="294" y="184" fill="#475569" font-size="12.5">Add something aversive</text>
+    <text class="oc-body" x="294" y="204" fill="#64748b" font-size="12">e.g. extra work for</text>
+    <text class="oc-body" x="294" y="219" fill="#64748b" font-size="12">misbehaviour</text>
+    <path d="M294 230 L302 240 L310 230 Z" fill="#dc2626"/>
+    <text class="oc-title" x="316" y="240" fill="#b91c1c" font-size="12.5">Behaviour decreases</text>
+  </g>
+
+  <!-- BL: Negative Punishment -->
+  <g class="cell" tabindex="0">
+    <rect class="ring" x="84" y="266" width="192" height="146" rx="13" stroke="#ea580c" stroke-width="3"/>
+    <rect x="88" y="270" width="184" height="138" rx="11" fill="#fff5eb" stroke="#fdba74" stroke-width="1.5"/>
+    <text class="oc-title" x="102" y="294" fill="#c2410c" font-size="14">Negative</text>
+    <text class="oc-title" x="102" y="312" fill="#c2410c" font-size="14">Punishment</text>
+    <text class="oc-body" x="102" y="334" fill="#475569" font-size="12.5">Remove something pleasant</text>
+    <text class="oc-body" x="102" y="354" fill="#64748b" font-size="12">e.g. take away break</text>
+    <text class="oc-body" x="102" y="369" fill="#64748b" font-size="12">time</text>
+    <path d="M102 388 L110 398 L118 388 Z" fill="#ea580c"/>
+    <text class="oc-title" x="124" y="398" fill="#c2410c" font-size="12.5">Behaviour decreases</text>
+  </g>
+
+  <!-- BR: Negative Reinforcement -->
+  <g class="cell" tabindex="0">
+    <rect class="ring" x="276" y="266" width="192" height="146" rx="13" stroke="#2563eb" stroke-width="3"/>
+    <rect x="280" y="270" width="184" height="138" rx="11" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.5"/>
+    <text class="oc-title" x="294" y="294" fill="#1d4ed8" font-size="14">Negative</text>
+    <text class="oc-title" x="294" y="312" fill="#1d4ed8" font-size="14">Reinforcement</text>
+    <text class="oc-body" x="294" y="334" fill="#475569" font-size="12.5">Remove something aversive</text>
+    <text class="oc-body" x="294" y="354" fill="#64748b" font-size="12">e.g. drop a task once</text>
+    <text class="oc-body" x="294" y="369" fill="#64748b" font-size="12">behaviour improves</text>
+    <path d="M294 388 L302 378 L310 388 Z" fill="#2563eb"/>
+    <text class="oc-title" x="316" y="390" fill="#1d4ed8" font-size="12.5">Behaviour increases</text>
+  </g>
+
+  <!-- note -->
+  <rect x="24" y="424" width="432" height="44" rx="10" fill="#eef2fb" stroke="#c7d2e8" stroke-width="1.2"/>
+  <text class="oc-body" x="240" y="444" text-anchor="middle" fill="#1a2e5a" font-size="12.5">Reinforcement always <tspan font-weight="700" fill="#166534">increases</tspan> behaviour; punishment <tspan font-weight="700" fill="#b91c1c">decreases</tspan> it.</text>
+  <text class="oc-body" x="240" y="461" text-anchor="middle" fill="#64748b" font-size="12">Skinner preferred reinforcement &#8212; it teaches what to do.</text>
+
+  <text class="oc-body" x="240" y="520" text-anchor="middle" fill="#94a3b8" font-size="11">Sharether Learning Platform &#8226; EBS 106 &#8226; Lesson 16: Operant Conditioning</text>
+
+  <script><![CDATA[
+    (function () {
+      var svg = document.currentScript.closest('svg');
+      svg.querySelectorAll('.cell').forEach(function (el) {
+        el.addEventListener('click', function () {
+          var on = el.classList.contains('is-active');
+          svg.querySelectorAll('.cell').forEach(function (c) { c.classList.remove('is-active'); });
+          if (!on) el.classList.add('is-active');
+        });
+      });
+    })();
+  ]]></script>
+</svg>
