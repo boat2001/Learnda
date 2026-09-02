@@ -1,7 +1,6 @@
-import { useRef, useState, useEffect, useLayoutEffect } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { FiArrowLeft, FiEye, FiEyeOff } from 'react-icons/fi';
 import { ONBOARDING_STEPS } from '../../../utils/onboarding';
-import { formatIndexNumberInput } from '../../../utils/studentIdentity';
 import ConfettiOverlay from '../../gamification/ConfettiOverlay';
 import { toDisplayName, getPlanCopy } from '../../../utils/contributionPlans';
 import { BILLING_DURATION_OPTIONS } from '../../../utils/billingUpgrade';
@@ -13,16 +12,7 @@ export default function OnboardingContent({
   processing,
   profileForm,
   needsPasswordInPersonal,
-  universities,
-  selectedCollege,
-  colleges,
-  collegeOptions,
-  collegesLoading,
-  programCategoryOptions,
-  academicProgramOptions,
-  indexExample,
   submitPersonalInfo,
-  submitProfile,
   setProfileForm,
   submitPassword,
   goToPersonalInfo,
@@ -52,22 +42,12 @@ export default function OnboardingContent({
   avatarError,
 }) {
   const avatarInputRef = useRef(null);
-  const indexInputRef = useRef(null);
-  const indexCursorRef = useRef(null);
   const [confettiActive, setConfettiActive] = useState(false);
 
   useEffect(() => {
     if (completionSummary) setConfettiActive(true);
   }, [completionSummary]);
 
-  // Restore cursor after React re-renders the formatted index number value.
-  useLayoutEffect(() => {
-    if (indexCursorRef.current !== null && indexInputRef.current) {
-      const pos = indexCursorRef.current;
-      indexCursorRef.current = null;
-      indexInputRef.current.setSelectionRange(pos, pos);
-    }
-  });
 
   const formatPlanAmount = (amount) => {
     const value = Number(amount || 0);
@@ -184,51 +164,6 @@ export default function OnboardingContent({
                 />
               </div>
 
-              <div className="form-group auth-onboarding-span-two">
-                <label htmlFor="onboarding-index">Index / Application No.</label>
-                <input
-                  id="onboarding-index"
-                  ref={indexInputRef}
-                  value={profileForm.index_number}
-                  onChange={(e) => {
-                    const selStart = e.target.selectionStart;
-                    // Count raw (alphanumeric) chars before the cursor so we can
-                    // map it back to the right position in the formatted string.
-                    const rawBefore = e.target.value.slice(0, selStart).replace(/[^A-Z0-9]/gi, '').length;
-                    const formatted = formatIndexNumberInput(e.target.value);
-                    let rawCount = 0;
-                    let newCursor = formatted.length;
-                    for (let i = 0; i <= formatted.length; i++) {
-                      if (rawCount >= rawBefore) { newCursor = i; break; }
-                      if (i < formatted.length && /[A-Z0-9]/i.test(formatted[i])) rawCount++;
-                    }
-                    indexCursorRef.current = newCursor;
-                    setProfileForm((prev) => ({ ...prev, index_number: formatted }));
-                  }}
-                  onKeyDown={(e) => {
-                    if (e.key !== 'Backspace') return;
-                    const input = e.currentTarget;
-                    const cursorAtEnd = input.selectionStart === input.value.length && input.selectionEnd === input.value.length;
-                    if (!cursorAtEnd || !profileForm.index_number.endsWith('/')) return;
-                    e.preventDefault();
-                    const nextRawValue = profileForm.index_number.slice(0, -2);
-                    setProfileForm((prev) => ({
-                      ...prev,
-                      index_number: formatIndexNumberInput(nextRawValue),
-                    }));
-                  }}
-                  style={{ textTransform: 'uppercase' }}
-                  placeholder={`e.g. ${indexExample}`}
-                  inputMode="text"
-                  autoCapitalize="characters"
-                  autoCorrect="off"
-                  spellCheck="false"
-                  maxLength={19}
-                  required
-                  disabled={processing}
-                />
-              </div>
-
               {needsPasswordInPersonal ? (
                 <>
                   <div className="auth-onboarding-span-two onboarding-section-label">
@@ -302,187 +237,11 @@ export default function OnboardingContent({
       );
     }
 
-    return (
-      <form onSubmit={submitProfile} className="auth-onboarding-form">
-        <div className="auth-onboarding-grid">
-          <div className="auth-onboarding-span-two onboarding-section-label">
-            <span>Institution</span>
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="onboarding-affiliate-university">Affiliated University</label>
-            <select
-              id="onboarding-affiliate-university"
-              value={profileForm.affiliate_university}
-              onChange={(e) => {
-                const nextUniversity = e.target.value;
-                setProfileForm((prev) => {
-                  const preserveCollege = selectedCollege?.affiliate_university === nextUniversity;
-                  return {
-                    ...prev,
-                    affiliate_university: nextUniversity,
-                    institution_id: preserveCollege ? prev.institution_id : '',
-                    institution: preserveCollege ? prev.institution : '',
-                    program: preserveCollege ? prev.program : '',
-                    academic_program: preserveCollege ? prev.academic_program : '',
-                  };
-                });
-              }}
-              required
-              disabled={processing}
-            >
-              <option value="">Select university</option>
-              {universities.map((option) => (
-                <option key={option.value || option.label} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="onboarding-college">College</label>
-            <select
-              id="onboarding-college"
-              value={profileForm.institution_id}
-              onChange={(e) => {
-                const selectedId = e.target.value;
-                const nextCollege = colleges.find((item) => String(item.id) === String(selectedId));
-                setProfileForm((prev) => ({
-                  ...prev,
-                  institution_id: selectedId,
-                  institution: nextCollege?.name || '',
-                  affiliate_university: String(nextCollege?.affiliate_university || '').trim(),
-                  program: '',
-                  academic_program: '',
-                }));
-              }}
-              required
-              disabled={processing}
-            >
-              <option value="">
-                {collegesLoading ? 'Loading...' : 'Select college'}
-              </option>
-              {collegeOptions.map((college) => (
-                <option key={college.id} value={college.id}>
-                  {college.name}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          {selectedCollege?.notes?.length ? (
-            <div className="auth-onboarding-span-two">
-              <p className="auth-onboarding-hint">{selectedCollege.notes.join(' · ')}</p>
-            </div>
-          ) : null}
-
-          <div className="auth-onboarding-span-two onboarding-section-label">
-            <span>Programme</span>
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="onboarding-program">Category</label>
-            <select
-              id="onboarding-program"
-              value={profileForm.program}
-              onChange={(e) => setProfileForm((prev) => ({
-                ...prev,
-                program: e.target.value,
-                academic_program: '',
-              }))}
-              required
-              disabled={processing || !selectedCollege}
-            >
-              <option value="">Select category</option>
-              {programCategoryOptions.map((category) => (
-                <option key={category.code || category.name} value={category.name}>
-                  {category.name}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="onboarding-academic-program">Programme</label>
-            <select
-              id="onboarding-academic-program"
-              value={profileForm.academic_program}
-              onChange={(e) => setProfileForm((prev) => ({ ...prev, academic_program: e.target.value }))}
-              required
-              disabled={processing || !profileForm.program}
-            >
-              <option value="">Select programme</option>
-              {academicProgramOptions.map((programOption) => (
-                <option
-                  key={programOption.id || programOption.key || programOption.name}
-                  value={programOption.name}
-                >
-                  {programOption.name}
-                  {programOption.is_placeholder ? ' (general track)' : ''}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div className="auth-onboarding-span-two onboarding-section-label">
-            <span>Standing</span>
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="onboarding-level">Level</label>
-            <select
-              id="onboarding-level"
-              value={profileForm.level}
-              onChange={(e) => setProfileForm((prev) => ({ ...prev, level: e.target.value }))}
-              required
-              disabled={processing}
-            >
-              <option value="">Select level</option>
-              <option value="100">100</option>
-              <option value="200">200</option>
-              <option value="300">300</option>
-              <option value="400">400</option>
-              <option value="graduate">Graduate</option>
-            </select>
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="onboarding-semester">Semester</label>
-            <select
-              id="onboarding-semester"
-              value={profileForm.semester}
-              onChange={(e) => setProfileForm((prev) => ({ ...prev, semester: e.target.value }))}
-              required
-              disabled={processing}
-            >
-              <option value="">Select semester</option>
-              <option value="1">Semester 1</option>
-              <option value="2">Semester 2</option>
-            </select>
-          </div>
-
-        </div>
-
-        <div className="auth-actions">
-          <button
-            className="auth-btn secondary auth-back-btn"
-            type="button"
-            onClick={(event) => {
-              event.preventDefault();
-              event.stopPropagation();
-              goToPersonalInfo();
-            }}
-            disabled={processing}
-          >
-            <FiArrowLeft aria-hidden />
-          </button>
-          <button className="auth-btn primary" type="submit" disabled={processing}>
-            {processing ? 'Saving...' : 'Continue'}
-          </button>
-        </div>
-      </form>
-    );
+    // No academic step at sign-up. §13.6 progressive onboarding: a name gets a
+    // learner into the app, and their class is asked for once, the first time
+    // they open class content (ClassPlacementPrompt). Collecting college,
+    // programme, level, semester and index number here was the tertiary flow.
+    return null;
   }
 
   if (currentStep === ONBOARDING_STEPS.PASSWORD) {

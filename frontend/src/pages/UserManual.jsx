@@ -13,184 +13,138 @@ import './SharedPages.css';
 /* ─── Feature card data ─────────────────────────────────────────────────── */
 const ALL_FEATURES = [
   {
-    id: 'search',
-    icon: FiSearch,
-    label: 'Search',
-    tagline: 'Find anything instantly',
-    description:
-      'The global search bar at the top of every page lets you search across courses, notes, lessons, past questions, and articles all at once.',
-    howTo: [
-      'Type a course name, code, or topic in the search bar.',
-      'Filter results by type — Notes, Lessons, Past Questions, or Articles.',
-      'Tap a result to open it directly.',
-    ],
-    tips: 'Searching by course code (e.g. "MTH 101") gives the most precise results.',
-    href: '/',
-  },
-  {
-    id: 'courses',
-    icon: FiBookOpen,
-    label: 'Courses',
-    tagline: 'Your full academic catalogue',
-    description:
-      'Browse every course available on Learnda, organised by programme, level, and semester. Each course page shows its lessons, notes, past questions, and study resources.',
-    howTo: [
-      'Go to Courses from the main navigation.',
-      'Filter by programme, level (100–500), or semester to narrow results.',
-      'Open a course to see all its available content.',
-      'Add extra courses to your profile from Settings → Your Courses.',
-    ],
-    tips: 'Your programme courses load automatically in your PLS — you only need to add courses you take outside your programme.',
-    href: '/learn',
-  },
-  {
     id: 'learn',
-    icon: FiFolder,
-    label: 'Learn & Practice',
-    tagline: 'Your courses and tests',
+    icon: FiBookOpen,
+    label: 'Learn',
+    tagline: 'Your subjects, for your class',
     description:
-      'Learn and Practice are your study home. Learn brings together your current programme courses and lessons; Practice holds your quizzes and past questions so you can pick up where you left off.',
+      'Learn shows the subjects your class studies. Kindergarten learners see Learning Areas with pictures and audio; Basic, JHS and SHS learners see their subjects for the year.',
     howTo: [
-      'Open Learn from the sidebar or bottom nav to see all your current courses — tap one to continue.',
-      'Open Practice to see your attempted tests and start new ones.',
-      'Your progress, XP level, and streak show as you study.',
+      'Open Learn from the bottom navigation.',
+      'Tap a subject to see its lessons.',
+      'In Kindergarten and Basic, tap the speaker icon to hear a subject read aloud.',
     ],
-    tips: 'Add extra courses from Settings → Your Courses and they will appear in Learn and Practice automatically.',
+    tips: 'Your subjects come from your class. There is nothing to add or remove.',
     href: '/learn',
   },
   {
-    id: 'groups',
-    icon: FiUsers,
-    label: 'Study Groups',
-    tagline: 'Study together, achieve more',
-    description:
-      'Study groups let you collaborate in real time with classmates. Each group has a shared chat room where you can send messages, share files, and coordinate study sessions.',
-    howTo: [
-      'Go to Study Groups and search for a group by course name or group title.',
-      'Click Join — open groups accept you immediately.',
-      'Inside the group room, send messages and share files with members.',
-      'Start your own group from the Study Groups page by filling in the group details and selecting a course.',
-    ],
-    tips: 'Groups tied to a specific course show how many members are currently active — choose busier groups for faster responses.',
-    href: '/groups',
-  },
-  {
-    id: 'eduvhibe',
+    id: 'classes',
     icon: FiLayers,
-    label: 'Eduvhibe',
-    tagline: 'UCC-focused learning hub',
+    label: 'Your class',
+    tagline: 'One class per school year',
     description:
-      'Eduvhibe is Learnda\'s dedicated section for UCC students. It brings together curated notes, YouTube video tutorials, academic survival guides, and a CGPA calculator in one focused space.',
+      'Learnda follows the real school timeline from KG 1 to SHS 3. You study your own class, you can revise every class you have already passed, and classes ahead of you stay locked until the next school year.',
     howTo: [
-      'Open Eduvhibe from the main navigation.',
-      'Notes tab: browse and download course notes by level (100–400). Search by title.',
-      'Videos tab: watch curated YouTube tutorials filtered by level. Click a card to play.',
-      'Survival Guides tab: read academic strategy articles filtered by category (Academic, Lifestyle, Career, Tech, Campus Hacks).',
-      'CGPA tab: add courses with their credit hours and letter grades to calculate your semester and cumulative GPA. You can clear a semester and re-enter at any time.',
+      'Your class is set once, when you first open Learn.',
+      'Use the class strip at the top of Learn or Practice to revise an earlier class.',
+      'Classes above yours show a padlock and open next academic year.',
     ],
-    tips: 'The CGPA calculator is for personal use — results are not saved to the server, so keep a copy if you want to refer back later.',
-    href: '/eduvhibe',
-  },
-  {
-    id: 'contribute',
-    icon: FiUploadCloud,
-    label: 'Create Content',
-    tagline: 'Share knowledge, earn rewards',
-    description:
-      'Learnda is creator-powered. Create files, video lessons, survival guides, articles, stories, quotes, fun facts, and jokes for learners across the platform.',
-    howTo: [
-      'Go to Create Content from the menu and choose the content format that fits your idea.',
-      'Upload content — notes as PDF, video lessons as links or direct uploads, articles as rich text.',
-      'Content is reviewed before going live.',
-      'Track your submissions after review and improve the next upload from learner engagement.',
-    ],
-    tips: 'Content tagged to specific courses and levels gets significantly more views than untagged uploads.',
-    href: '/contribute',
-  },
-  {
-    id: 'settings',
-    icon: FiSettings,
-    label: 'Settings',
-    tagline: 'Manage your account and courses',
-    description:
-      'Settings is where you control your profile, custom course enrolment, contribution plan, payout details, password, and display preferences.',
-    howTo: [
-      'Profile tab: update your name and profile photo, and manage your custom course list.',
-      'Your Courses: add extra courses via the course picker or remove ones you added yourself.',
-      'Academic info (Institution, Programme, Level) is locked after onboarding — contact support to correct it.',
-      'Account tab: view and change your contribution plan, update your payout contact number, and change your password.',
-      'Preferences tab: switch between Light, Dark, and Auto theme. Toggle interface sounds.',
-    ],
-    tips: 'Adding extra courses in Settings → Your Courses makes them appear in the Study, Practice, and Groups tabs of your PLS.',
-    href: '/settings',
+    tips: 'You move up automatically when the school year turns — there is nothing to do.',
   },
   {
     id: 'practice',
     icon: FiZap,
     label: 'Practice',
-    tagline: 'Test yourself, track progress',
+    tagline: 'Questions for your class',
     description:
-      'The Practice section lets you attempt past questions and test sessions by course. See your scores, review correct answers, and build exam confidence over repeated attempts.',
+      'Practice sets follow the same class rules as lessons. Basic learners get short, gentle question sets with no pressure. JHS and SHS learners get full practice and exam preparation.',
     howTo: [
-      'Open Practice from the navigation.',
-      'Select a course to see available test items.',
-      'Attempt questions and get feedback on your answers.',
-      'Your attempt history is visible in the Practice tab of your PLS.',
+      'Open Practice from the bottom navigation.',
+      'Choose a subject and work through its question set.',
+      'Revise an earlier class using the class strip.',
     ],
-    tips: 'Revisiting past questions from multiple semesters is one of the most effective ways to prepare for exams.',
+    tips: 'Kindergarten has no tests. Learning at that age is for playing, listening and exploring.',
     href: '/practice',
   },
   {
-    id: 'rewards',
-    icon: FiAward,
-    label: 'Rewards',
-    tagline: 'Earn XP, badges, and streak rewards',
+    id: 'my-space',
+    icon: FiFolder,
+    label: 'My Space',
+    tagline: 'Everything you saved',
     description:
-      'Learnda has two reward tracks. The XP system levels you up (Newcomer to Grandmaster) and unlocks badges as you reach milestones. The cash rewards system pays out for maintaining a 7-day streak and referring friends. Contributing content earns you XP — not cash.',
+      'My Space holds the lessons and files you have saved, organised into folders you create.',
     howTo: [
-      'XP is earned automatically each time you complete a lesson, finish a practice attempt, hit a streak milestone, or get a content piece approved.',
-      'As your XP total grows, your account level increases and new badges are unlocked — view them all on the Progress page.',
-      'For cash rewards: maintain a 7-day learning streak to claim the streak reward from the Rewards section.',
-      'Invite friends to unlock additional claimable rewards.',
-      'Claim payouts to your registered mobile money number from Settings → Account.',
+      'Save a lesson or file while reading it.',
+      'Open My Space from the bottom navigation.',
+      'Create folders to group what you have saved.',
     ],
-    tips: 'Keep your daily streak alive — even a short session counts — because the 7-day streak reward resets if you miss a day.',
-    href: '/progress',
+    href: '/my-space',
   },
   {
-    id: 'forum',
-    icon: FiMessageSquare,
-    label: 'Community',
-    tagline: 'Chat live with the whole community',
+    id: 'search',
+    icon: FiSearch,
+    label: 'Search',
+    tagline: 'Find a subject or lesson',
     description:
-      'The Community is a shared real-time chat space for all Learnda students. Send text messages, share voice notes, attach files, and react to messages. External links are blocked to keep the space focused.',
+      'Search looks across the subjects and lessons available to your class. It will never return content from a class above yours.',
     howTo: [
-      'Go to Community Forum from the navigation.',
-      'Type a message in the chat input and press Send.',
-      'Hold the mic button to record a voice note.',
-      'Use the paperclip icon to attach a file or image.',
-      'Use the emoji button to open the emoji picker and react to messages.',
-      'The Members panel on the right shows who is in the community and their online status.',
+      'Type a subject or topic in the search bar at the top of any page.',
+      'Tap a result to open it.',
     ],
-    tips: 'The Info panel on the right has quick links to Learn, Practice, and Groups — handy for jumping to content mid-conversation.',
-    href: '/forum',
   },
   {
     id: 'progress',
     icon: FiBarChart2,
     label: 'Progress',
-    tagline: 'See how far you\'ve come',
+    tagline: 'Points, stages and streaks',
     description:
-      'The Progress page shows your full learning profile — XP total, account level (Newcomer to Grandmaster), current streak, lessons and practice completed, and every badge you\'ve earned or are working towards.',
+      'You earn Learning Points as you study. Points move you through Stages, from Beginner to Master Learner, and a day streak counts the days you keep learning.',
     howTo: [
-      'Open Progress from the navigation.',
-      'The top section shows your XP, current level name, and how close you are to the next level.',
-      'Scroll down to see your badges — both earned and locked. Click a badge to see what it stands for and how to earn it.',
-      'Your streak history and lesson/practice completion counts are shown in the stats section.',
-      'The leaderboard shows how your XP ranking compares to other students.',
+      'Complete lessons and practice sets to earn Learning Points.',
+      'Open Progress to see your Stage and your streak.',
     ],
-    tips: 'Badges have different rarity tiers — Common, Uncommon, Rare, Epic, and Legendary. Rarer badges award more bonus XP when unlocked.',
+    tips: 'Stages are about your own learning, not a competition with other learners.',
     href: '/progress',
+  },
+  {
+    id: 'groups',
+    icon: FiUsers,
+    label: 'Study groups',
+    tagline: 'Study together, JHS and SHS',
+    description:
+      'Study groups let JHS and SHS learners work through a subject together. They are not available in Kindergarten or Basic school.',
+    howTo: [
+      'Open a subject and choose its study group.',
+      'Post questions and answers for your classmates.',
+    ],
+  },
+  {
+    id: 'forum',
+    icon: FiMessageSquare,
+    label: 'Community',
+    tagline: 'Ask and answer, JHS and SHS',
+    description:
+      'The community is a moderated space for JHS and SHS learners to ask questions about their subjects.',
+    howTo: [
+      'Open Community from the More menu.',
+      'Ask a question or answer one.',
+    ],
+  },
+  {
+    id: 'create',
+    icon: FiUploadCloud,
+    label: 'Contribute',
+    tagline: 'Share what you know',
+    description:
+      'Teachers and approved contributors can submit lessons and practice questions for a subject and class.',
+    howTo: [
+      'Open Contribute and choose a subject and class.',
+      'Submit your material for review before it is published.',
+    ],
+    href: '/create',
+  },
+  {
+    id: 'settings',
+    icon: FiSettings,
+    label: 'Settings',
+    tagline: 'Your account',
+    description:
+      'Update your name, photo and contact details. Your class is shown here but cannot be edited.',
+    howTo: [
+      'Open Settings from the More menu.',
+      'Edit your profile details and save.',
+    ],
+    href: '/settings',
   },
 ];
 
@@ -210,193 +164,109 @@ const ALL_SECTIONS = [
     items: [
       {
         q: 'How do I create an account?',
-        a: 'Click "Get Started" on any page. You\'ll be guided through choosing your institution, programme, and a study plan. Your academic level and programme are set here and cannot be changed later without contacting support.',
+        a: 'Tap "Get Started" on any page and sign up with your phone number or email. You only need your name to get in — you choose your class the first time you open Learn.',
       },
       {
-        q: 'How do I choose the right plan?',
-        a: 'Learnda has three contribution levels: Free Learner (free), Helper, and Hero. Free Learner gives access to the core learning workflow. Helper and Hero unlock more lessons, deeper practice content, and greater contributor access. Visit Contribution Plans to compare in detail.',
+        q: 'Which class should I choose?',
+        a: 'Choose the class you are actually in at school this year, from KG 1 to SHS 3. Your lessons and practice all come from that class, so it needs to be right.',
       },
       {
-        q: 'Can I change my plan later?',
-        a: 'Yes — upgrade or downgrade at any time from Settings → Account. Changes take effect on your next billing cycle.',
+        q: 'I chose the wrong class. Can I change it?',
+        a: 'Not by yourself. Your class moves up automatically each school year, so it is not something you set again. If it is wrong, ask a parent or your school to correct it for you.',
       },
       {
-        q: 'Why is my level locked in Settings?',
-        a: 'Your academic level (100, 200, etc.) is tied to your onboarding profile and controls which courses and resources load automatically in your PLS. It is locked to prevent accidental data mismatches. If you need it corrected, contact support with your index number.',
-      },
-      {
-        q: 'How do I set up my profile?',
-        a: 'Go to Settings → Profile. You can update your name and profile photo here. Academic details (institution, programme, level) are read-only and were set during onboarding.',
+        q: 'I am in SHS. What is a learning area?',
+        a: 'Your learning area is the pathway you are offering — Science, General Arts, Business, Applied Technology, Home Economics, Art, Agriculture, Languages, or STEM. It decides which elective subjects you study alongside your core subjects.',
       },
     ],
   },
   {
-    id: 'content',
-    title: 'Finding and using content',
+    id: 'classes-and-content',
+    title: 'Classes and content',
     items: [
       {
-        q: 'How do I find content for my course?',
-        a: 'Use the search bar at the top of any page and type your course name or code (e.g. "MTH 101"). You can also browse by programme from the Courses section, or go directly to Eduvhibe for notes, video tutorials, and guides specific to UCC.',
+        q: 'Why can I not see the next class?',
+        a: 'Learnda follows the real school timeline. You study your own class, and classes above yours stay locked until the next academic year. This is deliberate — it keeps you learning at the right level instead of jumping ahead.',
       },
       {
-        q: 'What types of content are available?',
-        a: 'Learnda hosts past questions, course notes, lesson walkthroughs, YouTube video tutorials (via Eduvhibe), academic survival guides, educative articles, and practice test sessions — all organised by course, level, and semester.',
+        q: 'Can I go back to an earlier class?',
+        a: 'Yes. Every class you have already passed stays open for revision. Use the class strip at the top of Learn or Practice and pick an earlier class.',
       },
       {
-        q: 'Can I download notes?',
-        a: 'Yes — notes on the platform can be downloaded to your device. On Eduvhibe, note cards have a download button that initiates a short countdown before saving the file.',
+        q: 'When do I move up a class?',
+        a: 'At the start of each academic year, in September. It happens automatically — you will see a short message welcoming you to your new class.',
       },
       {
-        q: 'Where does saved content appear?',
-        a: 'Content you interact with — courses you study and practice sessions you attempt — is reflected in your PLS under the Study and Practice tabs.',
+        q: 'Why do I see different subjects from my friend?',
+        a: 'Subjects come from your class. A Basic 3 learner and a JHS 1 learner study different subjects. In SHS, your learning area also changes which electives you see.',
       },
     ],
   },
   {
-    id: 'pls',
-    title: 'Personal Learning Space (PLS)',
+    id: 'kindergarten',
+    title: 'For Kindergarten and parents',
     items: [
       {
-        q: 'What is the Personal Learning Space?',
-        a: 'PLS is your private study dashboard. It has two tabs — Study and Practice — and shows your current courses and test attempt history in one place. Your XP level and streak are displayed at the top.',
+        q: 'Are there tests in Kindergarten?',
+        a: 'No. There are no exams and no quizzes in KG 1 or KG 2. Learning at that age is for listening, looking and playing, so Practice does not appear at all.',
       },
       {
-        q: 'How are my courses loaded into PLS?',
-        a: 'Your programme courses load automatically based on your institution, programme, and level set during onboarding. If you study courses outside your programme, add them in Settings → Your Courses and they will appear across the Study and Practice tabs.',
+        q: 'My child cannot read yet. Can they still use Learnda?',
+        a: 'Yes. Kindergarten uses big pictures and audio. Tap the speaker icon on any Learning Area to hear its name read aloud, and lessons are audio-first.',
       },
       {
-        q: 'How do I add extra courses to my PLS?',
-        a: 'Go to Settings → Your Courses, then click "Add Course". A picker opens where you can search by course name or code and filter by programme, level, and semester. Added courses appear in your PLS immediately.',
-      },
-      {
-        q: 'Can I remove a course from my PLS?',
-        a: 'You can remove courses that you manually added — they will have a remove button (×) in the Your Courses section of Settings. Courses automatically assigned by your programme cannot be removed, as they are tied to your academic profile.',
-      },
-      {
-        q: 'What are streaks?',
-        a: 'Streaks track consecutive days of learning activity. They build a daily study habit and award XP towards your account level. A 7-day streak also unlocks a claimable cash reward from the Rewards section. Missing a day resets your streak.',
-      },
-      {
-        q: 'What does the Practice tab show?',
-        a: 'The Practice tab in PLS shows your previous test attempts — which courses you practised and your recent scores. You can jump back into a course\'s practice set directly from there.',
+        q: 'Can my child chat with other users?',
+        a: 'No. Community and messaging are switched off entirely for Kindergarten and Basic school learners.',
       },
     ],
   },
   {
-    id: 'eduvhibe',
-    title: 'Eduvhibe',
+    id: 'progress',
+    title: 'Progress and awards',
     items: [
       {
-        q: 'What is Eduvhibe?',
-        a: 'Eduvhibe is Learnda\'s dedicated learning hub for UCC students. It brings together curated course notes, YouTube video tutorials, academic strategy guides, and a CGPA calculator — all in one focused section accessible from the main navigation.',
+        q: 'What are Learning Points?',
+        a: 'You earn Learning Points for finishing lessons and practice sets. They add up over time and move you through Stages.',
       },
       {
-        q: 'How do I find notes on Eduvhibe?',
-        a: 'Open Eduvhibe and go to the Notes tab. You can search by title or filter by level (100–400). Notes are uploaded by creators and approved before going live. Click a note card to preview or download it.',
+        q: 'What are Stages?',
+        a: 'Stages run from Beginner to Master Learner and show how much you have studied on Learnda. They are separate from your class at school — a Basic 2 learner and an SHS 2 learner can both be at any Stage.',
       },
       {
-        q: 'How does the CGPA calculator work?',
-        a: 'Go to Eduvhibe → CGPA tab. Add each course you took in a semester — enter the course name, credit hours, letter grade, and grade points. The calculator shows your semester GPA and cumulative GPA across all semesters. You can import results in bulk or clear a semester and re-enter.',
-      },
-      {
-        q: 'Who can upload content to Eduvhibe?',
-        a: 'Creators and admins can upload notes and add video links. If you have creator access, open the Notes or Videos tab and click "Upload Note" or "Add Video". Content is tagged to Eduvhibe so it appears in the right tab automatically.',
-      },
-      {
-        q: 'Are the videos hosted on Learnda?',
-        a: 'No — Eduvhibe videos are YouTube links. Creators paste a valid YouTube URL when adding a video. The platform extracts the video ID to display a thumbnail and embeds the video in a player modal when clicked.',
-      },
-    ],
-  },
-  {
-    id: 'courses-enrollment',
-    title: 'Your Courses',
-    items: [
-      {
-        q: 'What is the "Your Courses" section in Settings?',
-        a: 'This section in Settings → Your Courses shows the extra courses you have manually added. It is where you manage your personal course list on top of the courses your programme assigns automatically.',
-      },
-      {
-        q: 'How do I add a course that isn\'t in my programme?',
-        a: 'In Settings → Your Courses, click "Add Course". A picker modal opens. Search by title, code, or department. Use the Programme, Level, and Semester filters for precision. Click the + button on any course to add it.',
-      },
-      {
-        q: 'Will added courses affect my whole PLS or just one tab?',
-        a: 'Added courses appear across both PLS tabs — Study shows lessons for those courses and Practice includes their past questions. It is a full integration across the dashboard.',
-      },
-      {
-        q: 'What happens when I remove a custom course?',
-        a: 'It disappears from all PLS tabs immediately. Your programme\'s automatic courses are not affected. You can re-add it at any time from the course picker.',
+        q: 'What is a day streak?',
+        a: 'It counts the days in a row you have learnt something. Missing a day resets it, and that is fine — it is meant to encourage you, not to worry you.',
       },
     ],
   },
   {
     id: 'community',
-    title: 'Community and groups',
+    title: 'Study groups and community',
     items: [
       {
-        q: 'How do I join a study group?',
-        a: 'Go to Study Groups, search for a group by course name or group title, and click Join. Open groups accept you immediately. Once inside the group room, you can chat with members and share files.',
+        q: 'Who can join a study group?',
+        a: 'JHS and SHS learners only. Groups are organised by subject so you study with classmates working on the same material.',
       },
       {
-        q: 'How do I create a study group?',
-        a: 'From the Study Groups page, fill in the group creation form — add a name and select the relevant course. Once created, share the group with classmates so they can join.',
-      },
-      {
-        q: 'What is the Community Forum?',
-        a: 'The Community Forum is a shared real-time chat space for all Learnda students. It is not a thread or board system — it is a single live chat where you can send text messages, voice notes, and file attachments. External links are blocked automatically to keep the space focused.',
-      },
-      {
-        q: 'Can I reply to a specific message in the community?',
-        a: 'The community chat is a continuous conversation — there are no threaded replies or message quoting. If you want to address a specific point, mention it in your message so others have context.',
-      },
-    ],
-  },
-  {
-    id: 'contributing',
-    title: 'Contributing content',
-    items: [
-      {
-        q: 'How do I create content?',
-        a: 'Visit Create Content from the menu and start uploading. Notes go as PDF files, videos as YouTube links or direct uploads, and articles as rich text. All content goes through a review before it goes live.',
-      },
-      {
-        q: 'How does creator pay work?',
-        a: 'Creators earn based on engagement — downloads, views, and interactions with their content all factor in. When your balance is ready to claim, you can request a payout to your registered mobile money number from Settings → Account.',
-      },
-      {
-        q: 'What content is accepted?',
-        a: 'Past questions, course notes, lesson recordings, video tutorials, and academic articles relevant to supported programmes. All content must be accurate, clearly sourced, and original — or properly attributed if based on existing material.',
-      },
-      {
-        q: 'Can I upload content to Eduvhibe directly?',
-        a: 'Yes, if you have creator or admin access. Open Eduvhibe, go to the Notes or Videos tab, and use the Upload or Add Video button that appears for creators. The content is automatically tagged to appear in Eduvhibe.',
+        q: 'Why can I not see the community?',
+        a: 'Community features are limited to JHS and SHS. They are switched off for Kindergarten and Basic school to keep younger learners safe.',
       },
     ],
   },
   {
     id: 'account',
-    title: 'Account and billing',
+    title: 'Account and support',
     items: [
       {
-        q: 'How do I reset my password?',
-        a: 'Click "Forgot password" on the sign-in screen. You\'ll receive a reset link by email or SMS within a few minutes. You can also change your password directly from Settings → Account once you are signed in.',
+        q: 'How do I change my name or photo?',
+        a: 'Open Settings, edit your profile details and save. Your class is shown there but cannot be edited.',
       },
       {
-        q: 'How do I cancel or change my contribution plan?',
-        a: 'Go to Settings → Account. You can view your current plan and switch to a different level. Downgrading to Friend takes effect after your current active period ends.',
+        q: 'Does Learnda work offline?',
+        a: 'Yes. Lessons you have opened stay available without a connection, at every level.',
       },
       {
-        q: 'How do I set up my payout details?',
-        a: 'Go to Settings → Account and enter your mobile money number. The platform detects your network (MTN, Telecel, AT) automatically. Use this number to receive cash rewards from the streak and invite programmes.',
-      },
-      {
-        q: 'I was charged incorrectly. What do I do?',
-        a: 'Contact support via the Contact page with your account email and a description of the charge. We investigate and resolve billing issues within 48 hours.',
-      },
-      {
-        q: 'How do I change my institution or programme?',
-        a: 'Institution, programme, and level are locked after onboarding because they control which courses load automatically in your PLS. Contact support with your index number and the correction needed — we will update it manually.',
+        q: 'Something is wrong. How do I report it?',
+        a: 'Use the Report an issue button at the top of this page, or contact support directly.',
       },
     ],
   },
@@ -502,8 +372,8 @@ export default function UserManual() {
               Everything you need to get the most out of Learnda.
             </h1>
             <p className="hero-subtitle">
-              Step-by-step answers for every part of the platform — from creating an account and adding
-              courses to contributing content and managing your subscription.
+              Step-by-step answers for every part of Learnda — from choosing your class to
+              revising an earlier year and keeping track of your progress.
             </p>
             <div className="hero-actions">
               <button className="btn btn-primary" type="button" onClick={() => navigate('/contact')}>

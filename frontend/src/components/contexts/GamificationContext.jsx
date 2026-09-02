@@ -20,7 +20,7 @@ export const GamificationProvider = ({ children }) => {
   const [xp, setXp] = useState(0);
   const [level, setLevel] = useState(1);
   const [streak, setStreak] = useState(() => {
-    try { return Number(localStorage.getItem('shr_streak') || 0); } catch { return 0; }
+    try { return Number(localStorage.getItem('learnda_streak') || 0); } catch { return 0; }
   });
   const [leaderboardRank, setLeaderboardRank] = useState(null);
   const [badges, setBadges] = useState([]);
@@ -47,7 +47,7 @@ export const GamificationProvider = ({ children }) => {
     setBadges([]);
     setEarnedBadges([]);
     setError(null);
-    try { localStorage.removeItem('shr_streak'); } catch {
+    try { localStorage.removeItem('learnda_streak'); } catch {
       // Local storage can be unavailable in privacy-restricted contexts.
     }
   }, [user]);
@@ -68,7 +68,7 @@ export const GamificationProvider = ({ children }) => {
         setLevel(Number(response.level ?? 1) || 1);
         const newStreak = Number(response.streak ?? 0) || 0;
         setStreak(newStreak);
-        try { localStorage.setItem('shr_streak', String(newStreak)); } catch {
+        try { localStorage.setItem('learnda_streak', String(newStreak)); } catch {
           // Local storage can be unavailable in privacy-restricted contexts.
         }
         prevStreakRef.current = newStreak;
@@ -165,7 +165,7 @@ export const GamificationProvider = ({ children }) => {
     }
     if (Number.isFinite(newStreak) && newStreak >= 0) {
       setStreak(newStreak);
-      try { localStorage.setItem('shr_streak', String(newStreak)); } catch {
+      try { localStorage.setItem('learnda_streak', String(newStreak)); } catch {
         // Local storage can be unavailable in privacy-restricted contexts.
       }
     }

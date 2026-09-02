@@ -129,14 +129,19 @@ const getMonthlySpotlightWindow = (now = new Date()) => {
 const formatSpotlightDate = (date) =>
   date ? date.toISOString().slice(0, 10) : null;
 
-const formatSpotlightUser = (user = {}) => ({
-  id: user.id || null,
-  name: user.full_name || 'Learnda learner',
-  college: user.institution || user.institutionProfile?.name || 'Learnda community',
-  program: user.program || user.programme_category || 'Learning community',
-  level: user.level ? (/level/i.test(String(user.level)) ? String(user.level) : `Level ${user.level}`) : 'Level 100',
-  image: user.avatar_url || null,
-});
+const formatSpotlightUser = (user = {}) => {
+  const profile = user.academic_profile || null;
+  const classLevel = profile?.class_level || null;
+  return {
+    id: user.id || null,
+    name: user.full_name || 'Learnda learner',
+    // A learner's public identity is their class, not an institution (§1.2).
+    class_level: classLevel,
+    class_label: classLevel ? getClassLevel(classLevel)?.label || classLevel : null,
+    level_group: profile?.level_group || null,
+    image: user.avatar_url || null,
+  };
+};
 
 const getSpotlightShareUrl = (awardId) => `/home?spotlight=${encodeURIComponent(awardId)}`;
 
@@ -448,7 +453,7 @@ router.get('/spotlights', optionalAuth, async (req, res) => {
         {
           model: User,
           as: 'user',
-          attributes: ['id', 'full_name', 'avatar_url', 'institution', 'program', 'programme_category', 'level'],
+          attributes: ['id', 'full_name', 'avatar_url'],
         },
       ],
       order: [
@@ -482,7 +487,7 @@ router.get('/spotlights', optionalAuth, async (req, res) => {
 
     // Fetch published content in monthly window from all_content view, joined with creator and stats
     const publishedContentRaw = await gamSeq.query(
-      `SELECT ac.*, u.id AS creator_id_u, u.full_name, u.avatar_url, u.institution, u.program, u.programme_category, u.level AS user_level,
+      `SELECT ac.*, u.id AS creator_id_u, u.full_name, u.avatar_url,
               cs.total_views, cs.like_count, cs.save_count, cs.total_completions
        FROM all_content ac
        LEFT JOIN users u ON u.id = ac.creator_id
@@ -498,7 +503,7 @@ router.get('/spotlights', optionalAuth, async (req, res) => {
     const publishedContent = publishedContentRaw.map((row) => ({
       id: row.id,
       creator_id: row.creator_id,
-      creator: row.full_name ? { id: row.creator_id, full_name: row.full_name, avatar_url: row.avatar_url, institution: row.institution, program: row.program, programme_category: row.programme_category, level: row.user_level } : null,
+      creator: row.full_name ? { id: row.creator_id, full_name: row.full_name, avatar_url: row.avatar_url } : null,
       stats: { total_views: row.total_views || 0, like_count: row.like_count || 0, save_count: row.save_count || 0, total_completions: row.total_completions || 0 },
       comments: [],
     }));

@@ -15,8 +15,6 @@ import ContributionAppeal from '../subscription/ContributionAppeal';
 import {
   getProgramCategoryCode,
   buildIndexNumberExample,
-  deriveCollegeCode,
-  formatIndexNumberInput,
 } from '../../utils/studentIdentity';
 import './Auth.css';
 
@@ -33,7 +31,7 @@ const STEP_TITLES = {
 };
 
 const STEP_DESCRIPTIONS = {
-  [ONBOARDING_STEPS.PROFILE]: 'Enter your full name and student index number.',
+  [ONBOARDING_STEPS.PROFILE]: 'Enter your full name.',
   [ONBOARDING_STEPS.PASSWORD]: 'Create a strong password to secure your account.',
   [ONBOARDING_STEPS.PLAN]: 'Choose a plan that fits how seriously you want to study.',
 };
@@ -197,17 +195,8 @@ function resolveOnboardingError(errorStr) {
   if ((e.includes('full_name') || e.includes('full name') || e.includes('name')) && e.includes('required')) {
     return { message: 'Please enter your full name to continue.' };
   }
-  if ((e.includes('institution') || e.includes('college')) && e.includes('required')) {
-    return { message: 'Please select your college or institution to continue.' };
-  }
-  if (e.includes('index') && (e.includes('invalid') || e.includes('format') || e.includes('wrong'))) {
-    return { message: 'That index number format looks wrong. Check it and try again.' };
-  }
-  if (e.includes('program') && e.includes('required')) {
-    return { message: 'Please select your programme to continue.' };
-  }
-  if (e.includes('level') && e.includes('required')) {
-    return { message: 'Please select your level of study to continue.' };
+  if (e.includes('class_level') || e.includes('class level')) {
+    return { message: 'Please choose the class you are in to continue.' };
   }
 
   // ── Password stage ──
@@ -279,17 +268,9 @@ export default function AuthOnboardingFlow({
   const [status, setStatus] = useState('');
   const [profileSubStep, setProfileSubStep] = useState(initialDraft?.profileSubStep || 'personal');
 
-  const [profileForm, setProfileForm] = useState({
-    full_name: '',
-    institution_id: '',
-    institution: '',
-    affiliate_university: '',
-    program: '',
-    academic_program: '',
-    level: '',
-    semester: '',
-    index_number: '',
-  });
+  // Sign-up collects a name only. Class placement happens later, the first
+  // time class content is opened (§5, §13.6).
+  const [profileForm, setProfileForm] = useState({ full_name: '' });
 
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -301,8 +282,6 @@ export default function AuthOnboardingFlow({
   const [avatarFile, setAvatarFile] = useState(null);
   const [avatarPreview, setAvatarPreview] = useState(user?.avatar_url || null);
   const [avatarError, setAvatarError] = useState('');
-  const [academicCatalog, setAcademicCatalog] = useState(null);
-  const [academicCatalogLoading, setAcademicCatalogLoading] = useState(false);
   const [completionSummary, setCompletionSummary] = useState(null);
   const [durationMonths, setDurationMonths] = useState(Number(initialDraft?.durationMonths) || 1);
   const [registrationSession, setRegistrationSession] = useState(initialRegistrationSession);
@@ -359,41 +338,14 @@ export default function AuthOnboardingFlow({
     const draftProfile = draft?.profileForm && typeof draft.profileForm === 'object'
       ? draft.profileForm
       : {};
-    const sessionProgramName = registrationSession?.program_name || '';
-    const sessionProgrammeCategory = registrationSession?.programme_category || '';
 
     setProfileForm({
       full_name: user?.full_name || user?.name || registrationSession?.full_name || draftProfile.full_name || '',
-      institution_id: user?.institution_id || registrationSession?.institution_id || draftProfile.institution_id || '',
-      institution: user?.institution || draftProfile.institution || '',
-      affiliate_university: user?.affiliate_university || registrationSession?.affiliate_university || draftProfile.affiliate_university || '',
-      program: user?.programme_category || sessionProgrammeCategory || draftProfile.program || '',
-      academic_program: user?.academic_program || sessionProgramName || draftProfile.academic_program || '',
-      level: user?.level || registrationSession?.level || draftProfile.level || '',
-      semester: user?.semester || user?.current_semester || registrationSession?.semester || draftProfile.semester || '',
-      index_number: formatIndexNumberInput(user?.index_number || registrationSession?.index_number || draftProfile.index_number || ''),
     });
   }, [
     user?.full_name,
     user?.name,
-    user?.institution_id,
-    user?.institution,
-    user?.affiliate_university,
-    user?.programme_category,
-    user?.program,
-    user?.academic_program,
-    user?.level,
-    user?.semester,
-    user?.current_semester,
-    user?.index_number,
-    registrationSession?.affiliate_university,
     registrationSession?.full_name,
-    registrationSession?.index_number,
-    registrationSession?.institution_id,
-    registrationSession?.level,
-    registrationSession?.semester,
-    registrationSession?.program_name,
-    registrationSession?.programme_category,
   ]);
 
   useEffect(() => {
@@ -481,81 +433,6 @@ export default function AuthOnboardingFlow({
     const price = Number(selectedPlan?.price || 0);
     return Number((price * durationMonths).toFixed(2));
   }, [selectedPlan?.price, durationMonths]);
-
-  const universities = useMemo(
-    () => Array.isArray(academicCatalog?.universities) ? academicCatalog.universities : [],
-    [academicCatalog]
-  );
-
-  const colleges = useMemo(
-    () => Array.isArray(academicCatalog?.colleges) ? academicCatalog.colleges : [],
-    [academicCatalog]
-  );
-
-  const selectedCollege = useMemo(
-    () => colleges.find((college) => String(college.id) === String(profileForm.institution_id)) || null,
-    [colleges, profileForm.institution_id]
-  );
-
-  const universityOptions = useMemo(() => {
-    const currentValue = String(profileForm.affiliate_university || '').trim();
-    const options = new Map();
-
-    universities.forEach((item) => {
-      const value = String(item?.name || '').trim();
-      if (!value) return;
-      options.set(value, {
-        value,
-        label: String(item?.code || item?.name || '').trim() || value,
-      });
-    });
-
-    if (currentValue && !options.has(currentValue)) {
-      options.set(currentValue, {
-        value: currentValue,
-        label: currentValue,
-      });
-    }
-
-    return Array.from(options.values());
-  }, [universities, profileForm.affiliate_university]);
-
-  const collegeOptions = useMemo(() => (
-    colleges.filter((college) => (
-      !profileForm.affiliate_university ||
-      college.affiliate_university === profileForm.affiliate_university
-    )).slice().sort((a, b) => (
-      String(a?.name || '').localeCompare(String(b?.name || ''), undefined, { sensitivity: 'base' })
-    ))
-  ), [colleges, profileForm.affiliate_university]);
-
-  const programCategoryOptions = useMemo(() => {
-    if (!selectedCollege) return [];
-    return Array.isArray(selectedCollege.programme_categories)
-      ? selectedCollege.programme_categories
-      : [];
-  }, [selectedCollege]);
-
-  const academicProgramOptions = useMemo(() => {
-    if (!profileForm.program) return [];
-    const programsByCategory = academicCatalog?.programs_by_category || {};
-    return Array.isArray(programsByCategory[profileForm.program])
-      ? programsByCategory[profileForm.program]
-      : [];
-  }, [academicCatalog, profileForm.program]);
-
-  const expectedProgramCode = useMemo(
-    () => getProgramCategoryCode(profileForm.program),
-    [profileForm.program]
-  );
-
-  const indexExample = useMemo(
-    () => buildIndexNumberExample({
-      collegeCode: deriveCollegeCode(selectedCollege),
-      programCode: expectedProgramCode
-    }),
-    [expectedProgramCode, selectedCollege]
-  );
 
   const registrationSessionPayload = useMemo(() => (
     registrationSession?.id && registrationSession?.resume_token
@@ -816,10 +693,6 @@ export default function AuthOnboardingFlow({
       setError('Please enter your full name to continue.');
       return;
     }
-    if (!profileForm.index_number.trim()) {
-      setError('Please enter your index number or application number.');
-      return;
-    }
     if (needsPasswordInPersonal) {
       if (password.length < 8) {
         setError('Password must be at least 8 characters.');
@@ -831,101 +704,9 @@ export default function AuthOnboardingFlow({
       }
     }
 
-    setProfileSubStep('academic');
+    setCurrentStep(ONBOARDING_STEPS.PLAN);
   };
 
-  const submitProfile = async (event) => {
-    event.preventDefault();
-    setCompletionSummary(null);
-    setProcessing(true);
-    setError('');
-    setStatus('');
-
-    try {
-      if (needsPasswordInPersonal) {
-        if (password.length < 8) {
-          setError('Password must be at least 8 characters.');
-          setProcessing(false);
-          return;
-        }
-        if (password !== confirmPassword) {
-          setError('Passwords do not match.');
-          setProcessing(false);
-          return;
-        }
-        await authService.createPassword(password);
-      }
-
-      if (avatarFile) {
-        try {
-          if (isRegistrationSessionMode && registrationSessionPayload) {
-            await authService.uploadRegistrationAvatar({
-              registration_session_id: registrationSessionPayload.registration_session_id,
-              resume_token: registrationSessionPayload.resume_token,
-              file: avatarFile,
-            });
-          } else {
-            const formData = new FormData();
-            formData.append('avatar', avatarFile);
-            await api.user.updateAvatar(formData);
-          }
-          setAvatarError('');
-        } catch (avatarErr) {
-          // Don't block registration — the user can set their photo from Settings later.
-          console.error('Avatar upload failed:', avatarErr);
-          setAvatarError("We couldn't upload your photo right now. You can add one from Settings after signing up.");
-          setAvatarFile(null);
-        }
-      }
-
-      const payload = {
-        full_name: profileForm.full_name.trim(),
-        role: user?.role || 'student',
-        institution_id: profileForm.institution_id || null,
-        institution: profileForm.institution.trim(),
-        affiliate_university: profileForm.affiliate_university.trim(),
-        program: profileForm.program.trim(),
-        academic_program: profileForm.academic_program.trim(),
-        level: profileForm.level.trim(),
-        semester: profileForm.semester.trim(),
-        index_number: formatIndexNumberInput(profileForm.index_number, { showTrailingSeparator: false }),
-      };
-      const response = isRegistrationSessionMode
-        ? await authService.completeRegistrationProfile({
-            ...registrationSessionPayload,
-            ...payload,
-          })
-        : await authService.completeProfile(payload);
-
-      const next = response?.next_step || ONBOARDING_STEPS.PASSWORD;
-      if (response?.registration_session) {
-        setRegistrationSession(response.registration_session);
-        mergeRegistrationSessionDraft(response.registration_session, next);
-      }
-      const normalizedNext = needsPasswordInPersonal && normalizeUiStep(next) === ONBOARDING_STEPS.PASSWORD
-        ? ONBOARDING_STEPS.PLAN
-        : normalizeUiStep(next);
-      if (!completeIfDone(normalizedNext)) {
-        setCurrentStep(normalizedNext);
-        if (normalizedNext === ONBOARDING_STEPS.PROFILE) {
-          setProfileSubStep('academic');
-        }
-      }
-      if (response?.user) {
-        await checkAuth(true);
-      }
-      if (needsPasswordInPersonal) {
-        setPassword('');
-        setConfirmPassword('');
-        setShowPassword(false);
-        setShowConfirmPassword(false);
-      }
-    } catch (err) {
-      setError(err.message || 'Failed to complete profile');
-    } finally {
-      setProcessing(false);
-    }
-  };
 
   const submitPassword = async (event) => {
     event.preventDefault();
@@ -1031,16 +812,12 @@ export default function AuthOnboardingFlow({
   };
 
   const goToPreviousStep = () => {
-    if (profileSubStep === 'academic') {
-      goToPersonalInfo();
-      return;
-    }
     if (currentStep === ONBOARDING_STEPS.PLAN) {
       setCompletionSummary(null);
       setError('');
       setStatus('');
       setCurrentStep(ONBOARDING_STEPS.PROFILE);
-      setProfileSubStep('academic');
+      setProfileSubStep('personal');
       return;
     }
     const currentIndex = STEP_SEQUENCE.indexOf(currentStep);
@@ -1059,16 +836,7 @@ export default function AuthOnboardingFlow({
       processing={processing}
       profileForm={profileForm}
       needsPasswordInPersonal={needsPasswordInPersonal}
-      universities={universityOptions}
-      selectedCollege={selectedCollege}
-      colleges={colleges}
-      collegeOptions={collegeOptions}
-      collegesLoading={academicCatalogLoading}
-      programCategoryOptions={programCategoryOptions}
-      academicProgramOptions={academicProgramOptions}
-      indexExample={indexExample}
       submitPersonalInfo={submitPersonalInfo}
-      submitProfile={submitProfile}
       setProfileForm={setProfileForm}
       submitPassword={submitPassword}
       goToPersonalInfo={goToPersonalInfo}
@@ -1101,12 +869,8 @@ export default function AuthOnboardingFlow({
 
   const resolvedError = error ? resolveOnboardingError(error) : null;
   const resolvedErrorHandler = resolvedError?.actionKey === 'freePlan' ? handleGoToHome : null;
-  const visualStepIndex = currentStep === ONBOARDING_STEPS.PLAN
-    ? 2
-    : currentStep === ONBOARDING_STEPS.PROFILE && profileSubStep === 'academic'
-      ? 1
-      : 0;
-  const visualSteps = ['Personal', 'Academic', 'Plan'];
+  const visualStepIndex = currentStep === ONBOARDING_STEPS.PLAN ? 1 : 0;
+  const visualSteps = ['Personal', 'Plan'];
 
   return (
     <div className="auth-modal auth-onboarding-modal">
@@ -1125,15 +889,9 @@ export default function AuthOnboardingFlow({
           </div>
           {currentStep === ONBOARDING_STEPS.PLAN && <ContributionAppeal />}
           <div className="auth-panel-header">
-            <h3>
-              {currentStep === ONBOARDING_STEPS.PROFILE && profileSubStep === 'academic'
-                ? 'Academic info'
-                : STEP_TITLES[currentStep] || 'Finish your setup'}
-            </h3>
+            <h3>{STEP_TITLES[currentStep] || 'Finish your setup'}</h3>
             <p>
-              {currentStep === ONBOARDING_STEPS.PROFILE && profileSubStep === 'academic'
-                ? 'Select your college, program, and year of study.'
-                : STEP_DESCRIPTIONS[currentStep] || 'Complete your account details.'}
+              {STEP_DESCRIPTIONS[currentStep] || 'Complete your account details.'}
             </p>
           </div>
         </>
