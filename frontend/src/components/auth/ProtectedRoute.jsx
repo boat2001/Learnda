@@ -3,11 +3,11 @@ import { useAuth } from '../../hooks/useAuth';
 import {
   ONBOARDING_STEPS,
   getNextOnboardingStep,
-  hasFullAcademicProfile,
+  hasClassPlacement,
 } from '../../utils/onboarding';
 import FormModal from '../common/FormModal';
 import GuestGateModal from './GuestGateModal';
-import AcademicProfileGate from './AcademicProfileGate';
+import ClassPlacementPrompt from '../../pages/learn/ClassPlacementPrompt';
 
 export default function ProtectedRoute({
   children,
@@ -17,7 +17,7 @@ export default function ProtectedRoute({
   allowIncompleteOnboarding = false,
   requiresAcademicProfile = false,
 }) {
-  const { user, isAuthenticated, loading } = useAuth();
+  const { user, isAuthenticated, loading, checkAuth } = useAuth();
   const navigate = useNavigate();
   const nextStep = getNextOnboardingStep(user);
 
@@ -38,13 +38,18 @@ export default function ProtectedRoute({
     return <Navigate to="/learn" replace />;
   }
 
-  // Progressive onboarding: programme-specific routes need a full academic
-  // profile. Instead of hard-blocking, collect the deferred details inline the
-  // first time the user opens this kind of content.
-  if (requiresAcademicProfile && !hasFullAcademicProfile(user)) {
+  // Progressive onboarding: class content needs a class (§5). Rather than
+  // hard-blocking, ask for it inline the first time such content is opened.
+  if (requiresAcademicProfile && !hasClassPlacement(user)) {
     // On success the auth store updates `user`, which re-renders this route and
     // reveals the gated content — no explicit navigation needed.
-    return <AcademicProfileGate />;
+    return (
+      <ClassPlacementPrompt
+        mode={user?.class_level ? 'pathway' : 'class'}
+        classLevel={user?.class_level || null}
+        onPlaced={() => checkAuth?.(true)}
+      />
+    );
   }
 
   if (nextStep !== ONBOARDING_STEPS.DONE && !allowIncompleteOnboarding) {

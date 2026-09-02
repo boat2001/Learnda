@@ -28,20 +28,6 @@ const normalizeItem = (item) => {
   };
 };
 
-const getAcademicFilterValue = (value) => {
-  const match = String(value || '').match(/\d+/);
-  return match?.[0] || String(value || '').trim();
-};
-
-const getCurrentLearningFilters = (user = {}, overrides = {}) => {
-  const level = getAcademicFilterValue(overrides.level || user.academic_level || user.level || user.study_level);
-  const semester = getAcademicFilterValue(overrides.semester || user.current_semester || user.semester);
-  return {
-    ...(level ? { level } : {}),
-    ...(semester ? { semester } : {}),
-  };
-};
-
 export const PLSProvider = ({ children }) => {
   const { user } = useAuth();
   const [courses, setCourses] = useState([]);
@@ -57,7 +43,7 @@ export const PLSProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const refreshPLS = useCallback(async (academicOverrides = null) => {
+  const refreshPLS = useCallback(async () => {
     if (!user) {
       setCourses([]);
       setCurrentCourses([]);
@@ -76,17 +62,18 @@ export const PLSProvider = ({ children }) => {
     setError(null);
 
     try {
-      const currentLearningFilters = getCurrentLearningFilters(user, academicOverrides || {});
-      const [dashboardResult, itemsResult, currentCoursesResult, currentGroupsResult] = await Promise.allSettled([
+      // Class scope is server-side (§5): the client sends no academic filters,
+      // so it cannot ask for anything outside the learner's class.
+      const [dashboardResult, itemsResult, currentSubjectsResult, currentGroupsResult] = await Promise.allSettled([
         api.pls.getDashboard(),
         api.pls.getItems(),
-        api.courses.getCurrent(currentLearningFilters),
-        api.studyGroups.getCurrent(currentLearningFilters)
+        api.subjects.getAll(),
+        api.studyGroups.getCurrent({})
       ]);
 
       const dashboardRes = dashboardResult.status === 'fulfilled' ? dashboardResult.value : null;
       const itemsRes = itemsResult.status === 'fulfilled' ? itemsResult.value : null;
-      const currentCoursesRes = currentCoursesResult.status === 'fulfilled' ? currentCoursesResult.value : null;
+      const currentSubjectsRes = currentSubjectsResult.status === 'fulfilled' ? currentSubjectsResult.value : null;
       const currentGroupsRes = currentGroupsResult.status === 'fulfilled' ? currentGroupsResult.value : null;
 
       if (dashboardRes?.success) {
@@ -102,19 +89,25 @@ export const PLSProvider = ({ children }) => {
 
       setCourses(courseItems);
       setFiles(fileItems);
-      setCurrentCourses(currentCoursesRes?.data?.courses || []);
-      setCurrentResources(currentCoursesRes?.data?.resources || []);
+      setCurrentCourses(currentSubjectsRes?.data?.subjects || []);
+      setCurrentResources([]);
       setCurrentCoursesMeta({
-        academicProfile: currentCoursesRes?.data?.academic_profile || null,
-        missingProfile: Boolean(currentCoursesRes?.data?.missing_profile),
-        resolvedProgramCategories: currentCoursesRes?.data?.resolved_program_categories || [],
+        academicProfile: currentSubjectsRes?.data
+          ? {
+            class_level: currentSubjectsRes.data.class_level,
+            class_label: currentSubjectsRes.data.class_label,
+            level_group: currentSubjectsRes.data.level_group,
+          }
+          : null,
+        missingProfile: Boolean(currentSubjectsRes?.data?.needs_class_placement),
+        resolvedProgramCategories: [],
       });
-      setLastPracticeActivity(currentCoursesRes?.data?.last_practice_activity || null);
+      setLastPracticeActivity(null);
       setCurrentStudyGroups(currentGroupsRes?.data?.groups || []);
       setCurrentStudyGroupsMeta({
         academicProfile: currentGroupsRes?.data?.academic_profile || null,
         missingProfile: Boolean(currentGroupsRes?.data?.missing_profile),
-        resolvedProgramCategories: currentGroupsRes?.data?.resolved_program_categories || [],
+        resolvedProgramCategories: [],
       });
 
       const stats = dashboardRes?.data?.stats || {};

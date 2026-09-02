@@ -1305,83 +1305,31 @@ class ApiService {
   };
 
   // Course catalog endpoints
-  courses = {
-    getAll: (filters = {}) => {
-      if (PLACEHOLDER_MODE) {
-        return placeholderCoursesApi.getAll(filters);
-      }
-      const params = new URLSearchParams(filters).toString();
-      return this.request(`/courses?${params}`, { cacheTtlMs: 60000 });
+  // Subjects (KG Learning Areas, Primary/JHS/SHS Subjects). Replaces the
+  // tertiary `courses` client. Class scope is derived server-side from the
+  // learner's academic profile -- it is never a query parameter, so the client
+  // cannot ask for content above the learner's class (§5).
+  subjects = {
+    getAll: () => this.request('/subjects', { cacheTtlMs: 60000 }),
+
+    getBySlug: (slug) => this.request(`/subjects/${encodeURIComponent(slug)}`),
+
+    // `classLevel` selects a past class to revise. The server rejects anything
+    // at or above the learner's class band rather than clamping it.
+    getLessons: (slug, { classLevel } = {}) => {
+      const params = classLevel ? `?class_level=${encodeURIComponent(classLevel)}` : '';
+      return this.request(`/subjects/${encodeURIComponent(slug)}/lessons${params}`, {
+        cacheTtlMs: 60000,
+      });
     },
-    getPrograms: (filters = {}) => {
-      if (PLACEHOLDER_MODE) {
-        return placeholderCoursesApi.getPrograms(filters);
-      }
-      const params = new URLSearchParams(filters).toString();
-      return this.request(`/courses/programs?${params}`, { cacheTtlMs: 60000 });
-    },
-    getProgram: (programId, filters = {}) => {
-      if (PLACEHOLDER_MODE) {
-        return placeholderCoursesApi.getProgram(programId, filters);
-      }
-      const params = new URLSearchParams(filters).toString();
-      return this.request(`/courses/programs/${programId}?${params}`);
-    },
-    getOfferings: (filters = {}) => {
-      if (PLACEHOLDER_MODE) {
-        return placeholderCoursesApi.getOfferings(filters);
-      }
-      const params = new URLSearchParams(filters).toString();
-      return this.request(`/courses/offerings?${params}`);
-    },
-    getCurrent: (filters = {}) => {
-      if (PLACEHOLDER_MODE) {
-        return Promise.resolve({
-          success: true,
-          data: {
-            courses: [],
-            academic_profile: null,
-            missing_profile: true,
-          },
-        });
-      }
-      const params = new URLSearchParams(filters).toString();
-      return this.request(`/courses/current${params ? `?${params}` : ''}`, { cacheTtlMs: 120000, staleWhileRevalidate: true });
-    },
-    getById: (courseId) =>
-      PLACEHOLDER_MODE
-        ? placeholderCoursesApi.getById(courseId)
-        : this.request(`/courses/${courseId}`, { cacheTtlMs: 180000, staleWhileRevalidate: true }),
-    getLessons: (courseId, filters = {}) => {
-      if (PLACEHOLDER_MODE) {
-        return placeholderCoursesApi.getLessons(courseId, filters);
-      }
-      const params = new URLSearchParams(filters).toString();
-      return this.request(`/courses/${courseId}/lessons?${params}`, { cacheTtlMs: 120000, staleWhileRevalidate: true });
-    },
-    getEnrolled: () =>
-      this.request('/courses/user-enrolled', { cacheTtlMs: 60000 }),
-    addEnrolled: (courseId) =>
-      this.request(`/courses/user-enrolled/${courseId}`, { method: 'POST' }).then((r) => {
-        this.invalidateCache(['/courses/user-enrolled', '/courses/current']);
-        return r;
-      }),
-    removeEnrolled: (courseId) =>
-      this.request(`/courses/user-enrolled/${courseId}`, { method: 'DELETE' }).then((r) => {
-        this.invalidateCache(['/courses/user-enrolled', '/courses/current']);
-        return r;
-      }),
-    getExcluded: () =>
-      this.request('/courses/user-excluded', { cacheTtlMs: 60000 }),
-    addExcluded: (courseId) =>
-      this.request(`/courses/user-excluded/${courseId}`, { method: 'POST' }).then((r) => {
-        this.invalidateCache(['/courses/user-excluded', '/courses/current']);
-        return r;
-      }),
-    removeExcluded: (courseId) =>
-      this.request(`/courses/user-excluded/${courseId}`, { method: 'DELETE' }).then((r) => {
-        this.invalidateCache(['/courses/user-excluded', '/courses/current']);
-        return r;
+
+    // The §6.3 ladder: which classes are current, revision, or locked.
+    getClassLevels: () => this.request('/subjects/class-levels', { cacheTtlMs: 60000 }),
+
+    // SHS learning areas for onboarding. STEM appears only for STEM schools.
+    getPathways: ({ isStemSchool = false } = {}) =>
+      this.request(`/subjects/pathways?is_stem_school=${isStemSchool ? 'true' : 'false'}`, {
+        cacheTtlMs: 300000,
       }),
   };
 

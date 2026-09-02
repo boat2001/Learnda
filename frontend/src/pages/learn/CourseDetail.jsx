@@ -673,8 +673,9 @@ export default function CourseDetail() {
 
     try {
       let courseData = storedCourse;
-      const lessonsPromise = api.courses.getLessons(resolvedCourseId).catch(() => null);
-      const courseResponse = await api.courses.getById(resolvedCourseId).catch(() => null);
+      // `resolvedCourseId` is now a subject slug; class scope is applied server-side (§5).
+      const lessonsPromise = api.subjects.getLessons(resolvedCourseId).catch(() => null);
+      const courseResponse = await api.subjects.getBySlug(resolvedCourseId).catch(() => null);
 
       if (courseResponse?.data) {
         courseData = mergeCourseData(storedCourse || {}, courseResponse.data);

@@ -250,7 +250,7 @@ export default function ResourceCategory() {
               >
                 {courses.map((course) => (
                   <option key={course} value={course}>
-                    {course === 'all' ? 'All Courses' : course}
+                    {course === 'all' ? 'All Subjects' : course}
                   </option>
                 ))}
               </select>

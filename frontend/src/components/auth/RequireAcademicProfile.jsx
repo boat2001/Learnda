@@ -1,22 +1,36 @@
+import { useCallback } from 'react';
 import { useAuth } from '../../hooks/useAuth';
-import { hasFullAcademicProfile } from '../../utils/onboarding';
-import AcademicProfileGate from './AcademicProfileGate';
+import { hasClassPlacement } from '../../utils/onboarding';
+import ClassPlacementPrompt from '../../pages/learn/ClassPlacementPrompt';
 
 /**
- * Gate for programme-specific content on otherwise-public routes (Learn,
- * Courses, Practice). Guests keep browsing freely; signed-in users who deferred
- * their academic details at sign-up are asked to add them here — the first time
- * they open course content — instead of in the sign-up funnel.
+ * Gate for class content (Learn, Practice).
+ *
+ * A learner cannot be shown any lesson or practice set until we know their
+ * class, because every content query is scoped to it (§5). Sign-up stays short:
+ * a name gets you into the app, and the class is asked for here, the first time
+ * class content is opened.
+ *
+ * Guests keep browsing public pages freely.
  */
 export default function RequireAcademicProfile({ children }) {
-  const { isAuthenticated, user, loading } = useAuth();
+  const { isAuthenticated, user, loading, checkAuth } = useAuth();
+
+  // Re-read the session so the freshly saved placement reaches this component.
+  const handlePlaced = useCallback(() => { checkAuth?.(true); }, [checkAuth]);
 
   if (loading) {
     return children;
   }
 
-  if (isAuthenticated && !hasFullAcademicProfile(user)) {
-    return <AcademicProfileGate />;
+  if (isAuthenticated && !hasClassPlacement(user)) {
+    return (
+      <ClassPlacementPrompt
+        mode={user?.class_level ? 'pathway' : 'class'}
+        classLevel={user?.class_level || null}
+        onPlaced={handlePlaced}
+      />
+    );
   }
 
   return children;

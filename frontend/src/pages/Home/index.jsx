@@ -791,8 +791,8 @@ export default function Home() {
       const courseFilters = { limit: 8, level: levelValue, semester: semesterValue };
       const contentP   = api.content.getAll({ limit: 120 }).catch(() => null);
       const coursesP   = (isAuthenticated
-        ? api.courses.getCurrent(courseFilters)
-        : api.courses.getAll({ limit: 8 })
+        ? api.subjects.getAll()
+        : Promise.resolve(null)
       ).catch(() => null);
       const resourcesP = api.resources.getFiles(isAuthenticated ? courseFilters : { limit: 8 }).catch(() => null);
       const spotlightP = api.gamification.getSpotlights().catch(() => null);
@@ -918,10 +918,7 @@ export default function Home() {
         if (!active) return;
         let courseCandidates = [...rawCourseItems];
         if (courseCandidates.length === 0) {
-          // getCurrent returns [] in placeholder mode — fall back to full catalog
-          const catalogRes = await api.courses.getAll({ limit: 6, level: levelValue, semester: semesterValue }).catch(() => null);
-          const catalogItems =
-            catalogRes?.courses || catalogRes?.data?.courses || catalogRes?.data || [];
+          const catalogItems = [];
           courseCandidates = Array.isArray(catalogItems) ? catalogItems : [];
         }
         if (!active) return;
@@ -939,7 +936,7 @@ export default function Home() {
         const lessonResults = await Promise.all(
           pool.map((course) => {
             const courseId = course.id || course.course_id;
-            return api.courses.getLessons(courseId).catch(() => null).then((res) => ({
+            return api.subjects.getLessons(course.slug || courseId).catch(() => null).then((res) => ({
               course,
               courseId,
               lessons: res?.data?.lessons || res?.lessons || [],

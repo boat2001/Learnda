@@ -34,8 +34,8 @@ let creatorCourseOptionsPromise;
 
 const loadCreatorCourseOptions = () => {
   if (!creatorCourseOptionsPromise) {
-    creatorCourseOptionsPromise = api.courses.getAll({ limit: 0 })
-      .then((response) => response?.data?.courses || [])
+    creatorCourseOptionsPromise = api.subjects.getAll()
+      .then((response) => response?.data?.subjects || [])
       .catch((error) => {
         creatorCourseOptionsPromise = null;
         throw error;
@@ -275,7 +275,7 @@ function CourseSelector({ label, course, onSelect, initialQuery = '', required =
         type="text"
         value={query}
         required={required}
-        placeholder="Type a course name or code"
+        placeholder="Type a subject name"
         autoComplete="off"
         role="combobox"
         aria-autocomplete="list"
@@ -510,17 +510,6 @@ function StudyGroupForm({ draft }) {
   const [visibility, setVisibility] = useState(() => readDraftField(draft, 'creator-group-visibility') || 'open');
   const [programs, setPrograms] = useState([]);
 
-  useEffect(() => {
-    let cancelled = false;
-    api.courses.getPrograms()
-      .then((response) => {
-        if (!cancelled) setPrograms(response?.data?.programs || []);
-      })
-      .catch(() => {
-        if (!cancelled) setPrograms([]);
-      });
-    return () => { cancelled = true; };
-  }, []);
 
   return (
     <>

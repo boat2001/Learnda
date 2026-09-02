@@ -409,7 +409,7 @@ export default function ResourcesIndex() {
     (async () => {
       try {
         const [currentResponse, accessedResponse] = await Promise.all([
-          api.courses.getCurrent(),
+          api.subjects.getAll(),
           api.resources.getAccessedFileIds().catch(() => null),
         ]);
         if (!active) return;
@@ -437,7 +437,7 @@ export default function ResourcesIndex() {
     setCatalogLoading(true);
     try {
       const [coursesResponse, filesResponse] = await Promise.all([
-        api.courses.getAll({ limit: 1000 }),
+        api.subjects.getAll(),
         api.resources.getFiles(),
       ]);
 
@@ -464,7 +464,7 @@ export default function ResourcesIndex() {
       setCatalogLoaded(false);
       try {
         const [programsResponse, trendingResponse, mostAccessedResponse, topResponse, recentResponse] = await Promise.all([
-          api.courses.getPrograms({ includeCounts: false }),
+          Promise.resolve({ data: { programs: [] } }),
           api.resources.getFiles({ limit: SECTION_LIMIT, sort_by: 'trending', sort_order: 'desc' }),
           api.resources.getFiles({ limit: SECTION_LIMIT, sort_by: 'most_accessed', sort_order: 'desc' }),
           api.resources.getFiles({ limit: SECTION_LIMIT, sort_by: 'top', sort_order: 'desc' }),

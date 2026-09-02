@@ -16,7 +16,7 @@ const NAV_ITEMS = [
   { name: "Home", path: "/", icon: <MdHome /> },
   { name: "Learn", path: "/learn", icon: <MdSchool /> },
   { name: "Practice", path: "/practice", icon: <MdQuiz /> },
-  { name: "Files", path: "/resources", icon: <MdFolder /> },
+  { name: "My Space", path: "/my-space", icon: <MdFolder /> },
 ];
 
 export default function BottomNav() {
@@ -24,6 +24,7 @@ export default function BottomNav() {
   const [moreOpen, setMoreOpen] = useState(false);
 
   const moreItems = [
+    { name: "Files", path: "/resources", icon: <MdFolder /> },
     { name: "Spotlights", path: "/spotlights", icon: <MdWorkspacePremium /> },
     { name: "Settings", path: "/settings", icon: <MdSettings /> },
   ];

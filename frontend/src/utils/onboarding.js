@@ -28,22 +28,20 @@ const nonEmpty = (value) => typeof value === 'string' && value.trim().length > 0
 export const hasMinimumProfile = (user) =>
   nonEmpty(user?.full_name || user?.name);
 
-// Full academic profile — used to gate programme-specific content/features
-// (Learn/Courses/PLS), NOT to gate entry into the app. Mirrors the backend
-// `hasFullAcademicProfile` in backend/src/utils/onboarding.js.
-export const hasFullAcademicProfile = (user) => {
+// A learner needs a class before any content can be shown (§5), and an SHS
+// learner also needs a pathway (§4.4). This gates class content only -- never
+// entry into the app. Mirrors `hasClassPlacement` in
+// backend/src/utils/onboarding.js; the backend remains the authority.
+export const hasClassPlacement = (user) => {
   if (!user) return false;
-  return (
-    nonEmpty(user.full_name || user.name) &&
-    Boolean(user.institution_id || nonEmpty(user.institution)) &&
-    nonEmpty(user.affiliate_university) &&
-    nonEmpty(user.programme_category || user.program) &&
-    nonEmpty(user.academic_program || user.program) &&
-    nonEmpty(user.level) &&
-    nonEmpty(user.semester) &&
-    nonEmpty(user.index_number)
-  );
+  if (!nonEmpty(user.class_level)) return false;
+  if (user.level_group === 'SHS' && !user.pathway_id) return false;
+  return true;
 };
+
+// Kept under the old name so existing callers keep working; the meaning is now
+// "has enough academic detail to open class content".
+export const hasFullAcademicProfile = hasClassPlacement;
 
 export const getNextOnboardingStep = (user) => {
   if (!user) return ONBOARDING_STEPS.DONE;

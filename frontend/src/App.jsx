@@ -32,6 +32,7 @@ import './styles/global.css';
 
 const Home = lazy(() => import('./pages/Home'));
 const LearnIndex = lazy(() => import('./pages/learn'));
+const MySpace = lazy(() => import('./pages/MySpace'));
 const PracticeIndex = lazy(() => import('./pages/practice'));
 const PracticeDetail = lazy(() => import('./pages/practice/PracticeDetail'));
 const PracticeSession = lazy(() => import('./pages/practice/PracticeSession'));
@@ -524,7 +525,14 @@ function RouteTree() {
                       <Route path=":courseSlug" element={<RequireAcademicProfile><PracticeDetail /></RequireAcademicProfile>} />
                     </Route>
                     
-                    {/* PLS retired — redirect old URLs to Learn / Practice */}
+                    {/* §9: My Space — the learner's saved work. */}
+                    <Route path="my-space" element={
+                      <ProtectedRoute feature="My Space" message="Sign in to open My Space.">
+                        <MySpace />
+                      </ProtectedRoute>
+                    } />
+
+                    {/* PLS retired — old URLs redirect to Learn / Practice */}
                     <Route path="pls" element={<PlsRedirect base="/learn" />} />
                     <Route path="pls/study/:courseSlug" element={<PlsRedirect base="/learn" />} />
                     <Route path="pls/practice/:courseSlug" element={<PlsRedirect base="/practice" />} />

@@ -117,7 +117,7 @@ const TRIGGERS = [
         label: 'New Level / Year Begins',
         icon: '🆙',
         template: "Hey {name}! Level up! 🆙 Your college has moved you into a new academic year — welcome to your next level. Find your new courses, connect with classmates, and start strong.",
-        cta: 'Find My Courses',
+        cta: 'Find My Subjects',
       },
       {
         id: 'level_complete',

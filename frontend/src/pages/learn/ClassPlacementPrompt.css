@@ -1,0 +1,177 @@
+/* One-time class placement. Reads as a setup step, not a settings form —
+ * a learner sets this once and the academic year owns it afterwards (§1.4). */
+
+.placement {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 32px 16px 96px;
+}
+
+.placement__header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.placement__icon {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 14px;
+  border-radius: 50%;
+  background: var(--color-primary-50);
+  color: var(--color-primary-600);
+  font-size: 2rem;
+}
+
+.placement__title {
+  margin: 0 0 8px;
+  font-family: var(--font-family-heading);
+  font-size: 1.5rem;
+  line-height: 1.25;
+  color: var(--color-text-primary);
+}
+
+.placement__sub {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.placement__groups { display: grid; gap: 22px; }
+
+.placement__group-title {
+  margin: 0 0 10px;
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-light);
+}
+
+.placement__options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.placement__options--stack { flex-direction: column; }
+
+.placement__option {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  /* 44px minimum tap target: these are chosen by children and by parents
+     holding a phone one-handed. */
+  min-height: 44px;
+  padding: 10px 16px;
+  border: 1.5px solid var(--color-border-default);
+  border-radius: 12px;
+  background: var(--color-bg-light);
+  color: var(--color-text-primary);
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.placement__option:hover { border-color: var(--color-primary-400); }
+
+.placement__option.is-selected {
+  border-color: var(--color-primary-600);
+  background: var(--color-primary-50);
+  color: var(--color-primary-700);
+}
+
+.placement__option--wide {
+  width: 100%;
+  text-align: left;
+  padding: 14px 16px;
+}
+
+.placement__option--wide span { display: grid; gap: 3px; }
+.placement__option--wide em {
+  font-style: normal;
+  font-weight: 400;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.placement__pathways { margin-top: 24px; }
+
+.placement__checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+  padding: 12px 14px;
+  border: 1px solid var(--color-border-light);
+  border-radius: 12px;
+  background: var(--color-secondary-50);
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+}
+
+.placement__checkbox input { width: 18px; height: 18px; accent-color: var(--color-primary-600); }
+
+.placement__note {
+  margin: 0;
+  color: var(--color-text-light);
+  font-size: var(--font-size-sm);
+}
+
+/* States the §6.4 promotion rule up front, so a learner is not surprised
+   later by a class they cannot change. */
+.placement__notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 26px 0 18px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: var(--color-secondary-50);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  line-height: 1.5;
+}
+
+.placement__notice svg { flex-shrink: 0; margin-top: 2px; font-size: 1.1rem; }
+
+.placement__error {
+  margin: 0 0 14px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--color-error) 12%, transparent);
+  color: var(--color-error);
+  font-size: var(--font-size-sm);
+}
+
+.placement__submit {
+  width: 100%;
+  min-height: 48px;
+  font-size: var(--font-size-base);
+  font-weight: 700;
+}
+
+.placement__submit:disabled { opacity: 0.55; cursor: not-allowed; }
+
+@media (prefers-reduced-motion: reduce) {
+  .placement__option { transition: none; }
+}
+
+[data-theme="dark"] .placement__option,
+[data-theme="dark"] .placement__checkbox,
+[data-theme="dark"] .placement__notice {
+  background: var(--color-secondary-800);
+  border-color: var(--color-secondary-700);
+}
+
+[data-theme="dark"] .placement__title { color: var(--color-text-on-dark); }
+
+[data-theme="dark"] .placement__option.is-selected {
+  background: color-mix(in srgb, var(--color-primary-600) 24%, transparent);
+  border-color: var(--color-primary-500);
+  color: var(--color-primary-100);
+}

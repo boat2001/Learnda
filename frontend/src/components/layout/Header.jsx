@@ -61,7 +61,7 @@ const GLOBAL_SEARCH_DEBOUNCE_MS = 90;
 const GLOBAL_SEARCH_SECONDARY_DELAY_MS = 120;
 
 const GLOBAL_SEARCH_SECTIONS = [
-  { key: "courses", label: "Courses", icon: <FiBookOpen /> },
+  { key: "subjects", label: "Subjects", icon: <FiBookOpen /> },
   { key: "textLessons", label: "Text lessons", icon: <FiBookOpen /> },
   { key: "videos", label: "Videos", icon: <FiPlayCircle /> },
   { key: "files", label: "Files", icon: <FiFileText /> },
@@ -534,9 +534,10 @@ function Header({ onToggleSidebar, toggleButtonRef, currentTheme, onThemeToggle 
       });
 
       runSource(async () => {
-        const response = await api.courses.getAll({ q: query, search: query, limit: 6 });
+        const response = await api.subjects.getAll();
         applyResults({
-          courses: getList(response?.courses, response?.data?.courses, response?.data)
+          courses: getList(response?.data?.subjects)
+            .filter((s) => String(s.name || '').toLowerCase().includes(String(query).toLowerCase()))
             .slice(0, 6),
         });
         finishRequest();

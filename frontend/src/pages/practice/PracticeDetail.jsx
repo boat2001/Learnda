@@ -347,7 +347,7 @@ export default function PracticeDetail() {
       let courseData = storedCourse;
 
       if (resolvedCourseId) {
-        const courseResponse = await api.courses.getById(resolvedCourseId).catch(() => null);
+        const courseResponse = await api.subjects.getBySlug(resolvedCourseId).catch(() => null);
         if (courseResponse?.data) {
           courseData = mergeCourseData(storedCourse || {}, courseResponse.data);
         }
