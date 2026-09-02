@@ -1,5 +1,6 @@
 const { Op } = require('sequelize');
-const { User } = require('../models');
+const { User, AcademicProfile } = require('../models');
+const { normalizeClassLevelCode } = require('../config/educationStructure');
 const notificationService = require('./notificationService');
 const { sendEngagementEmail } = require('./emailService');
 const { sendSms } = require('./smsService');
@@ -11,7 +12,7 @@ const {
   buildEngagementSmsText,
 } = require('../utils/reengagementContent');
 
-const USER_ATTRS = ['id', 'full_name', 'email', 'phone_number', 'last_active_at', 'role', 'institution_id'];
+const USER_ATTRS = ['id', 'full_name', 'email', 'phone_number', 'last_active_at', 'role'];
 
 const isDeliverableEmail = (email) => {
   const value = String(email || '').trim().toLowerCase();
@@ -118,15 +119,18 @@ const resolveEngagementRecipients = async ({
   if (mode === 'group') {
     const groupType = String(group?.type || '').trim();
     const where = {};
+    let classLevelFilter = null;
 
     if (groupType === 'role') {
       where.role = String(group?.role || 'student').trim();
-    } else if (groupType === 'institution') {
-      const institutionId = String(group?.institutionId || '').trim();
-      if (!institutionId) {
-        return { users: [], error: 'Choose a college for this group.' };
+    } else if (groupType === 'class') {
+      // Class placement lives on academic_profiles, so filter through it
+      // rather than a column on users (§6.2).
+      const classLevel = normalizeClassLevelCode(group?.classLevel);
+      if (!classLevel) {
+        return { users: [], error: 'Choose a class for this group.' };
       }
-      where.institution_id = institutionId;
+      classLevelFilter = classLevel;
       where.role = 'student';
     } else if (groupType === 'inactive') {
       const cutoff = new Date(Date.now() - inactivityDays * 24 * 60 * 60 * 1000);
@@ -138,6 +142,17 @@ const resolveEngagementRecipients = async ({
     const users = await User.findAll({
       where,
       attributes: USER_ATTRS,
+      ...(classLevelFilter
+        ? {
+          include: [{
+            model: AcademicProfile,
+            as: 'academic_profile',
+            required: true,
+            attributes: [],
+            where: { class_level: classLevelFilter },
+          }],
+        }
+        : {}),
       limit: 500,
       order: [['last_active_at', 'ASC']],
     });

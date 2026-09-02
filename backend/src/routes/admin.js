@@ -2596,8 +2596,8 @@ router.post('/reengagement/send', authenticate, checkRole(['admin']), async (req
         selected: 'Manual: selected users',
         group: group?.type === 'role'
           ? `Group: ${group.role || 'users'}`
-          : group?.type === 'institution'
-            ? 'Group: college students'
+          : group?.type === 'class'
+            ? `Group: ${group.classLevel || 'class'} learners`
             : group?.type === 'inactive'
               ? `Group: inactive ${inactivityDays}d`
               : 'Group send',

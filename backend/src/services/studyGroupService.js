@@ -126,18 +126,18 @@ const buildGroupDescription = (course) => {
   const courseTitle = String(course?.title || 'this course').trim();
   const courseCode = String(course?.code || '').trim();
   return courseCode
-    ? `Discuss ${courseTitle} (${courseCode}), share files, and study with other students taking this general course this semester.`
-    : `Discuss ${courseTitle}, share files, and study with other students taking this general course this semester.`;
+    ? `Discuss ${courseTitle} (${courseCode}), share files, and study with other learners in your class.`
+    : `Discuss ${courseTitle}, share files, and study with other learners in your class.`;
 };
 
-const buildCourseGroupMetadata = ({ course, learning, programmeCategory }) => ({
+// Groups are keyed to a subject at a class level (§5), not a programme/semester.
+const buildCourseGroupMetadata = ({ course, learning }) => ({
   source: COURSE_GROUP_SOURCE,
   auto_managed: true,
-  course_code: course?.code || null,
-  course_title: course?.title || null,
-  level: learning?.academicProfile?.level || null,
-  semester: learning?.academicProfile?.semester || null,
-  programme_category: programmeCategory || learning?.academicProfile?.programme_category || null
+  subject_slug: course?.key || null,
+  subject_title: course?.title || null,
+  class_level: learning?.academicProfile?.classLevel || course?.class_level || null,
+  level_group: learning?.academicProfile?.levelGroup || course?.level_group || null
 });
 
 const serializeGroup = ({ group, course, memberCount = 0, isJoined = false, lastActivityAt = null }) => {
@@ -174,9 +174,8 @@ const serializeGroup = ({ group, course, memberCount = 0, isJoined = false, last
     course_id: course?.id || group.course_id || null,
     course_name: course?.title || group.course?.title || null,
     course_code: course?.code || group.course?.code || null,
-    programme_category: metadata.programme_category || null,
-    level: metadata.level || null,
-    semester: metadata.semester || null,
+    class_level: metadata.class_level || null,
+    level_group: metadata.level_group || null,
     avatar_url: metadata.avatar_url || null,
     created_at: group.created_at || group.createdAt || null,
     last_activity_at: lastActivityAt,
@@ -309,18 +308,13 @@ const ensureCourseGroups = async ({ courses, learning, ownerUserId, user }) => {
     const createdGroup = await StudyGroup.create({
       creator_user_id: ownerUserId || user?.id,
       course_id: course.id,
-      institution_id: null,
       title: stripGroupSuffix(course.title) || course.title,
       description: buildGroupDescription(course),
       visibility: 'public',
       join_requirement: 'serious_or_master',
       status: 'active',
       member_limit: DEFAULT_MEMBER_LIMIT,
-      metadata: buildCourseGroupMetadata({
-        course,
-        learning,
-        programmeCategory: (learning?.resolvedProgramCategories || [])[0] || null
-      })
+      metadata: buildCourseGroupMetadata({ course, learning })
     });
 
     groupByCourseId.set(courseKey, createdGroup);
