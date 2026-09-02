@@ -7,6 +7,8 @@ const sequelize = createSequelize();
 
 // Load model definers
 const modelDefiners = [
+  // K-12 education structure (learnda-dev-guide.md §2, §4)
+  require('./LearningUnit'),
   require('./Institution'),
   require('./User'),
   require('./UserContact'),
