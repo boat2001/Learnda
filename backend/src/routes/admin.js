@@ -790,7 +790,7 @@ const buildAnalyticsSnapshot = async ({ range = '30d', segment = 'all' }) => {
     courses:      (p) => p === '/learn' || (p.startsWith('/learn/') && !p.startsWith('/learn/lesson')),
     lessons:      (p) => p.startsWith('/learn/lesson') || p.startsWith('/pls/study'),
     tests:        (p) => p.startsWith('/practice') || p.startsWith('/pls/practice'),
-    edutainment:  (p) => p.startsWith('/edutainment') || p.startsWith('/eduvhibe') || p.startsWith('/blog'),
+    edutainment:  (p) => p.startsWith('/edutainment') || p.startsWith('/blog'),
     community:    (p) => p.startsWith('/community') || p.startsWith('/forum'),
     groups:       (p) => p.startsWith('/groups'),
     profile:      (p) => p === '/settings/profile',
@@ -991,8 +991,7 @@ router.get('/stats', async (req, res) => {
     const { start } = getRange(range);
     const prevRange = getPreviousRange(range);
 
-    const { EduvhibeVideo, EduvhibeNote } = require('../models');
-    const [totalUsers, totalContent, pendingReviews, totalContributors, pendingPayouts, contentBreakdown, totalResourceFiles, eduvhibeVideoCount, eduvhibeNoteCount] = await Promise.all([
+    const [totalUsers, totalContent, pendingReviews, totalContributors, pendingPayouts, contentBreakdown, totalResourceFiles] = await Promise.all([
       User.count(),
       countLearningContentItems(),
       Contribution.count({ where: { status: 'pending' } }),
@@ -1008,9 +1007,7 @@ router.get('/stats', async (req, res) => {
          WHERE status = 'published'`,
         { type: dbSequelize.QueryTypes.SELECT }
       ).then((rows) => rows[0] || {}).catch(() => ({})),
-      ResourceFile.count({ where: { category: { [Op.ne]: 'eduvhibe_note' } } }).catch(() => 0),
-      EduvhibeVideo ? EduvhibeVideo.count().catch(() => 0) : Promise.resolve(0),
-      EduvhibeNote ? EduvhibeNote.count().catch(() => 0) : Promise.resolve(0),
+      ResourceFile.count().catch(() => 0),
     ]);
 
     const activeSubscribers = await Subscription.count({
@@ -1093,8 +1090,6 @@ router.get('/stats', async (req, res) => {
         testItems: Number(contentBreakdown.test_items || 0),
         edutainment: Number(contentBreakdown.edutainment || 0),
         resourceFiles: Number(totalResourceFiles || 0),
-        eduvhibeVideos: Number(eduvhibeVideoCount || 0),
-        eduvhibeNotes: Number(eduvhibeNoteCount || 0),
         studyGroups: studyGroupCount,
         communities: communityCount,
       },
@@ -1162,7 +1157,7 @@ router.get('/content', async (req, res) => {
     if (search) { conditions.push(`(ac.title ILIKE :search OR ac.description ILIKE :search)`); replacements.search = `%${search}%`; }
     if (type && type !== 'all') {
       if (type === 'text') conditions.push(`ac.content_type = 'lesson'`);
-      else if (type === 'video') conditions.push(`ac.content_type IN ('video_lesson','eduvhibe_video')`);
+      else if (type === 'video') conditions.push(`ac.content_type = 'video_lesson'`);
       else if (type === 'test') conditions.push(`ac.content_type = 'text_item' AND ac.subtype IN ('quiz','exam','past_question')`);
       else if (type === 'blog') conditions.push(`ac.content_type = 'text_item' AND ac.subtype = 'blog'`);
       else if (type === 'edutainment') conditions.push(`ac.content_type = 'text_item' AND (ac.subtype IS NULL OR ac.subtype NOT IN ('quiz','exam','past_question','site_info','team_profile'))`);
@@ -1191,7 +1186,7 @@ router.get('/content', async (req, res) => {
 
     const typeLabel = (row) => {
       if (row.content_type === 'lesson') return 'text';
-      if (row.content_type === 'video_lesson' || row.content_type === 'eduvhibe_video') return 'video';
+      if (row.content_type === 'video_lesson') return 'video';
       if (row.subtype === 'blog') return 'blog';
       if (['quiz','exam','past_question'].includes(row.subtype)) return 'test';
       return 'edutainment';
@@ -1654,7 +1649,7 @@ router.get('/content/pending', async (req, res) => {
       if (['text_lesson', 'lesson'].includes(type)) {
         acConditions.push("ac.content_type = 'lesson'");
       } else if (type === 'video') {
-        acConditions.push("ac.content_type IN ('video_lesson','eduvhibe_video')");
+        acConditions.push("ac.content_type = 'video_lesson'");
       } else if (type === 'quiz') {
         acConditions.push("ac.content_type = 'text_item' AND ac.subtype = 'quiz'");
       } else if (type === 'past_question') {
@@ -2191,7 +2186,7 @@ router.get('/analytics/visits', async (req, res) => {
       if (p.includes('/learn') || p.includes('/courses') || p.includes('/lesson')) return 'Course Preview';
       if (p.includes('/community') || p.includes('/forum') || p.includes('/groups')) return 'Community';
       if (p.includes('/register') || p.includes('/signup') || p.includes('/login') || p.includes('/auth')) return 'Signup / Auth';
-      if (p.includes('/edutainment') || p.includes('/eduvhibe') || p.includes('/trending')) return 'Edutainment';
+      if (p.includes('/edutainment') || p.includes('/trending')) return 'Edutainment';
       if (p.includes('/resources') || p.includes('/files')) return 'Resources';
       if (p.includes('/upgrade') || p.includes('/features-and-plans') || p.includes('/pricing')) return 'Plans & Pricing';
       return 'Other';

@@ -1,6 +1,6 @@
 'use strict';
 /**
- * Extract text from ResourceFile and EduvhibeNote rows into uploads/_generated-content/extracted-text.
+ * Extract text from ResourceFile rows into uploads/_generated-content/extracted-text.
  *
  * Usage:
  *   node src/scripts/extract_resource_text.js --dry-run
@@ -44,7 +44,7 @@ function parseArgs(argv) {
       const limit = /^--limit=(\d+)$/.exec(arg);
       const course = /^--course=(.+)$/.exec(arg);
       const category = /^--category=(.+)$/.exec(arg);
-      const source = /^--source=(resource_files|eduvhibe_notes|all)$/.exec(arg);
+      const source = /^--source=(resource_files|all)$/.exec(arg);
       if (limit) args.limit = Number.parseInt(limit[1], 10);
       if (course) args.course = course[1].trim();
       if (category) args.category = category[1].trim();
@@ -84,16 +84,6 @@ async function collectSources(db, args) {
     rows.push(...resourceRows.map((row) => ({ sourceName: 'resource_files', row })));
   }
 
-  if (args.source === 'all' || args.source === 'eduvhibe_notes') {
-    const noteWhere = {};
-    if (args.course) noteWhere.course = { [Op.iLike]: `%${args.course}%` };
-    const noteRows = await db.EduvhibeNote.findAll({
-      where: noteWhere,
-      order: [['created_at', 'ASC']],
-      limit: args.limit || undefined,
-    });
-    rows.push(...noteRows.map((row) => ({ sourceName: 'eduvhibe_notes', row })));
-  }
 
   return args.limit ? rows.slice(0, args.limit) : rows;
 }

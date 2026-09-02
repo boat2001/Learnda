@@ -6,7 +6,6 @@ import {
   MdFolder,
   MdSettings,
   MdPerson,
-  MdRocketLaunch,
   MdWorkspacePremium,
 } from "react-icons/md";
 import { useAuth } from "../../hooks/useAuth";
@@ -17,7 +16,6 @@ const NAV_ITEMS = [
   { name: "Learn", path: "/learn", icon: <MdSchool /> },
   { name: "Practice", path: "/practice", icon: <MdQuiz /> },
   { name: "Files", path: "/resources", icon: <MdFolder /> },
-  { name: "Eduvhibe", path: "/eduvhibe", icon: <MdRocketLaunch /> },
   { name: "Spotlights", path: "/spotlights", icon: <MdWorkspacePremium /> },
   { name: "Settings", path: "/settings", icon: <MdSettings /> },
 ];

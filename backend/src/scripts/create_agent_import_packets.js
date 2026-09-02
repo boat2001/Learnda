@@ -95,17 +95,11 @@ async function collectLessonSources(db, args) {
 
   const packets = [];
   for (const course of courses) {
-    const [eduvhibeNotes, resourceFiles] = await Promise.all([
-      db.EduvhibeNote.findAll({
-        where: { course: { [Op.iLike]: `%${course.title}%` } },
-        order: [['created_at', 'ASC']],
-      }),
-      db.ResourceFile.findAll({
-        where: { course: { [Op.iLike]: `%${course.title}%` } },
-        order: [['created_at', 'ASC']],
-      }),
-    ]);
-    const notes = [...eduvhibeNotes, ...resourceFiles.filter(isLikelyNote)]
+    const resourceFiles = await db.ResourceFile.findAll({
+      where: { course: { [Op.iLike]: `%${course.title}%` } },
+      order: [['created_at', 'ASC']],
+    });
+    const notes = resourceFiles.filter(isLikelyNote)
       .sort((a, b) => sourceTitle(a).localeCompare(sourceTitle(b), undefined, { numeric: true }));
     notes.forEach((note, index) => {
       packets.push({

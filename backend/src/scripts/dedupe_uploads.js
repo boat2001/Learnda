@@ -6,7 +6,7 @@ const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
 const { Op } = require('sequelize');
-const { connectAndSync, sequelize, ResourceFile, EduvhibeNote } = require('../models');
+const { connectAndSync, sequelize, ResourceFile } = require('../models');
 
 const APPLY = process.argv.includes('--apply');
 const SKIP_DB = process.argv.includes('--skip-db');
@@ -28,7 +28,7 @@ const usage = () => {
   console.log('Usage: node src/scripts/dedupe_uploads.js [--apply] [--skip-db] [--target=resources]');
   console.log('  default     dry-run: scan duplicates and write a JSON report');
   console.log('  --apply     move duplicate files into uploads_dedupe_quarantine and update DB references');
-  console.log('  --skip-db   do not connect to the DB or update ResourceFile/EduvhibeNote rows');
+  console.log('  --skip-db   do not connect to the DB or update ResourceFile rows');
   console.log('  --target    optional subdirectory under UPLOAD_DIR to scan, e.g. resources');
 };
 
@@ -118,10 +118,6 @@ const buildDbReferenceMap = async () => {
     : [];
   addRows(resourceRows, 'ResourceFile');
 
-  const noteRows = EduvhibeNote
-    ? await EduvhibeNote.findAll({ attributes: ['id', 'file_name', 'file_url', 'file_path'] })
-    : [];
-  addRows(noteRows, 'EduvhibeNote');
 
   return map;
 };
@@ -133,7 +129,6 @@ const scoreCandidate = (file, dbReferenceMap) => {
   if (rel.startsWith('resources/')) score += 100;
   if (/^resources\/(?:notes\/sem-\d\/)?(?:100|200|300|400)\/sem-\d\//i.test(rel)) score += 700;
   if (/^resources\/(?:100|200|300|400)\//i.test(rel)) score += 400;
-  if (/^resources\/eduvhibe-notes\//i.test(rel)) score -= 250;
   if (/^resources\/notes\/[^/]+$/i.test(rel)) score -= 150;
   if (!/copy|duplicate|\(\d+\)/i.test(path.basename(rel))) score += 80;
   score += Math.max(0, 200 - rel.length);
@@ -143,7 +138,7 @@ const scoreCandidate = (file, dbReferenceMap) => {
 const updateDbReferences = async (duplicateRel, keepRel) => {
   const duplicate = getPathVariants(duplicateRel);
   const keep = getPathVariants(keepRel);
-  const summary = { resourceFiles: 0, eduvhibeNotes: 0 };
+  const summary = { resourceFiles: 0 };
 
   const resourceWhere = {
     [Op.or]: [
@@ -159,21 +154,6 @@ const updateDbReferences = async (duplicateRel, keepRel) => {
   );
   summary.resourceFiles = resourceCount;
 
-  if (EduvhibeNote) {
-    const noteWhere = {
-      [Op.or]: [
-        { file_path: duplicate.relative },
-        { file_path: duplicate.absolute },
-        { file_url: duplicate.fileUrl },
-        { file_url: duplicate.flatFileUrl },
-      ],
-    };
-    const [noteCount] = await EduvhibeNote.update(
-      { file_path: keep.relative, file_url: keep.fileUrl },
-      { where: noteWhere }
-    );
-    summary.eduvhibeNotes = noteCount;
-  }
 
   return summary;
 };

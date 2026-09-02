@@ -478,8 +478,6 @@ export default function ContentSection({ period }) {
               { label: 'Test Items',         value: fmt(stats?.testItems),         icon: FiCheckSquare, accent: 'amber' },
               { label: 'Edutainment',        value: fmt(stats?.edutainment),       icon: FiPlay,        accent: 'red'   },
               { label: 'Resource Files',     value: fmt(stats?.resourceFiles),     icon: FiFile,        accent: 'blue'  },
-              { label: 'Eduvhibe Videos',    value: fmt(stats?.eduvhibeVideos),    icon: FiFilm,        accent: 'red'   },
-              { label: 'Eduvhibe Notes',     value: fmt(stats?.eduvhibeNotes),     icon: FiFileText,    accent: 'green' },
               { label: 'Study Groups',       value: fmt(stats?.studyGroups),       icon: FiUsers        },
               { label: 'Communities',        value: fmt(stats?.communities),       icon: FiUsers,       accent: 'blue'  },
             ].map(({ label, value, icon: Icon, accent }) => (

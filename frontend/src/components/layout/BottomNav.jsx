@@ -6,7 +6,6 @@ import {
   MdQuiz,
   MdFolder,
   MdSettings,
-  MdRocketLaunch,
   MdWorkspacePremium,
   MdMoreHoriz,
   MdClose,
@@ -25,7 +24,6 @@ export default function BottomNav() {
   const [moreOpen, setMoreOpen] = useState(false);
 
   const moreItems = [
-    { name: "Eduvhibe", path: "/eduvhibe", icon: <MdRocketLaunch /> },
     { name: "Spotlights", path: "/spotlights", icon: <MdWorkspacePremium /> },
     { name: "Settings", path: "/settings", icon: <MdSettings /> },
   ];

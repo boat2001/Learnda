@@ -19,7 +19,6 @@ const modelDefiners = [
   require('./Progress'),
   require('./Lesson'),
   require('./VideoLesson'),
-  require('./EduvhibeVideo'),
   require('./TextItem'),
   require('./ContentMetadata'),
   require('./ContentStats'),
@@ -57,8 +56,6 @@ const modelDefiners = [
   require('./StudyGroupMember'),
   require('./StudyGroupMessage'),
   require('./ResourceFile'),
-  require('./EduvhibeNote'),
-  require('./EduvhibeCgpaEntry'),
   require('./ReferralDownload'),
   require('./AdminAuditLog')
 ];
@@ -161,63 +158,6 @@ async function backfillLegacyAcademicColumns() {
   }
 }
 
-/** Creates eduvhibe_notes table and migrates records from resource_files if needed. */
-async function ensureEduvhibeNotesTable() {
-  try {
-    await sequelize.query(`
-DO $$
-BEGIN
-  IF NOT EXISTS (
-    SELECT 1 FROM information_schema.tables
-    WHERE table_schema = 'public' AND table_name = 'eduvhibe_notes'
-  ) THEN
-    CREATE TABLE eduvhibe_notes (
-      id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-      title VARCHAR(255) NOT NULL,
-      description TEXT,
-      file_name VARCHAR(255) NOT NULL,
-      file_url VARCHAR(500) NOT NULL,
-      file_path VARCHAR(500),
-      file_type VARCHAR(100),
-      file_size INTEGER,
-      course VARCHAR(255),
-      level VARCHAR(50),
-      semester VARCHAR(50),
-      is_premium BOOLEAN DEFAULT false,
-      downloads INTEGER DEFAULT 0,
-      views INTEGER DEFAULT 0,
-      last_viewed_at TIMESTAMPTZ,
-      last_downloaded_at TIMESTAMPTZ,
-      uploader_id UUID,
-      created_at TIMESTAMPTZ DEFAULT NOW(),
-      updated_at TIMESTAMPTZ DEFAULT NOW()
-    );
-  END IF;
-
-  -- Migrate any existing eduvhibe notes from resource_files
-  INSERT INTO eduvhibe_notes (
-    id, title, description, file_name, file_url, file_path, file_type, file_size,
-    course, level, semester, is_premium, downloads, views,
-    last_viewed_at, last_downloaded_at, uploader_id, created_at, updated_at
-  )
-  SELECT
-    id, title, description, file_name,
-    COALESCE(file_url, ''), file_path, file_type, file_size,
-    course, level, semester, COALESCE(is_premium, false),
-    COALESCE(downloads, 0), COALESCE(views, 0),
-    last_viewed_at, last_downloaded_at, uploader_id, created_at, updated_at
-  FROM resource_files
-  WHERE category = 'eduvhibe_note'
-  ON CONFLICT (id) DO NOTHING;
-
-  DELETE FROM resource_files WHERE category = 'eduvhibe_note';
-END $$;
-`);
-    logger.info('eduvhibe_notes table verified and migrated.');
-  } catch (err) {
-    logger.error(`Failed to ensure eduvhibe_notes: ${err.message}`);
-  }
-}
 
 /** Adds community_replies.metadata when the model expects it but legacy DBs lack the column. */
 async function ensureCommunityReplyMetadataColumn() {
@@ -460,7 +400,6 @@ CREATE INDEX IF NOT EXISTS admin_audit_logs_created_at_idx ON admin_audit_logs(c
 async function connectAndSync() {
   await sequelize.authenticate();
   logger.info('Database connection established.');
-  await ensureEduvhibeNotesTable();
   await ensureCommunityReplyMetadataColumn();
   await ensureAcademicStateColumns();
   await ensureSpotlightAwardsTable();

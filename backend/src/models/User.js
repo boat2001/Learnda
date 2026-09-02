@@ -378,7 +378,6 @@ module.exports = (sequelize) => {
     
     User.hasMany(models.Lesson, { foreignKey: 'creator_id', as: 'created_lessons', constraints: false });
     User.hasMany(models.VideoLesson, { foreignKey: 'creator_id', as: 'created_video_lessons', constraints: false });
-    User.hasMany(models.EduvhibeVideo, { foreignKey: 'creator_id', as: 'created_eduvhibe_videos', constraints: false });
     User.hasMany(models.TextItem, { foreignKey: 'creator_id', as: 'created_text_items', constraints: false });
     
     User.hasMany(models.PLSItem, {

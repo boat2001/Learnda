@@ -214,20 +214,14 @@ async function getCreator(db) {
 }
 
 async function collectNotesForCourse(db, courseTitle) {
-  const [eduvhibeNotes, resourceFiles] = await Promise.all([
-    db.EduvhibeNote.findAll({
-      where: { course: { [Op.iLike]: `%${courseTitle}%` } },
-      order: [['created_at', 'ASC']],
-    }),
-    db.ResourceFile.findAll({
-      where: { course: { [Op.iLike]: `%${courseTitle}%` } },
-      order: [['created_at', 'ASC']],
-    }),
-  ]);
+  const resourceFiles = await db.ResourceFile.findAll({
+    where: { course: { [Op.iLike]: `%${courseTitle}%` } },
+    order: [['created_at', 'ASC']],
+  });
 
   const seen = new Set();
   const notes = [];
-  for (const note of [...eduvhibeNotes, ...resourceFiles.filter(isLikelyNote)]) {
+  for (const note of resourceFiles.filter(isLikelyNote)) {
     const key = noteKey(note);
     if (!key || seen.has(key)) continue;
     seen.add(key);

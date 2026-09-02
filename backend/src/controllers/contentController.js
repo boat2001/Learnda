@@ -384,7 +384,7 @@ module.exports = {
       if (type === 'text_lesson') {
         conditions.push(`ac.content_type = 'lesson'`);
       } else if (type === 'video') {
-        conditions.push(`ac.content_type IN ('video_lesson','eduvhibe_video')`);
+        conditions.push(`ac.content_type = 'video_lesson'`);
       } else if (['edutainment','quote','blog','quiz','past_question','illustration','site_info','team_profile'].includes(type)) {
         conditions.push(`ac.content_type = 'text_item' AND ac.subtype = :filterType`);
         replacements.filterType = type;

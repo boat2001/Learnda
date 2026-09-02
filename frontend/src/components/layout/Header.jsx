@@ -222,7 +222,6 @@ const getContentKind = (item = {}) => {
     return "exam";
   }
   if (type.includes("quiz") || subtype.includes("quiz")) return "quiz";
-  if (contentType === "eduvhibe video" || type === "eduvhibe video") return "eduvhibe_video";
   if (contentType.includes("video") || type.includes("video")) return "video";
   if (isEdutainmentItem(item)) return "edutainment";
   return "lesson";
@@ -232,7 +231,7 @@ const getContentSearchSectionKey = (item = {}) => {
   const kind = getContentKind(item);
   if (kind === "quiz") return "practiceQuizzes";
   if (kind === "exam") return "practiceExams";
-  if (kind === "video" || kind === "eduvhibe_video") return "videos";
+  if (kind === "video") return "videos";
   if (kind === "edutainment") return getEdutainmentSectionKey(item);
   return "textLessons";
 };
@@ -729,7 +728,6 @@ function Header({ onToggleSidebar, toggleButtonRef, currentTheme, onThemeToggle 
     { text: "Create Content",     icon: <FiUploadCloud />,   action: () => { navigate("/create");           setShowMenu(false); } },
     FEATURE_FLAGS.studyGroups && { text: "Study Groups", icon: <FiUsers />, action: () => { navigate("/groups"); setShowMenu(false); } },
     FEATURE_FLAGS.community && { type: "community-picker" },
-    FEATURE_FLAGS.collegeRankings && { text: "College Rankings", icon: <FiBarChart2 />, action: () => { navigate("/college-rankings"); setShowMenu(false); } },
     { text: "User Manual",        icon: <FiHelpCircle />,    action: () => { navigate("/user-manual");      setShowMenu(false); } },
   ].filter(Boolean);
 
@@ -885,14 +883,6 @@ function Header({ onToggleSidebar, toggleButtonRef, currentTheme, onThemeToggle 
       return item.id ? buildPracticeSessionPath(item.id) : "/practice";
     }
     if (item.type === "blog") return item.id ? `/blog/post/${item.id}` : "/blog";
-    if (kind === "eduvhibe_video") {
-      try {
-        localStorage.setItem("edu_last_tab", "videos");
-      } catch (error) {
-        // Browser storage is optional for routing.
-      }
-      return "/eduvhibe";
-    }
     if (kind === "edutainment") {
       // Edutainment now lives on Home — route all its search hits there.
       return "/";

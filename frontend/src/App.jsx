@@ -44,7 +44,6 @@ const PostDetail = lazy(() => import('./pages/Blog/PostDetail'));
 const SettingsIndex = lazy(() => import('./pages/Settings'));
 const Profile = lazy(() => import('./pages/Settings/Profile'));
 const Preferences = lazy(() => import('./pages/Settings/Preferences'));
-const Eduvhibe = lazy(() => import('./pages/Eduvhibe/index'));
 const Create = lazy(() => import('./pages/Create'));
 const Contribute = lazy(() => import('./pages/Contribute'));
 const StudyGroups = lazy(() => import('./pages/PLS/StudyGroups'));
@@ -55,7 +54,6 @@ const Roadmap = lazy(() => import('./pages/Roadmap'));
 const Forum = lazy(() => import('./pages/Forum'));
 const Events = lazy(() => import('./pages/Events'));
 const SuccessStories = lazy(() => import('./pages/SuccessStories'));
-const CollegeRankings = lazy(() => import('./pages/CollegeRankings'));
 const Spotlights = lazy(() => import('./pages/Spotlights'));
 const Contact = lazy(() => import('./pages/Contact'));
 const Terms = lazy(() => import('./pages/Terms'));
@@ -78,11 +76,9 @@ const ResetPassword = lazy(() => import('./pages/ResetPassword'));
 const AdminDashboard = lazy(() => import('./pages/Admin'));
 const ContentReview = lazy(() => import('./pages/Admin/ContentReview'));
 const AdminAnalytics = lazy(() => import('./pages/Admin/Analytics'));
-const CollegeSignals = lazy(() => import('./pages/Admin/CollegeSignals'));
 const Progress = lazy(() => import('./pages/Progress'));
 const NotificationsPage = lazy(() => import('./pages/Notifications'));
 const GoogleOAuthCallback = lazy(() => import('./pages/GoogleOAuthCallback'));
-const LecturerInvite = lazy(() => import('./pages/LecturerInvite'));
 
 function PageViewTracker() {
   const location = useLocation();
@@ -444,7 +440,6 @@ function RouteTree() {
             <Route index element={<AdminGuard><AdminDashboard /></AdminGuard>} />
             <Route path="content-review" element={<AdminGuard><ContentReview /></AdminGuard>} />
             <Route path="analytics" element={<AdminGuard><AdminAnalytics /></AdminGuard>} />
-            <Route path="college-signals" element={<AdminGuard><CollegeSignals /></AdminGuard>} />
           </Route>
 
           <Route path="learn/lesson/:lessonId" element={<LessonViewer />} />
@@ -454,7 +449,6 @@ function RouteTree() {
               <ProtectedRoute feature="Study Group Room" message="Sign in to open study groups."><StudyGroupRoom /></ProtectedRoute>
             } />
           )}
-          <Route path="lecturer-invite/:token" element={<LecturerInvite />} />
           {FEATURE_FLAGS.community && <Route path="forum" element={<Forum />} />}
           <Route path="auth/google/callback" element={<GoogleOAuthCallback />} />
           <Route path="upgrade" element={
@@ -554,8 +548,6 @@ function RouteTree() {
                     {/* Edutainment retired — its content now lives on Home. */}
                     <Route path="edutainment/*" element={<Navigate to="/" replace />} />
 
-                    {/* Eduvhibe */}
-                    <Route path="eduvhibe" element={<Eduvhibe />} />
                     
                     {/* Blog Routes */}
                     <Route path="blog">
@@ -593,9 +585,6 @@ function RouteTree() {
                     <Route path="roadmap" element={<Roadmap />} />
                     <Route path="events" element={<Events />} />
                     <Route path="success-stories" element={<SuccessStories />} />
-                    {FEATURE_FLAGS.collegeRankings && (
-                      <Route path="college-rankings" element={<CollegeRankings />} />
-                    )}
                     <Route path="spotlights" element={<Spotlights />} />
                     <Route path="contact" element={<Contact />} />
                     <Route path="contribute" element={<Contribute />} />

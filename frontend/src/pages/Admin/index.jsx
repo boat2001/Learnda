@@ -24,7 +24,6 @@ import LecturersSection from './sections/LecturersSection';
 import PlansSection from './sections/PlansSection';
 import AmbassadorsSection from './sections/AmbassadorsSection';
 import PublishingSection from './sections/PublishingSection';
-import RankingsSection from './sections/RankingsSection';
 import ContributorOpsSection from './sections/ContributorOpsSection';
 import RoadmapSection from './sections/RoadmapSection';
 import ServicesSection from './sections/ServicesSection';
@@ -41,7 +40,6 @@ const NAV = [
   { id: 'contributor-ops', label: 'Contributor Ops', icon: FiAward,      group: 'OPERATIONS'},
   { id: 'content',       label: 'Content',           icon: FiBook,       group: 'PLATFORM'  },
   { id: 'publishing',    label: 'Team & Updates',    icon: FiBookOpen,   group: 'PLATFORM'  },
-  { id: 'rankings',      label: 'College Rankings',  icon: FiTrendingUp, group: 'PLATFORM'  },
   { id: 'pages',         label: 'Pages & Features',  icon: FiLayout,     group: 'PLATFORM'  },
   { id: 'notifications', label: 'Notifications',     icon: FiBell,       group: 'OPERATIONS'},
   { id: 'messages',      label: 'Messages & Feedback', icon: FiInbox,    group: 'OPERATIONS'},
@@ -74,7 +72,6 @@ const SECTION_MAP = {
   'contributor-ops': ContributorOpsSection,
   content:       ContentSection,
   publishing:    PublishingSection,
-  rankings:      RankingsSection,
   pages:         PagesSection,
   notifications: NotificationsSection,
   messages:      MessagesSection,

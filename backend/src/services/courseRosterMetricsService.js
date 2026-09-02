@@ -82,7 +82,7 @@ async function fetchEngagedStudentIds(courseIdStr, courseTitle) {
     LEFT JOIN courses c ON c.id = ac.course_id
     WHERE ce.user_id IS NOT NULL
       AND ce.action IN ('view', 'complete')
-      AND ac.content_type IN ('lesson', 'video_lesson', 'eduvhibe_video')
+      AND ac.content_type IN ('lesson', 'video_lesson')
       AND (
         ac.course_id::text = :courseIdStr
         ${titlePredicate}

@@ -65,7 +65,6 @@ const ROUTE_META = [
   { match: (path) => path === '/resources',        title: 'Resources | Learnda',        description: 'Access study files, past questions, and academic resources for every course.' },
   { match: (path) => path === '/edutainment',      title: 'Edutainment | Learnda',      description: 'Entertaining content that makes learning stick — videos, facts, and study inspiration.' },
   { match: (path) => path === '/edutainment/feed', title: 'Edutainment Feed | Learnda', description: 'Your personalised edutainment feed — bite-sized content to keep you learning.' },
-  { match: (path) => path === '/eduvhibe',         title: 'Eduvhibe | Learnda',         description: 'Explore Eduvhibe — a curated learning experience on Learnda.' },
   { match: (path) => path === '/blog',             title: 'Blog | Learnda',             description: 'Study tips, platform updates, and student learning insights from the Learnda team.' },
   { match: (path) => path === '/college-rankings', title: 'College Rankings | Learnda', description: 'Explore college and university rankings across Ghana.' },
   { match: (path) => path === '/success-stories',  title: 'Success Stories | Learnda',  description: 'Read how Learnda students are achieving their academic goals.' },

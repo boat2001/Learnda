@@ -980,12 +980,6 @@ class ApiService {
       }),
 
     // Lecturer invites
-    getLecturerInvites: () =>
-      this.request('/admin/lecturer-invites'),
-    sendLecturerInvite: (contact) =>
-      this.request('/admin/lecturer-invites', { method: 'POST', body: JSON.stringify({ contact }) }),
-    revokeLecturerInvite: (id) =>
-      this.request(`/admin/lecturer-invites/${id}`, { method: 'DELETE' }),
 
     // Lecturers list (re-uses users endpoint with role filter)
     getLecturers: (params = {}) => {
@@ -1009,15 +1003,6 @@ class ApiService {
   };
 
   // Public lecturer invite (no auth required)
-  lecturerInvite = {
-    validate: (token) =>
-      this.request(`/lecturer-invite/${token}`),
-    complete: (token, data) =>
-      this.request(`/lecturer-invite/${token}/complete`, {
-        method: 'POST',
-        body: JSON.stringify(data),
-      }),
-  };
 
   // Subscription endpoints
   subscription = {
@@ -1450,17 +1435,6 @@ class ApiService {
   };
 
   // Ranking endpoints
-  ranking = {
-    getColleges: (filters = {}) => {
-      const params = new URLSearchParams(filters).toString();
-      return this.request(`/ranking/colleges?${params}`);
-    },
-    updateCollegeSignals: (id, signals) =>
-      this.request(`/ranking/colleges/${id}/signals`, {
-        method: 'PATCH',
-        body: JSON.stringify(signals),
-      }),
-  };
 
   // Support endpoints
   support = {
@@ -1487,67 +1461,6 @@ class ApiService {
     get: () => this.request('/public-config', { cacheTtlMs: 60000 }),
   };
 
-  // Eduvhibe endpoints
-  eduvhibe = {
-    getNotes: () => this.request('/eduvhibe/notes', { cacheTtlMs: 120000, staleWhileRevalidate: true }),
-    uploadNote: (formData) =>
-      this.request('/eduvhibe/notes', {
-        method: 'POST',
-        body: formData,
-        headers: {},
-      }),
-    downloadNote: (id) =>
-      this.request(`/eduvhibe/notes/${id}/download`, {
-        responseType: 'blob',
-      }),
-    deleteNote: (id) =>
-      this.request(`/eduvhibe/notes/${id}`, {
-        method: 'DELETE',
-      }),
-    getVideos: () => this.request('/eduvhibe/videos', { cacheTtlMs: 120000, staleWhileRevalidate: true }),
-    createVideo: (payload) =>
-      this.request('/eduvhibe/videos', {
-        method: 'POST',
-        body: JSON.stringify(payload),
-      }),
-    deleteVideo: (id) =>
-      this.request(`/eduvhibe/videos/${id}`, {
-        method: 'DELETE',
-      }),
-    getGuides: () => this.request('/eduvhibe/guides', { cacheTtlMs: 120000, staleWhileRevalidate: true }),
-    createGuide: (payload) =>
-      this.request('/eduvhibe/guides', {
-        method: 'POST',
-        body: JSON.stringify(payload),
-      }),
-    deleteGuide: (id) =>
-      this.request(`/eduvhibe/guides/${id}`, {
-        method: 'DELETE',
-      }),
-    getCgpaEntries: () => this.request('/eduvhibe/cgpa', { cacheTtlMs: 60000 }),
-    createCgpaEntry: (payload) =>
-      this.request('/eduvhibe/cgpa', {
-        method: 'POST',
-        body: JSON.stringify(payload),
-      }),
-    importCgpaEntries: (entries) =>
-      this.request('/eduvhibe/cgpa/import', {
-        method: 'POST',
-        body: JSON.stringify({ entries }),
-      }),
-    deleteCgpaEntry: (id) =>
-      this.request(`/eduvhibe/cgpa/${id}`, {
-        method: 'DELETE',
-      }),
-    clearCgpaSemester: (semester) =>
-      this.request(`/eduvhibe/cgpa/semester/${semester}`, {
-        method: 'DELETE',
-      }),
-    clearCgpaAll: () =>
-      this.request('/eduvhibe/cgpa', {
-        method: 'DELETE',
-      }),
-  };
 
   // Notifications endpoints
   notifications = {

@@ -326,7 +326,7 @@ async function buildRewardInsights(userId) {
   const topContent = contentStatsRows.slice(0, 5).map((row) => {
     let legacyType = row.content_type_ref || 'unknown';
     if (legacyType === 'lesson') legacyType = 'text_lesson';
-    else if (legacyType === 'eduvhibe_video' || legacyType === 'video_lesson') legacyType = 'video';
+    else if (legacyType === 'video_lesson') legacyType = 'video';
     else if (legacyType === 'text_item') legacyType = row.content_subtype || 'text_item';
     return {
       content_id: row.content_id || row.content_id_ref,

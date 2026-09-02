@@ -2,8 +2,8 @@
 /**
  * Single source of truth for the `all_content` view definition.
  *
- * The view UNIONs the four dedicated content tables (lessons, video_lessons,
- * eduvhibe_videos, text_items) into one shape the read paths query. Keeping the
+ * The view UNIONs the three dedicated content tables (lessons, video_lessons,
+ * text_items) into one shape the read paths query. Keeping the
  * DDL here means refresh_all_content_view.js and sync_content_to_target.js can
  * never drift apart. Editing a column? Edit it once, here.
  */
@@ -34,18 +34,6 @@ const ALL_CONTENT_VIEW_SQL = `
       NULL::JSONB AS questions, NULL::JSONB AS sections
     FROM video_lessons
 
-    UNION ALL
-
-    SELECT
-      id, 'eduvhibe_video'::TEXT AS content_type, NULL::TEXT AS subtype,
-      title, description, status, is_premium, creator_id, depth_level, tags,
-      thumbnail_url, file_url, video_url,
-      duration_minutes, NULL::INTEGER AS word_count, published_at, created_at, updated_at,
-      NULL::UUID AS course_id, NULL::INTEGER AS lesson_number, level,
-      NULL::TEXT AS category, NULL::TEXT AS tone, NULL::TEXT AS body, NULL::TEXT AS author,
-      metadata, NULL::JSONB AS lesson_document, NULL::JSONB AS exercises, NULL::JSONB AS objectives, NULL::JSONB AS final_assessment,
-      NULL::JSONB AS questions, NULL::JSONB AS sections
-    FROM eduvhibe_videos
 
     UNION ALL
 

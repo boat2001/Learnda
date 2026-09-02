@@ -314,7 +314,6 @@ export function playUiSound(kind) {
           scheduleSoftChime(a, m, 523.25, t0, 0.85, 0.038);
         });
         break;
-      case 'pageArriveEduvhibe':
         // Creative, curious: F4 → A4 → C5 (F-major — warm and creative)
         playThroughMaster(ac, 0.22, (a, m, t0) => {
           scheduleSoftChime(a, m, 349.23, t0,        0.55, 0.038);
@@ -347,5 +346,5 @@ export const SOUND_IDS = [
   'click', 'nav', 'toggleOn', 'toggleOff', 'tab', 'formSubmit', 'success', 'error',
   'welcomeGuest', 'welcomeAuth',
   'pageArriveLearn', 'pageArrivePractice', 'pageArrivePLS', 'pageArriveResources',
-  'pageArriveBlog', 'pageArriveSettings', 'pageArriveEduvhibe', 'pageArriveEdutainment',
+  'pageArriveBlog', 'pageArriveSettings', 'pageArriveEdutainment',
 ];

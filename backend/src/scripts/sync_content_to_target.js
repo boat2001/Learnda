@@ -33,7 +33,6 @@ const { refreshAllContentView } = require('./lib/allContentView');
 const CONTENT_TABLES = [
   { name: 'lessons', remapCourseId: true },
   { name: 'video_lessons', remapCourseId: true },
-  { name: 'eduvhibe_videos', remapCourseId: false },
   { name: 'text_items', remapCourseId: false },
 ];
 

@@ -378,11 +378,6 @@ export default function Footer() {
             <div className="link-group">
               <h5>Community</h5>
               <ul>
-                {FEATURE_FLAGS.collegeRankings ? (
-                  <li><Link to="/college-rankings"><FiAward aria-hidden /> College Rankings</Link></li>
-                ) : (
-                  <ComingSoonItem icon={FiAward} label="College Rankings" onSelect={setComingSoonFeature} />
-                )}
                 {FEATURE_FLAGS.community ? (
                   <li><CommunityForumPicker variant="footer-link" /></li>
                 ) : (

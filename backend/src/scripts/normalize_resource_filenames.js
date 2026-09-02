@@ -6,7 +6,7 @@ const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
 const { Op } = require('sequelize');
-const { connectAndSync, sequelize, ResourceFile, EduvhibeNote } = require('../models');
+const { connectAndSync, sequelize, ResourceFile } = require('../models');
 const {
   classifyResourceCategory,
   deriveYear,
@@ -46,7 +46,7 @@ const usage = () => {
   console.log('Usage: node src/scripts/normalize_resource_filenames.js [--apply] [--skip-db] [--target=resources]');
   console.log('  default     dry-run: report filename fixes only');
   console.log('  --apply     rename files, quarantine same-content collisions, and update DB references');
-  console.log('  --skip-db   do not connect to the DB or update ResourceFile/EduvhibeNote rows');
+  console.log('  --skip-db   do not connect to the DB or update ResourceFile rows');
 };
 
 const toPosix = (value) => String(value || '').replace(/\\/g, '/');
@@ -277,13 +277,8 @@ const updateDbReferences = async (fromRel, toRel) => {
   };
 
   const [resourceFiles] = await ResourceFile.update(values, { where });
-  let eduvhibeNotes = 0;
-  if (EduvhibeNote) {
-    const [count] = await EduvhibeNote.update(values, { where });
-    eduvhibeNotes = count;
-  }
 
-  return { resourceFiles, eduvhibeNotes };
+  return { resourceFiles };
 };
 
 const moveToQuarantine = (sourceRel) => {

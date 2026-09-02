@@ -9,14 +9,13 @@ const { Op } = require('sequelize');
 const TYPE_TO_MODEL = {
   lesson: 'Lesson',
   video_lesson: 'VideoLesson',
-  eduvhibe_video: 'EduvhibeVideo',
   text_item: 'TextItem',
 };
 
 /**
  * Return the Sequelize model for a given content_type discriminator.
  * @param {object} db - the models object from require('../models')
- * @param {string} contentType - 'lesson' | 'video_lesson' | 'eduvhibe_video' | 'text_item'
+ * @param {string} contentType - 'lesson' | 'video_lesson' | 'text_item'
  */
 const getModel = (db, contentType) => {
   const name = TYPE_TO_MODEL[contentType];
@@ -39,7 +38,7 @@ const findById = async (db, id) => {
 
 /**
  * Find the content_type for a given id (fast single-column query).
- * Returns 'lesson' | 'video_lesson' | 'eduvhibe_video' | 'text_item' | null
+ * Returns 'lesson' | 'video_lesson' | 'text_item' | null
  */
 const getContentType = async (db, id) => {
   const { sequelize } = db;
@@ -72,7 +71,6 @@ const normalizeRow = (row) => {
     // Map content_type back to a type field frontends may expect
     type: row.content_type === 'lesson' ? 'text_lesson'
         : row.content_type === 'text_item' ? (row.subtype || 'text_item')
-        : row.content_type === 'eduvhibe_video' ? 'video'
         : row.content_type, // video_lesson
   };
 };

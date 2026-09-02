@@ -141,7 +141,7 @@ class ContentService {
 
       if (type) {
         if (type === 'text_lesson') conditions.push(`content_type = 'lesson'`);
-        else if (type === 'video') conditions.push(`content_type IN ('video_lesson','eduvhibe_video')`);
+        else if (type === 'video') conditions.push(`content_type = 'video_lesson'`);
         else { conditions.push(`content_type = 'text_item' AND subtype = :filterType`); replacements.filterType = type; }
       }
       if (depth_level) { conditions.push(`depth_level = :depth_level`); replacements.depth_level = depth_level; }
@@ -377,7 +377,7 @@ class ContentService {
 
       if (filters.type) {
         if (filters.type === 'text_lesson') conditions.push(`content_type = 'lesson'`);
-        else if (filters.type === 'video') conditions.push(`content_type IN ('video_lesson','eduvhibe_video')`);
+        else if (filters.type === 'video') conditions.push(`content_type = 'video_lesson'`);
         else { conditions.push(`subtype = :fType`); replacements.fType = filters.type; }
       }
       if (filters.course) {

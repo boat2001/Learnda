@@ -5,5 +5,4 @@
 export const FEATURE_FLAGS = {
   studyGroups: false,
   community: false,
-  collegeRankings: false,
 };
