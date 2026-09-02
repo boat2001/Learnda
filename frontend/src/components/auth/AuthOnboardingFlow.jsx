@@ -60,7 +60,7 @@ const AUTO_RENEW_FIELDS = [
 const DURATION_FIELDS = ['duration_months', 'durationMonths', 'billing_months', 'billingMonths'];
 const PLAN_DESCRIPTION_OVERRIDES = {
   'Serious Student': 'Unlock all core course content, more downloads, and full access to study groups.',
-  'Master Student': 'Everything Sharether offers — core and elective courses, unlimited downloads, all features.',
+  'Master Student': 'Everything Learnda offers — core and elective courses, unlimited downloads, all features.',
   'Basic Student': 'Access notes, past questions, and resources — free, always. Upgrade when you need more.',
 };
 

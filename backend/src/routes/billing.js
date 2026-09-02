@@ -23,7 +23,7 @@ const MAX_DURATION_MONTHS = 12;
 const normalizeString = (value) => String(value || '').trim();
 const normalizePhoneDigits = (value) => String(value || '').replace(/\D/g, '');
 const isValidCheckoutEmail = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizeString(value));
-const buildPhoneCheckoutEmail = (phoneNumber) => `phone.${normalizePhoneDigits(phoneNumber)}@auth.sharether.app`;
+const buildPhoneCheckoutEmail = (phoneNumber) => `phone.${normalizePhoneDigits(phoneNumber)}@auth.learnda.app`;
 
 const parseDurationMonths = (value) => {
   const parsed = Number.parseInt(value, 10);
@@ -35,7 +35,7 @@ const parseDurationMonths = (value) => {
 
 const resolveCheckoutEmail = (user) => {
   const rawEmail = normalizeString(user?.email);
-  if (isValidCheckoutEmail(rawEmail) && !rawEmail.endsWith('@auth.sharether.local')) {
+  if (isValidCheckoutEmail(rawEmail) && !rawEmail.endsWith('@auth.learnda.local')) {
     return rawEmail.toLowerCase();
   }
 

@@ -150,14 +150,14 @@
 }
 
 .plan-item--free {
-  border-color: var(--primary-color, #1f7177);
+  border-color: var(--primary-color, #2b62c4);
   border-width: 2px;
 }
 
 .plan-item__tagline {
   font-size: 0.78rem;
   font-weight: 600;
-  color: var(--primary-color, #1f7177);
+  color: var(--primary-color, #2b62c4);
   margin: 4px 0 6px !important;
 }
 
@@ -189,8 +189,8 @@
   color: var(--color-text-secondary);
   margin: 0 0 1.25rem;
   padding: 0.75rem 1rem;
-  border-left: 3px solid #f59e0b;
-  background: rgba(245, 158, 11, 0.06);
+  border-left: 3px solid #fab82c;
+  background: rgba(250, 184, 44, 0.06);
   border-radius: 0 8px 8px 0;
 }
 

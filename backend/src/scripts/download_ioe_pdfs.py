@@ -465,7 +465,7 @@ PACKET_TEMPLATE = {
     "subtype": "notes",
     "status": "ready",
     "instructions": (
-        "You are a skilled curriculum writer for Sharether, an e-learning platform "
+        "You are a skilled curriculum writer for Learnda, an e-learning platform "
         "for Ghanaian teacher-education students. Using ONLY the extracted_text below "
         "(do NOT invent facts not in the source), write a complete lesson JSON following "
         "the draft_output_template schema. Use Ghanaian examples, analogies, and rhetorical "
@@ -497,7 +497,7 @@ def make_session():
     s = requests.Session()
     retries = Retry(total=3, backoff_factor=1, status_forcelist=[500, 502, 503, 504])
     s.mount("https://", HTTPAdapter(max_retries=retries))
-    s.headers["User-Agent"] = "Mozilla/5.0 (compatible; Sharether-IoE-Fetcher/1.0)"
+    s.headers["User-Agent"] = "Mozilla/5.0 (compatible; Learnda-IoE-Fetcher/1.0)"
     return s
 
 

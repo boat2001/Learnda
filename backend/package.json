@@ -1,7 +1,7 @@
 {
   "name": "backend",
   "version": "3.0.0",
-  "description": "Sharether - Learning Platform Backend",
+  "description": "Learnda - Learning Platform Backend",
   "main": "src/app.js",
   "scripts": {
     "sync-ip": "node ../sync-ip.cjs",
@@ -15,7 +15,7 @@
     "migrate:undo": "sequelize-cli db:migrate:undo",
     "seed": "sequelize-cli db:seed:all",
     "seed:undo": "sequelize-cli db:seed:undo:all",
-    "seed:sharether": "node src/scripts/seed_sharether_content.js",
+    "seed:learnda": "node src/scripts/seed_learnda_content.js",
     "seed:eduvhibe": "node src/scripts/seed_eduvhibe_code_content.js",
     "seed:eduvhibe-second-sem-youtube": "node src/scripts/seed_eduvhibe_second_sem_youtube.js",
     "seed:eduvhibe:notes": "node src/scripts/seed_eduvhibe_notes.js",

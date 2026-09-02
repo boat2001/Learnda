@@ -1,6 +1,6 @@
 'use strict';
 /**
- * Generate draft Sharether lessons from uploaded notes.
+ * Generate draft Learnda lessons from uploaded notes.
  *
  * Usage:
  *   node src/scripts/generate_lessons_from_notes.js --dry-run
@@ -99,9 +99,9 @@ function buildLessonPrompt({
     ? `The final chunk heading must be exactly "What You've Achieved". It should summarize the important learning from the course and encourage practical application.`
     : `The final chunk heading must be exactly "What's Coming Up". Tease the next lesson "${nextNoteTitle || 'the next lesson'}" by naming one or two specific concepts students will meet.`;
 
-  return `You are an expert educational content designer for Sharether, a learning platform for Ghanaian university students.
+  return `You are an expert educational content designer for Learnda, a learning platform for Ghanaian university students.
 
-Transform the extracted course notes into one structured, engaging Sharether lesson. Do not merely summarize or reformat the source. Build a lesson students can read, understand, and practise with.
+Transform the extracted course notes into one structured, engaging Learnda lesson. Do not merely summarize or reformat the source. Build a lesson students can read, understand, and practise with.
 
 COURSE CONTEXT
 Course title: ${courseTitle}

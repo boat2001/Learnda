@@ -68,8 +68,8 @@ const sendOtpSms = async (phoneNumber, otp, purpose = 'verification', expiresInM
   }
 
   const message = purpose === 'signin'
-    ? `Your Sharether sign-in code is ${otp}. It expires in ${expiresInMinutes} minutes.`
-    : `Your Sharether verification code is ${otp}. Expires in ${expiresInMinutes} mins. Do not share it.`;
+    ? `Your Learnda sign-in code is ${otp}. It expires in ${expiresInMinutes} minutes.`
+    : `Your Learnda verification code is ${otp}. Expires in ${expiresInMinutes} mins. Do not share it.`;
 
   return sendArkeselSms({ to: phoneNumber, message });
 };

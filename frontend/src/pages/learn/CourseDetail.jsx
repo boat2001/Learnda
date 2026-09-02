@@ -388,7 +388,7 @@ const storeLessonUnlocks = (storageKey, unlocks) => {
 const getLessonAccessStorageKey = ({ course, courseSlug, userId }) => {
   const courseKey = String(course?.id || course?.course_id || course?.content_id || courseSlug || 'course').trim();
   const learnerKey = String(userId || 'guest').trim();
-  return `sharether:lesson-access:${learnerKey}:${courseKey}`;
+  return `learnda:lesson-access:${learnerKey}:${courseKey}`;
 };
 
 const normalizeImageUrl = (value) => {
@@ -444,7 +444,7 @@ const mergeLessonData = (base, next) => {
   };
 };
 
-// Sharether signature tone: triangle wave with sustain phase gives warm bell-like character.
+// Learnda signature tone: triangle wave with sustain phase gives warm bell-like character.
 const scheduleTone = (audioContext, destination, frequency, startAt, duration, volume, type = 'triangle') => {
   const oscillator = audioContext.createOscillator();
   const gainNode = audioContext.createGain();
@@ -538,8 +538,8 @@ export default function CourseDetail() {
       setPrelimProgressMap(loadPrelimProgress(prelimProgressStorageKey));
     };
 
-    window.addEventListener('sharether:prelim-progress-updated', handlePrelimProgressUpdated);
-    return () => window.removeEventListener('sharether:prelim-progress-updated', handlePrelimProgressUpdated);
+    window.addEventListener('learnda:prelim-progress-updated', handlePrelimProgressUpdated);
+    return () => window.removeEventListener('learnda:prelim-progress-updated', handlePrelimProgressUpdated);
   }, [course?.id, courseIdParam, prelimProgressStorageKey]);
 
   useEffect(() => {

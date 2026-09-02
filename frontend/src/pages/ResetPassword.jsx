@@ -85,7 +85,7 @@ export default function ResetPassword() {
             </h1>
             <p className="hero-subtitle">
               {isResetFlow
-                ? 'Enter a new password below to regain access to your Sharether account.'
+                ? 'Enter a new password below to regain access to your Learnda account.'
                 : 'Enter the email address linked to your account and we will send a reset link.'}
             </p>
           </div>
@@ -96,7 +96,7 @@ export default function ResetPassword() {
                 <span className="panel-dot"></span>
                 <div>
                   <strong>Contact support</strong>
-                  <p>support@sharether.com</p>
+                  <p>support@learnda.app</p>
                 </div>
               </div>
               <div className="panel-list-item">

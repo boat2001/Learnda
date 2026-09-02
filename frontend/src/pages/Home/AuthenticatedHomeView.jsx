@@ -52,7 +52,7 @@ function GreetingArt() {
         <path d="M39 127 C39 105 39 92 40 78" stroke="#10b981" strokeWidth="3" strokeLinecap="round" />
         <path d="M31 91 C18 91 14 82 14 73 C26 73 34 79 31 91 Z" fill="#34d399" />
         <path d="M55 89 C67 87 72 78 70 69 C58 70 51 78 55 89 Z" fill="#10b981" />
-        <path d="M40 82 C30 75 30 65 35 57 C45 63 49 72 40 82 Z" fill="#22c55e" />
+        <path d="M40 82 C30 75 30 65 35 57 C45 63 49 72 40 82 Z" fill="#73a24b" />
         <path d="M21 126 H58 L53 154 H27 Z" fill="#e8f1f8" stroke="#b9cee0" strokeWidth="2" />
         <path d="M18 124 C18 121.8 19.8 120 22 120 H57 C59.2 120 61 121.8 61 124 V130 H18 Z" fill="#f8fbfd" stroke="#b9cee0" strokeWidth="2" />
         <path d="M28 137 H52" stroke="#c8d9e7" strokeWidth="2" strokeLinecap="round" />
@@ -84,8 +84,8 @@ function GreetingArt() {
         <path className="home-hero-cap-body" d="M119 61 H153 V75 C146 80 126 80 119 75 Z" fill="#334155" />
         <path className="home-hero-cap-board" d="M136 35 L187 53 L136 71 L85 53 Z" fill="#172033" />
         <path className="home-hero-cap-crown" d="M136 35 L187 53 L136 59 L85 53 Z" fill="#27364d" />
-        <circle cx="136" cy="53" r="3.5" fill="#f59e0b" />
-        <path d="M136 53 C166 51 173 55 173 63 V72" stroke="#f59e0b" strokeWidth="3" strokeLinecap="round" />
+        <circle cx="136" cy="53" r="3.5" fill="#fab82c" />
+        <path d="M136 53 C166 51 173 55 173 63 V72" stroke="#fab82c" strokeWidth="3" strokeLinecap="round" />
         <path d="M169 72 H177 L175 83 H171 Z" fill="#fb923c" />
       </g>
     </svg>
@@ -197,7 +197,7 @@ export default function AuthenticatedHomeView({ home }) {
       <section className="home-hero has-resume">
         <div className="home-hero-intro">
           <div className="home-hero-text">
-            <p className="home-hero-eyebrow">{isAuthenticated ? 'Welcome back,' : 'Welcome to Sharether'}</p>
+            <p className="home-hero-eyebrow">{isAuthenticated ? 'Welcome back,' : 'Welcome to Learnda'}</p>
             <h1 className="home-hero-name">
               {isAuthenticated ? `${firstName || 'there'}!` : 'Scholar'} <span className="home-hero-wave">👋</span>
             </h1>

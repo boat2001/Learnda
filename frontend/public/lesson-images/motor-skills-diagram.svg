@@ -102,7 +102,7 @@
 
   <!-- Teacher note in centre column (no overlap with side columns) -->
   <line x1="430" y1="122" x2="430" y2="210" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="5,3"/>
-  <rect x="252" y="210" width="356" height="180" rx="12" fill="#f0fdf4" stroke="#22c55e" stroke-width="1.5"/>
+  <rect x="252" y="210" width="356" height="180" rx="12" fill="#f0fdf4" stroke="#73a24b" stroke-width="1.5"/>
   <text x="430" y="238" text-anchor="middle" font-size="13" font-weight="700" fill="#14532d">📚 Teacher's Note</text>
   <text x="430" y="264" text-anchor="middle" font-size="11" fill="#166534">Boys often excel in gross motor skills;</text>
   <text x="430" y="282" text-anchor="middle" font-size="11" fill="#166534">girls may excel in fine motor skills.</text>
@@ -112,5 +112,5 @@
   <text x="430" y="362" text-anchor="middle" font-size="11" fill="#166534">motor development.</text>
 
   <!-- Footer -->
-  <text x="430" y="490" text-anchor="middle" font-size="10" fill="#94a3b8">Sharether Learning Platform • Physical Development — Motor Skills</text>
+  <text x="430" y="490" text-anchor="middle" font-size="10" fill="#94a3b8">Learnda Learning Platform • Physical Development — Motor Skills</text>
 </svg>

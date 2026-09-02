@@ -1,9 +1,9 @@
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
-import { initSharetherPwa } from "./utils/pwaInstall";
+import { initLearndaPwa } from "./utils/pwaInstall";
 
-initSharetherPwa();
+initLearndaPwa();
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter

@@ -392,7 +392,7 @@ export default function PracticeSession() {
 
     if (typeof window !== 'undefined') {
       window.dispatchEvent(
-        new CustomEvent('sharether:learning-progress-updated', {
+        new CustomEvent('learnda:learning-progress-updated', {
           detail: {
             practiceId,
             courseId: location.state?.course?.id || practice?.course?.id || null,
@@ -729,7 +729,7 @@ export default function PracticeSession() {
       id: `${practiceId}-${targetType}-${Date.now()}`,
       body: safeText(discussionDraft),
       authorKey: getUserKey(user),
-      authorName: user?.full_name || user?.name || 'Sharether Student',
+      authorName: user?.full_name || user?.name || 'Learnda Student',
       authorAvatar: user?.avatar_url || null,
       createdAt: new Date().toISOString(),
       likes: 0,
@@ -750,7 +750,7 @@ export default function PracticeSession() {
       id: `${entryId}-reply-${Date.now()}`,
       body: safeText(discussionReplyDrafts[entryId]),
       authorKey: getUserKey(user),
-      authorName: user?.full_name || user?.name || 'Sharether Student',
+      authorName: user?.full_name || user?.name || 'Learnda Student',
       authorAvatar: user?.avatar_url || null,
       createdAt: new Date().toISOString(),
     };

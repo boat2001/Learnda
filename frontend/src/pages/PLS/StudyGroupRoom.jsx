@@ -33,7 +33,7 @@ import {
   saveThemePreference,
 } from '../../utils/theme';
 import { playUiSound } from '../../utils/uiSounds';
-import { SharetherChatBackdrop } from '../../components/common/SharetherChatBackdrop';
+import { LearndaChatBackdrop } from '../../components/common/LearndaChatBackdrop';
 import { lockBodyScroll } from '../../utils/bodyScrollLock';
 import {
   canRequestMicrophone,
@@ -1126,7 +1126,7 @@ export default function StudyGroupRoom() {
           </aside>
 
           <section className="sgr-chat" aria-label="Group chat">
-            <SharetherChatBackdrop patternSeed={`study-group-chat-${group?.id ?? groupId ?? 'room'}`} />
+            <LearndaChatBackdrop patternSeed={`study-group-chat-${group?.id ?? groupId ?? 'room'}`} />
             <div className="sgr-chat__messages">
               {messages.length === 0 ? (
                 <div className="sgr-chat__empty">

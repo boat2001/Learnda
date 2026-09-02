@@ -178,7 +178,7 @@ const syncUserAcademicColumnsFromProfile = async (user) => {
   Object.assign(user, patch);
   return user;
 };
-const buildPhonePlaceholderEmail = (phoneNumber) => `phone.${String(phoneNumber || '').replace(/\D/g, '')}@auth.sharether.app`;
+const buildPhonePlaceholderEmail = (phoneNumber) => `phone.${String(phoneNumber || '').replace(/\D/g, '')}@auth.learnda.app`;
 const getRegistrationChallengeKey = ({ channel, contact }) => (
   channel === 'phone'
     ? buildPhonePlaceholderEmail(contact)

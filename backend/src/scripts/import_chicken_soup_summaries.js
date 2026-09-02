@@ -58,7 +58,7 @@ const selected = [
   },
   {
     category: 'articles', title: 'The Rules for Being Human: A Reflection Guide', author: 'Cherie Carter-Scott', page: 52,
-    summary: 'A reflective framework presents life as continuing learning through experimentation, repeated lessons, personal choice, and self-examination. Sharether readers can use the ideas as prompts for journaling about mistakes, growth, and professional identity rather than as fixed rules.',
+    summary: 'A reflective framework presents life as continuing learning through experimentation, repeated lessons, personal choice, and self-examination. Learnda readers can use the ideas as prompts for journaling about mistakes, growth, and professional identity rather than as fixed rules.',
     lesson: 'Reflection turns experience, including unsuccessful attempts, into material for continued learning.',
     tags: ['reflection', 'growth', 'professional-identity']
   },

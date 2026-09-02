@@ -26,14 +26,14 @@
 
   <!-- ============ STAGE 1: GERMINAL ============ -->
   <g class="stage" tabindex="0">
-    <rect class="ring" x="104" y="92" width="356" height="150" rx="13" stroke="#f59e0b" stroke-width="3"/>
+    <rect class="ring" x="104" y="92" width="356" height="150" rx="13" stroke="#fab82c" stroke-width="3"/>
     <rect x="108" y="96" width="348" height="142" rx="12" fill="#fff7e6" stroke="#fcd385" stroke-width="1.5"/>
-    <rect x="108" y="96" width="6" height="142" rx="3" fill="#f59e0b"/>
-    <circle class="node" cx="78" cy="167" r="11" fill="#f59e0b"/>
+    <rect x="108" y="96" width="6" height="142" rx="3" fill="#fab82c"/>
+    <circle class="node" cx="78" cy="167" r="11" fill="#fab82c"/>
     <text class="pt-title" x="78" y="172" text-anchor="middle" fill="#ffffff" font-size="14">1</text>
 
     <text class="pt-title" x="128" y="124" fill="#1e293b" font-size="17">Germinal</text>
-    <rect x="218" y="110" width="92" height="20" rx="10" fill="#f59e0b"/>
+    <rect x="218" y="110" width="92" height="20" rx="10" fill="#fab82c"/>
     <text class="pt-body" x="264" y="124" text-anchor="middle" fill="#ffffff" font-size="13" font-weight="700">0&#8211;2 weeks</text>
 
     <text class="pt-body" x="128" y="150" fill="#1e293b" font-size="14">&#8226; Zygote divides rapidly and implants</text>
@@ -64,8 +64,8 @@
 
     <!-- Warning badge (geometric, no emoji) -->
     <g transform="translate(128,366)">
-      <rect x="0" y="0" width="232" height="24" rx="12" fill="#fee2e2" stroke="#ef4444" stroke-width="1.2"/>
-      <path d="M14 5 L21 18 L7 18 Z" fill="#ef4444"/>
+      <rect x="0" y="0" width="232" height="24" rx="12" fill="#fee2e2" stroke="#fb6334" stroke-width="1.2"/>
+      <path d="M14 5 L21 18 L7 18 Z" fill="#fb6334"/>
       <text class="pt-title" x="14" y="16.5" text-anchor="middle" fill="#ffffff" font-size="11">!</text>
       <text class="pt-body" x="30" y="16" fill="#b91c1c" font-size="12.5" font-weight="700">Greatest teratogen risk</text>
     </g>
@@ -99,7 +99,7 @@
   </g>
 
   <!-- Footer -->
-  <text class="pt-body" x="240" y="646" text-anchor="middle" fill="#94a3b8" font-size="11">Sharether Learning Platform &#8226; EBS 106 &#8226; Lesson 4: Prenatal Development</text>
+  <text class="pt-body" x="240" y="646" text-anchor="middle" fill="#94a3b8" font-size="11">Learnda Learning Platform &#8226; EBS 106 &#8226; Lesson 4: Prenatal Development</text>
 
   <script><![CDATA[
     // Progressive enhancement: tap-to-toggle for touch devices (hover handles desktop).

@@ -6,7 +6,7 @@ const courses = require('../data/lastNotesCourses');
 const curatedSources = require('../data/lastNotesSources');
 
 const ROOT = path.resolve(__dirname, '../../last-notes');
-const USER_AGENT = 'SharetherCourseNotesCollector/1.0 (+educational-resource-indexer)';
+const USER_AGENT = 'LearndaCourseNotesCollector/1.0 (+educational-resource-indexer)';
 const DOCUMENT_EXTENSIONS = new Set(['.pdf', '.doc', '.docx', '.ppt', '.pptx', '.txt']);
 const MIME_EXTENSIONS = new Map([
   ['application/pdf', '.pdf'],

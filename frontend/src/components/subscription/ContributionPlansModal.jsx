@@ -58,7 +58,7 @@ export default function ContributionPlansModal({ isOpen, onClose, source = 'cont
       <div className="contribution-plans-modal" role="dialog" aria-modal="true" aria-label="Contribution plans">
         <div className="contribution-plans-modal__header">
           <div>
-            <h3>Chip in to Sharether</h3>
+            <h3>Chip in to Learnda</h3>
             <p>Pick what fits your budget. Every plan opens up more of the platform.</p>
           </div>
           <button

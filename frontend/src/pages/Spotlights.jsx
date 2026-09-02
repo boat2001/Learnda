@@ -10,7 +10,7 @@ export default function Spotlights() {
             <span className="hero-tag">Student &amp; contributor of the month</span>
             <h1 className="hero-title">Spotlights</h1>
             <p className="hero-subtitle">
-              A dedicated home for the students and contributors Sharether celebrates each month.
+              A dedicated home for the students and contributors Learnda celebrates each month.
               This page is being built — the spotlight cards are moving here from the home page.
             </p>
           </div>

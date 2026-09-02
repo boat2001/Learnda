@@ -132,14 +132,14 @@ const [showModal, setShowModal] = useState(false);
             <span className="hero-tag">Support and outreach</span>
             <h1 className="hero-title">Get answers, raise issues, or start the conversation that moves things forward.</h1>
             <p className="hero-subtitle">
-              This page combines direct contact, quick support answers, and the main paths for reaching the Sharether team.
+              This page combines direct contact, quick support answers, and the main paths for reaching the Learnda team.
             </p>
             <div className="hero-actions">
               <button className="btn btn-primary" type="button" onClick={() => setShowModal(true)}>
                 Send us a message
               </button>
               <button className="btn btn-secondary" type="button" onClick={() => navigate('/contribute')}>
-                Chip in to Sharether
+                Chip in to Learnda
               </button>
             </div>
             <div className="stat-grid">
@@ -188,11 +188,11 @@ const [showModal, setShowModal] = useState(false);
           <p>Pick the channel that works best for you.</p>
         </div>
         <div className="contact-grid">
-          <a className="contact-box" href="mailto:support@sharether.com">
+          <a className="contact-box" href="mailto:support@learnda.app">
             <div className="contact-box__icon"><FiMail /></div>
             <div className="contact-box__body">
               <span className="contact-box__label">Email</span>
-              <span className="contact-box__value">support@sharether.com</span>
+              <span className="contact-box__value">support@learnda.app</span>
               <span className="contact-box__desc">For support, billing, and partnerships.</span>
             </div>
           </a>

@@ -269,12 +269,12 @@ export const PLSProvider = ({ children }) => {
       }, 450);
     };
 
-    window.addEventListener('sharether:learning-progress-updated', handleLearningProgressUpdated);
+    window.addEventListener('learnda:learning-progress-updated', handleLearningProgressUpdated);
     return () => {
       if (timeoutId) {
         window.clearTimeout(timeoutId);
       }
-      window.removeEventListener('sharether:learning-progress-updated', handleLearningProgressUpdated);
+      window.removeEventListener('learnda:learning-progress-updated', handleLearningProgressUpdated);
     };
   }, [refreshPLS, user]);
 

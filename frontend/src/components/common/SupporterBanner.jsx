@@ -60,11 +60,11 @@ export default function SupporterBanner() {
   };
 
   return (
-    <div className="supporter-banner" role="complementary" aria-label="Sharether supporter progress">
+    <div className="supporter-banner" role="complementary" aria-label="Learnda supporter progress">
       <div className="supporter-banner__inner">
         <p className="supporter-banner__text">
           <strong>{stats.count} students</strong> are chipping in this month — just{' '}
-          <strong>{gap} more</strong> and Sharether is fully funded for the rest of it.
+          <strong>{gap} more</strong> and Learnda is fully funded for the rest of it.
         </p>
         <button type="button" className="supporter-banner__cta" onClick={handleJoin}>
           Join them

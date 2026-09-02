@@ -8,7 +8,7 @@ const PRIVACY_SECTIONS = [
   },
   {
     title: 'How we use data',
-    body: 'We use data to personalize lessons, recommend content, and keep Sharether secure.',
+    body: 'We use data to personalize lessons, recommend content, and keep Learnda secure.',
   },
   {
     title: 'Data sharing',
@@ -44,7 +44,7 @@ export default function Policies() {
         <div className="hero-grid">
           <div>
             <span className="hero-tag">Transparency</span>
-            <h1 className="hero-title">How Sharether handles your data and uses cookies.</h1>
+            <h1 className="hero-title">How Learnda handles your data and uses cookies.</h1>
             <p className="hero-subtitle">
               This page covers our privacy practices and cookie usage in one place — what we collect, why it matters, and where your control begins.
             </p>

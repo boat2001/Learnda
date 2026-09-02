@@ -189,9 +189,9 @@ const PHASE_ICONS = {
   expansion: [FiGlobe, FiNavigation, FiCompass, FiLink, FiLink, FiBriefcase, FiCpu, FiTrendingUp],
 };
 
-const SITE_URL = import.meta.env.VITE_SITE_URL || 'https://sharether.com';
-const ROADMAP_SVG = '/sharether-roadmap.svg';
-const FILENAME    = 'sharether-platform-roadmap.png';
+const SITE_URL = import.meta.env.VITE_SITE_URL || 'https://learnda.app';
+const ROADMAP_SVG = '/learnda-roadmap.svg';
+const FILENAME    = 'learnda-platform-roadmap.png';
 
 function triggerDownload(url, filename) {
   const link = document.createElement('a');
@@ -257,13 +257,13 @@ export default function Roadmap() {
       if (navigator.canShare?.({ files: [file] })) {
         await navigator.share({
           files: [file],
-          title: 'Sharether Platform Roadmap',
-          text: "The 10-year roadmap for Sharether — building the learning infrastructure Africa's students deserve.",
+          title: 'Learnda Platform Roadmap',
+          text: "The 10-year roadmap for Learnda — building the learning infrastructure Africa's students deserve.",
         });
       } else if (navigator.share) {
         await navigator.share({
-          title: 'Sharether Platform Roadmap',
-          text: "The 10-year roadmap for Sharether — building the learning infrastructure Africa's students deserve.",
+          title: 'Learnda Platform Roadmap',
+          text: "The 10-year roadmap for Learnda — building the learning infrastructure Africa's students deserve.",
           url: `${SITE_URL}/roadmap`,
         });
       } else {
@@ -342,7 +342,7 @@ export default function Roadmap() {
 
       <section className="page-section">
         <div className="section-heading">
-          <h2>The Sharether journey</h2>
+          <h2>The Learnda journey</h2>
           <p>
             Five versions, five phases, each with its own milestone, team, and set of students it was built to serve.
           </p>
@@ -358,9 +358,9 @@ export default function Roadmap() {
         <div className="rm-canvas" aria-hidden="true">
           {/* Brand watermark — top-left */}
           <div className="rm-brand-mark">
-            <img src="/sharether-logo.webp" alt="" className="rm-brand-mark__logo" />
+            <img src="/learnda-logo.webp" alt="" className="rm-brand-mark__logo" />
             <div className="rm-brand-mark__text">
-              <span className="rm-brand-mark__name">Sharether</span>
+              <span className="rm-brand-mark__name">Learnda</span>
               <span className="rm-brand-mark__tagline">Learn Like Never Before</span>
             </div>
           </div>
@@ -459,9 +459,9 @@ export default function Roadmap() {
           {/* Mobile header card */}
           <div className="rm-mobile-header">
             <div className="rm-mobile-header__brand">
-              <img src="/sharether-logo.webp" alt="" className="rm-mobile-header__logo" />
+              <img src="/learnda-logo.webp" alt="" className="rm-mobile-header__logo" />
               <div>
-                <span className="rm-mobile-header__name">Sharether</span>
+                <span className="rm-mobile-header__name">Learnda</span>
                 <span className="rm-mobile-header__tagline">Learn Like Never Before</span>
               </div>
             </div>

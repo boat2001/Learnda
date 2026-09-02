@@ -38,7 +38,7 @@ function fmtCurrency(n) {
   return `GH₵ ${Number(n).toLocaleString('en-GH', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 }
 
-const TEAL = '#1f7177';
+const TEAL = '#2b62c4';
 const TEAL_LIGHT = '#4fb3ad';
 
 function chartColors() {

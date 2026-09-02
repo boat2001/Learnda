@@ -16,7 +16,7 @@ const getClient = () => {
   return client;
 };
 
-const from = () => config.resend?.from || 'Sharether <noreply@sharether.com>';
+const from = () => config.resend?.from || 'Learnda <noreply@learnda.app>';
 
 const logSkipped = (type, details = {}) =>
   logger.info(`Email service not configured. Skipping ${type} email.`, details);
@@ -40,9 +40,11 @@ const sendEmail = async ({ to, subject, text, html, replyTo }) => {
 
 // ── Shared HTML helpers ────────────────────────────────────────────────────────
 
-const BRAND_NAME = 'Sharether Learning Platform';
-const SITE_URL = 'https://beta.sharether.com';
-const LOGO_URL = 'https://pub-1dec8067cfda47ef9b8088c56989e07e.r2.dev/brand/sharether-logo.png';
+const BRAND_NAME = 'Learnda Learning Platform';
+const SITE_URL = process.env.APP_PUBLIC_URL || 'https://beta.learnda.app';
+// Absolute URL required: email clients cannot resolve app-relative paths.
+const LOGO_URL = process.env.BRAND_LOGO_URL
+  || (process.env.R2_PUBLIC_URL ? `${process.env.R2_PUBLIC_URL}/brand/learnda-logo.png` : `${SITE_URL}/learnda-logo.png`);
 
 const wrap = (bodyContent) => `
 <!DOCTYPE html>
@@ -57,7 +59,7 @@ const wrap = (bodyContent) => `
     <tr><td align="center">
       <table width="100%" style="max-width:520px;background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.08);">
         <tr>
-          <td style="background:#1f7177;padding:20px 32px;">
+          <td style="background:#1f56db;padding:20px 32px;">
             <table cellpadding="0" cellspacing="0">
               <tr>
                 <td style="vertical-align:middle;padding-right:12px;">
@@ -76,7 +78,7 @@ const wrap = (bodyContent) => `
           <td style="padding:20px 32px;border-top:1px solid #f0f0f0;text-align:center;">
             <p style="margin:0;font-size:12px;color:#9ca3af;">
               &copy; ${new Date().getFullYear()} ${BRAND_NAME} &bull;
-              <a href="${SITE_URL}" style="color:#1f7177;text-decoration:none;">sharether.com</a>
+              <a href="${SITE_URL}" style="color:#1f56db;text-decoration:none;">learnda.app</a>
             </p>
           </td>
         </tr>
@@ -88,7 +90,7 @@ const wrap = (bodyContent) => `
 
 const otpBlock = (otp) => `
   <div style="margin:24px 0;text-align:center;">
-    <span style="display:inline-block;background:#f0fafa;border:2px dashed #1f7177;border-radius:8px;padding:14px 32px;font-size:32px;font-weight:700;letter-spacing:8px;color:#1f7177;">${otp}</span>
+    <span style="display:inline-block;background:#f0fafa;border:2px dashed #1f56db;border-radius:8px;padding:14px 32px;font-size:32px;font-weight:700;letter-spacing:8px;color:#1f56db;">${otp}</span>
   </div>`;
 
 const p = (text, style = '') =>
@@ -105,19 +107,21 @@ const muted = (text) =>
 module.exports = {
   isConfigured,
   sendEmail,
+  LOGO_URL,
+  SITE_URL,
 
   sendWelcomeEmail: async (email, fullName) => {
     if (!isConfigured()) { logSkipped('welcome', { email }); return { success: true, skipped: true }; }
     const name = fullName || 'there';
     return sendEmail({
       to: email,
-      subject: 'Welcome to Sharether!',
-      text: `Hi ${name}, welcome to Sharether! We're glad you're here. Start exploring courses and study resources at https://sharether.com.`,
+      subject: 'Welcome to Learnda!',
+      text: `Hi ${name}, welcome to Learnda! We're glad you're here. Start exploring courses and study resources at https://learnda.app.`,
       html: wrap(`
         ${h1(`Welcome, ${name}! 🎉`)}
-        ${p('You\'ve successfully joined Sharether — the smarter way to learn.')}
+        ${p('You\'ve successfully joined Learnda — the smarter way to learn.')}
         ${p('Explore courses, study resources, and personalised learning tools tailored to your programme.')}
-        <a href="https://sharether.com" style="display:inline-block;margin-top:8px;background:#1f7177;color:#ffffff;text-decoration:none;padding:12px 28px;border-radius:8px;font-size:15px;font-weight:600;">Get started</a>
+        <a href="https://learnda.app" style="display:inline-block;margin-top:8px;background:#1f56db;color:#ffffff;text-decoration:none;padding:12px 28px;border-radius:8px;font-size:15px;font-weight:600;">Get started</a>
         ${muted('If you did not create an account, you can safely ignore this email.')}
       `),
     });
@@ -127,12 +131,12 @@ module.exports = {
     if (!isConfigured()) { logSkipped('verification', { email }); return { success: true, skipped: true }; }
     return sendEmail({
       to: email,
-      subject: 'Verify your Sharether account',
+      subject: 'Verify your Learnda account',
       text: `Use this token to verify your account: ${token}`,
       html: wrap(`
         ${h1('Verify your account')}
-        ${p('Use the link below to verify your Sharether account:')}
-        <a href="${token}" style="display:inline-block;margin:8px 0 16px;background:#1f7177;color:#ffffff;text-decoration:none;padding:12px 28px;border-radius:8px;font-size:15px;font-weight:600;">Verify account</a>
+        ${p('Use the link below to verify your Learnda account:')}
+        <a href="${token}" style="display:inline-block;margin:8px 0 16px;background:#1f56db;color:#ffffff;text-decoration:none;padding:12px 28px;border-radius:8px;font-size:15px;font-weight:600;">Verify account</a>
         ${muted('If you did not request this, ignore this email.')}
       `),
     });
@@ -142,12 +146,12 @@ module.exports = {
     if (!isConfigured()) { logSkipped('password_reset', { email }); return { success: true, skipped: true }; }
     return sendEmail({
       to: email,
-      subject: 'Reset your Sharether password',
+      subject: 'Reset your Learnda password',
       text: `Click here to reset your password: ${resetUrl}. This link expires in 1 hour.`,
       html: wrap(`
         ${h1('Reset your password')}
-        ${p('We received a request to reset your Sharether password. Click the button below to choose a new one.')}
-        <a href="${resetUrl}" style="display:inline-block;margin:8px 0 16px;background:#1f7177;color:#ffffff;text-decoration:none;padding:12px 28px;border-radius:8px;font-size:15px;font-weight:600;">Reset password</a>
+        ${p('We received a request to reset your Learnda password. Click the button below to choose a new one.')}
+        <a href="${resetUrl}" style="display:inline-block;margin:8px 0 16px;background:#1f56db;color:#ffffff;text-decoration:none;padding:12px 28px;border-radius:8px;font-size:15px;font-weight:600;">Reset password</a>
         ${p('This link expires in <strong>1 hour</strong>.', 'font-size:13px;color:#6b7280;')}
         ${muted('If you did not request a password reset, ignore this email — your account is safe.')}
       `),
@@ -158,11 +162,11 @@ module.exports = {
     if (!isConfigured()) { logSkipped('password_reset_otp', { email }); return { success: true, skipped: true }; }
     return sendEmail({
       to: email,
-      subject: 'Your Sharether password reset code',
+      subject: 'Your Learnda password reset code',
       text: `Your password reset code is ${otp}. It expires in ${expiresInMinutes} minutes.`,
       html: wrap(`
         ${h1('Password reset code')}
-        ${p('Use the code below to reset your Sharether password:')}
+        ${p('Use the code below to reset your Learnda password:')}
         ${otpBlock(otp)}
         ${p(`This code expires in <strong>${expiresInMinutes} minutes</strong>.`, 'font-size:13px;color:#6b7280;')}
         ${muted('If you did not request a password reset, ignore this email.')}
@@ -174,11 +178,11 @@ module.exports = {
     if (!isConfigured()) { logSkipped('register_otp', { email }); return { success: true, skipped: true }; }
     return sendEmail({
       to: email,
-      subject: 'Verify your Sharether email',
-      text: `Your Sharether verification code is ${otp}. It expires in ${expiresInMinutes} minutes.`,
+      subject: 'Verify your Learnda email',
+      text: `Your Learnda verification code is ${otp}. It expires in ${expiresInMinutes} minutes.`,
       html: wrap(`
         ${h1('Verify your email')}
-        ${p('Enter this code to complete your Sharether registration:')}
+        ${p('Enter this code to complete your Learnda registration:')}
         ${otpBlock(otp)}
         ${p(`This code expires in <strong>${expiresInMinutes} minutes</strong>.`, 'font-size:13px;color:#6b7280;')}
         ${muted('If you did not create an account, ignore this email.')}
@@ -190,13 +194,13 @@ module.exports = {
     if (!isConfigured()) { logSkipped('subscription_confirmation', { email }); return { success: true, skipped: true }; }
     return sendEmail({
       to: email,
-      subject: 'Subscription confirmed — Sharether',
-      text: `Your Sharether subscription is active. Plan: ${planId}. Transaction: ${transactionId}.`,
+      subject: 'Subscription confirmed — Learnda',
+      text: `Your Learnda subscription is active. Plan: ${planId}. Transaction: ${transactionId}.`,
       html: wrap(`
         ${h1('Subscription confirmed ✓')}
-        ${p('Your Sharether subscription is now active. You have full access to all content on your plan.')}
+        ${p('Your Learnda subscription is now active. You have full access to all content on your plan.')}
         ${p(`<strong>Plan:</strong> ${planId}<br/><strong>Transaction:</strong> ${transactionId}`)}
-        <a href="https://sharether.com" style="display:inline-block;margin-top:8px;background:#1f7177;color:#ffffff;text-decoration:none;padding:12px 28px;border-radius:8px;font-size:15px;font-weight:600;">Start learning</a>
+        <a href="https://learnda.app" style="display:inline-block;margin-top:8px;background:#1f56db;color:#ffffff;text-decoration:none;padding:12px 28px;border-radius:8px;font-size:15px;font-weight:600;">Start learning</a>
       `),
     });
   },
@@ -205,13 +209,13 @@ module.exports = {
     if (!isConfigured()) { logSkipped('subscription_cancellation', { email }); return { success: true, skipped: true }; }
     return sendEmail({
       to: email,
-      subject: 'Subscription cancelled — Sharether',
-      text: `Your Sharether subscription (${planName}) has been cancelled.`,
+      subject: 'Subscription cancelled — Learnda',
+      text: `Your Learnda subscription (${planName}) has been cancelled.`,
       html: wrap(`
         ${h1('Subscription cancelled')}
         ${p(`Your <strong>${planName}</strong> subscription has been cancelled. You will retain access until the end of your current billing period.`)}
         ${p('We\'d love to have you back. You can resubscribe at any time.')}
-        <a href="https://sharether.com" style="display:inline-block;margin-top:8px;background:#1f7177;color:#ffffff;text-decoration:none;padding:12px 28px;border-radius:8px;font-size:15px;font-weight:600;">View Plans</a>
+        <a href="https://learnda.app" style="display:inline-block;margin-top:8px;background:#1f56db;color:#ffffff;text-decoration:none;padding:12px 28px;border-radius:8px;font-size:15px;font-weight:600;">View Plans</a>
       `),
     });
   },
@@ -220,12 +224,12 @@ module.exports = {
     if (!isConfigured()) { logSkipped('subscription_expired', { email }); return { success: true, skipped: true }; }
     return sendEmail({
       to: email,
-      subject: 'Your Sharether subscription has expired',
-      text: `Your Sharether subscription (${planId}) has expired. Please renew to keep access.`,
+      subject: 'Your Learnda subscription has expired',
+      text: `Your Learnda subscription (${planId}) has expired. Please renew to keep access.`,
       html: wrap(`
         ${h1('Your subscription has expired')}
         ${p(`Your <strong>${planId}</strong> subscription has expired. Renew now to keep access to all your courses and study materials.`)}
-        <a href="https://sharether.com" style="display:inline-block;margin-top:8px;background:#1f7177;color:#ffffff;text-decoration:none;padding:12px 28px;border-radius:8px;font-size:15px;font-weight:600;">Renew subscription</a>
+        <a href="https://learnda.app" style="display:inline-block;margin-top:8px;background:#1f56db;color:#ffffff;text-decoration:none;padding:12px 28px;border-radius:8px;font-size:15px;font-weight:600;">Renew subscription</a>
       `),
     });
   },
@@ -236,7 +240,7 @@ module.exports = {
       return { success: true, skipped: true };
     }
     const firstName = String(name || 'there').trim() || 'there';
-    const subject = String(title || 'Sharether').trim() || 'Sharether';
+    const subject = String(title || 'Learnda').trim() || 'Learnda';
     const payload = { title: subject, name: firstName, message, ctaLabel, ctaUrl };
     return sendEmail({
       to: email,
@@ -249,7 +253,7 @@ module.exports = {
   sendLearningReminderEmail: async (email, payload) =>
     module.exports.sendEngagementEmail(email, {
       ...payload,
-      title: payload?.title || 'Sharether missing you',
+      title: payload?.title || 'Learnda missing you',
     }),
 
   sendSupportReport: async ({ to, subject, message, reporter, category }) => {
@@ -265,7 +269,7 @@ module.exports = {
       html: wrap(`
         ${h1(subject)}
         ${lines ? p(lines) : ''}
-        <div style="background:#f9fafb;border-left:4px solid #1f7177;border-radius:4px;padding:16px;margin-top:8px;">
+        <div style="background:#f9fafb;border-left:4px solid #1f56db;border-radius:4px;padding:16px;margin-top:8px;">
           <p style="margin:0;font-size:14px;line-height:1.6;color:#374151;white-space:pre-wrap;">${message}</p>
         </div>
       `),

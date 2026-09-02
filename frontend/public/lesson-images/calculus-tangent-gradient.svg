@@ -73,7 +73,7 @@
   <text id="ct-read" class="ct-body" x="56" y="466" fill="#1e293b" font-size="13">Rising part &#8212; the tangent slopes up, so the gradient is positive.</text>
   <text class="ct-body" x="56" y="486" fill="#64748b" font-size="12">Gradient = dy/dx &#183; the normal is perpendicular to the tangent.</text>
 
-  <text class="ct-body" x="240" y="520" text-anchor="middle" fill="#94a3b8" font-size="11">Sharether Learning Platform &#8226; EBS 301J &#8226; Lesson 6: Derivatives in Action</text>
+  <text class="ct-body" x="240" y="520" text-anchor="middle" fill="#94a3b8" font-size="11">Learnda Learning Platform &#8226; EBS 301J &#8226; Lesson 6: Derivatives in Action</text>
 
   <script><![CDATA[
     (function () {

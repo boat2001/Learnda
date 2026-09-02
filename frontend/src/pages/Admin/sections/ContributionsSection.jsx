@@ -14,7 +14,7 @@ function fmtCurrency(n) {
   return `GH₵ ${Number(n).toLocaleString('en-GH', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 }
 
-const BADGE_COLORS = ['#d97706', '#94a3b8', '#d97706', '#1f7177', '#059669'];
+const BADGE_COLORS = ['#d97706', '#94a3b8', '#d97706', '#2b62c4', '#059669'];
 const LEVEL_COLORS = ['#94a3b8', '#059669', '#2563eb', '#7c3aed', '#d97706'];
 
 export default function ContributionsSection({ period }) {

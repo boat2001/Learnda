@@ -25,7 +25,7 @@ export default function ProtectedRoute({
     return (
       <div className="app-loading">
         <div className="loading-spinner"></div>
-        <p>Loading Sharether...</p>
+        <p>Loading Learnda...</p>
       </div>
     );
   }
@@ -52,13 +52,13 @@ export default function ProtectedRoute({
       <FormModal
         isOpen
         onClose={() => navigate('/')}
-        title="Complete your Sharether profile"
+        title="Complete your Learnda profile"
         subtitle="Your registration is not finished yet. Complete the remaining steps to access this section."
         modalClassName="setup-required-modal"
       >
         <div className="setup-required-modal__body">
           <p>
-            Sharether keeps academic tools, groups, and plan access tied to a complete student profile.
+            Learnda keeps academic tools, groups, and plan access tied to a complete student profile.
           </p>
           <div className="setup-required-modal__actions">
             <button

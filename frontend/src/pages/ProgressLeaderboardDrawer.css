@@ -5,7 +5,7 @@
 
 @keyframes pg-lb-flash-up {
   0% {
-    background: rgba(34, 197, 94, 0.28);
+    background: rgba(115, 162, 75, 0.28);
     transform: translateX(-4px);
   }
   100% {
@@ -27,7 +27,7 @@
 
 @keyframes pg-lb-flash-up-dark {
   0% {
-    background: rgba(34, 197, 94, 0.22);
+    background: rgba(115, 162, 75, 0.22);
     transform: translateX(-4px);
   }
   100% {

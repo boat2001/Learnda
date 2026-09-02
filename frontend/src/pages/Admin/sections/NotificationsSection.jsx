@@ -50,7 +50,7 @@ const TRIGGERS = [
         id: 'midsem_start',
         label: 'Mid-Semester Quizzes Begin',
         icon: '📝',
-        template: "Hey {name}! Mid-sem quizzes are starting! 🧠 Use Sharether to practice past questions, reinforce key concepts, and go in confident. Start practicing now!",
+        template: "Hey {name}! Mid-sem quizzes are starting! 🧠 Use Learnda to practice past questions, reinforce key concepts, and go in confident. Start practicing now!",
         cta: 'Practice Tests',
       },
       {
@@ -64,7 +64,7 @@ const TRIGGERS = [
         id: 'exams_start',
         label: 'End-of-Semester Exams Begin',
         icon: '⚡',
-        template: "Hey {name}! Exams are here! ⚡ Don't panic — you've got Sharether. Revise with video lessons, take practice tests, and ace your papers. You've got this!",
+        template: "Hey {name}! Exams are here! ⚡ Don't panic — you've got Learnda. Revise with video lessons, take practice tests, and ace your papers. You've got this!",
         cta: 'Revise Now',
       },
       {
@@ -83,22 +83,22 @@ const TRIGGERS = [
         id: 'vacation_sem1',
         label: 'Semester 1 Break',
         icon: '🌴',
-        template: "Hey {name}! Semester break is here! 🌴 Use this time wisely — explore edutainment, get ahead on next semester's topics, or just enjoy the Sharether community.",
+        template: "Hey {name}! Semester break is here! 🌴 Use this time wisely — explore edutainment, get ahead on next semester's topics, or just enjoy the Learnda community.",
         cta: 'Stay Engaged',
       },
       {
         id: 'vacation_sem2',
         label: 'Long Vacation',
         icon: '☀️',
-        template: "Hey {name}! Long vacation time! ☀️ Keep your mind sharp — explore Sharether's edutainment library, join a study group, or pick up a skill. Growth doesn't stop on vacation.",
+        template: "Hey {name}! Long vacation time! ☀️ Keep your mind sharp — explore Learnda's edutainment library, join a study group, or pick up a skill. Growth doesn't stop on vacation.",
         cta: 'Explore Library',
       },
       {
         id: 'vacation_during',
         label: 'During Vacation',
         icon: '🌅',
-        template: "Hey {name}! Vacation is in progress. 🌅 Rest well, stay connected, and use Sharether whenever you want to revise, explore edutainment, or get ahead.",
-        cta: 'Explore Sharether',
+        template: "Hey {name}! Vacation is in progress. 🌅 Rest well, stay connected, and use Learnda whenever you want to revise, explore edutainment, or get ahead.",
+        cta: 'Explore Learnda',
       },
       {
         id: 'vacation_ending',
@@ -130,7 +130,7 @@ const TRIGGERS = [
         id: 'sts',
         label: 'Student Teaching Practice (STS)',
         icon: '🏫',
-        template: "Hey {name}! STS is approaching! 🏫 Sharether has everything you need — teaching resources, lesson plan templates, and community support from fellow STS students.",
+        template: "Hey {name}! STS is approaching! 🏫 Learnda has everything you need — teaching resources, lesson plan templates, and community support from fellow STS students.",
         cta: 'Explore Resources',
       },
       {
@@ -144,7 +144,7 @@ const TRIGGERS = [
         id: 'macro_teaching',
         label: 'Macro Teaching',
         icon: '🏆',
-        template: "Hey {name}! Macro-teaching is here! 🏆 You've been preparing — now show what you've got. Use Sharether's teaching tools and community for last-minute tips.",
+        template: "Hey {name}! Macro-teaching is here! 🏆 You've been preparing — now show what you've got. Use Learnda's teaching tools and community for last-minute tips.",
         cta: 'Get Tips',
       },
       {
@@ -495,7 +495,7 @@ function AcademicStateSection() {
             )}
 
             {scope === 'all' && (
-              <div style={{ padding: '10px 12px', background: 'rgba(239,68,68,0.06)', border: '1px solid rgba(239,68,68,0.2)', borderRadius: 'var(--adm-radius-sm)', fontSize: 13, color: 'var(--adm-text)' }}>
+              <div style={{ padding: '10px 12px', background: 'rgba(251, 99, 52,0.06)', border: '1px solid rgba(251, 99, 52,0.2)', borderRadius: 'var(--adm-radius-sm)', fontSize: 13, color: 'var(--adm-text)' }}>
                 ⚠️ This will apply the selected state to <strong>all {institutions.length} colleges</strong> and every student linked to them. Proceed carefully.
               </div>
             )}
@@ -818,7 +818,7 @@ function ReengagementSection() {
               </select>
             </label>
             <div style={{ fontSize: 12, color: 'var(--adm-text-muted)', marginBottom: 8 }}>
-              In-app title shown to users: <strong style={{ color: 'var(--adm-text)' }}>Sharether missing you</strong> (not “re-engagement”).
+              In-app title shown to users: <strong style={{ color: 'var(--adm-text)' }}>Learnda missing you</strong> (not “re-engagement”).
             </div>
             <textarea
               style={{
@@ -1097,7 +1097,7 @@ const TIP_CTA_OPTIONS = [
 function EngagementTipsSection() {
   const [category, setCategory] = useState('study');
   const [studyTips, setStudyTips] = useState([]);
-  const [sharetherTips, setSharetherTips] = useState([]);
+  const [learndaTips, setLearndaTips] = useState([]);
   const [tipId, setTipId] = useState('');
   const [message, setMessage] = useState('');
   const [ctaLabel, setCtaLabel] = useState('');
@@ -1122,26 +1122,26 @@ function EngagementTipsSection() {
   const [histCategory, setHistCategory] = useState('');
   const HIST_PER_PAGE = 15;
 
-  const catalog = category === 'sharether' ? sharetherTips : studyTips;
+  const catalog = category === 'learnda' ? learndaTips : studyTips;
 
   const applyTip = useCallback((tips, id, cat) => {
-    const list = cat === 'sharether' ? sharetherTips : studyTips;
+    const list = cat === 'learnda' ? learndaTips : studyTips;
     const picked = list.find((t) => t.id === id) || tips.find((t) => t.id === id) || list[0];
     if (!picked) return;
     setTipId(picked.id);
     setMessage(picked.message || '');
     setCtaLabel(picked.ctaLabel || '');
     setCtaPath(picked.ctaPath || '/pls');
-  }, [sharetherTips, studyTips]);
+  }, [learndaTips, studyTips]);
 
   useEffect(() => {
     api.admin.getEngagementTipsCatalog()
       .then((res) => {
         if (!res?.success) return;
         const study = res.studyTips || [];
-        const sharether = res.sharetherTips || [];
+        const learnda = res.learndaTips || [];
         setStudyTips(study);
-        setSharetherTips(sharether);
+        setLearndaTips(learnda);
         const first = study[0];
         if (first) {
           setTipId(first.id);
@@ -1154,11 +1154,11 @@ function EngagementTipsSection() {
   }, []);
 
   useEffect(() => {
-    const list = category === 'sharether' ? sharetherTips : studyTips;
+    const list = category === 'learnda' ? learndaTips : studyTips;
     if (!list.length) return;
     const exists = list.some((t) => t.id === tipId);
     applyTip(list, exists ? tipId : list[0].id, category);
-  }, [category, studyTips, sharetherTips]);
+  }, [category, studyTips, learndaTips]);
 
   const loadHistory = useCallback(async () => {
     setHistLoading(true);
@@ -1294,7 +1294,7 @@ function EngagementTipsSection() {
   };
 
   const totalHistPages = Math.ceil(histTotal / HIST_PER_PAGE);
-  const inAppTitle = category === 'sharether' ? 'Sharether tip' : 'Study tip';
+  const inAppTitle = category === 'learnda' ? 'Learnda tip' : 'Study tip';
 
   return (
     <>
@@ -1302,7 +1302,7 @@ function EngagementTipsSection() {
         <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
           <div className="adm-notif-icon"><FiBookOpen /></div>
           <div>
-            <div style={{ fontSize: 14, fontWeight: 700, color: 'var(--adm-text)' }}>Study tips & Sharether tricks</div>
+            <div style={{ fontSize: 14, fontWeight: 700, color: 'var(--adm-text)' }}>Study tips & Learnda tricks</div>
             <div style={{ fontSize: 13, color: 'var(--adm-text-muted)', marginTop: 3 }}>
               Send helpful study habits or platform how-tos via push, email, and SMS. Users see friendly titles like <strong>Study tip</strong> — not admin jargon.
             </div>
@@ -1320,7 +1320,7 @@ function EngagementTipsSection() {
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             {[
               { id: 'study', label: 'Study tips' },
-              { id: 'sharether', label: 'Sharether tips & tricks' },
+              { id: 'learnda', label: 'Learnda tips & tricks' },
             ].map((opt) => (
               <button
                 key={opt.id}
@@ -1565,7 +1565,7 @@ function EngagementTipsSection() {
           >
             <option value="">All tips</option>
             <option value="study">Study tips only</option>
-            <option value="sharether">Sharether tips only</option>
+            <option value="learnda">Learnda tips only</option>
           </select>
         </div>
 

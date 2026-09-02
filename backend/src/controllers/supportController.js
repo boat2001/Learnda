@@ -33,8 +33,8 @@ const storyFromReport = (report) => {
   return {
     id: report.id,
     name: report.name,
-    college: college || focus || 'Sharether community',
-    focus: focus && focus !== 'Sharether learner' ? focus : (college || 'Sharether learner'),
+    college: college || focus || 'Learnda community',
+    focus: focus && focus !== 'Learnda learner' ? focus : (college || 'Learnda learner'),
     story,
     testimony: story,
     achievement: story,
@@ -50,7 +50,7 @@ class SupportController {
       const college = String(req.body?.college || '').trim();
       const normalizedCategory = normalizeCategory(category);
       const isSuccessStory = normalizedCategory === SUCCESS_STORY_CATEGORY;
-      const reportEmail = email || (isSuccessStory ? 'success-story@guest.sharether.local' : '');
+      const reportEmail = email || (isSuccessStory ? 'success-story@guest.learnda.local' : '');
 
       if (!name || !reportEmail || !subject || !message) {
         return res.status(400).json({ success: false, error: 'Missing required fields' });
@@ -79,7 +79,7 @@ class SupportController {
         try {
           await emailService.sendSupportReport({
             to: recipients,
-            subject: `Sharether report: ${subject}`,
+            subject: `Learnda report: ${subject}`,
             message: reportMessage,
             reporter: email ? `${name} (${email})` : (college ? `${name} (${college})` : name),
             category: normalizedCategory

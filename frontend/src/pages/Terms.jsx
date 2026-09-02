@@ -26,7 +26,7 @@ export default function Terms() {
         <div className="hero-grid">
           <div>
             <span className="hero-tag">Ground rules</span>
-            <h1 className="hero-title">The practical rules for using Sharether well and safely.</h1>
+            <h1 className="hero-title">The practical rules for using Learnda well and safely.</h1>
             <p className="hero-subtitle">
               These terms outline the responsibilities, boundaries, and protections that keep the platform usable for everyone.
             </p>

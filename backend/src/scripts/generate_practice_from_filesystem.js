@@ -126,7 +126,7 @@ function deriveLevelSemester(relPath) {
 
 function cleanTitle(filename) {
   return filename
-    .replace(/\s*-\s*Sharether\.com/gi, '')
+    .replace(/\s*-\s*Learnda\.com/gi, '')
     .replace(/\.pdf$/i, '')
     .trim();
 }
@@ -224,7 +224,7 @@ function buildPrompt({ title, filename, subtype, course, relPath, extractedText 
     ? `Prefer objective multiple-choice questions with four options and one answer. If the answer cannot be confidently inferred, keep the question but set "needs_review": true.`
     : `Preserve paper structure: Section A (objective MCQ → multiple_choice), Section B (essay/theory → type "theory" with marking keywords). Include marks where visible.`;
 
-  return `You are converting an extracted Sharether PDF into a draft ${typeLabel} for Ghanaian university students.
+  return `You are converting an extracted Learnda PDF into a draft ${typeLabel} for Ghanaian university students.
 
 SOURCE CONTEXT
 File title: ${title}

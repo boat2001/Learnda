@@ -75,7 +75,7 @@ function SocialEditRow({ link, onChange, onRemove }) {
         </div>
         <div>
           <label style={lbl}>Handle</label>
-          <input className="adm-input adm-input-full" value={link.handle} onChange={(e) => onChange('handle', e.target.value)} placeholder="@sharether" />
+          <input className="adm-input adm-input-full" value={link.handle} onChange={(e) => onChange('handle', e.target.value)} placeholder="@learnda" />
         </div>
       </div>
       <div style={{ marginBottom: 10 }}>

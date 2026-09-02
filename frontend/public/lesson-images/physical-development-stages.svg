@@ -11,12 +11,12 @@
   <polygon points="840,414 858,420 840,426" fill="#1a2e5a"/>
 
   <!-- ====== INFANCY ====== -->
-  <rect x="60" y="80" width="220" height="300" rx="14" fill="#fff8e1" stroke="#f59e0b" stroke-width="2.5"/>
+  <rect x="60" y="80" width="220" height="300" rx="14" fill="#fff8e1" stroke="#fab82c" stroke-width="2.5"/>
   <!-- Header -->
-  <rect x="60" y="80" width="220" height="54" rx="14" fill="#f59e0b"/>
-  <rect x="60" y="118" width="220" height="16" rx="0" fill="#f59e0b"/>
+  <rect x="60" y="80" width="220" height="54" rx="14" fill="#fab82c"/>
+  <rect x="60" y="118" width="220" height="16" rx="0" fill="#fab82c"/>
   <!-- Baby figure -->
-  <circle cx="93" cy="106" r="18" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+  <circle cx="93" cy="106" r="18" fill="#fef3c7" stroke="#fab82c" stroke-width="1.5"/>
   <circle cx="93" cy="98" r="9" fill="#fbbf24"/>
   <ellipse cx="93" cy="114" rx="8" ry="6" fill="#fbbf24"/>
   <text x="170" y="100" text-anchor="middle" font-size="15" font-weight="700" fill="#fff">INFANCY</text>
@@ -38,16 +38,16 @@
   <text x="170" y="358" text-anchor="middle" font-size="11" fill="#78350f">Walking → Jumping</text>
 
   <!-- Dot on timeline -->
-  <circle cx="170" cy="420" r="8" fill="#f59e0b" stroke="#fff" stroke-width="2"/>
+  <circle cx="170" cy="420" r="8" fill="#fab82c" stroke="#fff" stroke-width="2"/>
   <text x="170" y="445" text-anchor="middle" font-size="11" fill="#92400e" font-weight="600">0–2 yrs</text>
 
   <!-- ====== CHILDHOOD ====== -->
-  <rect x="316" y="80" width="288" height="300" rx="14" fill="#e8f5e9" stroke="#22c55e" stroke-width="2.5"/>
+  <rect x="316" y="80" width="288" height="300" rx="14" fill="#e8f5e9" stroke="#73a24b" stroke-width="2.5"/>
   <!-- Header -->
-  <rect x="316" y="80" width="288" height="54" rx="14" fill="#22c55e"/>
-  <rect x="316" y="118" width="288" height="16" rx="0" fill="#22c55e"/>
+  <rect x="316" y="80" width="288" height="54" rx="14" fill="#73a24b"/>
+  <rect x="316" y="118" width="288" height="16" rx="0" fill="#73a24b"/>
   <!-- Child figure -->
-  <circle cx="349" cy="106" r="18" fill="#f0fdf4" stroke="#22c55e" stroke-width="1.5"/>
+  <circle cx="349" cy="106" r="18" fill="#f0fdf4" stroke="#73a24b" stroke-width="1.5"/>
   <circle cx="349" cy="98" r="9" fill="#4ade80"/>
   <ellipse cx="349" cy="114" rx="9" ry="7" fill="#4ade80"/>
   <line x1="340" y1="110" x2="333" y2="122" stroke="#4ade80" stroke-width="2" stroke-linecap="round"/>
@@ -79,7 +79,7 @@
   <text x="459" y="358" text-anchor="middle" font-size="11" fill="#14532d">Coordination becomes smoother &amp; more varied</text>
 
   <!-- Dot on timeline -->
-  <circle cx="460" cy="420" r="8" fill="#22c55e" stroke="#fff" stroke-width="2"/>
+  <circle cx="460" cy="420" r="8" fill="#73a24b" stroke="#fff" stroke-width="2"/>
   <text x="460" y="445" text-anchor="middle" font-size="11" fill="#14532d" font-weight="600">2–11 yrs</text>
 
   <!-- ====== ADOLESCENCE ====== -->
@@ -123,5 +123,5 @@
   <text x="80" y="444" text-anchor="middle" font-size="11" fill="#1a2e5a">Birth</text>
 
   <!-- Footer -->
-  <text x="460" y="488" text-anchor="middle" font-size="10" fill="#94a3b8">Sharether Learning Platform • Lesson 2: Physical Development of the Child</text>
+  <text x="460" y="488" text-anchor="middle" font-size="10" fill="#94a3b8">Learnda Learning Platform • Lesson 2: Physical Development of the Child</text>
 </svg>

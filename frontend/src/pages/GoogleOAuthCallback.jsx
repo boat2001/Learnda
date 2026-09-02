@@ -133,7 +133,7 @@ export default function GoogleOAuthCallback() {
               updatedAt: Date.now(),
             });
           }
-          sessionStorage.setItem('sharether_pending_onboarding', JSON.stringify({ step: nextStep }));
+          sessionStorage.setItem('learnda_pending_onboarding', JSON.stringify({ step: nextStep }));
           const dest =
             returnPayload.returnPath &&
             returnPayload.returnPath !== '/auth/google/callback'
@@ -166,7 +166,7 @@ export default function GoogleOAuthCallback() {
       <div className="auth-google-callback__backdrop" aria-hidden="true">
         <section className="auth-google-callback__hero">
           <div>
-            <span className="auth-google-callback__tag">Sharether</span>
+            <span className="auth-google-callback__tag">Learnda</span>
             <h1>Learn together, wherever you are.</h1>
             <p>Your courses, resources, practice, and progress in one calm learning space.</p>
           </div>
@@ -222,7 +222,7 @@ export default function GoogleOAuthCallback() {
         </section>
       ) : (
         <section className="auth-google-callback__loading" aria-live="polite">
-          <img src="/sharether-logo.webp" alt="Sharether" />
+          <img src="/learnda-logo.webp" alt="Learnda" />
           <span className="auth-google-callback__spinner" aria-hidden="true" />
           <h1>Signing you in...</h1>
           <p>Connecting your Google account securely.</p>

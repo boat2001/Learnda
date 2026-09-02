@@ -54,8 +54,8 @@ import UserAvatar from "../common/UserAvatar";
 import { FEATURE_FLAGS } from "../../config/featureFlags";
 import "./Header.css";
 
-const LOGO_SRC = `${import.meta.env.BASE_URL}sharether-logo.webp`;
-const LOGO_DARK_SRC = `${import.meta.env.BASE_URL}sharether-logo.webp`;
+const LOGO_SRC = `${import.meta.env.BASE_URL}learnda-logo.webp`;
+const LOGO_DARK_SRC = `${import.meta.env.BASE_URL}learnda-logo.webp`;
 const GLOBAL_SEARCH_MIN_CHARS = 2;
 const GLOBAL_SEARCH_DEBOUNCE_MS = 90;
 const GLOBAL_SEARCH_SECONDARY_DELAY_MS = 120;
@@ -266,7 +266,7 @@ function GlobalSearchPanel({
     <div id="global-search-panel" className="global-search-panel" role="dialog" aria-label="Global search results">
       <div className="global-search-panel-head">
         <div>
-          <strong>{hasQuery ? `Search results for "${trimmed}"` : "Search Sharether"}</strong>
+          <strong>{hasQuery ? `Search results for "${trimmed}"` : "Search Learnda"}</strong>
           <span>{hasQuery ? `${total} matches across learning content` : "Type at least 2 characters to search."}</span>
         </div>
         <button type="button" className="global-search-close" onClick={onClose} aria-label="Close search results">
@@ -988,14 +988,14 @@ function Header({ onToggleSidebar, toggleButtonRef, currentTheme, onThemeToggle 
             </button>
 
             <div className="brand-section">
-              <Link className="brand" to="/" aria-label="Sharether home">
+              <Link className="brand" to="/" aria-label="Learnda home">
                 <span className="brand-logo">
-                  <img src={LOGO_SRC} alt="Sharether logo" className="logo-light" />
-                  <img src={LOGO_DARK_SRC} alt="Sharether logo" className="logo-dark" />
+                  <img src={LOGO_SRC} alt="Learnda logo" className="logo-light" />
+                  <img src={LOGO_DARK_SRC} alt="Learnda logo" className="logo-dark" />
                 </span>
                 <span className="brand-copy">
                   <span className="brand-title-row">
-                    <span className="brand-text">Sharether</span>
+                    <span className="brand-text">Learnda</span>
                     <span className="version-badge">v3</span>
                   </span>
                   <span className="brand-tagline">Learning Platform</span>
@@ -1208,7 +1208,7 @@ function Header({ onToggleSidebar, toggleButtonRef, currentTheme, onThemeToggle 
                             />
                           </span>
                           <span className="account-meta">
-                            <span className="account-name-text">{formatDisplayName(user.full_name) || "Sharether User"}</span>
+                            <span className="account-name-text">{formatDisplayName(user.full_name) || "Learnda User"}</span>
                             <span className="account-contact-text">{displayContact || "No contact added"}</span>
                             <span className={`account-plan-pill ${accountPlanToneClass}`}>
                               {toDisplayName(currentPlanName)}
@@ -1292,7 +1292,7 @@ function Header({ onToggleSidebar, toggleButtonRef, currentTheme, onThemeToggle 
 
       <ConfirmModal
         isOpen={showSignOutConfirm}
-        title="Sign out of Sharether?"
+        title="Sign out of Learnda?"
         message="You will be logged out on this device and need to sign in again to access your dashboard."
         confirmLabel={signingOut ? "Signing out..." : "Sign out"}
         cancelLabel="Stay signed in"

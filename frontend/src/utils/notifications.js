@@ -11,7 +11,7 @@ const TYPE_LABELS = {
   learning_reminder: 'Learning',
   reengagement: 'Learning',
   study_tip: 'Study tip',
-  sharether_tip: 'Sharether tip',
+  learnda_tip: 'Learnda tip',
 };
 
 const TITLE_SMALL = new Set(['a','an','the','and','but','or','nor','for','so','yet','at','by','in','of','on','to','up','as','into','onto','with','from','over','via']);

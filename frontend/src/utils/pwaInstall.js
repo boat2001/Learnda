@@ -59,18 +59,18 @@ export const getManualInstallInstructions = () => {
 
   if (platform === 'ios') {
     return {
-      title: 'Add Sharether to your Home Screen (iPhone / iPad)',
+      title: 'Add Learnda to your Home Screen (iPhone / iPad)',
       steps: [
         'Tap the Share button (square with an arrow pointing up) in the toolbar.',
         'Scroll down and tap Add to Home Screen.',
-        'Tap Add in the top-right. You’ll get a Sharether icon on your home screen that opens like an app.',
+        'Tap Add in the top-right. You’ll get a Learnda icon on your home screen that opens like an app.',
       ],
     };
   }
 
   if (platform === 'android') {
     return {
-      title: 'Install Sharether on Android',
+      title: 'Install Learnda on Android',
       steps: [
         'Tap the three-dot menu (⋮) in the top-right.',
         'Tap Install app or Add to Home screen, then confirm.',
@@ -82,7 +82,7 @@ export const getManualInstallInstructions = () => {
   return {
     title: 'Install from your computer',
     steps: [
-      'Chrome or Edge: look for an install icon in the address bar, or open the menu (⋮) and choose Install Sharether.',
+      'Chrome or Edge: look for an install icon in the address bar, or open the menu (⋮) and choose Install Learnda.',
       'Safari on Mac: use File → Add to Dock when the site supports it.',
       'Firefox: use the address-bar or menu install option when offered.',
     ],
@@ -100,9 +100,9 @@ export const subscribePwaInstall = (fn) => {
 /**
  * Call once at app startup. Must preventDefault on beforeinstallprompt or Chrome will not allow prompt().
  */
-export const initSharetherPwa = () => {
-  if (typeof window === 'undefined' || window.__sharetherPwaListeners) return;
-  window.__sharetherPwaListeners = true;
+export const initLearndaPwa = () => {
+  if (typeof window === 'undefined' || window.__learndaPwaListeners) return;
+  window.__learndaPwaListeners = true;
 
   window.addEventListener('beforeinstallprompt', (event) => {
     event.preventDefault();

@@ -19,7 +19,7 @@ const PLAN_BADGE = {
 
 function scoreColor(score) {
   if (score >= 75) return { bg: 'rgba(5,150,105,0.15)', color: '#059669' };
-  if (score >= 50) return { bg: 'rgba(31,113,119,0.15)', color: '#1f7177' };
+  if (score >= 50) return { bg: 'rgba(43, 98, 196,0.15)', color: '#2b62c4' };
   if (score >= 25) return { bg: 'rgba(217,119,6,0.12)', color: '#d97706' };
   return { bg: 'rgba(220,38,38,0.12)', color: '#dc2626' };
 }

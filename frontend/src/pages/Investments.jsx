@@ -7,7 +7,7 @@ import FormModal from '../components/common/FormModal';
 import './SharedPages.css';
 
 const HIGHLIGHTS = [
-  { title: 'Student-first market', body: 'Sharether focuses on practical tools with measurable learning outcomes.' },
+  { title: 'Student-first market', body: 'Learnda focuses on practical tools with measurable learning outcomes.' },
   { title: 'Scalable platform', body: 'Built as a modular SPA with dedicated learning, practice, and resource pipelines.' },
   { title: 'Creator economy layer', body: 'Creator publishing and revenue sharing unlock sustainable content growth.' },
 ];
@@ -84,7 +84,7 @@ export default function Investments() {
         {submitted ? (
           <div className="fm-success">
             <div className="fm-success-icon">✓</div>
-            <p>Investment inquiry sent. The Sharether team can now follow up directly.</p>
+            <p>Investment inquiry sent. The Learnda team can now follow up directly.</p>
             <button className="btn btn-primary" type="button" onClick={closeModal}>Done</button>
           </div>
         ) : (
@@ -143,14 +143,14 @@ export default function Investments() {
             <span className="hero-tag">Growth capital</span>
             <h1 className="hero-title">Back the infrastructure behind better student outcomes.</h1>
             <p className="hero-subtitle">
-              Explore investment opportunities supporting Sharether&apos;s long-term growth in student learning.
+              Explore investment opportunities supporting Learnda&apos;s long-term growth in student learning.
             </p>
             <div className="hero-actions">
               <button className="btn btn-primary" type="button" onClick={() => setShowModal(true)}>
                 Contact investment desk
               </button>
               <Link className="btn btn-secondary" to="/about">
-                About Sharether
+                About Learnda
               </Link>
             </div>
             <div className="stat-grid">
@@ -200,7 +200,7 @@ export default function Investments() {
       <section className="page-section">
         <div className="section-heading">
           <h2>Investment highlights</h2>
-          <p>Core reasons investors engage with the Sharether mission.</p>
+          <p>Core reasons investors engage with the Learnda mission.</p>
         </div>
         <div className="card-grid">
           {HIGHLIGHTS.map((item) => (

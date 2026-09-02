@@ -395,7 +395,7 @@ const createGuestCollegeRecord = (college) => ({
   index_code: null,
   affiliate_university: college.affiliation,
   motto: null,
-  description: `${college.name} serves teacher trainees with ${college.programs.join(', ')} programmes on Sharether.`,
+  description: `${college.name} serves teacher trainees with ${college.programs.join(', ')} programmes on Learnda.`,
   image_url: college.image,
   image_alt: college.name,
   est_date: null,
@@ -560,7 +560,7 @@ const buildSignalHighlights = (college, profile) => {
   }
 
   if (college.user_count > 0) {
-    highlights.push(`${college.user_count} students on Sharether`);
+    highlights.push(`${college.user_count} students on Learnda`);
   }
 
   highlights.push(FOOTPRINT_LABELS[profile.footprint]);
@@ -783,7 +783,7 @@ export default function CollegeRankings() {
               {[
                 ['10 ranking lenses', 'Each lens surfaces a different angle — from academics to campus beauty.'],
                 ['Public institutional signals', 'Founded year, footprint, heritage, affiliation, and programme breadth.'],
-                ['Transparent by design', 'A public-signal index for exploration on Sharether, not an official accreditation table.'],
+                ['Transparent by design', 'A public-signal index for exploration on Learnda, not an official accreditation table.'],
               ].map(([title, desc]) => (
                 <div key={title} className="panel-list-item">
                   <span className="panel-dot" />
@@ -985,7 +985,7 @@ export default function CollegeRankings() {
             [FiMapPin,     'Location footprint',    'Campus city size and access level — coastal capitals, metro areas, and regional hubs signal stronger infrastructure and public reach.'],
             [FiGlobe,      'Heritage and affiliation', 'Mission origin (university-led, Catholic, Presbyterian, SDA, public) and the strength of the affiliated university both factor in.'],
             [FiActivity,   'Campus setting',        'The physical and environmental character of the campus — coastal, highland, garden city, ridge, urban, or town — shapes environment and beauty scores.'],
-            [FiStar,       'Platform signals',      'The number of students registered on Sharether from each college feeds directly into the Popularity lens, updating as the platform grows.'],
+            [FiStar,       'Platform signals',      'The number of students registered on Learnda from each college feeds directly into the Popularity lens, updating as the platform grows.'],
             [FiTrendingUp, 'Verified data override','When admin-curated figures are entered — NTC pass rate, accreditation tier, enrollment — they replace the inferred estimates in the relevant lenses.'],
           ].map(([Icon, title, desc]) => (
             <div key={title} className="info-card">

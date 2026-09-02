@@ -15,9 +15,9 @@ export const PLAN_COPY = {
   'Basic Student': {
     displayName: 'Free Learner',
     tagline:     'Use free, support later',
-    description: 'Start learning with no payment required. Support Sharether when you can.',
+    description: 'Start learning with no payment required. Support Learnda when you can.',
     ctaLabel:    'Start as a Free Learner',
-    color:       '#2a6f97',
+    color:       '#3e7fdd',
   },
   'Serious Student': {
     displayName: 'Helper',
@@ -29,9 +29,9 @@ export const PLAN_COPY = {
   'Master Student': {
     displayName: 'Hero',
     tagline:     'Full support, full access',
-    description: 'Contribute GHS 10 and unlock everything Sharether has to offer.',
+    description: 'Contribute GHS 10 and unlock everything Learnda has to offer.',
     ctaLabel:    'Contribute GHS 10',
-    color:       '#f4a261',
+    color:       '#fab82c',
   },
 };
 

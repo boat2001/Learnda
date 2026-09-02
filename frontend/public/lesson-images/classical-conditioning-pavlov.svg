@@ -35,7 +35,7 @@
   <g id="ph-before" class="phase">
     <!-- bell row -->
     <rect x="40" y="150" width="158" height="54" rx="11" fill="#fff7e6" stroke="#fcd385" stroke-width="1.5"/>
-    <g transform="translate(58,166)"><path d="M0 12 C0 4 4 0 8 0 C12 0 16 4 16 12 L18 15 L-2 15 Z" fill="#f59e0b"/><circle cx="8" cy="18" r="2" fill="#f59e0b"/></g>
+    <g transform="translate(58,166)"><path d="M0 12 C0 4 4 0 8 0 C12 0 16 4 16 12 L18 15 L-2 15 Z" fill="#fab82c"/><circle cx="8" cy="18" r="2" fill="#fab82c"/></g>
     <text class="pv-body" x="86" y="173" fill="#1e293b" font-size="13.5">Bell</text>
     <text class="pv-body" x="86" y="190" fill="#94a3b8" font-size="12">neutral (NS)</text>
     <path d="M206 177 L244 177" stroke="#94a3b8" stroke-width="2"/><path d="M252 177 L242 172 L242 182 Z" fill="#94a3b8"/>
@@ -57,7 +57,7 @@
   <!-- ===== DURING ===== -->
   <g id="ph-during" class="phase">
     <rect x="40" y="190" width="200" height="76" rx="11" fill="#fff7e6" stroke="#fcd385" stroke-width="1.5"/>
-    <g transform="translate(58,214)"><path d="M0 12 C0 4 4 0 8 0 C12 0 16 4 16 12 L18 15 L-2 15 Z" fill="#f59e0b"/><circle cx="8" cy="18" r="2" fill="#f59e0b"/></g>
+    <g transform="translate(58,214)"><path d="M0 12 C0 4 4 0 8 0 C12 0 16 4 16 12 L18 15 L-2 15 Z" fill="#fab82c"/><circle cx="8" cy="18" r="2" fill="#fab82c"/></g>
     <text class="pv-body" x="86" y="221" fill="#1e293b" font-size="13.5">Bell (NS)</text>
     <text class="pv-title" x="120" y="246" fill="#0f172a" font-size="15">+</text>
     <g transform="translate(150,236)"><path d="M0 2 Q9 16 18 2" fill="none" stroke="#f97316" stroke-width="2.4"/><ellipse cx="9" cy="3" rx="11" ry="3" fill="#f97316"/></g>
@@ -74,14 +74,14 @@
   <!-- ===== AFTER ===== -->
   <g id="ph-after" class="phase">
     <rect x="40" y="190" width="180" height="76" rx="11" fill="#ecfdf5" stroke="#86efac" stroke-width="1.6"/>
-    <g transform="translate(64,214)"><path d="M0 12 C0 4 4 0 8 0 C12 0 16 4 16 12 L18 15 L-2 15 Z" fill="#16a34a"/><circle cx="8" cy="18" r="2" fill="#16a34a"/></g>
+    <g transform="translate(64,214)"><path d="M0 12 C0 4 4 0 8 0 C12 0 16 4 16 12 L18 15 L-2 15 Z" fill="#5b8439"/><circle cx="8" cy="18" r="2" fill="#5b8439"/></g>
     <text class="pv-body" x="92" y="221" fill="#1e293b" font-size="13.5">Bell</text>
-    <text class="pv-body" x="92" y="238" fill="#16a34a" font-size="12" font-weight="700">now CS</text>
-    <path d="M228 228 L286 228" stroke="#16a34a" stroke-width="2.4"/><path d="M294 228 L283 222 L283 234 Z" fill="#16a34a"/>
+    <text class="pv-body" x="92" y="238" fill="#5b8439" font-size="12" font-weight="700">now CS</text>
+    <path d="M228 228 L286 228" stroke="#5b8439" stroke-width="2.4"/><path d="M294 228 L283 222 L283 234 Z" fill="#5b8439"/>
     <rect x="300" y="190" width="140" height="76" rx="11" fill="#ecfdf5" stroke="#86efac" stroke-width="1.6"/>
-    <g transform="translate(316,218)"><path d="M8 0 C13 8 12 17 8 17 C4 17 3 8 8 0 Z" fill="#16a34a"/></g>
+    <g transform="translate(316,218)"><path d="M8 0 C13 8 12 17 8 17 C4 17 3 8 8 0 Z" fill="#5b8439"/></g>
     <text class="pv-body" x="336" y="231" fill="#1e293b" font-size="13.5">Salivation</text>
-    <text class="pv-body" x="336" y="248" fill="#16a34a" font-size="12" font-weight="700">now CR</text>
+    <text class="pv-body" x="336" y="248" fill="#5b8439" font-size="12" font-weight="700">now CR</text>
     <text class="pv-body" x="40" y="318" fill="#475569" font-size="13">The bell <tspan font-weight="700" fill="#166534">alone</tspan> now triggers salivation &#8212;</text>
     <text class="pv-body" x="40" y="338" fill="#475569" font-size="13">a brand-new, learned response.</text>
   </g>
@@ -92,7 +92,7 @@
   <text class="pv-body" x="56" y="402" fill="#475569" font-size="12"><tspan font-weight="700" fill="#1a2e5a">CS</tspan> conditioned stimulus &#183; <tspan font-weight="700" fill="#1a2e5a">CR</tspan> conditioned response</text>
   <text class="pv-body" x="56" y="424" fill="#64748b" font-size="12">Classroom: a subject paired with shame becomes a CS for anxiety.</text>
 
-  <text class="pv-body" x="240" y="520" text-anchor="middle" fill="#94a3b8" font-size="11">Sharether Learning Platform &#8226; EBS 106 &#8226; Lesson 15: Classical Conditioning</text>
+  <text class="pv-body" x="240" y="520" text-anchor="middle" fill="#94a3b8" font-size="11">Learnda Learning Platform &#8226; EBS 106 &#8226; Lesson 15: Classical Conditioning</text>
 
   <script><![CDATA[
     (function () {

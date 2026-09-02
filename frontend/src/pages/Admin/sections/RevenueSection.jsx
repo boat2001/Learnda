@@ -17,8 +17,8 @@ function fmtShort(n) {
   return `GH₵ ${Number(n).toFixed(2)}`;
 }
 
-const TIER_COLORS = { basic: '#94a3b8', serious: '#1f7177', master: '#d97706' };
-const PIE_COLORS = ['#1f7177', '#d97706', '#2563eb'];
+const TIER_COLORS = { basic: '#94a3b8', serious: '#2b62c4', master: '#d97706' };
+const PIE_COLORS = ['#2b62c4', '#d97706', '#2563eb'];
 
 function StatCard({ label, value, sub, icon: Icon, accent }) {
   return (
@@ -225,7 +225,7 @@ export default function RevenueSection({ period }) {
           <div className="adm-card-body">
             <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
               {[
-                { label: 'Helper Plan', count: seriousUsers, price: 'GH₵ 5/mo', color: '#1f7177' },
+                { label: 'Helper Plan', count: seriousUsers, price: 'GH₵ 5/mo', color: '#2b62c4' },
                 { label: 'Hero Plan',   count: masterUsers,  price: 'GH₵ 10/mo', color: '#d97706' },
               ].map((tier) => {
                 const total = seriousUsers + masterUsers;

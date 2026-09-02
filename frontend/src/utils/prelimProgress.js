@@ -1,4 +1,4 @@
-const PRELIM_PROGRESS_STORAGE_PREFIX = 'sharether:prelim-progress';
+const PRELIM_PROGRESS_STORAGE_PREFIX = 'learnda:prelim-progress';
 
 const normalizeStorageKeyPart = (value, fallback = 'guest') => {
   const text = String(value || '').trim();

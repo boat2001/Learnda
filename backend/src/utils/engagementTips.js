@@ -43,7 +43,7 @@ const STUDY_TIPS = [
     'Past questions',
     'exams',
     'Study tip',
-    '{name}, examiners repeat patterns. Practise a few past questions on Sharether before class tests and finals.',
+    '{name}, examiners repeat patterns. Practise a few past questions on Learnda before class tests and finals.',
     'Try past questions',
     '/practice'
   ),
@@ -79,7 +79,7 @@ const STUDY_TIPS = [
     'Chunk your work',
     'productivity',
     'Study tip',
-    '{name}, split big topics into tiny tasks: read → summarise → quiz. Check off one piece at a time on Sharether.',
+    '{name}, split big topics into tiny tasks: read → summarise → quiz. Check off one piece at a time on Learnda.',
     'Open your plan',
     '/pls'
   ),
@@ -97,7 +97,7 @@ const STUDY_TIPS = [
     'Timed practice',
     'exams',
     'Study tip',
-    '{name}, simulate exam pressure with a timed quiz. Sharether practice mode helps you build speed and confidence.',
+    '{name}, simulate exam pressure with a timed quiz. Learnda practice mode helps you build speed and confidence.',
     'Timed quiz',
     '/practice'
   ),
@@ -121,12 +121,12 @@ const STUDY_TIPS = [
   ),
 ];
 
-const SHARETHER_TIPS = [
+const LEARNDA_TIPS = [
   tip(
     'pls_overview',
     'Your learning space',
     'basics',
-    'Sharether tip',
+    'Learnda tip',
     'Hey {name}, your Personal Learning Space keeps courses, progress, and saved items in one place. Open it when you log in.',
     'Open PLS',
     '/pls'
@@ -135,8 +135,8 @@ const SHARETHER_TIPS = [
     'practice_mode',
     'Practice tests',
     'practice',
-    'Sharether tip',
-    '{name}, use Practice on Sharether to test yourself with real-style questions and track what you get wrong.',
+    'Learnda tip',
+    '{name}, use Practice on Learnda to test yourself with real-style questions and track what you get wrong.',
     'Go to Practice',
     '/practice'
   ),
@@ -144,7 +144,7 @@ const SHARETHER_TIPS = [
     'download_resources',
     'Download resources',
     'resources',
-    'Sharether tip',
+    'Learnda tip',
     'Hi {name}! Found a useful PDF or note? Download it from Resources so you can study offline on the go.',
     'Browse resources',
     '/learn'
@@ -153,8 +153,8 @@ const SHARETHER_TIPS = [
     'study_groups_feature',
     'Study groups',
     'community',
-    'Sharether tip',
-    '{name}, create or join a study group on Sharether to share files, voice notes, and questions with classmates.',
+    'Learnda tip',
+    '{name}, create or join a study group on Learnda to share files, voice notes, and questions with classmates.',
     'Find groups',
     '/pls'
   ),
@@ -162,7 +162,7 @@ const SHARETHER_TIPS = [
     'track_progress',
     'Track progress',
     'progress',
-    'Sharether tip',
+    'Learnda tip',
     'Hey {name}, check your progress dashboard to see streaks, XP, and completed lessons — small wins add up.',
     'View progress',
     '/progress'
@@ -171,8 +171,8 @@ const SHARETHER_TIPS = [
     'edutainment',
     'Edutainment break',
     'fun',
-    'Sharether tip',
-    '{name}, take a light break with Edutainment on Sharether — learn something new without heavy textbook mode.',
+    'Learnda tip',
+    '{name}, take a light break with Edutainment on Learnda — learn something new without heavy textbook mode.',
     'Explore edutainment',
     '/edutainment'
   ),
@@ -180,7 +180,7 @@ const SHARETHER_TIPS = [
     'lesson_resume',
     'Resume lessons',
     'lessons',
-    'Sharether tip',
+    'Learnda tip',
     'Hi {name}! Pick up exactly where you stopped — open your last lesson and continue in one tap.',
     'Continue lesson',
     '/learn'
@@ -189,7 +189,7 @@ const SHARETHER_TIPS = [
     'course_filters',
     'Find your course fast',
     'navigation',
-    'Sharether tip',
+    'Learnda tip',
     '{name}, filter Learn by programme or semester so you reach the right course notes in seconds.',
     'Browse courses',
     '/learn'
@@ -198,8 +198,8 @@ const SHARETHER_TIPS = [
     'invite_classmate',
     'Invite a classmate',
     'community',
-    'Sharether tip',
-    'Hey {name}, learning is better together. Invite a course mate to Sharether and compare notes in a group.',
+    'Learnda tip',
+    'Hey {name}, learning is better together. Invite a course mate to Learnda and compare notes in a group.',
     'Invite friends',
     '/invite-friends'
   ),
@@ -207,16 +207,16 @@ const SHARETHER_TIPS = [
     'notifications_inbox',
     'Stay in the loop',
     'account',
-    'Sharether tip',
+    'Learnda tip',
     '{name}, turn on notifications for assignment reminders and platform updates so you never miss a beat.',
-    'Open Sharether',
+    'Open Learnda',
     '/pls'
   ),
   tip(
     'practice_wrong_answers',
     'Redo wrong answers',
     'practice',
-    'Sharether tip',
+    'Learnda tip',
     'Hi {name}! After practice, revisit questions you missed — that is where the real learning happens.',
     'Retry practice',
     '/practice'
@@ -225,7 +225,7 @@ const SHARETHER_TIPS = [
     'semester_organisation',
     'Semester organisation',
     'organisation',
-    'Sharether tip',
+    'Learnda tip',
     '{name}, align your PLS with this semester’s courses so every lecture and quiz stays one click away.',
     'Organise PLS',
     '/pls'
@@ -233,25 +233,25 @@ const SHARETHER_TIPS = [
 ];
 
 const studyById = new Map(STUDY_TIPS.map((entry) => [entry.id, entry]));
-const sharetherById = new Map(SHARETHER_TIPS.map((entry) => [entry.id, entry]));
+const learndaById = new Map(LEARNDA_TIPS.map((entry) => [entry.id, entry]));
 
 const resolveEngagementTip = (category, tipId, overrides = {}) => {
   const cat = String(category || '').trim();
-  const catalog = cat === 'sharether' ? SHARETHER_TIPS : STUDY_TIPS;
-  const map = cat === 'sharether' ? sharetherById : studyById;
+  const catalog = cat === 'learnda' ? LEARNDA_TIPS : STUDY_TIPS;
+  const map = cat === 'learnda' ? learndaById : studyById;
   const picked = tipId ? map.get(tipId) : null;
   const fallback = catalog[0];
 
-  const notificationType = cat === 'sharether' ? 'sharether_tip' : 'study_tip';
+  const notificationType = cat === 'learnda' ? 'learnda_tip' : 'study_tip';
   const notificationTitle = overrides.title || picked?.title || fallback.title;
 
   return {
-    category: cat === 'sharether' ? 'sharether' : 'study',
+    category: cat === 'learnda' ? 'learnda' : 'study',
     tipId: picked?.id || fallback.id,
     notificationType,
     notificationTitle,
     message: overrides.message || picked?.message || fallback.message,
-    ctaLabel: overrides.ctaLabel || picked?.ctaLabel || 'Open Sharether',
+    ctaLabel: overrides.ctaLabel || picked?.ctaLabel || 'Open Learnda',
     ctaPath: overrides.ctaPath || picked?.ctaPath || DEFAULT_CTA_PATH,
     tipMeta: picked || fallback,
   };
@@ -259,6 +259,6 @@ const resolveEngagementTip = (category, tipId, overrides = {}) => {
 
 module.exports = {
   STUDY_TIPS,
-  SHARETHER_TIPS,
+  LEARNDA_TIPS,
   resolveEngagementTip,
 };

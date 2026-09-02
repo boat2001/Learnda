@@ -1,7 +1,7 @@
 import './PageSkeleton.css';
 
 export default function PageSkeleton({
-  title = 'Loading Sharether',
+  title = 'Loading Learnda',
   subtitle = 'Preparing your next screen.',
   cardCount = 6,
   compact = false,

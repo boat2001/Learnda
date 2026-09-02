@@ -188,7 +188,7 @@ const buildDisplayContent = (item, type, expanded) => {
   const bodyHasHtml = /<\/?[a-z][\s\S]*>/i.test(String(rawBody || ''));
 
   if (type === 'quote') {
-    const quoteText = isSameText(titleText, 'Sharether Quote') ? bodyText : (bodyText || titleText || previewText);
+    const quoteText = isSameText(titleText, 'Learnda Quote') ? bodyText : (bodyText || titleText || previewText);
     return { title: '', body: quoteText, teaser: quoteText, hasMore: false, hasHtml: false, html: '' };
   }
   if (type === 'fact' || type === 'joke') {
@@ -452,7 +452,7 @@ export default function MomentsViewer({
     const url = `${window.location.origin}/`;
     try {
       if (navigator.share) {
-        await navigator.share({ title: currentItem?.title || 'Sharether', url }).catch(() => null);
+        await navigator.share({ title: currentItem?.title || 'Learnda', url }).catch(() => null);
         showFeedback('Shared!');
       } else if (navigator.clipboard?.writeText) {
         await navigator.clipboard.writeText(url);
@@ -591,8 +591,8 @@ export default function MomentsViewer({
       <header className="edut-header">
         <div className="edut-header-brand">
           <img
-            src={`${import.meta.env.BASE_URL}sharether-logo.webp`}
-            alt="Sharether"
+            src={`${import.meta.env.BASE_URL}learnda-logo.webp`}
+            alt="Learnda"
             className="edut-header-logo"
           />
         </div>
@@ -854,7 +854,7 @@ export default function MomentsViewer({
                     </div>
                     <div className="edut-comment-body">
                       <div className="edut-comment-meta">
-                        <strong>{toDisplayNameCase(comment.author_name || 'Sharether member')}</strong>
+                        <strong>{toDisplayNameCase(comment.author_name || 'Learnda member')}</strong>
                         <span>{formatCommentDate(comment.created_at)}</span>
                         {comment.pending ? <span className="edut-comment-pending">Sending…</span> : null}
                       </div>

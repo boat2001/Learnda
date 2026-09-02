@@ -386,7 +386,7 @@
   min-height: 3rem;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.9);
-  border: 1px solid rgba(31, 113, 119, 0.12);
+  border: 1px solid rgba(43, 98, 196, 0.12);
   box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.42), 0 8px 18px rgba(15, 23, 42, 0.06);
 }
 
@@ -409,7 +409,7 @@
   min-width: 3rem;
   min-height: 3rem;
   border-radius: 999px;
-  border: 1px solid rgba(31, 113, 119, 0.12);
+  border: 1px solid rgba(43, 98, 196, 0.12);
   background: rgba(255, 255, 255, 0.9);
   color: #0f172a;
   cursor: pointer;
@@ -502,7 +502,7 @@
   min-width: 3rem;
   min-height: 3rem;
   border-radius: 999px;
-  border: 1px solid rgba(31, 113, 119, 0.12);
+  border: 1px solid rgba(43, 98, 196, 0.12);
   background: rgba(255, 255, 255, 0.9);
   color: #0f172a;
   cursor: pointer;
@@ -2632,7 +2632,7 @@
 }
 
 .lesson-complete-confetti-piece.is-mint .lesson-complete-confetti-shape {
-  background: linear-gradient(180deg, #14b8a6 0%, #5eead4 100%);
+  background: linear-gradient(180deg, #73a24b 0%, #5eead4 100%);
 }
 
 .lesson-complete-confetti-piece.is-gold .lesson-complete-confetti-shape {
@@ -3495,7 +3495,7 @@
 }
 
 .lesson-burst-correct .lesson-burst-particle {
-  color: rgba(34, 197, 94, 0.9);
+  color: rgba(115, 162, 75, 0.9);
 }
 
 .lesson-burst-wrong .lesson-burst-particle {
@@ -4766,7 +4766,7 @@
 }
 
 .lesson-discussion-type-switch button.is-active {
-  border-color: rgba(31, 113, 119, 0.36);
+  border-color: rgba(43, 98, 196, 0.36);
   background: rgba(209, 250, 229, 0.92);
   color: #065f46;
 }
@@ -4834,18 +4834,18 @@
   height: 2.58rem;
   padding: 0 0.88rem;
   border-radius: 999px;
-  border: 1px solid rgba(31, 113, 119, 0.24);
+  border: 1px solid rgba(43, 98, 196, 0.24);
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(248, 250, 252, 0.94));
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.75),
-    0 0 0 3px rgba(31, 113, 119, 0.08);
+    0 0 0 3px rgba(43, 98, 196, 0.08);
 }
 
 .lesson-thread-panel .lesson-discussion-composer input:focus {
-  border-color: rgba(31, 113, 119, 0.46);
+  border-color: rgba(43, 98, 196, 0.46);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.85),
-    0 0 0 4px rgba(31, 113, 119, 0.15);
+    0 0 0 4px rgba(43, 98, 196, 0.15);
 }
 
 .lesson-discussion-submit {

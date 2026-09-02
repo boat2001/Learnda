@@ -165,7 +165,7 @@ export default function VideosTab() {
               type="button"
               className="eduvhibe-video-thumb-button"
               onClick={() => setActiveVideo(video)}
-              aria-label={`Watch ${video.title} in Sharether`}
+              aria-label={`Watch ${video.title} in Learnda`}
             >
               <img src={thumbnailUrl} alt={video.title} loading="lazy" decoding="async" />
               <span className="eduvhibe-video-play-chip">
@@ -232,11 +232,11 @@ export default function VideosTab() {
           <div className="eduvhibe-video-modal-title-row">
             <img
               className="eduvhibe-video-modal-logo"
-              src={`${import.meta.env.BASE_URL}sharether-logo.webp`}
-              alt="Sharether"
+              src={`${import.meta.env.BASE_URL}learnda-logo.webp`}
+              alt="Learnda"
             />
             <div className="eduvhibe-video-modal-copy">
-              <span className="eduvhibe-video-modal-kicker">Now playing in Sharether</span>
+              <span className="eduvhibe-video-modal-kicker">Now playing in Learnda</span>
               <h3>{activeVideo.title}</h3>
             </div>
           </div>

@@ -21,7 +21,7 @@ const testimonialsData = [
     name: 'Kwabena Boateng Agyei',
     role: 'Software Developer & Founder',
     quote:
-      'As the founder of Sharether and a partner on Eduvhibe, I see it as a credible, reliable, and genuinely useful space for studying course materials.',
+      'As the founder of Learnda and a partner on Eduvhibe, I see it as a credible, reliable, and genuinely useful space for studying course materials.',
     image: kwabenaTestimonialImage,
   },
   {
@@ -130,7 +130,7 @@ export default function AboutTab() {
           </div>
           <p className="about-description">
             Eduvhibe gives students access to a wide range of course materials and academic tools that enrich progress.
-            It now lives inside Sharether so notes, videos, survival guides, CGPA tracking, and study support can work
+            It now lives inside Learnda so notes, videos, survival guides, CGPA tracking, and study support can work
             together in one learning platform.
           </p>
 
@@ -250,7 +250,7 @@ export default function AboutTab() {
 
             <div className="profile-body">
               <p>Baffoe Theophilus conceived the Eduvhibe idea, built Eduvhibe V1 and V2, and shaped it around course materials, video resources, survival guides, and CGPA tracking.</p>
-              <p>He offered Eduvhibe to Sharether because most of its operations were cross-cutting with Sharether's learning mission. The integration keeps the original academic purpose while giving students a stronger platform around it.</p>
+              <p>He offered Eduvhibe to Learnda because most of its operations were cross-cutting with Learnda's learning mission. The integration keeps the original academic purpose while giving students a stronger platform around it.</p>
             </div>
           </div>
         </div>

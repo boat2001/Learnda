@@ -188,7 +188,7 @@ async function collectPracticeSources(db, args) {
 
 function lessonInstructions(packet) {
   return [
-    'Generate one Sharether lesson JSON from extracted_text.',
+    'Generate one Learnda lesson JSON from extracted_text.',
     'Lesson 1 opens with a warm course welcome instead of a recap.',
     'Lessons 2-N open with a specific recap of the previous lesson, naming real ideas from it.',
     'Create 3-5 chunks total. Use analogies, rhetorical questions, Ghanaian examples, and clean HTML paragraphs/lists.',
@@ -202,7 +202,7 @@ function lessonInstructions(packet) {
 function practiceInstructions(packet) {
   const isQuiz = packet.subtype === 'quiz';
   return [
-    `Generate one Sharether ${isQuiz ? 'quiz' : 'past-question exam pack'} JSON from extracted_text.`,
+    `Generate one Learnda ${isQuiz ? 'quiz' : 'past-question exam pack'} JSON from extracted_text.`,
     isQuiz
       ? 'Prefer objective multiple-choice questions with four options and one answer. Mark uncertain answers with needs_review=true.'
       : 'Preserve Section A/Section B, marks, duration, year, and course code where visible. Theory questions use type="theory" with keywords/rubric.',

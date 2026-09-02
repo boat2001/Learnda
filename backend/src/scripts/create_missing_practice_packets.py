@@ -90,13 +90,13 @@ def derive_level_semester(rel_path):
 
 def extract_title(filename):
     title = filename
-    title = re.sub(r'\s*-\s*Sharether\.com', '', title, flags=re.IGNORECASE)
+    title = re.sub(r'\s*-\s*Learnda\.com', '', title, flags=re.IGNORECASE)
     title = re.sub(r'\.pdf$', '', title, flags=re.IGNORECASE)
     return title.strip()
 
 
 def slugify(text):
-    text = re.sub(r'\s*-\s*Sharether\.com', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'\s*-\s*Learnda\.com', '', text, flags=re.IGNORECASE)
     text = re.sub(r'\.pdf$', '', text, flags=re.IGNORECASE)
     text = text.lower()
     text = re.sub(r'[^a-z0-9]+', '-', text)
@@ -135,7 +135,7 @@ def ocr_pdf(pdf_path, dpi=200, language='eng'):
         missing = [t for t, p in [('pdftoppm', pdftoppm), ('tesseract', tesseract)] if not p]
         return '', {'method': 'ocr', 'error': f'missing tools: {missing}', 'pages': 0}
 
-    tmp = tempfile.mkdtemp(prefix='sharether_ocr_')
+    tmp = tempfile.mkdtemp(prefix='learnda_ocr_')
     prefix = os.path.join(tmp, 'page')
     try:
         subprocess.run(
@@ -172,7 +172,7 @@ def extract_pdf_text(pdf_path):
         )
         text = result.stdout.strip()
         # Filter out watermark-only content
-        meaningful = re.sub(r'Downloaded from\s*sharether\.com\s*Get files and let\'s learn together', '', text, flags=re.IGNORECASE).strip()
+        meaningful = re.sub(r'Downloaded from\s*learnda\.com\s*Get files and let\'s learn together', '', text, flags=re.IGNORECASE).strip()
         if len(meaningful) >= 250:
             return text, {'method': 'pdf_text', 'pages': None, 'error': None}
     except Exception:
@@ -203,7 +203,7 @@ def build_packet(filename, rel_path, full_path, subtype, extracted_text, extract
     course_title_guess = course_folder.replace('-', ' ').title() if course_folder else ''
 
     source_id = str(uuid.uuid4())
-    windows_path = 'D:\\Projects\\sharether-spa-and-mobile-app\\backend\\uploads\\resources\\' + rel_path.replace('/', '\\')
+    windows_path = 'D:\\Projects\\learnda-spa-and-mobile-app\\backend\\uploads\\resources\\' + rel_path.replace('/', '\\')
     file_url = '/uploads/' + filename
 
     subtype_label = 'quiz' if subtype == 'quiz' else 'past-question exam pack'
@@ -221,7 +221,7 @@ def build_packet(filename, rel_path, full_path, subtype, extracted_text, extract
         'subtype': subtype,
         'status': 'ready',
         'instructions': [
-            f'Generate one Sharether {subtype_label} JSON from extracted_text.',
+            f'Generate one Learnda {subtype_label} JSON from extracted_text.',
             type_instruction,
             'Do not invent unsupported questions.',
             'Return JSON with title, description, tags, metadata, sections, questions.',

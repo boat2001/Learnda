@@ -2,23 +2,23 @@ import { useEffect, useRef } from 'react';
 import './CelebrationContributors.css';
 
 const CONFETTI = [
-  { left: '4%',  bg: '#f59e0b', dur: '3.5s', delay: '0s',    w: 8,  h: 8,  r: 2 },
+  { left: '4%',  bg: '#fab82c', dur: '3.5s', delay: '0s',    w: 8,  h: 8,  r: 2 },
   { left: '11%', bg: '#34d399', dur: '4.1s', delay: '0.4s',  w: 6,  h: 10, r: 1 },
   { left: '17%', bg: '#38bdf8', dur: '3.2s', delay: '0.8s',  w: 8,  h: 8,  r: 4 },
   { left: '24%', bg: '#f97316', dur: '4.6s', delay: '1.2s',  w: 10, h: 5,  r: 1 },
-  { left: '31%', bg: '#f59e0b', dur: '3.8s', delay: '0.5s',  w: 7,  h: 7,  r: 2 },
+  { left: '31%', bg: '#fab82c', dur: '3.8s', delay: '0.5s',  w: 7,  h: 7,  r: 2 },
   { left: '39%', bg: '#818cf8', dur: '4.3s', delay: '1.5s',  w: 8,  h: 8,  r: 4 },
   { left: '47%', bg: '#10b981', dur: '3.6s', delay: '0.2s',  w: 6,  h: 9,  r: 1 },
-  { left: '54%', bg: '#f59e0b', dur: '4.9s', delay: '0.9s',  w: 9,  h: 5,  r: 2 },
+  { left: '54%', bg: '#fab82c', dur: '4.9s', delay: '0.9s',  w: 9,  h: 5,  r: 2 },
   { left: '61%', bg: '#f97316', dur: '3.3s', delay: '1.7s',  w: 7,  h: 7,  r: 3 },
   { left: '69%', bg: '#0ea5e9', dur: '4.1s', delay: '0.4s',  w: 8,  h: 8,  r: 4 },
   { left: '76%', bg: '#6366f1', dur: '3.9s', delay: '1.3s',  w: 6,  h: 10, r: 1 },
-  { left: '83%', bg: '#f59e0b', dur: '4.4s', delay: '0.6s',  w: 10, h: 6,  r: 2 },
+  { left: '83%', bg: '#fab82c', dur: '4.4s', delay: '0.6s',  w: 10, h: 6,  r: 2 },
   { left: '89%', bg: '#10b981', dur: '3.7s', delay: '1.9s',  w: 7,  h: 7,  r: 3 },
   { left: '95%', bg: '#f97316', dur: '4.7s', delay: '0.1s',  w: 8,  h: 8,  r: 4 },
   { left: '8%',  bg: '#6366f1', dur: '3.4s', delay: '2.1s',  w: 6,  h: 6,  r: 3 },
   { left: '21%', bg: '#0ea5e9', dur: '4.2s', delay: '2.3s',  w: 9,  h: 5,  r: 1 },
-  { left: '43%', bg: '#f59e0b', dur: '3.1s', delay: '2.5s',  w: 6,  h: 11, r: 1 },
+  { left: '43%', bg: '#fab82c', dur: '3.1s', delay: '2.5s',  w: 6,  h: 11, r: 1 },
   { left: '66%', bg: '#34d399', dur: '4.8s', delay: '2.7s',  w: 8,  h: 8,  r: 4 },
   { left: '78%', bg: '#f97316', dur: '3.9s', delay: '2.9s',  w: 7,  h: 7,  r: 2 },
   { left: '52%', bg: '#818cf8', dur: '4.0s', delay: '3.1s',  w: 6,  h: 6,  r: 3 },
@@ -26,7 +26,7 @@ const CONFETTI = [
 
 // Saturated colours that show clearly on both light and dark backgrounds
 const FIREWORK_PALETTES = [
-  ['#f59e0b', '#d97706', '#fbbf24'],
+  ['#fab82c', '#d97706', '#fbbf24'],
   ['#10b981', '#059669', '#34d399'],
   ['#0ea5e9', '#0284c7', '#38bdf8'],
   ['#ea580c', '#c2410c', '#f97316'],
@@ -34,7 +34,7 @@ const FIREWORK_PALETTES = [
   ['#e11d48', '#be123c', '#fb7185'],
 ];
 
-const CC_ACCENTS = ['#f59e0b', '#10b981', '#0ea5e9', '#f97316', '#6366f1'];
+const CC_ACCENTS = ['#fab82c', '#10b981', '#0ea5e9', '#f97316', '#6366f1'];
 
 const getInitials = (name = '') =>
   String(name).trim().split(/\s+/).filter(Boolean)
@@ -178,7 +178,7 @@ export default function CelebrationContributors({ contributors = [], totalAmount
         <span className="cc-header__emoji" aria-hidden="true">🎉</span>
         <h2 className="cc-header__title">Thank You, Contributors!</h2>
         <p className="cc-header__subtitle">
-          These people brought Sharether back when it went down. Every contribution mattered. They are our superheroes. Let&apos;s celebrate them.
+          These people brought Learnda back when it went down. Every contribution mattered. They are our superheroes. Let&apos;s celebrate them.
         </p>
         <div className="cc-stats">
           <div className="cc-stat">

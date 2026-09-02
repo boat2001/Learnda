@@ -1,6 +1,6 @@
 export const APP_EVENTS = {
-  STATE_CHANGED: "sharether:stateChanged",
-  THEME_CHANGED: "sharether:themeChanged",
+  STATE_CHANGED: "learnda:stateChanged",
+  THEME_CHANGED: "learnda:themeChanged",
 };
 
 export const APP_STATE_SCOPES = {

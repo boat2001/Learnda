@@ -6,9 +6,9 @@ const SUBTYPES = { quotes: 'quote', facts: 'fact', jokes: 'jocular', stories: 's
 
 async function syncCollected(categories = Object.keys(SUBTYPES)) {
   const [systemUser] = await User.findOrCreate({
-    where: { email: 'system@sharether.com' },
+    where: { email: 'system@learnda.app' },
     defaults: {
-      full_name: 'Sharether System', password_hash: `collector-${Date.now()}`,
+      full_name: 'Learnda System', password_hash: `collector-${Date.now()}`,
       role: 'admin', account_status: 'active'
     }
   });
@@ -27,7 +27,7 @@ async function syncCollected(categories = Object.keys(SUBTYPES)) {
       const wordCount = item.body.split(/\s+/).filter(Boolean).length;
       return {
         subtype: SUBTYPES[category], title: item.title, description: item.summary, body: item.body,
-        author: String(item.author || item.sourceName || 'Sharether').slice(0, 200),
+        author: String(item.author || item.sourceName || 'Learnda').slice(0, 200),
         category, tone: SUBTYPES[category], slug,
         creator_id: systemUser.id, status: 'published', is_premium: false, depth_level: 'basic',
         tags: [...new Set([category, 'edutainment', 'collected', ...(item.tags || [])])],

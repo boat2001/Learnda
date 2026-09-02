@@ -4,7 +4,7 @@ const path = require('path');
 const { authenticate, checkRole } = require('../middleware/auth');
 const { requireAdminPermission, auditAdminAction } = require('../utils/adminAccess');
 const { optionalAuth } = require('../middleware/auth');
-const { sendEmail } = require('../services/emailService');
+const { sendEmail, LOGO_URL } = require('../services/emailService');
 
 const DATA_FILE       = path.join(__dirname, '../data/applications.json');
 const TEAM_LINKS_FILE = path.join(__dirname, '../data/team_links.json');
@@ -43,7 +43,7 @@ async function sendWhatsAppInviteEmail(app, whatsappLink) {
   if (!app.email || !whatsappLink) return;
   const role = TYPE_LABEL[app.type] || 'Team Member';
   const firstName = (app.name || '').split(' ')[0] || 'there';
-  const subject = `Welcome to the Sharether ${role} team! 🎉`;
+  const subject = `Welcome to the Learnda ${role} team! 🎉`;
   const html = `
 <!DOCTYPE html>
 <html lang="en">
@@ -53,13 +53,13 @@ async function sendWhatsAppInviteEmail(app, whatsappLink) {
     <tr><td align="center">
       <table width="100%" style="max-width:520px;background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.08);">
         <tr>
-          <td style="background:#1f7177;padding:20px 32px;">
+          <td style="background:#1f56db;padding:20px 32px;">
             <table cellpadding="0" cellspacing="0"><tr>
               <td style="vertical-align:middle;padding-right:12px;">
-                <img src="https://pub-1dec8067cfda47ef9b8088c56989e07e.r2.dev/brand/sharether-logo.png" alt="Sharether" width="40" height="40" style="display:block;border-radius:8px;" />
+                <img src="${LOGO_URL}" alt="Learnda" width="40" height="40" style="display:block;border-radius:8px;" />
               </td>
               <td style="vertical-align:middle;">
-                <span style="font-size:20px;font-weight:700;color:#ffffff;">Sharether</span>
+                <span style="font-size:20px;font-weight:700;color:#ffffff;">Learnda</span>
               </td>
             </tr></table>
           </td>
@@ -67,7 +67,7 @@ async function sendWhatsAppInviteEmail(app, whatsappLink) {
         <tr><td style="padding:32px;">
           <h1 style="margin:0 0 16px;font-size:22px;font-weight:700;color:#111827;">Congratulations, ${firstName}! 🎉</h1>
           <p style="margin:0 0 16px;font-size:15px;line-height:1.6;color:#374151;">
-            Your application to join the Sharether team as a <strong>${role}</strong> has been approved.
+            Your application to join the Learnda team as a <strong>${role}</strong> has been approved.
             We're excited to have you on board!
           </p>
           <p style="margin:0 0 24px;font-size:15px;line-height:1.6;color:#374151;">
@@ -83,8 +83,8 @@ async function sendWhatsAppInviteEmail(app, whatsappLink) {
         <tr>
           <td style="padding:20px 32px;border-top:1px solid #f0f0f0;text-align:center;">
             <p style="margin:0;font-size:12px;color:#9ca3af;">
-              &copy; ${new Date().getFullYear()} Sharether &bull;
-              <a href="https://beta.sharether.com" style="color:#1f7177;text-decoration:none;">sharether.com</a>
+              &copy; ${new Date().getFullYear()} Learnda &bull;
+              <a href="https://beta.learnda.app" style="color:#1f56db;text-decoration:none;">learnda.app</a>
             </p>
           </td>
         </tr>

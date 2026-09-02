@@ -1,4 +1,4 @@
--- Sharether auth/onboarding extension (non-destructive)
+-- Learnda auth/onboarding extension (non-destructive)
 
 ALTER TABLE users
   ADD COLUMN IF NOT EXISTS auth_provider TEXT,

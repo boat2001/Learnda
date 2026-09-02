@@ -8,4 +8,4 @@ Disallow: /onboarding
 Disallow: /login
 Disallow: /register
 Disallow: /notifications
-Sitemap: https://sharether.com/sitemap.xml
+Sitemap: https://learnda.app/sitemap.xml

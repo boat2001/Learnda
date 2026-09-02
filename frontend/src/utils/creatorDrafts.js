@@ -1,4 +1,4 @@
-export const CREATOR_DRAFTS_KEY = 'sharether.creatorDrafts';
+export const CREATOR_DRAFTS_KEY = 'learnda.creatorDrafts';
 
 const canUseStorage = () => typeof window !== 'undefined' && Boolean(window.localStorage);
 

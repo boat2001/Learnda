@@ -416,11 +416,11 @@ async function run() {
         `
           UPDATE user_contacts uc
           SET contact_value = CASE
-                WHEN contact_type = 'email' THEN 'archived+' || uc.id::text || '@deleted.sharether.local'
+                WHEN contact_type = 'email' THEN 'archived+' || uc.id::text || '@deleted.learnda.local'
                 ELSE 'archived-' || uc.id::text
               END,
               normalized_value = CASE
-                WHEN contact_type = 'email' THEN 'archived+' || uc.id::text || '@deleted.sharether.local'
+                WHEN contact_type = 'email' THEN 'archived+' || uc.id::text || '@deleted.learnda.local'
                 ELSE 'archived-' || uc.id::text
               END,
               is_primary = false,
@@ -436,7 +436,7 @@ async function run() {
     await sequelize.query(
       `
         UPDATE users u
-        SET email = 'archived+' || u.id::text || '@deleted.sharether.local',
+        SET email = 'archived+' || u.id::text || '@deleted.learnda.local',
             country_code = NULL,
             phone_number = NULL,
             auth_provider = NULL,

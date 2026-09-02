@@ -74,7 +74,7 @@ export default function Report() {
         {submitted ? (
           <div className="fm-success">
             <div className="fm-success-icon">✓</div>
-            <p>Report received. The Sharether team will investigate and follow up within 24–48 hours.</p>
+            <p>Report received. The Learnda team will investigate and follow up within 24–48 hours.</p>
             <button className="btn btn-primary" type="button" onClick={closeModal}>Done</button>
           </div>
         ) : (
@@ -161,7 +161,7 @@ export default function Report() {
                 <span className="panel-dot" />
                 <div>
                   <strong>We respond</strong>
-                  <p>Expect a reply from a Sharether admin within 2 days.</p>
+                  <p>Expect a reply from a Learnda admin within 2 days.</p>
                 </div>
               </div>
               <div className="panel-list-item">

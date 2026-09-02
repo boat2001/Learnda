@@ -28,8 +28,8 @@ function fmt(n) {
   return String(n);
 }
 
-const TEAL = '#1f7177';
-const COLORS = ['#1f7177', '#4fb3ad', '#2563eb', '#d97706', '#059669', '#dc2626', '#7c3aed', '#94a3b8'];
+const TEAL = '#2b62c4';
+const COLORS = ['#2b62c4', '#4fb3ad', '#2563eb', '#d97706', '#059669', '#dc2626', '#7c3aed', '#94a3b8'];
 
 function chartColors() {
   const s = getComputedStyle(document.documentElement);
@@ -71,7 +71,7 @@ function BreakdownCard({ title, data, labelKey = 'label', valueKey = 'count' }) 
 function ActivenessTable({ users }) {
   const categories = [
     { label: 'Highly Active',  min: 75,  color: '#059669' },
-    { label: 'Active',         min: 50,  color: '#1f7177' },
+    { label: 'Active',         min: 50,  color: '#2b62c4' },
     { label: 'Moderate',       min: 25,  color: '#d97706' },
     { label: 'Low / Churning', min: 0,   color: '#dc2626' },
   ];

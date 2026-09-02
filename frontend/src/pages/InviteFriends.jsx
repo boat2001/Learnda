@@ -37,7 +37,7 @@ export default function InviteFriends() {
     return url.toString();
   }, [user]);
 
-  const inviteText = `Study with me on Sharether — the smarter way to learn together: ${inviteLink}`;
+  const inviteText = `Study with me on Learnda — the smarter way to learn together: ${inviteLink}`;
 
   const copyInvite = async () => {
     if (!inviteLink) return;
@@ -62,8 +62,8 @@ export default function InviteFriends() {
     if (navigator.share) {
       try {
         await navigator.share({
-          title: 'Join me on Sharether',
-          text: 'Study with me on Sharether — the smarter way to learn together.',
+          title: 'Join me on Learnda',
+          text: 'Study with me on Learnda — the smarter way to learn together.',
           url: inviteLink,
         });
         return;
@@ -83,13 +83,13 @@ export default function InviteFriends() {
       label: 'X',
       Icon: FaXTwitter,
       color: null,
-      href: `https://twitter.com/intent/tweet?text=${encode('Study with me on Sharether — the smarter way to learn together.')}&url=${encode(inviteLink)}`,
+      href: `https://twitter.com/intent/tweet?text=${encode('Study with me on Learnda — the smarter way to learn together.')}&url=${encode(inviteLink)}`,
     },
     {
       label: 'Telegram',
       Icon: FaTelegram,
       color: '#0088cc',
-      href: `https://t.me/share/url?url=${encode(inviteLink)}&text=${encode('Study with me on Sharether.')}`,
+      href: `https://t.me/share/url?url=${encode(inviteLink)}&text=${encode('Study with me on Learnda.')}`,
     },
     {
       label: 'Facebook',
@@ -125,7 +125,7 @@ export default function InviteFriends() {
       label: 'Reddit',
       Icon: FaReddit,
       color: '#ff4500',
-      href: `https://reddit.com/submit?url=${encode(inviteLink)}&title=${encode('Join me on Sharether — the smarter way to study')}`,
+      href: `https://reddit.com/submit?url=${encode(inviteLink)}&title=${encode('Join me on Learnda — the smarter way to study')}`,
     },
     {
       label: 'Pinterest',
@@ -149,7 +149,7 @@ export default function InviteFriends() {
       label: 'Email',
       Icon: FiMail,
       color: '#ea4335',
-      href: `mailto:?subject=${encode('Join me on Sharether')}&body=${encode(inviteText)}`,
+      href: `mailto:?subject=${encode('Join me on Learnda')}&body=${encode(inviteText)}`,
     },
   ];
 
@@ -159,7 +159,7 @@ export default function InviteFriends() {
         <div className="hero-grid">
           <div>
             <span className="hero-tag">Invite friends</span>
-            <h1 className="hero-title">Bring your study circle to Sharether.</h1>
+            <h1 className="hero-title">Bring your study circle to Learnda.</h1>
             <p className="hero-subtitle">
               Share your personal invite link — every friend you bring makes the community stronger.
             </p>

@@ -3,7 +3,7 @@
  * Respects prefers-reduced-motion and optional user mute (localStorage + saved preferences).
  */
 
-const STORAGE_KEY = 'sharether_ui_sounds_enabled';
+const STORAGE_KEY = 'learnda_ui_sounds_enabled';
 
 let audioContext = null;
 

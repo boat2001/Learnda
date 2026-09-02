@@ -196,7 +196,7 @@ export default function CommunityForumPicker({ onClose, variant = 'default' }) {
             <span className="cfp-option-icon cfp-option-icon--global"><FiGlobe /></span>
             <span className="cfp-option-body">
               <strong>Global Community</strong>
-              <span>All Sharether users</span>
+              <span>All Learnda users</span>
             </span>
           </button>
         </div>

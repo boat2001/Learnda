@@ -83,8 +83,8 @@ import {
 } from './lessonDiscussion';
 
 const CHUNK_COMPLETE_DELAY_SECONDS = 5;
-const DISCUSSION_STORAGE_PREFIX = 'sharether:lesson-discussion';
-const HIGHLIGHT_STORAGE_PREFIX = 'sharether:lesson-highlights';
+const DISCUSSION_STORAGE_PREFIX = 'learnda:lesson-discussion';
+const HIGHLIGHT_STORAGE_PREFIX = 'learnda:lesson-highlights';
 const LESSON_STATE_VERSION = 1;
 const MAX_PERSISTED_ASSESSMENT_ATTEMPTS = 6;
 
@@ -483,7 +483,7 @@ const normalizeDiscussionReply = (reply = {}, index = 0) => ({
   id: safeText(reply.id) || `reply-${index}`,
   body: safeText(reply.body),
   authorKey: safeText(reply.authorKey),
-  authorName: safeText(reply.authorName) || 'Sharether Student',
+  authorName: safeText(reply.authorName) || 'Learnda Student',
   authorAvatar: safeText(reply.authorAvatar) || null,
   createdAt: safeText(reply.createdAt) || new Date().toISOString(),
 });
@@ -497,7 +497,7 @@ const normalizeDiscussionEntry = (entry = {}, index = 0) => {
     id: safeText(entry.id) || `entry-${index}`,
     body: safeText(entry.body),
     authorKey: safeText(entry.authorKey),
-    authorName: safeText(entry.authorName) || 'Sharether Student',
+    authorName: safeText(entry.authorName) || 'Learnda Student',
     authorAvatar: safeText(entry.authorAvatar) || null,
     createdAt: safeText(entry.createdAt) || new Date().toISOString(),
     likes: Math.max(0, Number(entry.likes || likedBy.length || 0)),
@@ -1726,7 +1726,7 @@ export default function LessonViewer() {
     };
 
     window.dispatchEvent(
-      new CustomEvent('sharether:learning-progress-updated', {
+      new CustomEvent('learnda:learning-progress-updated', {
         detail: {
           lessonId,
           courseId: lessonSchema.entity.course.id || location.state?.courseId || null,
@@ -1748,7 +1748,7 @@ export default function LessonViewer() {
 
     if (typeof window !== 'undefined') {
       window.dispatchEvent(
-        new CustomEvent('sharether:prelim-progress-updated', {
+        new CustomEvent('learnda:prelim-progress-updated', {
           detail: {
             courseId: lessonSchema.entity.course.id || location.state?.courseId || null,
             prelimId: lessonId,
@@ -1830,7 +1830,7 @@ export default function LessonViewer() {
         planKey: detail.planKey || 'serious',
         message:
           detail.message ||
-          `Chip in to open up ${detail.featureLabel?.toLowerCase() || 'this feature'} — and help keep Sharether free for everyone else.`,
+          `Chip in to open up ${detail.featureLabel?.toLowerCase() || 'this feature'} — and help keep Learnda free for everyone else.`,
       });
     };
 
@@ -2472,8 +2472,8 @@ export default function LessonViewer() {
       try {
         if (navigator.share) {
           await navigator.share({
-            title: lesson?.title || 'Sharether lesson',
-            text: `${lesson?.title || 'Lesson'} on Sharether`,
+            title: lesson?.title || 'Learnda lesson',
+            text: `${lesson?.title || 'Lesson'} on Learnda`,
             url: shareUrl,
           });
           setSupportStatus('Prelim guide shared.');
@@ -2492,8 +2492,8 @@ export default function LessonViewer() {
 
     const shareUrl = typeof window !== 'undefined' ? window.location.href : '';
     const sharePayload = {
-      title: lesson?.title || 'Sharether lesson',
-      text: `${lesson?.title || 'Lesson'} on Sharether`,
+      title: lesson?.title || 'Learnda lesson',
+      text: `${lesson?.title || 'Lesson'} on Learnda`,
       url: shareUrl,
     };
 
@@ -2555,7 +2555,7 @@ export default function LessonViewer() {
       id: `${currentChunk.id}-${targetBoardType}-${Date.now()}`,
       body: safeText(discussionDraft),
       authorKey: getUserKey(user),
-      authorName: user?.full_name || user?.name || 'Sharether Student',
+      authorName: user?.full_name || user?.name || 'Learnda Student',
       authorAvatar: user?.avatar_url || null,
       createdAt: new Date().toISOString(),
       likes: 0,
@@ -2597,7 +2597,7 @@ export default function LessonViewer() {
       id: `${entryId}-reply-${Date.now()}`,
       body: safeText(replyDrafts[entryId]),
       authorKey: getUserKey(user),
-      authorName: user?.full_name || user?.name || 'Sharether Student',
+      authorName: user?.full_name || user?.name || 'Learnda Student',
       authorAvatar: user?.avatar_url || null,
       createdAt: new Date().toISOString(),
     };

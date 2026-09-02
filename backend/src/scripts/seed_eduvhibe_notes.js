@@ -41,7 +41,7 @@ function getCourseLabel(fileName) {
 
 function getDescription(fileName) {
   const title = extractTitleFromFileName(fileName);
-  return `${title} from the original Eduvhibe course-material library, now available inside Sharether for study and revision.`;
+  return `${title} from the original Eduvhibe course-material library, now available inside Learnda for study and revision.`;
 }
 
 async function getSeedUserId() {

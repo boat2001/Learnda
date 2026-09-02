@@ -1,4 +1,4 @@
-const REGISTRATION_DRAFT_KEY = 'sharether_registration_draft_v1';
+const REGISTRATION_DRAFT_KEY = 'learnda_registration_draft_v1';
 
 const isObject = (value) => value && typeof value === 'object' && !Array.isArray(value);
 

@@ -23,7 +23,7 @@ function toSlug(...parts) {
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/(^-|-$)/g, '')
     .slice(0, 90);
-  return base || `sharether-import-${Date.now()}`;
+  return base || `learnda-import-${Date.now()}`;
 }
 
 function validateLessonOutput(generated) {

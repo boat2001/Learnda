@@ -33,7 +33,7 @@ const ALL_FEATURES = [
     label: 'Courses',
     tagline: 'Your full academic catalogue',
     description:
-      'Browse every course available on Sharether, organised by programme, level, and semester. Each course page shows its lessons, notes, past questions, and study resources.',
+      'Browse every course available on Learnda, organised by programme, level, and semester. Each course page shows its lessons, notes, past questions, and study resources.',
     howTo: [
       'Go to Courses from the main navigation.',
       'Filter by programme, level (100–500), or semester to narrow results.',
@@ -80,7 +80,7 @@ const ALL_FEATURES = [
     label: 'Eduvhibe',
     tagline: 'UCC-focused learning hub',
     description:
-      'Eduvhibe is Sharether\'s dedicated section for UCC students. It brings together curated notes, YouTube video tutorials, academic survival guides, and a CGPA calculator in one focused space.',
+      'Eduvhibe is Learnda\'s dedicated section for UCC students. It brings together curated notes, YouTube video tutorials, academic survival guides, and a CGPA calculator in one focused space.',
     howTo: [
       'Open Eduvhibe from the main navigation.',
       'Notes tab: browse and download course notes by level (100–400). Search by title.',
@@ -97,7 +97,7 @@ const ALL_FEATURES = [
     label: 'Create Content',
     tagline: 'Share knowledge, earn rewards',
     description:
-      'Sharether is creator-powered. Create files, video lessons, survival guides, articles, stories, quotes, fun facts, and jokes for learners across the platform.',
+      'Learnda is creator-powered. Create files, video lessons, survival guides, articles, stories, quotes, fun facts, and jokes for learners across the platform.',
     howTo: [
       'Go to Create Content from the menu and choose the content format that fits your idea.',
       'Upload content — notes as PDF, video lessons as links or direct uploads, articles as rich text.',
@@ -146,7 +146,7 @@ const ALL_FEATURES = [
     label: 'Rewards',
     tagline: 'Earn XP, badges, and streak rewards',
     description:
-      'Sharether has two reward tracks. The XP system levels you up (Newcomer to Grandmaster) and unlocks badges as you reach milestones. The cash rewards system pays out for maintaining a 7-day streak and referring friends. Contributing content earns you XP — not cash.',
+      'Learnda has two reward tracks. The XP system levels you up (Newcomer to Grandmaster) and unlocks badges as you reach milestones. The cash rewards system pays out for maintaining a 7-day streak and referring friends. Contributing content earns you XP — not cash.',
     howTo: [
       'XP is earned automatically each time you complete a lesson, finish a practice attempt, hit a streak milestone, or get a content piece approved.',
       'As your XP total grows, your account level increases and new badges are unlocked — view them all on the Progress page.',
@@ -163,7 +163,7 @@ const ALL_FEATURES = [
     label: 'Community',
     tagline: 'Chat live with the whole community',
     description:
-      'The Community is a shared real-time chat space for all Sharether students. Send text messages, share voice notes, attach files, and react to messages. External links are blocked to keep the space focused.',
+      'The Community is a shared real-time chat space for all Learnda students. Send text messages, share voice notes, attach files, and react to messages. External links are blocked to keep the space focused.',
     howTo: [
       'Go to Community Forum from the navigation.',
       'Type a message in the chat input and press Send.',
@@ -214,7 +214,7 @@ const ALL_SECTIONS = [
       },
       {
         q: 'How do I choose the right plan?',
-        a: 'Sharether has three contribution levels: Free Learner (free), Helper, and Hero. Free Learner gives access to the core learning workflow. Helper and Hero unlock more lessons, deeper practice content, and greater contributor access. Visit Contribution Plans to compare in detail.',
+        a: 'Learnda has three contribution levels: Free Learner (free), Helper, and Hero. Free Learner gives access to the core learning workflow. Helper and Hero unlock more lessons, deeper practice content, and greater contributor access. Visit Contribution Plans to compare in detail.',
       },
       {
         q: 'Can I change my plan later?',
@@ -240,7 +240,7 @@ const ALL_SECTIONS = [
       },
       {
         q: 'What types of content are available?',
-        a: 'Sharether hosts past questions, course notes, lesson walkthroughs, YouTube video tutorials (via Eduvhibe), academic survival guides, educative articles, and practice test sessions — all organised by course, level, and semester.',
+        a: 'Learnda hosts past questions, course notes, lesson walkthroughs, YouTube video tutorials (via Eduvhibe), academic survival guides, educative articles, and practice test sessions — all organised by course, level, and semester.',
       },
       {
         q: 'Can I download notes?',
@@ -288,7 +288,7 @@ const ALL_SECTIONS = [
     items: [
       {
         q: 'What is Eduvhibe?',
-        a: 'Eduvhibe is Sharether\'s dedicated learning hub for UCC students. It brings together curated course notes, YouTube video tutorials, academic strategy guides, and a CGPA calculator — all in one focused section accessible from the main navigation.',
+        a: 'Eduvhibe is Learnda\'s dedicated learning hub for UCC students. It brings together curated course notes, YouTube video tutorials, academic strategy guides, and a CGPA calculator — all in one focused section accessible from the main navigation.',
       },
       {
         q: 'How do I find notes on Eduvhibe?',
@@ -303,7 +303,7 @@ const ALL_SECTIONS = [
         a: 'Creators and admins can upload notes and add video links. If you have creator access, open the Notes or Videos tab and click "Upload Note" or "Add Video". Content is tagged to Eduvhibe so it appears in the right tab automatically.',
       },
       {
-        q: 'Are the videos hosted on Sharether?',
+        q: 'Are the videos hosted on Learnda?',
         a: 'No — Eduvhibe videos are YouTube links. Creators paste a valid YouTube URL when adding a video. The platform extracts the video ID to display a thumbnail and embeds the video in a player modal when clicked.',
       },
     ],
@@ -344,7 +344,7 @@ const ALL_SECTIONS = [
       },
       {
         q: 'What is the Community Forum?',
-        a: 'The Community Forum is a shared real-time chat space for all Sharether students. It is not a thread or board system — it is a single live chat where you can send text messages, voice notes, and file attachments. External links are blocked automatically to keep the space focused.',
+        a: 'The Community Forum is a shared real-time chat space for all Learnda students. It is not a thread or board system — it is a single live chat where you can send text messages, voice notes, and file attachments. External links are blocked automatically to keep the space focused.',
       },
       {
         q: 'Can I reply to a specific message in the community?',
@@ -499,7 +499,7 @@ export default function UserManual() {
           <div>
             <span className="hero-tag">Help centre</span>
             <h1 className="hero-title">
-              Everything you need to get the most out of Sharether.
+              Everything you need to get the most out of Learnda.
             </h1>
             <p className="hero-subtitle">
               Step-by-step answers for every part of the platform — from creating an account and adding

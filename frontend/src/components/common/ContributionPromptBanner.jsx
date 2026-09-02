@@ -27,7 +27,7 @@ const writeTimestamp = (key, value) => {
 
 /**
  * Dismissible nudge shown to settled-in free users to consider a contribution
- * plan. Tapping "Support Sharether" opens the contribution plans modal (styled
+ * plan. Tapping "Support Learnda" opens the contribution plans modal (styled
  * appeal + plans). Hidden for users already contributing.
  */
 export default function ContributionPromptBanner() {
@@ -79,10 +79,10 @@ export default function ContributionPromptBanner() {
   };
 
   return (
-    <div className="supporter-banner" role="complementary" aria-label="Support Sharether">
+    <div className="supporter-banner" role="complementary" aria-label="Support Learnda">
       <div className="supporter-banner__inner">
         <p className="supporter-banner__text">
-          Sharether working for you? <strong>Chip in what fits</strong> and keep it free for your classmates too.
+          Learnda working for you? <strong>Chip in what fits</strong> and keep it free for your classmates too.
         </p>
         <button type="button" className="supporter-banner__cta" onClick={handleSupport}>
           See the plans

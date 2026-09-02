@@ -29,8 +29,8 @@
   <!-- ===== Category cards (2 x 3) ===== -->
   <!-- Row 1 -->
   <g class="tcard" tabindex="0">
-    <rect class="tcard-box" x="24" y="132" width="212" height="72" rx="11" fill="#ffffff" stroke="#ef4444" stroke-width="1.4"/>
-    <circle cx="56" cy="168" r="17" fill="#ef4444"/>
+    <rect class="tcard-box" x="24" y="132" width="212" height="72" rx="11" fill="#ffffff" stroke="#fb6334" stroke-width="1.4"/>
+    <circle cx="56" cy="168" r="17" fill="#fb6334"/>
     <path d="M56 159 C61 167 60 178 56 178 C52 178 51 167 56 159 Z" fill="#ffffff"/>
     <text class="tt-title" x="84" y="162" fill="#1e293b" font-size="14.5">Alcohol</text>
     <text class="tt-body" x="84" y="180" fill="#475569" font-size="12.5">FASD: lifelong harm</text>
@@ -75,8 +75,8 @@
     <text class="tt-body" x="84" y="359" fill="#475569" font-size="12.5">the placenta</text>
   </g>
   <g class="tcard" tabindex="0">
-    <rect class="tcard-box" x="244" y="296" width="212" height="72" rx="11" fill="#ffffff" stroke="#22c55e" stroke-width="1.4"/>
-    <circle cx="276" cy="332" r="17" fill="#22c55e"/>
+    <rect class="tcard-box" x="244" y="296" width="212" height="72" rx="11" fill="#ffffff" stroke="#73a24b" stroke-width="1.4"/>
+    <circle cx="276" cy="332" r="17" fill="#73a24b"/>
     <path d="M267 330 A9 9 0 0 0 285 330 Z" fill="#ffffff"/>
     <text class="tt-title" x="304" y="326" fill="#1e293b" font-size="14.5">Malnutrition</text>
     <text class="tt-body" x="304" y="344" fill="#475569" font-size="12.5">Low folate, iodine,</text>
@@ -94,7 +94,7 @@
   <g class="barwrap">
     <!-- Germinal -->
     <g>
-      <rect class="bar" x="78" y="522" width="76" height="44" rx="5" fill="#f59e0b"/>
+      <rect class="bar" x="78" y="522" width="76" height="44" rx="5" fill="#fab82c"/>
       <text class="tt-title bar-val" x="116" y="514" text-anchor="middle" fill="#b45309" font-size="12.5">Low</text>
       <text class="tt-body" x="116" y="584" text-anchor="middle" fill="#475569" font-size="12.5">Germinal</text>
       <text class="tt-body" x="116" y="599" text-anchor="middle" fill="#94a3b8" font-size="11">0&#8211;2 wks</text>
@@ -116,7 +116,7 @@
   </g>
 
   <!-- Footer -->
-  <text class="tt-body" x="240" y="646" text-anchor="middle" fill="#94a3b8" font-size="11">Sharether Learning Platform &#8226; EBS 106 &#8226; Lesson 4: Prenatal Development</text>
+  <text class="tt-body" x="240" y="646" text-anchor="middle" fill="#94a3b8" font-size="11">Learnda Learning Platform &#8226; EBS 106 &#8226; Lesson 4: Prenatal Development</text>
 
   <script><![CDATA[
     var svg = document.currentScript.closest('svg');

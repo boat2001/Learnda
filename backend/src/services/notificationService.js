@@ -72,7 +72,7 @@ async function createWelcomeNotification(user) {
   const firstName = getFirstName(user);
   return createNotification({
     userId: user.id,
-    title: 'Welcome to Sharether v3.0',
+    title: 'Welcome to Learnda v3.0',
     body: WELCOME_NOTIFICATION_BODY,
     type: WELCOME_NOTIFICATION_TYPE,
     action_url: '/',

@@ -378,7 +378,7 @@ export default function Login({
 
   const contactLabel = contactMode === 'phone' ? 'phone number' : 'email';
   let headerTitle = 'Welcome back';
-  let headerSubtitle = 'Log in to continue to Sharether.';
+  let headerSubtitle = 'Log in to continue to Learnda.';
   if (isResetMode && resetChallengeToken) {
     headerTitle = 'Create a new password';
     headerSubtitle = 'Enter the reset code and set your new password.';

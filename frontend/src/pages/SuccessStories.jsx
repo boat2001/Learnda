@@ -82,7 +82,7 @@ export default function SuccessStories() {
         name: isAuthenticated ? (getDisplayName(user) || user?.email) : formState.name,
         email: isAuthenticated ? user?.email : formState.email,
         college: formState.college,
-        subject: `Success story submission: ${formState.focus || formState.college || 'Sharether learner'}`,
+        subject: `Success story submission: ${formState.focus || formState.college || 'Learnda learner'}`,
         category: 'Success Story',
         message: formState.story,
       });
@@ -143,13 +143,13 @@ export default function SuccessStories() {
             {stories.map((story) => (
               <article key={story.id} className="success-story-card">
                 <div className="success-story-head">
-                  <img src="/sharether-logo.webp" alt="" loading="lazy" />
+                  <img src="/learnda-logo.webp" alt="" loading="lazy" />
                   <div>
                     <h3>{story.name}</h3>
-                    <p className="college">{story.college || story.focus || 'Sharether community'}</p>
+                    <p className="college">{story.college || story.focus || 'Learnda community'}</p>
                   </div>
                 </div>
-                <p className="success-story-card__achievement">{story.focus || story.college || 'Sharether learner'}</p>
+                <p className="success-story-card__achievement">{story.focus || story.college || 'Learnda learner'}</p>
                 <p className="success-story-card__quote">"{story.story || story.testimony}"</p>
               </article>
             ))}

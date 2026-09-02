@@ -13,13 +13,13 @@ const SKIP = /^(THE PROJECT GUTENBERG|SHORT STORIES AND SELECTIONS$|TABLE OF CON
 const ARTICLE_TITLES = /ADDRESS|INAUGURAL|APPRECIATION|ACCOUNT OF HIS SPEECH|WALT WHITMAN|HEROISM IN HOUSEKEEPING|^WAR$|^SIGHT IN SAVAGES$/i;
 
 async function fetchJson(url) {
-  const response = await fetch(url, { headers: { 'User-Agent': 'SharetherPublicDomainReader/1.0 (admin@sharether.com)' } });
+  const response = await fetch(url, { headers: { 'User-Agent': 'LearndaPublicDomainReader/1.0 (admin@learnda.app)' } });
   if (!response.ok) throw new Error(`HTTP ${response.status}: ${url}`);
   return response.json();
 }
 
 async function fetchText(url) {
-  const response = await fetch(url, { headers: { 'User-Agent': 'SharetherPublicDomainReader/1.0 (admin@sharether.com)' } });
+  const response = await fetch(url, { headers: { 'User-Agent': 'LearndaPublicDomainReader/1.0 (admin@learnda.app)' } });
   if (!response.ok) throw new Error(`HTTP ${response.status}: ${url}`);
   return response.text();
 }

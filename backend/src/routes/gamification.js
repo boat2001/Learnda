@@ -131,8 +131,8 @@ const formatSpotlightDate = (date) =>
 
 const formatSpotlightUser = (user = {}) => ({
   id: user.id || null,
-  name: user.full_name || 'Sharether learner',
-  college: user.institution || user.institutionProfile?.name || 'Sharether community',
+  name: user.full_name || 'Learnda learner',
+  college: user.institution || user.institutionProfile?.name || 'Learnda community',
   program: user.program || user.programme_category || 'Learning community',
   level: user.level ? (/level/i.test(String(user.level)) ? String(user.level) : `Level ${user.level}`) : 'Level 100',
   image: user.avatar_url || null,
@@ -141,11 +141,11 @@ const formatSpotlightUser = (user = {}) => ({
 const getSpotlightShareUrl = (awardId) => `/home?spotlight=${encodeURIComponent(awardId)}`;
 
 const buildSpotlightShareText = (award) => {
-  if (!award) return 'Sharether is celebrating student achievement. Join the applause.';
+  if (!award) return 'Learnda is celebrating student achievement. Join the applause.';
   if (award.award_type === 'student') {
-    return `${award.name} just topped Sharether's weekly XP leaderboard with ${Number(award.xp || award.score || 0).toLocaleString()} XP. Celebrate this win with the community.`;
+    return `${award.name} just topped Learnda's weekly XP leaderboard with ${Number(award.xp || award.score || 0).toLocaleString()} XP. Celebrate this win with the community.`;
   }
-  return `${award.name} is Sharether's Contributor of the Month after creating real impact for learners. Celebrate and share the win.`;
+  return `${award.name} is Learnda's Contributor of the Month after creating real impact for learners. Celebrate and share the win.`;
 };
 
 const decorateSpotlightAward = async (award, currentUserId = null) => {

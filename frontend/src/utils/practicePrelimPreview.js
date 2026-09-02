@@ -1,4 +1,4 @@
-const STORAGE_PREFIX = 'sharether:practice-prelim-preview';
+const STORAGE_PREFIX = 'learnda:practice-prelim-preview';
 
 const buildStorageKey = (lessonId) => `${STORAGE_PREFIX}:${String(lessonId || '').trim()}`;
 

@@ -13,7 +13,7 @@ export default class ErrorBoundary extends Component {
   }
 
   componentDidCatch(error, info) {
-    console.error('[Sharether] Render error:', error, info?.componentStack);
+    console.error('[Learnda] Render error:', error, info?.componentStack);
   }
 
   reset() {

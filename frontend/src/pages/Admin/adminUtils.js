@@ -1,4 +1,4 @@
-const PHONE_EMAIL_RE = /^phone\.(\d+)@auth\.sharether\.(app|local)$/;
+const PHONE_EMAIL_RE = /^phone\.(\d+)@auth\.learnda\.(app|local)$/;
 
 export function isPhoneEmail(email) {
   return PHONE_EMAIL_RE.test(String(email || ''));

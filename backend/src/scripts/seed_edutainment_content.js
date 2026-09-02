@@ -312,9 +312,9 @@ function buildCategoryDeleteWhere() {
 
 async function ensureSystemUser() {
   const [systemUser] = await User.findOrCreate({
-    where: { email: 'system@sharether.com' },
+    where: { email: 'system@learnda.app' },
     defaults: {
-      full_name: 'Sharether System',
+      full_name: 'Learnda System',
       password_hash: `seed-${Date.now()}`,
       role: 'admin'
     }
@@ -335,7 +335,7 @@ function buildContentRow(entry, creatorId, index) {
     title: entry.title,
     description: summary,
     body: entry.body,
-    author: entry.author || 'Sharether',
+    author: entry.author || 'Learnda',
     category: entry.normalizedCategory,
     tone: entry.tone,
     key_lesson: entry.keyLesson || null,

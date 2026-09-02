@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.resolve(__dirname, '../../data/edutainment/collected');
-const USER_AGENT = 'SharetherEdutainmentCollector/1.0 (https://sharether.com; educational indexing)';
+const USER_AGENT = 'LearndaEdutainmentCollector/1.0 (https://learnda.app; educational indexing)';
 const CATEGORIES = new Set(['quotes', 'facts', 'jokes', 'stories', 'articles']);
 const WIKI_HOSTS = {
   quotes: 'https://en.wikiquote.org/w/api.php',
@@ -282,8 +282,8 @@ async function collectJokes(limit) {
   for (const [setup, punchline] of EDUCATION_JOKES) {
     items.push(baseItem('jokes', {
       title: setup, body: `${setup} ${punchline}`, author: 'Traditional classroom joke',
-      sourceName: 'Sharether classroom collection', sourceUrl: 'https://sharether.com',
-      license: 'Sharether-curated', tags: ['student-safe', 'teacher', 'classroom', 'education']
+      sourceName: 'Learnda classroom collection', sourceUrl: 'https://learnda.app',
+      license: 'Learnda-curated', tags: ['student-safe', 'teacher', 'classroom', 'education']
     }));
   }
   const data = await fetchJson(datasetUrl);
@@ -323,7 +323,7 @@ async function collectArticles(limit, query = 'teacher education training Ghana 
     url.searchParams.set('select', 'DOI,title,abstract,author,URL,publisher,subject,published');
     url.searchParams.set('rows', String(rows));
     url.searchParams.set('cursor', cursor);
-    url.searchParams.set('mailto', process.env.EDUTAINMENT_CONTACT_EMAIL || 'admin@sharether.com');
+    url.searchParams.set('mailto', process.env.EDUTAINMENT_CONTACT_EMAIL || 'admin@learnda.app');
     const data = await fetchJson(url.href);
     const records = data.message?.items || [];
     for (const record of records) {
@@ -344,7 +344,7 @@ async function collectArticles(limit, query = 'teacher education training Ghana 
 
 function loadDataset(category) {
   const file = path.join(ROOT, `${category}.json`);
-  if (!fs.existsSync(file)) return { schemaVersion: 'sharether.edutainment.v1', category, updatedAt: null, total: 0, entries: [] };
+  if (!fs.existsSync(file)) return { schemaVersion: 'learnda.edutainment.v1', category, updatedAt: null, total: 0, entries: [] };
   return JSON.parse(fs.readFileSync(file, 'utf8'));
 }
 
@@ -419,9 +419,9 @@ async function collectFocused(category, count = 200, options = {}) {
   let incoming = [];
   if (category === 'jokes') {
     incoming = LEARNING_RIDDLES.map(([question, answer]) => baseItem('jokes', {
-      title: question, body: `${question} Answer: ${answer}`, author: 'Sharether',
-      sourceName: 'Sharether learning riddles', sourceUrl: 'https://sharether.com',
-      license: 'Sharether original', tags: ['teacher', 'student', 'classroom', 'learning', 'brain-teaser']
+      title: question, body: `${question} Answer: ${answer}`, author: 'Learnda',
+      sourceName: 'Learnda learning riddles', sourceUrl: 'https://learnda.app',
+      license: 'Learnda original', tags: ['teacher', 'student', 'classroom', 'learning', 'brain-teaser']
     }));
   } else if (category === 'articles') {
     incoming = await collectArticles(count, 'teacher wellbeing classroom management student learning brain memory Ghana');

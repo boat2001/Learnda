@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { useLocation, useNavigationType } from 'react-router-dom';
 
-const STORAGE_KEY = 'sharether:scroll-positions';
+const STORAGE_KEY = 'learnda:scroll-positions';
 
 const readStoredPositions = () => {
   if (typeof window === 'undefined') return {};

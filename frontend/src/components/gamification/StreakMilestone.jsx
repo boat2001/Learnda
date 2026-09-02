@@ -6,7 +6,7 @@ import './StreakMilestone.css';
 const MILESTONE_MESSAGES = {
   3: { title: '3-Day Streak!', sub: "You're building a habit. Keep it up!" },
   7: { title: 'Week Warrior! 🔥', sub: 'A full week of learning. Incredible!' },
-  14: { title: '2-Week Streak!', sub: "You're unstoppable. Sharether salutes you!" },
+  14: { title: '2-Week Streak!', sub: "You're unstoppable. Learnda salutes you!" },
   21: { title: '3-Week Streak! 🏆', sub: "21 days of pure dedication. Legend!" },
   30: { title: '30-Day Master!', sub: 'A month of consistency. You did it!' },
 };

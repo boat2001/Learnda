@@ -139,16 +139,16 @@ function FullscreenAuthModalHost() {
   // Open onboarding modal after Google OAuth completes (pending step stored in sessionStorage)
   useEffect(() => {
     if (pathname === '/auth/google/callback') return;
-    const raw = sessionStorage.getItem('sharether_pending_onboarding');
+    const raw = sessionStorage.getItem('learnda_pending_onboarding');
     if (!raw) return;
     try {
       const { step } = JSON.parse(raw);
-      sessionStorage.removeItem('sharether_pending_onboarding');
+      sessionStorage.removeItem('learnda_pending_onboarding');
       if (step && step !== ONBOARDING_STEPS.DONE) {
         setState({ open: true, mode: 'login', forceOnboardingStep: step, lockOnboarding: false });
       }
     } catch {
-      sessionStorage.removeItem('sharether_pending_onboarding');
+      sessionStorage.removeItem('learnda_pending_onboarding');
     }
   }, [pathname]);
 

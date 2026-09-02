@@ -125,7 +125,7 @@ export default function GuestHomeView({
       await api.support.submitReport({
         name: storyForm.name,
         college: storyForm.college,
-        subject: `Guest success story: ${storyForm.college || 'Sharether learner'}`,
+        subject: `Guest success story: ${storyForm.college || 'Learnda learner'}`,
         category: 'Success story',
         message: storyForm.story,
         rating: storyForm.rating,
@@ -202,8 +202,8 @@ export default function GuestHomeView({
       </section>
 
       <GuestSection
-        title="Colleges on Sharether"
-        subtitle="Institutions actively learning on Sharether."
+        title="Colleges on Learnda"
+        subtitle="Institutions actively learning on Learnda."
         className="home-section colleges-section"
       >
         <AutoSwipeStrip interval={4200}>
@@ -268,7 +268,7 @@ export default function GuestHomeView({
       <ContributionAppeal className="page-contribution-appeal" />
 
       <GuestSection
-        title="Support Sharether, unlock more"
+        title="Support Learnda, unlock more"
         subtitle="Contribute to support the platform, or use it for free."
         className="home-section"
       >
@@ -289,7 +289,7 @@ export default function GuestHomeView({
 
       <GuestSection
         title="Success stories"
-        subtitle="Real progress from learners using Sharether every week."
+        subtitle="Real progress from learners using Learnda every week."
         className="home-section success-stories-section"
       >
         <AutoSwipeStrip interval={4600}>
@@ -342,7 +342,7 @@ export default function GuestHomeView({
       >
         <form className="guest-story-form" onSubmit={submitStory}>
           <div className="form-row story-rating-row">
-            <label>How would you rate Sharether?</label>
+            <label>How would you rate Learnda?</label>
             <div className="story-star-picker">
               {[1,2,3,4,5].map(star => (
                 <button
@@ -393,7 +393,7 @@ export default function GuestHomeView({
               rows={4}
               value={storyForm.story}
               onChange={onStoryInput}
-              placeholder="What changed for you after using Sharether?"
+              placeholder="What changed for you after using Learnda?"
               required
             />
           </div>

@@ -2,50 +2,36 @@
   {
     "id": "x",
     "name": "X (Twitter)",
-    "handle": "@sharether1",
-    "href": "https://x.com/sharether1",
+    "handle": "@learnda",
+    "href": "https://x.com/learnda",
     "purpose": "Fast conversations, public announcements"
-  },
-  {
-    "id": "facebook",
-    "name": "Facebook",
-    "handle": "Sharether",
-    "href": "https://www.facebook.com/people/Sharether/61573786536620/",
-    "purpose": "Community posts, page updates"
-  },
-  {
-    "id": "whatsapp",
-    "name": "WhatsApp Channel",
-    "handle": "@sharether",
-    "href": "https://whatsapp.com/channel/0029Vaf7UpGBKfhrqDPK6B1M",
-    "purpose": "Announcements and platform updates"
   },
   {
     "id": "telegram",
     "name": "Telegram",
-    "handle": "@sharether",
-    "href": "https://t.me/sharether",
+    "handle": "@learnda",
+    "href": "https://t.me/learnda",
     "purpose": "Learning tips and launch notes"
   },
   {
     "id": "youtube",
     "name": "YouTube",
-    "handle": "@sharether",
-    "href": "https://www.youtube.com/@sharether",
+    "handle": "@learnda",
+    "href": "https://www.youtube.com/@learnda",
     "purpose": "Tutorials and walkthroughs"
   },
   {
     "id": "tiktok",
     "name": "TikTok",
-    "handle": "@sharether.platform",
-    "href": "https://www.tiktok.com/@sharether.platform?_r=1&_t=ZS-96U1J5ZJp8W",
+    "handle": "@learnda",
+    "href": "https://www.tiktok.com/@learnda",
     "purpose": "Short study tips and product moments"
   },
   {
     "id": "instagram",
     "name": "Instagram",
-    "handle": "@sharether.platform",
-    "href": "https://www.instagram.com/invites/contact/?igsh=12b8a6d36wc53&utm_content=knswatk",
+    "handle": "@learnda",
+    "href": "https://www.instagram.com/learnda",
     "purpose": "Photos, reels, community stories"
   }
 ]

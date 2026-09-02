@@ -4,7 +4,7 @@ import api from '../../services/api';
 import './Rewards.css';
 
 const TRACK_STEPS = [
-  'Open Sharether and tap Practice > Quick quiz daily.',
+  'Open Learnda and tap Practice > Quick quiz daily.',
   'Complete at least one lesson or quiz every day.',
   'Review your streak badge in the Rewards area after day 7.',
 ];
@@ -52,7 +52,7 @@ export default function SevenDayStreak() {
           <span className="hero-tag">Streak challenge</span>
           <h1>Complete a 7-day streak to earn extra cash</h1>
           <p>
-            Keep the momentum for a full week by opening Sharether daily, exploring a lesson, and checking
+            Keep the momentum for a full week by opening Learnda daily, exploring a lesson, and checking
             in with practice drills. Finish the streak and we reward you with GH₵ 1 to spend on premium tools.
           </p>
         </div>

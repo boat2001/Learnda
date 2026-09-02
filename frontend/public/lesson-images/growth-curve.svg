@@ -15,8 +15,8 @@
   <text x="390" y="396" text-anchor="middle" font-size="12" font-weight="600" fill="#1a2e5a">Age (years)</text>
 
   <!-- Phase bands -->
-  <rect x="90" y="95" width="110" height="265" fill="#f59e0b" opacity="0.08"/>
-  <rect x="200" y="95" width="250" height="265" fill="#22c55e" opacity="0.08"/>
+  <rect x="90" y="95" width="110" height="265" fill="#fab82c" opacity="0.08"/>
+  <rect x="200" y="95" width="250" height="265" fill="#73a24b" opacity="0.08"/>
   <rect x="450" y="95" width="150" height="265" fill="#8b5cf6" opacity="0.10"/>
   <rect x="600" y="95" width="90" height="265" fill="#64748b" opacity="0.08"/>
 
@@ -55,5 +55,5 @@
   <text x="325" y="318" text-anchor="middle" font-size="10.5" font-weight="600" fill="#075985">Growth is measurable (cm, kg) and</text>
   <text x="325" y="334" text-anchor="middle" font-size="10.5" font-weight="600" fill="#075985">has a stopping point — unlike development.</text>
 
-  <text x="380" y="424" text-anchor="middle" font-size="10" fill="#94a3b8">Sharether Learning Platform • Lesson 1: The Concept of Growth and Development</text>
+  <text x="380" y="424" text-anchor="middle" font-size="10" fill="#94a3b8">Learnda Learning Platform • Lesson 1: The Concept of Growth and Development</text>
 </svg>

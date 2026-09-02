@@ -104,7 +104,7 @@ const normalizeDiscussionReply = (reply = {}, index = 0) => ({
   id: safeText(reply.id) || `reply-${index}`,
   body: safeText(reply.body),
   authorKey: safeText(reply.authorKey),
-  authorName: safeText(reply.authorName) || 'Sharether Student',
+  authorName: safeText(reply.authorName) || 'Learnda Student',
   authorAvatar: safeText(reply.authorAvatar) || null,
   createdAt: safeText(reply.createdAt) || new Date().toISOString(),
 });
@@ -118,7 +118,7 @@ const normalizeDiscussionEntry = (entry = {}, index = 0) => {
     id: safeText(entry.id) || `entry-${index}`,
     body: safeText(entry.body),
     authorKey: safeText(entry.authorKey),
-    authorName: safeText(entry.authorName) || 'Sharether Student',
+    authorName: safeText(entry.authorName) || 'Learnda Student',
     authorAvatar: safeText(entry.authorAvatar) || null,
     createdAt: safeText(entry.createdAt) || new Date().toISOString(),
     likes: Math.max(0, Number(entry.likes || likedBy.length || 0)),

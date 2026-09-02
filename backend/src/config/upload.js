@@ -31,7 +31,7 @@ if (r2Configured) {
 
     r2Storage = multerS3({
       s3: r2Client,
-      bucket: process.env.R2_BUCKET || 'sharether-content',
+      bucket: process.env.R2_BUCKET || 'learnda-content',
       // R2 does not support per-object ACLs — omit `acl` entirely.
       // Public access is controlled at the bucket level in the R2 dashboard.
       contentType: (req, file, cb) => cb(null, file.mimetype),

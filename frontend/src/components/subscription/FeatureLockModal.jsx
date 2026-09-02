@@ -24,7 +24,7 @@ export default function FeatureLockModal({
     if (event.target === event.currentTarget && onClose) onClose();
   };
 
-  const description = message || `Chip in to open up ${featureLabel.toLowerCase()} — and help keep Sharether free for everyone else.`;
+  const description = message || `Chip in to open up ${featureLabel.toLowerCase()} — and help keep Learnda free for everyone else.`;
 
   return (
     <div className="feature-lock-overlay" onClick={handleOverlayClick}>

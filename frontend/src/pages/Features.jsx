@@ -72,9 +72,9 @@ export default function Features() {
         <div className="hero-grid">
           <div>
             <span className="hero-tag">Contribution Plans</span>
-            <h1 className="hero-title">Support Sharether. Unlock more.</h1>
+            <h1 className="hero-title">Support Learnda. Unlock more.</h1>
             <p className="hero-subtitle">
-              Sharether is funded by students, for students. Contribute to keep it running — and get more tools as our thank you.
+              Learnda is funded by students, for students. Contribute to keep it running — and get more tools as our thank you.
             </p>
             <div className="stat-grid">
               <div className="stat-card">

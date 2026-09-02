@@ -1,29 +1,18 @@
-const SHARETHER_SOCIAL_GROUPS = [
+const LEARNDA_SOCIAL_GROUPS = [
   {
     group: 'Social Media Handles',
-    desc: 'Public pages and handles for quick follows, replies, and general Sharether activity.',
+    desc: 'Public pages and handles for quick follows, replies, and general Learnda activity.',
     channels: [
       {
         name: 'X',
-        handle: '@sharether',
-        purpose: 'Fast conversations, public announcements, and quick Sharether notes.',
+        handle: '@learnda',
+        purpose: 'Fast conversations, public announcements, and quick Learnda notes.',
         cta: 'Follow',
-        href: 'https://x.com/sharether',
+        href: 'https://x.com/learnda',
         iconKey: 'x',
         color: '#111827',
         bg: 'rgba(17, 24, 39, 0.08)',
         border: 'rgba(17, 24, 39, 0.16)',
-      },
-      {
-        name: 'Facebook',
-        handle: 'Sharether',
-        purpose: 'Community posts, page updates, and longer social announcements.',
-        cta: 'Like',
-        href: 'https://www.facebook.com/people/Sharether/61573786536620/',
-        iconKey: 'facebook',
-        color: '#1877f2',
-        bg: 'rgba(24, 119, 242, 0.1)',
-        border: 'rgba(24, 119, 242, 0.24)',
       },
     ],
   },
@@ -32,22 +21,11 @@ const SHARETHER_SOCIAL_GROUPS = [
     desc: 'Direct channels for announcements, release notes, reminders, and community messages.',
     channels: [
       {
-        name: 'WhatsApp Channel',
-        handle: '@sharether',
-        purpose: 'Announcements, community notes, and quick platform updates delivered to your phone.',
-        cta: 'Join',
-        href: 'https://whatsapp.com/channel/0029Vaf7UpGBKfhrqDPK6B1M',
-        iconKey: 'whatsapp',
-        color: '#25d366',
-        bg: 'rgba(37, 211, 102, 0.1)',
-        border: 'rgba(37, 211, 102, 0.24)',
-      },
-      {
         name: 'Telegram Channel',
-        handle: '@sharether',
+        handle: '@learnda',
         purpose: 'Learning tips, launch notes, and focused update drops in a quiet channel.',
         cta: 'Join',
-        href: 'https://t.me/sharether',
+        href: 'https://t.me/learnda',
         iconKey: 'telegram',
         color: '#2aabee',
         bg: 'rgba(42, 171, 238, 0.1)',
@@ -61,10 +39,10 @@ const SHARETHER_SOCIAL_GROUPS = [
     channels: [
       {
         name: 'YouTube',
-        handle: '@sharether',
-        purpose: 'Tutorials, walkthroughs, and longer Sharether explainers.',
+        handle: '@learnda',
+        purpose: 'Tutorials, walkthroughs, and longer Learnda explainers.',
         cta: 'Subscribe',
-        href: 'https://www.youtube.com/@sharether',
+        href: 'https://www.youtube.com/@learnda',
         iconKey: 'youtube',
         color: '#ff0000',
         bg: 'rgba(255, 0, 0, 0.09)',
@@ -72,10 +50,10 @@ const SHARETHER_SOCIAL_GROUPS = [
       },
       {
         name: 'TikTok',
-        handle: '@sharether',
+        handle: '@learnda',
         purpose: 'Short study tips, product moments, and quick platform videos.',
         cta: 'Follow',
-        href: 'https://tiktok.com/@sharether',
+        href: 'https://tiktok.com/@learnda',
         iconKey: 'tiktok',
         color: '#111827',
         bg: 'rgba(17, 24, 39, 0.08)',
@@ -89,10 +67,10 @@ const SHARETHER_SOCIAL_GROUPS = [
     channels: [
       {
         name: 'Instagram',
-        handle: '@sharether',
+        handle: '@learnda',
         purpose: 'Photos, reels, community stories, cute moments, and visual updates.',
         cta: 'Follow',
-        href: 'https://instagram.com/sharether',
+        href: 'https://instagram.com/learnda',
         iconKey: 'instagram',
         color: '#e1306c',
         bg: 'rgba(225, 48, 108, 0.1)',
@@ -102,8 +80,8 @@ const SHARETHER_SOCIAL_GROUPS = [
   },
 ];
 
-const SHARETHER_SOCIAL_CHANNELS = SHARETHER_SOCIAL_GROUPS.flatMap((group) =>
+const LEARNDA_SOCIAL_CHANNELS = LEARNDA_SOCIAL_GROUPS.flatMap((group) =>
   group.channels.map((channel) => ({ ...channel, group: group.group }))
 );
 
-export { SHARETHER_SOCIAL_CHANNELS, SHARETHER_SOCIAL_GROUPS };
+export { LEARNDA_SOCIAL_CHANNELS, LEARNDA_SOCIAL_GROUPS };

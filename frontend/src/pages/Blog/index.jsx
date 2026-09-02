@@ -164,7 +164,7 @@ export default function Blog() {
           writeForm.experience || 'Not provided',
         ].join('\n'),
       });
-      setWriteStatus('Your blog idea has been sent to the Sharether team.');
+      setWriteStatus('Your blog idea has been sent to the Learnda team.');
       setWriteForm((previous) => ({
         ...previous,
         title: '',
@@ -187,7 +187,7 @@ export default function Blog() {
       <section className="page-section featured-blogs">
         <div className="section-heading">
           <h2>Featured Articles</h2>
-          <p>High-signal reads from the Sharether learning community.</p>
+          <p>High-signal reads from the Learnda learning community.</p>
         </div>
         <div className="featured-grid">
           {featuredBlogs.map((blog, index) => (
@@ -220,7 +220,7 @@ export default function Blog() {
                         <FiUser />
                       </span>
                     )}
-                    <span>{blog.creator?.full_name || blog.creator_name || 'Sharether'}</span>
+                    <span>{blog.creator?.full_name || blog.creator_name || 'Learnda'}</span>
                   </div>
                   <Link to={`/blog/post/${blog.id}`} className="read-more">
                     Read More <FiChevronRight />
@@ -335,7 +335,7 @@ export default function Blog() {
         <div className="hero-grid">
           <div>
             <span className="hero-tag">Updates Blog</span>
-            <h1 className="hero-title">Sharether Blog</h1>
+            <h1 className="hero-title">Learnda Blog</h1>
             <p className="hero-subtitle">
             Insights, tips, and stories to inspire your learning journey
             </p>
@@ -391,7 +391,7 @@ export default function Blog() {
       <section className="page-section">
         <div className="info-card blog-cta">
           <h2>Want to Write for Us?</h2>
-          <p>Send a focused blog idea for the Sharether learning community.</p>
+          <p>Send a focused blog idea for the Learnda learning community.</p>
           {writeStatus ? <p className="pricing-inline-feedback success status-inline">{writeStatus}</p> : null}
           <button type="button" className="cta-button" onClick={() => setWriteModalOpen(true)}>
             Open writer form
@@ -402,7 +402,7 @@ export default function Blog() {
       <FormModal
         isOpen={writeModalOpen}
         onClose={() => !writeSubmitting && setWriteModalOpen(false)}
-        title="Write for Sharether"
+        title="Write for Learnda"
         subtitle="Share the article idea, the student problem it solves, and the angle you want to write from."
       >
         <form onSubmit={submitBlogPitch}>

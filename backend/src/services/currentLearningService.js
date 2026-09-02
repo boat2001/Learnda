@@ -224,7 +224,7 @@ const buildCourseSummary = (course, offerings = [], resourceStats = {}, options 
     practice_last_attempted_at: options.practice_last_attempted_at || null,
     image: normalizeCourseImage(course),
     image_url: normalizeCourseImage(course),
-    instructor: 'Sharether Instructor',
+    instructor: 'Learnda Instructor',
     rating: 4.7,
     enrolled: true,
     programs: Array.from(programNames),
@@ -395,7 +395,7 @@ const dedupeResources = (resources, preferPremium = false) => {
     const normalized = {
       ...file,
       title: file.title || extractTitleFromFileName(file.file_name),
-      uploader_name: file.uploader?.full_name || file.uploader_name || 'Sharether Contributor'
+      uploader_name: file.uploader?.full_name || file.uploader_name || 'Learnda Contributor'
     };
     const key = buildResourceDisplayKey(normalized);
     if (!grouped.has(key)) grouped.set(key, []);

@@ -14,17 +14,17 @@ const dedupeParts = (parts) => {
 
 const buildPageTitle = (title, options = {}) => {
   const config = typeof options === 'string' ? { suffix: options } : options;
-  const suffix = normalizePart(config?.suffix || 'Sharether');
+  const suffix = normalizePart(config?.suffix || 'Learnda');
   const section = normalizePart(config?.section || '');
   const trimmed = normalizePart(title);
 
   const parts = dedupeParts([trimmed, section, suffix]).filter(Boolean);
-  if (!parts.length) return suffix || 'Sharether';
+  if (!parts.length) return suffix || 'Learnda';
   return parts.join(' | ');
 };
 
 export default function usePageTitle(title, options = {}) {
-  const suffix = options.suffix || 'Sharether';
+  const suffix = options.suffix || 'Learnda';
   const section = options.section;
 
   useEffect(() => {

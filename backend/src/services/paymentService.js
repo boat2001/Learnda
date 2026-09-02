@@ -349,7 +349,7 @@ class PaymentService {
             recipient: bankDetails.recipientCode, // Previously created transfer recipient
             amount: Math.round(amount * 100),
             currency,
-            reason: `Sharether contributor earnings - Contributor ID: ${contributorId}`
+            reason: `Learnda contributor earnings - Contributor ID: ${contributorId}`
           }
         }
       );

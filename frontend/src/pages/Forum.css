@@ -20,15 +20,15 @@
 }
 
 .forum-toast--error {
-  background: rgba(239, 68, 68, 0.1);
-  border: 1px solid rgba(239, 68, 68, 0.26);
+  background: rgba(251, 99, 52, 0.1);
+  border: 1px solid rgba(251, 99, 52, 0.26);
   color: #dc2626;
 }
 
 .forum-toast--info {
-  background: rgba(31, 113, 119, 0.1);
-  border: 1px solid rgba(31, 113, 119, 0.24);
-  color: var(--primary-color, #1f7177);
+  background: rgba(43, 98, 196, 0.1);
+  border: 1px solid rgba(43, 98, 196, 0.24);
+  color: var(--primary-color, #2b62c4);
 }
 
 .forum-toast__close {
@@ -66,8 +66,8 @@
   gap: 0.55rem;
   padding: 1rem;
   border-radius: 0.85rem;
-  border: 1px dashed rgba(31, 113, 119, 0.35);
-  background: rgba(31, 113, 119, 0.06);
+  border: 1px dashed rgba(43, 98, 196, 0.35);
+  background: rgba(43, 98, 196, 0.06);
   color: var(--text-secondary, #475569);
   text-align: center;
 }
@@ -80,7 +80,7 @@
 
 .community-chat-guest svg {
   font-size: 1.5rem;
-  color: var(--primary-color, #1f7177);
+  color: var(--primary-color, #2b62c4);
 }
 
 .community-chat-guest p {
@@ -99,8 +99,8 @@
   min-width: 0;
   padding: 0.55rem;
   border-radius: 0.65rem;
-  background: rgba(31, 113, 119, 0.08);
-  border: 1px solid rgba(31, 113, 119, 0.14);
+  background: rgba(43, 98, 196, 0.08);
+  border: 1px solid rgba(43, 98, 196, 0.14);
   color: var(--text-secondary, #475569);
   font-size: 0.72rem;
   font-weight: 800;
@@ -122,16 +122,16 @@
   margin: 0 0.8rem 0.75rem;
   padding: 0.55rem 0.72rem;
   border-radius: 0.62rem;
-  border: 1px solid rgba(31, 113, 119, 0.28);
+  border: 1px solid rgba(43, 98, 196, 0.28);
   background: transparent;
-  color: var(--primary-color, #1f7177);
+  color: var(--primary-color, #2b62c4);
   font-weight: 800;
   font-size: 0.82rem;
   cursor: pointer;
 }
 
 .forum-info-copy:hover {
-  background: rgba(31, 113, 119, 0.08);
+  background: rgba(43, 98, 196, 0.08);
 }
 
 .forum-panel-empty {
@@ -156,7 +156,7 @@
   align-items: center;
   gap: 0.4rem;
   max-width: 100%;
-  color: var(--primary-color, #1f7177);
+  color: var(--primary-color, #2b62c4);
   font-weight: 700;
   font-size: 0.82rem;
   text-decoration: none;
@@ -202,8 +202,8 @@
 }
 
 .forum-shortcut:hover {
-  border-color: rgba(31, 113, 119, 0.28);
-  background: rgba(31, 113, 119, 0.08);
+  border-color: rgba(43, 98, 196, 0.28);
+  background: rgba(43, 98, 196, 0.08);
 }
 
 [data-theme='dark'] .forum-shortcut {
@@ -219,8 +219,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: rgba(31, 113, 119, 0.14);
-  color: var(--primary-color, #1f7177);
+  background: rgba(43, 98, 196, 0.14);
+  color: var(--primary-color, #2b62c4);
 }
 
 .forum-shortcut__text {
@@ -245,7 +245,7 @@
   margin: 0.85rem;
   padding: 0.75rem;
   border-radius: 0.78rem;
-  background: linear-gradient(135deg, rgba(244, 162, 97, 0.14), rgba(31, 113, 119, 0.08));
+  background: linear-gradient(135deg, rgba(250, 184, 44, 0.14), rgba(43, 98, 196, 0.08));
   color: var(--text-secondary, #475569);
   font-size: 0.78rem;
   line-height: 1.45;
@@ -254,7 +254,7 @@
 .forum-tip svg {
   flex-shrink: 0;
   margin-top: 0.1rem;
-  color: var(--primary-color, #1f7177);
+  color: var(--primary-color, #2b62c4);
 }
 
 .forum-tip p {
@@ -262,6 +262,6 @@
 }
 
 [data-theme='dark'] .forum-tip {
-  background: linear-gradient(135deg, rgba(244, 162, 97, 0.12), rgba(79, 179, 173, 0.1));
+  background: linear-gradient(135deg, rgba(250, 184, 44, 0.12), rgba(79, 179, 173, 0.1));
   color: #cbd5e1;
 }

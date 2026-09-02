@@ -13,7 +13,7 @@ function fmt(n) {
   return String(n);
 }
 
-const COLORS = ['#1f7177', '#4fb3ad', '#2563eb', '#d97706', '#059669', '#7c3aed', '#dc2626', '#94a3b8'];
+const COLORS = ['#2b62c4', '#4fb3ad', '#2563eb', '#d97706', '#059669', '#7c3aed', '#dc2626', '#94a3b8'];
 
 function chartColors() {
   const style = getComputedStyle(document.documentElement);

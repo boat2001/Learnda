@@ -5,7 +5,7 @@ export const RANK_NAMES = [
 
 export const RANK_COLORS = [
   '', '#94a3b8', '#6366f1', '#8b5cf6', '#0891b2',
-  '#0d9488', '#16a34a', '#d97706', '#dc2626', '#be185d', '#7c3aed',
+  '#0d9488', '#5b8439', '#d97706', '#dc2626', '#be185d', '#7c3aed',
 ];
 
 export const XP_THRESHOLDS = [0, 100, 250, 500, 1000, 2000, 3500, 5500, 8000, 11000, 15000];

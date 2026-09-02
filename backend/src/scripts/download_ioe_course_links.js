@@ -60,7 +60,7 @@ async function downloadOne(url, destPath, dryRun) {
   const res = await fetch(url, {
     redirect: 'follow',
     headers: {
-      'User-Agent': 'Sharether-ioe-course-sync/1.0 (+https://sharether.com)',
+      'User-Agent': 'Learnda-ioe-course-sync/1.0 (+https://learnda.app)',
       Accept: '*/*'
     }
   });

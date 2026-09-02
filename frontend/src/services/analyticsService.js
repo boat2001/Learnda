@@ -58,9 +58,10 @@ export const analyticsService = {
       // Send to backend
       const response = await api.analytics.trackPageView(page, pageData.properties);
       
-      // Also send to Google Analytics
-      if (window.gtag) {
-        window.gtag('config', 'G-9MBDQZ48EH', {
+      // Also send to Google Analytics, when a measurement ID is configured
+      const gaId = import.meta.env.VITE_GA_MEASUREMENT_ID;
+      if (gaId && window.gtag) {
+        window.gtag('config', gaId, {
           page_path: page,
           ...pageData.properties,
         });

@@ -15,7 +15,7 @@ const EDUVHIBE_TABS = [
   { key: 'notes', label: 'Notes', title: 'Course notes, past questions, and PDFs for every level.' },
   { key: 'videos', label: 'Videos', title: 'Short explanations and guided walkthroughs that save time.' },
   { key: 'guides', label: 'Guides', title: 'Useful reads for studying, staying organized, and handling campus life.' },
-  { key: 'cgpa', label: 'CGPA', title: 'Track semester performance without leaving your Sharether routine.' },
+  { key: 'cgpa', label: 'CGPA', title: 'Track semester performance without leaving your Learnda routine.' },
   { key: 'about', label: 'About', title: 'See the story, community voice, and thinking behind the page.' }
 ];
 

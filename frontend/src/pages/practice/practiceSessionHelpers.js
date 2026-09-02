@@ -113,4 +113,4 @@ export const buildPersistencePayload = ({ summary, timerDurationSeconds, evaluat
   })),
 });
 
-export const PRACTICE_DISCUSSION_PREFIX = 'sharether:practice-discussion';
+export const PRACTICE_DISCUSSION_PREFIX = 'learnda:practice-discussion';

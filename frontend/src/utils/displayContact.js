@@ -1,4 +1,4 @@
-const PLACEHOLDER_EMAIL_PATTERN = /^phone\.(\d+)@auth\.sharether\.(?:local|app)$/i;
+const PLACEHOLDER_EMAIL_PATTERN = /^phone\.(\d+)@auth\.learnda\.(?:local|app)$/i;
 
 const normalizeText = (value) => String(value || '').trim();
 const getPlaceholderPhoneDigits = (value) => normalizeText(value).match(PLACEHOLDER_EMAIL_PATTERN)?.[1] || '';

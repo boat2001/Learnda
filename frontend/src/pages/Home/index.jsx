@@ -102,7 +102,7 @@ import { buildCoursePath, buildCourseRouteState, buildPracticePath } from '../..
 import { toDisplayName } from '../../utils/contributionPlans';
 import { getSamplePracticeItemsForCourse } from '../../utils/samplePracticePapers';
 import { buildPracticeSessionPath } from '../../utils/practiceSession';
-import { SHARETHER_SOCIAL_GROUPS } from '../../utils/sharetherSocials';
+import { LEARNDA_SOCIAL_GROUPS } from '../../utils/learndaSocials';
 import { saveBlobAsFile, withDownloadLock } from '../../utils/downloadManager';
 import { APP_EVENTS, APP_STATE_SCOPES } from '../../utils/appEvents';
 
@@ -172,10 +172,10 @@ const matchesHomePracticeCourse = (item = {}, courseTitle = '') => {
   return source.includes(target) || target.includes(source);
 };
 
-const SOCIAL_PROMPT_SESSION_KEY = 'sharether_social_prompt_seen_session_v1';
-const SOCIAL_PROMPT_STORAGE_PREFIX = 'sharether_social_prompt_v1';
-const SPOTLIGHT_PROMPT_STORAGE_PREFIX = 'sharether_spotlight_prompt_seen_v1';
-const SPOTLIGHT_SESSION_KEY = 'sharether_spotlight_prompt_session_v1';
+const SOCIAL_PROMPT_SESSION_KEY = 'learnda_social_prompt_seen_session_v1';
+const SOCIAL_PROMPT_STORAGE_PREFIX = 'learnda_social_prompt_v1';
+const SPOTLIGHT_PROMPT_STORAGE_PREFIX = 'learnda_spotlight_prompt_seen_v1';
+const SPOTLIGHT_SESSION_KEY = 'learnda_spotlight_prompt_session_v1';
 
 const SOCIAL_PROMPT_ICONS = {
   facebook: FaFacebookF,
@@ -241,57 +241,57 @@ const writeSpotlightPromptSeen = (user, awardId) => {
   }
 };
 
-function SharetherSocialPrompt({ isOpen, onClose, onEngage, onViewAll }) {
+function LearndaSocialPrompt({ isOpen, onClose, onEngage, onViewAll }) {
   if (!isOpen) return null;
 
   return (
-    <div className="sharether-social-modal-backdrop" role="presentation" onClick={onClose}>
+    <div className="learnda-social-modal-backdrop" role="presentation" onClick={onClose}>
       <section
-        className="sharether-social-modal"
+        className="learnda-social-modal"
         role="dialog"
         aria-modal="true"
-        aria-labelledby="sharether-social-title"
+        aria-labelledby="learnda-social-title"
         onClick={(event) => event.stopPropagation()}
       >
         <button
           type="button"
-          className="sharether-social-modal-close"
+          className="learnda-social-modal-close"
           onClick={onClose}
           aria-label="Close social media prompt"
         >
           <FiX />
         </button>
 
-        <div className="sharether-social-modal-hero">
-          <span className="sharether-social-modal-kicker">Stay connected</span>
-          <h2 id="sharether-social-title">Follow Sharether where each channel fits best.</h2>
+        <div className="learnda-social-modal-hero">
+          <span className="learnda-social-modal-kicker">Stay connected</span>
+          <h2 id="learnda-social-title">Follow Learnda where each channel fits best.</h2>
           <p>
             Pick the right place for handles, messages and updates, videos, photos, and cute community moments.
           </p>
         </div>
 
-        <div className="sharether-social-modal-groups">
-          {SHARETHER_SOCIAL_GROUPS.map((group) => (
-            <section key={group.group} className="sharether-social-modal-group">
-              <div className="sharether-social-modal-group-header">
+        <div className="learnda-social-modal-groups">
+          {LEARNDA_SOCIAL_GROUPS.map((group) => (
+            <section key={group.group} className="learnda-social-modal-group">
+              <div className="learnda-social-modal-group-header">
                 <h3>{group.group}</h3>
                 {group.desc ? <p>{group.desc}</p> : null}
               </div>
-              <div className="sharether-social-modal-grid">
+              <div className="learnda-social-modal-grid">
                 {group.channels.map((channel) => {
                   const Icon = SOCIAL_PROMPT_ICONS[channel.iconKey] || FiShare2;
                   return (
                     <article
                       key={`${group.group}-${channel.name}`}
-                      className="sharether-social-modal-card"
+                      className="learnda-social-modal-card"
                       style={{
                         '--social-color': channel.color,
                         '--social-bg': channel.bg,
                         '--social-border': channel.border,
                       }}
                     >
-                      <div className="sharether-social-modal-card-main">
-                        <span className="sharether-social-modal-icon" aria-hidden="true">
+                      <div className="learnda-social-modal-card-main">
+                        <span className="learnda-social-modal-icon" aria-hidden="true">
                           <Icon />
                         </span>
                         <div>
@@ -304,7 +304,7 @@ function SharetherSocialPrompt({ isOpen, onClose, onEngage, onViewAll }) {
                         href={channel.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="sharether-social-modal-cta"
+                        className="learnda-social-modal-cta"
                         onClick={() => onEngage?.({ ...channel, group: group.group })}
                       >
                         {channel.cta}
@@ -318,11 +318,11 @@ function SharetherSocialPrompt({ isOpen, onClose, onEngage, onViewAll }) {
           ))}
         </div>
 
-        <div className="sharether-social-modal-actions">
-          <button type="button" className="sharether-social-modal-secondary" onClick={onClose}>
+        <div className="learnda-social-modal-actions">
+          <button type="button" className="learnda-social-modal-secondary" onClick={onClose}>
             Maybe later
           </button>
-          <button type="button" className="sharether-social-modal-primary" onClick={onViewAll}>
+          <button type="button" className="learnda-social-modal-primary" onClick={onViewAll}>
             View all socials
           </button>
         </div>
@@ -1203,7 +1203,7 @@ export default function Home() {
           lastShownAt: Date.now(),
           shownWeek: currentWeekKey,
         });
-        trackEvent("sharether_social_prompt_shown", {
+        trackEvent("learnda_social_prompt_shown", {
           reason: hasNeverSeen ? "first_home_visit" : "weekly_reminder",
         });
       }, hasNeverSeen ? 900 : 1600);
@@ -1222,7 +1222,7 @@ export default function Home() {
       dismissCount: Number(state.dismissCount || 0) + 1,
     });
     setShowSocialPrompt(false);
-    trackEvent("sharether_social_prompt_dismissed");
+    trackEvent("learnda_social_prompt_dismissed");
   };
 
   const handleSocialPromptEngage = (channel) => {
@@ -1230,7 +1230,7 @@ export default function Home() {
       lastEngagedAt: Date.now(),
       lastEngagedChannel: channel?.name || "",
     });
-    trackEvent("sharether_social_prompt_engaged", {
+    trackEvent("learnda_social_prompt_engaged", {
       channel: channel?.name || "unknown",
       cta: channel?.cta || "",
     });
@@ -1242,7 +1242,7 @@ export default function Home() {
       lastEngagedChannel: "Our Socials",
     });
     setShowSocialPrompt(false);
-    trackEvent("sharether_social_prompt_view_all");
+    trackEvent("learnda_social_prompt_view_all");
     navigate("/our-socials");
   };
 
@@ -1371,12 +1371,12 @@ export default function Home() {
     const shareUrl = spotlight.shareUrl?.startsWith("http")
       ? spotlight.shareUrl
       : `${baseUrl}${spotlight.shareUrl || `/home?spotlight=${encodeURIComponent(spotlight.awardId || key)}`}`;
-    const shareText = spotlight.shareText || `${spotlight.name} is being celebrated on Sharether. Join the applause.`;
+    const shareText = spotlight.shareText || `${spotlight.name} is being celebrated on Learnda. Join the applause.`;
 
     try {
       if (navigator.share) {
         await navigator.share({
-          title: spotlight.title || "Sharether Spotlight",
+          title: spotlight.title || "Learnda Spotlight",
           text: shareText,
           url: shareUrl,
         });
@@ -1400,7 +1400,7 @@ export default function Home() {
     body: item.body || item.preview || item.title,
     title: item.title || item.label,
     category: item.category || item.label,
-    uploader: item.uploader || "Sharether",
+    uploader: item.uploader || "Learnda",
   });
 
   const quoteSource = homeFeed.find((item) => normalizeCategoryText(item?.category || item?.type || "").includes("quote"));
@@ -1416,9 +1416,9 @@ export default function Home() {
         key: "quote",
         label: "Quote for the day",
         category: "Quote for the day",
-        title: getContentAuthor(quoteSource, "Sharether Quote"),
+        title: getContentAuthor(quoteSource, "Learnda Quote"),
         body: getContentBody(quoteSource, "Consistency compounds. Keep showing up."),
-        author: getContentAuthor(quoteSource, "Sharether"),
+        author: getContentAuthor(quoteSource, "Learnda"),
         imageUrl: getContentImage(quoteSource),
         icon: FaQuoteLeft,
         reactions: getReactionCountsFromItem(quoteSource, "quote"),
@@ -1540,7 +1540,7 @@ export default function Home() {
             contentId: source.id || null,
             stateKey: getHighlightStateKey(`${type}-extra-${idx + 1}`, source, `${type}-extra-${idx + 1}`),
             showImage: Boolean(getContentImage(source)),
-            uploader: 'Sharether',
+            uploader: 'Learnda',
           };
         });
       const combined = baseList.concat(extras).map((item, index) => ({
@@ -1603,7 +1603,7 @@ export default function Home() {
         celebrationCount: Number(studentAward?.celebration_count || 0),
         hasCelebrated: Boolean(studentAward?.has_celebrated),
         shareUrl: studentAward?.share_url || "/home?spotlight=student",
-        shareText: studentAward?.share_text || "Sharether is celebrating a student who topped the weekly XP leaderboard. Join the applause.",
+        shareText: studentAward?.share_text || "Learnda is celebrating a student who topped the weekly XP leaderboard. Join the applause.",
         publishedAt: studentAward?.published_at || null,
       },
       contributor: {
@@ -1612,8 +1612,8 @@ export default function Home() {
         userId: contributorAward?.user_id || contributorAward?.id || null,
         title: contributorAward?.title || contributor?.title || "Contributor of the Month",
         name: contributorAward?.name || contributor?.author_name || contributor?.author?.name || "Kwabena Boateng",
-        subtitle: contributorAward?.college || contributor?.subtitle || "Sharether Creator",
-        college: contributorAward?.college || contributor?.college || contributor?.institution || "Sharether community",
+        subtitle: contributorAward?.college || contributor?.subtitle || "Learnda Creator",
+        college: contributorAward?.college || contributor?.college || contributor?.institution || "Learnda community",
         program: contributorAward?.program || contributor?.program || programLabel,
         level: contributorAward?.level || levelLabel,
         body:
@@ -1625,7 +1625,7 @@ export default function Home() {
         celebrationCount: Number(contributorAward?.celebration_count || 0),
         hasCelebrated: Boolean(contributorAward?.has_celebrated),
         shareUrl: contributorAward?.share_url || "/home?spotlight=contributor",
-        shareText: contributorAward?.share_text || "Sharether is celebrating a contributor whose content helped learners this month. Share the win.",
+        shareText: contributorAward?.share_text || "Learnda is celebrating a contributor whose content helped learners this month. Share the win.",
         publishedAt: contributorAward?.published_at || null,
         scoreBreakdown: contributorAward?.score_breakdown || null,
       },
@@ -1798,7 +1798,7 @@ export default function Home() {
       key: item.key || marker,
       showImage: item.showImage ?? Boolean(item.imageUrl || getContentImage(item)),
       imageUrl: item.imageUrl || getContentImage(item) || null,
-      uploader: item.uploader || getContentUploader(item, "Sharether"),
+      uploader: item.uploader || getContentUploader(item, "Learnda"),
       mediaLabel: item.mediaLabel || item.title || item.label,
       reactions: item.reactions || { likes: 0, comments: 0, shares: 0 },
       contentId: item.contentId || item.id || null,
@@ -1876,7 +1876,7 @@ export default function Home() {
     if (!activeModal) return;
     triggerReactionBurst("shares");
     setModalReactions((previous) => ({ ...previous, shares: (previous.shares || 0) + 1 }));
-    setModalFeedback("Shared from Sharether.");
+    setModalFeedback("Shared from Learnda.");
     if (activeModal.contentId) {
       setIsSubmittingShare(true);
       try {
@@ -1961,7 +1961,7 @@ export default function Home() {
         try {
           await api.resources.trackView(item.sourceFileId);
           const blob = await api.resources.downloadFile(item.sourceFileId);
-          saveBlobAsFile(blob, item.fileName || `${item.courseName || "sharether-file"}.pdf`);
+          saveBlobAsFile(blob, item.fileName || `${item.courseName || "learnda-file"}.pdf`);
         } catch {
           openHomeTrendingFile(item);
         } finally {
@@ -2184,12 +2184,12 @@ export default function Home() {
       />
 
       {showContributionAppeal ? (
-        <section className="home-contribution-section" aria-label="Contribute to Sharether">
-          <ContributionAppeal className="page-contribution-appeal" heading="Contribute to Sharether" showPlansCta />
+        <section className="home-contribution-section" aria-label="Contribute to Learnda">
+          <ContributionAppeal className="page-contribution-appeal" heading="Contribute to Learnda" showPlansCta />
         </section>
       ) : null}
 
-      <SharetherSocialPrompt
+      <LearndaSocialPrompt
         isOpen={showSocialPrompt}
         onClose={closeSocialPrompt}
         onEngage={handleSocialPromptEngage}

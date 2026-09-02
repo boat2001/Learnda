@@ -10,12 +10,12 @@
   position: relative;
   background:
     radial-gradient(ellipse at 20% 0%, rgba(34, 211, 238, 0.12), transparent 55%),
-    radial-gradient(ellipse at 80% 100%, rgba(245, 158, 11, 0.09), transparent 55%),
+    radial-gradient(ellipse at 80% 100%, rgba(250, 184, 44, 0.09), transparent 55%),
     linear-gradient(
       135deg,
       rgba(34, 211, 238, 0.07) 0%,
       rgba(167, 139, 250, 0.06) 50%,
-      rgba(245, 158, 11, 0.07) 100%
+      rgba(250, 184, 44, 0.07) 100%
     );
   border: 1px solid rgba(34, 211, 238, 0.15);
 }
@@ -92,7 +92,7 @@
   vertical-align: middle;
   margin-right: 0.45rem;
   margin-bottom: 0.15rem;
-  color: #f59e0b;
+  color: #fab82c;
   width: 1.15rem;
   height: 1.15rem;
 }
@@ -105,9 +105,9 @@
   margin-bottom: 1.25rem;
   padding: 1.1rem 1.5rem;
   border-radius: var(--radius-xl, 1rem);
-  background: rgba(245, 158, 11, 0.07);
-  border: 1px solid rgba(245, 158, 11, 0.18);
-  border-left: 3px solid #f59e0b;
+  background: rgba(250, 184, 44, 0.07);
+  border: 1px solid rgba(250, 184, 44, 0.18);
+  border-left: 3px solid #fab82c;
 }
 
 .tm-gratitude p {
@@ -169,11 +169,11 @@
   transform: translateY(-4px);
   box-shadow:
     0 8px 24px rgba(15, 23, 42, 0.09),
-    0 20px 44px color-mix(in srgb, var(--tm-color, #1f7177) 12%, transparent);
+    0 20px 44px color-mix(in srgb, var(--tm-color, #2b62c4) 12%, transparent);
 }
 
 .tm-card:focus-visible {
-  outline: 2px solid var(--tm-color, #1f7177);
+  outline: 2px solid var(--tm-color, #2b62c4);
   outline-offset: 3px;
 }
 
@@ -229,7 +229,7 @@
   margin-top: 1rem;
   font-size: 0.78rem;
   font-weight: 600;
-  color: var(--tm-color, #1f7177);
+  color: var(--tm-color, #2b62c4);
   opacity: 0.75;
   transition: opacity 0.18s, gap 0.18s;
 }
@@ -249,11 +249,11 @@
   font-weight: 700;
   letter-spacing: 0.07em;
   text-transform: uppercase;
-  color: var(--tm-color, #1f7177);
+  color: var(--tm-color, #2b62c4);
   padding: 2px 8px;
   border-radius: 20px;
-  background: color-mix(in srgb, var(--tm-color, #1f7177) 10%, transparent);
-  border: 1px solid color-mix(in srgb, var(--tm-color, #1f7177) 25%, transparent);
+  background: color-mix(in srgb, var(--tm-color, #2b62c4) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--tm-color, #2b62c4) 25%, transparent);
   white-space: nowrap;
 }
 
@@ -288,7 +288,7 @@
   transform: translateY(-3px);
   box-shadow:
     0 6px 20px rgba(15, 23, 42, 0.08),
-    0 16px 36px color-mix(in srgb, var(--tm-color, #1f7177) 10%, transparent);
+    0 16px 36px color-mix(in srgb, var(--tm-color, #2b62c4) 10%, transparent);
 }
 
 .tm-contrib-card__top {
@@ -297,10 +297,10 @@
   flex-shrink: 0;
   background: linear-gradient(
     135deg,
-    color-mix(in srgb, var(--tm-color, #1f7177) 22%, transparent),
-    color-mix(in srgb, var(--tm-color, #1f7177) 8%, transparent)
+    color-mix(in srgb, var(--tm-color, #2b62c4) 22%, transparent),
+    color-mix(in srgb, var(--tm-color, #2b62c4) 8%, transparent)
   );
-  border-bottom: 1px solid color-mix(in srgb, var(--tm-color, #1f7177) 18%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--tm-color, #2b62c4) 18%, transparent);
   margin-bottom: 0;
 }
 
@@ -308,12 +308,12 @@
   width: 96px;
   height: 96px;
   border-radius: 50%;
-  background: color-mix(in srgb, var(--tm-color, #1f7177) 12%, var(--color-bg-light, #fff));
-  border: 2.5px solid var(--tm-color, #1f7177);
+  background: color-mix(in srgb, var(--tm-color, #2b62c4) 12%, var(--color-bg-light, #fff));
+  border: 2.5px solid var(--tm-color, #2b62c4);
   box-shadow:
     0 0 0 4px var(--color-bg-light, #fff),
-    0 0 0 6px color-mix(in srgb, var(--tm-color, #1f7177) 20%, transparent);
-  color: var(--tm-color, #1f7177);
+    0 0 0 6px color-mix(in srgb, var(--tm-color, #2b62c4) 20%, transparent);
+  color: var(--tm-color, #2b62c4);
   font-size: 1.4rem;
   font-weight: 800;
   display: flex;
@@ -328,7 +328,7 @@
 .tm-contrib-card:hover .tm-contrib-avatar {
   box-shadow:
     0 0 0 4px var(--color-bg-light, #fff),
-    0 0 0 7px color-mix(in srgb, var(--tm-color, #1f7177) 30%, transparent);
+    0 0 0 7px color-mix(in srgb, var(--tm-color, #2b62c4) 30%, transparent);
 }
 
 .tm-contrib-body {
@@ -410,11 +410,11 @@
   padding: 1.5rem 1rem 1.25rem;
   background: linear-gradient(
     160deg,
-    color-mix(in srgb, var(--tm-color, #1f7177) 6%, var(--color-bg-light, #fff)) 0%,
+    color-mix(in srgb, var(--tm-color, #2b62c4) 6%, var(--color-bg-light, #fff)) 0%,
     var(--color-bg-light, #fff) 100%
   );
-  border: 1px solid color-mix(in srgb, var(--tm-color, #1f7177) 18%, transparent);
-  border-top: 3px solid var(--tm-color, #1f7177);
+  border: 1px solid color-mix(in srgb, var(--tm-color, #2b62c4) 18%, transparent);
+  border-top: 3px solid var(--tm-color, #2b62c4);
   border-radius: var(--radius-xl, 1rem);
   box-shadow: 0 1px 4px rgba(15, 23, 42, 0.05);
   transition: box-shadow 0.22s ease, transform 0.22s ease;
@@ -424,16 +424,16 @@
   transform: translateY(-3px);
   box-shadow:
     0 6px 18px rgba(15, 23, 42, 0.08),
-    0 14px 32px color-mix(in srgb, var(--tm-color, #1f7177) 11%, transparent);
+    0 14px 32px color-mix(in srgb, var(--tm-color, #2b62c4) 11%, transparent);
 }
 
 .tm-donor-avatar {
   width: 52px;
   height: 52px;
   border-radius: 50%;
-  background: color-mix(in srgb, var(--tm-color, #1f7177) 12%, transparent);
-  border: 2px solid color-mix(in srgb, var(--tm-color, #1f7177) 35%, transparent);
-  color: var(--tm-color, #1f7177);
+  background: color-mix(in srgb, var(--tm-color, #2b62c4) 12%, transparent);
+  border: 2px solid color-mix(in srgb, var(--tm-color, #2b62c4) 35%, transparent);
+  color: var(--tm-color, #2b62c4);
   font-size: 0.95rem;
   font-weight: 800;
   display: flex;
@@ -444,7 +444,7 @@
 }
 
 .tm-donor-card:hover .tm-donor-avatar {
-  box-shadow: 0 0 0 5px color-mix(in srgb, var(--tm-color, #1f7177) 14%, transparent);
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--tm-color, #2b62c4) 14%, transparent);
 }
 
 .tm-donor-name {
@@ -477,7 +477,7 @@
   border-radius: var(--radius-xl, 1rem);
   box-shadow:
     0 2px 8px rgba(15, 23, 42, 0.06),
-    0 0 0 2px color-mix(in srgb, var(--tm-color, #1f7177) 14%, transparent);
+    0 0 0 2px color-mix(in srgb, var(--tm-color, #2b62c4) 14%, transparent);
   overflow: hidden;
 }
 
@@ -485,20 +485,20 @@
   width: 100%;
   height: 60px;
   flex-shrink: 0;
-  background: var(--tm-gradient, linear-gradient(135deg, #1f7177, #38bdf8, #34d399));
-  border-bottom: 1px solid color-mix(in srgb, var(--tm-color, #1f7177) 18%, transparent);
+  background: var(--tm-gradient, linear-gradient(135deg, #2b62c4, #38bdf8, #34d399));
+  border-bottom: 1px solid color-mix(in srgb, var(--tm-color, #2b62c4) 18%, transparent);
 }
 
 .tm-you-card__avatar {
   width: 96px;
   height: 96px;
   border-radius: 50%;
-  background: color-mix(in srgb, var(--tm-color, #1f7177) 12%, var(--color-bg-light, #fff));
-  border: 2.5px solid var(--tm-color, #1f7177);
+  background: color-mix(in srgb, var(--tm-color, #2b62c4) 12%, var(--color-bg-light, #fff));
+  border: 2.5px solid var(--tm-color, #2b62c4);
   box-shadow:
     0 0 0 4px var(--color-bg-light, #fff),
-    0 0 0 6px color-mix(in srgb, var(--tm-color, #1f7177) 22%, transparent);
-  color: var(--tm-color, #1f7177);
+    0 0 0 6px color-mix(in srgb, var(--tm-color, #2b62c4) 22%, transparent);
+  color: var(--tm-color, #2b62c4);
   font-size: 1.4rem;
   font-weight: 800;
   display: flex;
@@ -541,7 +541,7 @@
 
 .tm-you-thanks {
   margin: 0.75rem 0 0;
-  color: var(--primary-color, #1f7177);
+  color: var(--primary-color, #2b62c4);
   font-size: 0.85rem;
   font-weight: 600;
   font-style: italic;
@@ -721,17 +721,17 @@
   gap: 0.4rem;
   font-size: 0.82rem;
   font-weight: 500;
-  color: var(--primary-color, #1f7177);
+  color: var(--primary-color, #2b62c4);
   padding: 0.4rem 0.9rem;
   border-radius: 20px;
-  background: rgba(31, 113, 119, 0.08);
-  border: 1px solid rgba(31, 113, 119, 0.18);
+  background: rgba(43, 98, 196, 0.08);
+  border: 1px solid rgba(43, 98, 196, 0.18);
   text-decoration: none;
   transition: background 0.18s;
 }
 
 .tm-contact-chip:hover {
-  background: rgba(31, 113, 119, 0.14);
+  background: rgba(43, 98, 196, 0.14);
 }
 
 .tm-footer-divider {
@@ -750,16 +750,16 @@
   width: 2.1rem;
   height: 2.1rem;
   border-radius: 50%;
-  background: color-mix(in srgb, var(--tm-color, #1f7177) 10%, transparent);
-  border: 1px solid color-mix(in srgb, var(--tm-color, #1f7177) 22%, transparent);
-  color: var(--tm-color, #1f7177);
+  background: color-mix(in srgb, var(--tm-color, #2b62c4) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--tm-color, #2b62c4) 22%, transparent);
+  color: var(--tm-color, #2b62c4);
   text-decoration: none;
   transition: background 0.18s, transform 0.18s;
   flex-shrink: 0;
 }
 
 .tm-social-chip:hover {
-  background: color-mix(in srgb, var(--tm-color, #1f7177) 20%, transparent);
+  background: color-mix(in srgb, var(--tm-color, #2b62c4) 20%, transparent);
   transform: translateY(-2px);
 }
 
@@ -779,8 +779,8 @@
 [data-theme='dark'] .tm-celebrate {
   background:
     radial-gradient(ellipse at 20% 0%, rgba(34, 211, 238, 0.1), transparent 55%),
-    radial-gradient(ellipse at 80% 100%, rgba(245, 158, 11, 0.08), transparent 55%),
-    linear-gradient(135deg, rgba(34, 211, 238, 0.06) 0%, rgba(167, 139, 250, 0.05) 50%, rgba(245, 158, 11, 0.06) 100%);
+    radial-gradient(ellipse at 80% 100%, rgba(250, 184, 44, 0.08), transparent 55%),
+    linear-gradient(135deg, rgba(34, 211, 238, 0.06) 0%, rgba(167, 139, 250, 0.05) 50%, rgba(250, 184, 44, 0.06) 100%);
   border-color: rgba(34, 211, 238, 0.14);
 }
 
@@ -806,8 +806,8 @@
 }
 
 [data-theme='dark'] .tm-gratitude {
-  background: rgba(245, 158, 11, 0.08);
-  border-color: rgba(245, 158, 11, 0.2);
+  background: rgba(250, 184, 44, 0.08);
+  border-color: rgba(250, 184, 44, 0.2);
 }
 
 [data-theme='dark'] .tm-card {
@@ -836,13 +836,13 @@
 [data-theme='dark'] .tm-contrib-avatar {
   box-shadow:
     0 0 0 4px rgba(20, 30, 48, 0.95),
-    0 0 0 6px color-mix(in srgb, var(--tm-color, #1f7177) 24%, transparent);
+    0 0 0 6px color-mix(in srgb, var(--tm-color, #2b62c4) 24%, transparent);
 }
 
 [data-theme='dark'] .tm-contrib-card:hover .tm-contrib-avatar {
   box-shadow:
     0 0 0 4px rgba(20, 30, 48, 0.95),
-    0 0 0 7px color-mix(in srgb, var(--tm-color, #1f7177) 36%, transparent);
+    0 0 0 7px color-mix(in srgb, var(--tm-color, #2b62c4) 36%, transparent);
 }
 
 [data-theme='dark'] .tm-contrib-name,
@@ -853,10 +853,10 @@
 [data-theme='dark'] .tm-donor-card {
   background: linear-gradient(
     160deg,
-    color-mix(in srgb, var(--tm-color, #1f7177) 10%, rgba(20, 30, 48, 0.97)) 0%,
+    color-mix(in srgb, var(--tm-color, #2b62c4) 10%, rgba(20, 30, 48, 0.97)) 0%,
     rgba(20, 30, 48, 0.95) 100%
   );
-  border-color: color-mix(in srgb, var(--tm-color, #1f7177) 22%, transparent);
+  border-color: color-mix(in srgb, var(--tm-color, #2b62c4) 22%, transparent);
 }
 
 [data-theme='dark'] .tm-you-card {
@@ -867,7 +867,7 @@
 [data-theme='dark'] .tm-you-card__avatar {
   box-shadow:
     0 0 0 4px rgba(20, 30, 48, 0.95),
-    0 0 0 6px color-mix(in srgb, var(--tm-color, #1f7177) 30%, transparent);
+    0 0 0 6px color-mix(in srgb, var(--tm-color, #2b62c4) 30%, transparent);
 }
 
 [data-theme='dark'] .tm-you-card__name {

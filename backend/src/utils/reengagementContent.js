@@ -2,7 +2,7 @@ const config = require('../config/env');
 
 /** Shown in-app — never expose internal campaign name to users. */
 const USER_NOTIFICATION_TYPE = 'learning_reminder';
-const USER_NOTIFICATION_TITLE = 'Sharether missing you';
+const USER_NOTIFICATION_TITLE = 'Learnda missing you';
 const DEFAULT_CTA_LABEL = 'Open your personal learning space';
 const DEFAULT_CTA_PATH = '/pls';
 
@@ -20,7 +20,7 @@ const REENGAGEMENT_MESSAGE_TEMPLATES = [
     label: 'Sweet & warm',
     tone: 'sweet',
     message:
-      'Hi {name} 💛 Sharether has been quieter without you. Your study space, groups, and materials are waiting — drop in when you can.',
+      'Hi {name} 💛 Learnda has been quieter without you. Your study space, groups, and materials are waiting — drop in when you can.',
     ctaLabel: 'Visit your space',
   },
   {
@@ -28,7 +28,7 @@ const REENGAGEMENT_MESSAGE_TEMPLATES = [
     label: 'Friendly nudge',
     tone: 'nice',
     message:
-      'Hello {name}! A quick study session can make a big difference. Open Sharether and continue where you left off.',
+      'Hello {name}! A quick study session can make a big difference. Open Learnda and continue where you left off.',
     ctaLabel: 'Continue learning',
   },
   {
@@ -36,7 +36,7 @@ const REENGAGEMENT_MESSAGE_TEMPLATES = [
     label: 'Study buddy',
     tone: 'interesting',
     message:
-      '{name}, your future self will thank you for one focused block today. Lessons, practice, and notes are ready on Sharether.',
+      '{name}, your future self will thank you for one focused block today. Lessons, practice, and notes are ready on Learnda.',
     ctaLabel: 'Start a session',
   },
   {
@@ -44,7 +44,7 @@ const REENGAGEMENT_MESSAGE_TEMPLATES = [
     label: 'Campus energy',
     tone: 'interesting',
     message:
-      'Hey {name}! Classmates are still learning on Sharether — jump back in, review a topic, and stay in the loop.',
+      'Hey {name}! Classmates are still learning on Learnda — jump back in, review a topic, and stay in the loop.',
     ctaLabel: 'See what’s new',
   },
   {
@@ -52,7 +52,7 @@ const REENGAGEMENT_MESSAGE_TEMPLATES = [
     label: 'Light humor',
     tone: 'funny',
     message:
-      '{name}, your books called. They said you ghosted them 😄 Come say hi on Sharether — even 15 minutes counts.',
+      '{name}, your books called. They said you ghosted them 😄 Come say hi on Learnda — even 15 minutes counts.',
     ctaLabel: 'Answer the books',
   },
   {
@@ -60,7 +60,7 @@ const REENGAGEMENT_MESSAGE_TEMPLATES = [
     label: 'Exam mode',
     tone: 'funny',
     message:
-      'Plot twist, {name}: the syllabus did not pause while you were away. Sharether still has your practice questions ready.',
+      'Plot twist, {name}: the syllabus did not pause while you were away. Learnda still has your practice questions ready.',
     ctaLabel: 'Practice now',
   },
   {
@@ -68,7 +68,7 @@ const REENGAGEMENT_MESSAGE_TEMPLATES = [
     label: 'Streak tease',
     tone: 'funny',
     message:
-      '{name}, your streak is giving us the silent treatment. One login, one lesson — let’s bring it back to life on Sharether.',
+      '{name}, your streak is giving us the silent treatment. One login, one lesson — let’s bring it back to life on Learnda.',
     ctaLabel: 'Revive my streak',
   },
   {
@@ -76,7 +76,7 @@ const REENGAGEMENT_MESSAGE_TEMPLATES = [
     label: 'Motivational',
     tone: 'nice',
     message:
-      '{name}, small steps every day beat cramming later. Sharether is set up to help you learn smarter — open your space and take the next step.',
+      '{name}, small steps every day beat cramming later. Learnda is set up to help you learn smarter — open your space and take the next step.',
     ctaLabel: 'Take the next step',
   },
   {
@@ -84,15 +84,15 @@ const REENGAGEMENT_MESSAGE_TEMPLATES = [
     label: 'Community waiting',
     tone: 'gentle',
     message:
-      'Hi {name}, your study groups and saved content are still active on Sharether. Reconnect today and keep your momentum going.',
-    ctaLabel: 'Reconnect on Sharether',
+      'Hi {name}, your study groups and saved content are still active on Learnda. Reconnect today and keep your momentum going.',
+    ctaLabel: 'Reconnect on Learnda',
   },
 ];
 
 const templateById = new Map(REENGAGEMENT_MESSAGE_TEMPLATES.map((t) => [t.id, t]));
 
 const getPublicBaseUrl = () =>
-  String(config.app?.publicUrl || process.env.APP_PUBLIC_URL || 'https://sharether.com').replace(/\/$/, '');
+  String(config.app?.publicUrl || process.env.APP_PUBLIC_URL || 'https://learnda.app').replace(/\/$/, '');
 
 const getEngagementCta = (ctaPath = DEFAULT_CTA_PATH) => {
   const base = getPublicBaseUrl();
@@ -137,8 +137,8 @@ const buildEngagementEmailHtml = ({ title, name, message, ctaLabel, ctaUrl }) =>
   return `
     <h1 style="margin:0 0 20px;font-size:22px;font-weight:700;color:#111827;">${escapeHtml(heading)}</h1>
     <p style="margin:0 0 16px;font-size:15px;line-height:1.6;color:#374151;">${body}</p>
-    <a href="${url}" style="display:inline-block;margin:8px 0 20px;background:#1f7177;color:#ffffff;text-decoration:none;padding:12px 28px;border-radius:8px;font-size:15px;font-weight:600;">${label}</a>
-    <p style="margin:0;font-size:13px;color:#9ca3af;">Or copy this link: <a href="${url}" style="color:#1f7177;">${url}</a></p>
+    <a href="${url}" style="display:inline-block;margin:8px 0 20px;background:#1f56db;color:#ffffff;text-decoration:none;padding:12px 28px;border-radius:8px;font-size:15px;font-weight:600;">${label}</a>
+    <p style="margin:0;font-size:13px;color:#9ca3af;">Or copy this link: <a href="${url}" style="color:#1f56db;">${url}</a></p>
   `;
 };
 

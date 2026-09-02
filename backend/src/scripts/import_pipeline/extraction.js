@@ -62,7 +62,7 @@ function resolveLocalPath(filePath) {
 function downloadToTemp(url) {
   return new Promise((resolve, reject) => {
     const ext = path.extname(new URL(url).pathname) || '.pdf';
-    const tmp = path.join(os.tmpdir(), `sharether_import_${Date.now()}_${Math.random().toString(16).slice(2)}${ext}`);
+    const tmp = path.join(os.tmpdir(), `learnda_import_${Date.now()}_${Math.random().toString(16).slice(2)}${ext}`);
     const file = fs.createWriteStream(tmp);
     const lib = url.startsWith('https') ? https : http;
 
@@ -212,7 +212,7 @@ async function ocrPdf(filePath, options = {}) {
     };
   }
 
-  const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'sharether_ocr_'));
+  const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'learnda_ocr_'));
   const prefix = path.join(tempDir, 'page');
 
   try {

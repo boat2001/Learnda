@@ -6,7 +6,7 @@
 
 /* ── Tokens ─────────────────────────────────────────────────────────────────── */
 .edut-viewer {
-  --edut-accent:       #1f7177;
+  --edut-accent:       #2b62c4;
   --edut-accent-soft:  color-mix(in srgb, var(--edut-accent) 14%, transparent);
   --edut-bg:           #0c1220;
   --edut-surface:      rgba(255,255,255,.05);

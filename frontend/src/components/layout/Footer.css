@@ -4,7 +4,7 @@
   margin-top: auto;
   padding: var(--space-8) 0 var(--space-6);
   background: var(--footer-bg);
-  border-top: 1px solid rgba(31, 113, 119, 0.12);
+  border-top: 1px solid rgba(43, 98, 196, 0.12);
   position: relative;
   overflow: hidden;
 }
@@ -16,7 +16,7 @@
   left: 0;
   right: 0;
   height: 2px;
-  background: linear-gradient(90deg, transparent 0%, rgba(31, 113, 119, 0.5) 50%, transparent 100%);
+  background: linear-gradient(90deg, transparent 0%, rgba(43, 98, 196, 0.5) 50%, transparent 100%);
   opacity: 0.5;
 }
 
@@ -103,7 +103,7 @@
   left: 0;
   width: 100%;
   height: 1px;
-  background: linear-gradient(90deg, rgba(31, 113, 119, 0.42) 0%, rgba(31, 113, 119, 0.2) 70%, transparent 100%);
+  background: linear-gradient(90deg, rgba(43, 98, 196, 0.42) 0%, rgba(43, 98, 196, 0.2) 70%, transparent 100%);
 }
 
 .footer-section p {
@@ -127,15 +127,15 @@
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-semibold);
   color: rgba(20, 73, 86, 0.9);
-  background: rgba(31, 113, 119, 0.08);
-  border: 1px solid rgba(31, 113, 119, 0.18);
+  background: rgba(43, 98, 196, 0.08);
+  border: 1px solid rgba(43, 98, 196, 0.18);
   border-radius: var(--radius-full);
 }
 
 .footer-newsletter {
   margin-top: var(--space-2);
   background: rgba(255, 255, 255, 0.62);
-  border: 1px solid rgba(31, 113, 119, 0.14);
+  border: 1px solid rgba(43, 98, 196, 0.14);
   border-radius: var(--radius-xl);
   padding: var(--space-3);
   box-shadow: 0 10px 24px rgba(20, 52, 74, 0.08);
@@ -176,7 +176,7 @@
 .footer-newsletter.is-feedback {
   background:
     linear-gradient(168deg, rgba(255, 255, 255, 0.92) 0%, rgba(236, 246, 249, 0.9) 100%);
-  border: 1px solid rgba(31, 113, 119, 0.12);
+  border: 1px solid rgba(43, 98, 196, 0.12);
   border-radius: 1.2rem;
   box-shadow: 0 12px 30px rgba(20, 52, 74, 0.08);
   padding: 0.72rem 0.82rem 0.78rem;
@@ -224,7 +224,7 @@
   height: 2.3rem;
   border: none;
   background: transparent;
-  color: rgba(31, 113, 119, 0.2);
+  color: rgba(43, 98, 196, 0.2);
   font-size: 1.72rem !important;
   line-height: 1;
   padding: 0;
@@ -238,7 +238,7 @@
 
 .feedback-star:hover {
   transform: translateY(-1px) scale(1.03);
-  background-color: rgba(31, 113, 119, 0.05);
+  background-color: rgba(43, 98, 196, 0.05);
 }
 
 .feedback-star.is-active {
@@ -329,7 +329,7 @@
   border-radius: 0.9rem;
   line-height: 2.7rem;
   background: rgba(255, 255, 255, 0.94);
-  box-shadow: inset 0 0 0 1px rgba(31, 113, 119, 0.04);
+  box-shadow: inset 0 0 0 1px rgba(43, 98, 196, 0.04);
 }
 
 .feedback-action-row {
@@ -341,7 +341,7 @@
 .feedback-send {
   border: none;
   border-radius: var(--radius-full);
-  background: linear-gradient(135deg, rgba(31, 113, 119, 0.95), rgba(42, 111, 151, 0.92));
+  background: linear-gradient(135deg, rgba(43, 98, 196, 0.95), rgba(62, 127, 221, 0.92));
   color: var(--color-text-on-primary);
   display: inline-flex;
   align-items: center;
@@ -408,7 +408,7 @@
   flex: 1 1 auto;
   min-width: 0;
   padding: var(--space-2) var(--space-3);
-  border: 1px solid rgba(31, 113, 119, 0.18);
+  border: 1px solid rgba(43, 98, 196, 0.18);
   border-radius: var(--radius-lg);
   background: var(--color-bg-light);
   color: var(--text-color);
@@ -418,7 +418,7 @@
 
 .newsletter-input:focus {
   border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(31, 113, 119, 0.12);
+  box-shadow: 0 0 0 3px rgba(43, 98, 196, 0.12);
 }
 
 .newsletter-textarea {
@@ -431,7 +431,7 @@
 .newsletter-button {
   flex: 0 0 auto;
   padding: var(--space-2) var(--space-4);
-  background: linear-gradient(135deg, rgba(31, 113, 119, 0.95), rgba(42, 111, 151, 0.92));
+  background: linear-gradient(135deg, rgba(43, 98, 196, 0.95), rgba(62, 127, 221, 0.92));
   color: var(--color-text-on-primary);
   border: none;
   border-radius: var(--radius-lg);
@@ -462,7 +462,7 @@
   min-height: 2.75rem;
   padding: 0.7rem 1rem;
   border-radius: var(--radius-lg);
-  border: 1px solid rgba(31, 113, 119, 0.16);
+  border: 1px solid rgba(43, 98, 196, 0.16);
   background: rgba(255, 255, 255, 0.76);
   color: var(--primary-color);
   font-size: var(--font-size-sm);
@@ -474,7 +474,7 @@
 
 .newsletter-link:hover {
   transform: translateY(-1px);
-  border-color: rgba(31, 113, 119, 0.3);
+  border-color: rgba(43, 98, 196, 0.3);
   box-shadow: var(--shadow-sm);
 }
 
@@ -586,7 +586,7 @@
   letter-spacing: 0.03em;
   text-transform: uppercase;
   color: var(--primary-color);
-  background: rgba(31, 113, 119, 0.1);
+  background: rgba(43, 98, 196, 0.1);
   border-radius: var(--radius-full);
   padding: 0.25rem 0.7rem;
   margin-bottom: var(--space-3);
@@ -694,7 +694,7 @@
   max-width: var(--container-max);
   margin: 0 auto;
   padding: var(--space-5) var(--space-5) 0;
-  border-top: 1px solid rgba(31, 113, 119, 0.12);
+  border-top: 1px solid rgba(43, 98, 196, 0.12);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -732,7 +732,7 @@
   width: 2.5rem;
   height: 2.5rem;
   background: var(--color-bg-light);
-  border: 1px solid rgba(31, 113, 119, 0.18);
+  border: 1px solid rgba(43, 98, 196, 0.18);
   border-radius: var(--radius-md);
   color: var(--text-color);
   text-decoration: none;
@@ -743,7 +743,7 @@
 .social-icon:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-sm);
-  border-color: rgba(31, 113, 119, 0.4);
+  border-color: rgba(43, 98, 196, 0.4);
 }
 
 .back-to-top {
@@ -860,7 +860,7 @@
 
   .link-group {
     background: rgba(255, 255, 255, 0.62);
-    border: 1px solid rgba(31, 113, 119, 0.14);
+    border: 1px solid rgba(43, 98, 196, 0.14);
     border-radius: var(--radius-lg);
     padding: 0.85rem 0.8rem;
     gap: 0.55rem;
@@ -1044,7 +1044,7 @@
 
 .app-shell.plan-tier-basic .footer {
   background: var(--footer-bg);
-  border-top-color: rgba(31, 113, 119, 0.12);
+  border-top-color: rgba(43, 98, 196, 0.12);
 }
 
 .app-shell.plan-tier-serious .footer {

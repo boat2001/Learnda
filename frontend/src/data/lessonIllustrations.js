@@ -8,7 +8,7 @@
  *
  * Only entries that have a local /lesson-images/*.svg are included here.
  * These take precedence over whatever illustration is stored in the DB so that
- * Sharether-authored interactive SVGs are shown instead of external stock photos.
+ * Learnda-authored interactive SVGs are shown instead of external stock photos.
  *
  * mobile_position accepted values (see lessonAssessment.js normalizeChunkIllustration):
  *   'before_paragraph_0'       – floats above the first paragraph (mobile)
@@ -22,7 +22,7 @@ const entry = (image_url, alt, caption, mobile_position = 'between_paragraph_0_1
   image_url,
   alt,
   caption,
-  credit: 'Sharether Educational Diagram',
+  credit: 'Learnda Educational Diagram',
   type: 'diagram',
   mobile_position,
   desktop_align,

@@ -868,7 +868,7 @@ class SubscriptionService {
       if (user.email) {
         await emailService.sendEmail({
           to: user.email,
-          subject: 'Sharether plan renewal reminder',
+          subject: 'Learnda plan renewal reminder',
           text: `Your ${plan.name} plan renews in ${reminderDays} days. Ensure your mobile money account has enough balance for auto-renewal.`
         });
       }

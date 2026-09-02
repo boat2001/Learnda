@@ -26,11 +26,11 @@ const STRUCTURE_VERSION = 1;
 
 const PRACTICE_TYPES = ['quiz', 'past_question'];
 const WATERMARK_PATTERNS = [
-  /Downloaded from sharether\.com/gi,
+  /Downloaded from learnda\.com/gi,
   /Downloaded from/gi,
   /Get files and let's learn together/gi,
   /Get files and let's leat together/gi,
-  /sharether\.com/gi,
+  /learnda\.com/gi,
 ];
 
 const PLACEHOLDER_ANSWER_PATTERN = /^(Review required|Review the source|Generated without|This theory item needs|Answer key was not confidently)/i;
@@ -268,7 +268,7 @@ function qualityIssues(question) {
   if (!answer) issues.push('missing_answer');
   if (prompt.length > 0 && prompt.length < 12) issues.push('short_prompt');
   if (/be+ve+|GODp|%s|\b[a-z]{25,}\b|[�]/i.test(prompt)) issues.push('ocr_noise');
-  if (/sharether\.com|Downloaded from|get files/i.test(prompt)) issues.push('watermark');
+  if (/learnda\.com|Downloaded from|get files/i.test(prompt)) issues.push('watermark');
   if (/\b(Answer|Answer key|Answers|Solutions)\s*:/i.test(prompt)) issues.push('answer_spill');
   if (question.type === 'multiple_choice') {
     if (!Array.isArray(question.options) || question.options.length !== 4) issues.push('bad_option_count');

@@ -39,7 +39,7 @@ import usePageTitle from '../hooks/usePageTitle';
 import useChatSidePanelMobileLayout, { CHAT_SIDE_PANEL_MOBILE_MQ } from '../hooks/useChatSidePanelMobileLayout';
 import api, { resolveUploadUrl } from '../services/api';
 import AuthModal from '../components/auth/AuthModal';
-import { SharetherChatBackdrop } from '../components/common/SharetherChatBackdrop';
+import { LearndaChatBackdrop } from '../components/common/LearndaChatBackdrop';
 import { lockBodyScroll } from '../utils/bodyScrollLock';
 import {
   canRequestMicrophone,
@@ -563,7 +563,7 @@ export default function Forum() {
           data-theme={chatTheme}
         >
           <button type="button" className="sgr-back-btn" onClick={leaveCommunity}>
-            <FiArrowLeft aria-hidden /> Back to Sharether
+            <FiArrowLeft aria-hidden /> Back to Learnda
           </button>
           <div className="sgr-error-pane">
             <h1>Something went wrong</h1>
@@ -591,7 +591,7 @@ export default function Forum() {
         data-theme={chatTheme}
       >
         <header className="sgr-topbar">
-          <button type="button" className="sgr-back-btn" onClick={leaveCommunity} aria-label="Back to Sharether">
+          <button type="button" className="sgr-back-btn" onClick={leaveCommunity} aria-label="Back to Learnda">
             <FiArrowLeft aria-hidden />
           </button>
 
@@ -704,7 +704,7 @@ export default function Forum() {
           </aside>
 
           <section className="sgr-chat" aria-label="Community chat">
-            <SharetherChatBackdrop patternSeed="community-forum-chat" />
+            <LearndaChatBackdrop patternSeed="community-forum-chat" />
             <div className="sgr-chat__messages">
               {roomLoading ? (
                 <div className="sgr-chat__empty">

@@ -8,7 +8,7 @@ function normalizeText(value) {
 function normalizeFileName(fileName) {
   const normalized = normalizeText(fileName).toLowerCase();
   return normalized
-    .replace(/\s*-\s*sharether\.com/gi, '')
+    .replace(/\s*-\s*learnda\.com/gi, '')
     .replace(/\.pdf$/i, '')
     .replace(/[^a-z0-9]+/g, ' ')
     .trim();
@@ -18,7 +18,7 @@ function extractTitleFromFileName(fileName) {
   const normalized = normalizeText(fileName);
   if (!normalized) return 'Untitled file';
   return normalized
-    .replace(/\s*-\s*Sharether\.com/gi, '')
+    .replace(/\s*-\s*Learnda\.com/gi, '')
     .replace(/\.pdf$/i, '')
     .trim();
 }
@@ -138,7 +138,7 @@ function pickBestResourceCandidate(items, preferPremium = false) {
 
     if (preferPremium && item.is_premium) value += 40;
     if (!preferPremium && !item.is_premium) value += 40;
-    if (/ - Sharether\.com/i.test(fileName)) value += 10;
+    if (/ - Learnda\.com/i.test(fileName)) value += 10;
     value += Math.min(item.downloads || 0, 1000) / 100;
     value += Math.min(item.views || 0, 1000) / 200;
     if (item.created_at) value += new Date(item.created_at).getTime() / 1e15;

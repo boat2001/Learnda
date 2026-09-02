@@ -235,7 +235,7 @@ const fitQuoteLines = (text, maxWidth, maxHeight) => {
 
 const brandLogoSvg = ({ x, baselineY, align = 'left' }) => {
   const logoSize = 30;
-  const brand = 'Sharether';
+  const brand = 'Learnda';
   const estimatedTextWidth = 120;
   const totalWidth = logoSize + 10 + estimatedTextWidth;
   const startX = align === 'right' ? x - totalWidth : x;
@@ -321,7 +321,7 @@ const buildGenericShareCardSvg = ({ title, category, body, key }) => {
       <text x="96" y="370" fill="#ffffff" font-size="72" font-family="Manrope, Segoe UI, sans-serif" font-weight="700">${escapeSvgText(title)}</text>
       ${bodyText}
       <rect x="96" y="1448" width="1008" height="2" fill="rgba(255,255,255,0.9)" />
-      <text x="96" y="1524" fill="rgba(255,255,255,0.92)" font-size="36" font-family="Manrope, Segoe UI, sans-serif" font-weight="600">Shared from Sharether</text>
+      <text x="96" y="1524" fill="rgba(255,255,255,0.92)" font-size="36" font-family="Manrope, Segoe UI, sans-serif" font-weight="600">Shared from Learnda</text>
     </svg>
   `;
 };
@@ -938,7 +938,7 @@ module.exports = {
       id: comment.id,
       content: comment.body,
       author_id: comment.user_id,
-      author_name: comment.user?.full_name || 'Sharether Student',
+      author_name: comment.user?.full_name || 'Learnda Student',
       author_avatar: comment.user?.avatar_url || null,
       created_at: comment.created_at,
       likes: comment.likes || 0
@@ -958,7 +958,7 @@ module.exports = {
         id: comment.id,
         content: comment.body,
         author_id: comment.user_id,
-        author_name: user?.full_name || 'Sharether Student',
+        author_name: user?.full_name || 'Learnda Student',
         author_avatar: user?.avatar_url || null,
         created_at: comment.created_at,
         likes: comment.likes || 0
@@ -978,7 +978,7 @@ module.exports = {
 
       const payload = { ...normalizeRow(row), creator: creatorRow ? creatorRow.toJSON() : null };
       const key = normalizeShareKey(payload);
-      const title = payload.title || 'Sharether content';
+      const title = payload.title || 'Learnda content';
       const category = payload.metadata?.category || payload.category || payload.type || 'content';
       const body = pickBody(payload);
       const author = pickAuthor(payload);
@@ -990,7 +990,7 @@ module.exports = {
       const fileSafeTitle = String(title)
         .toLowerCase()
         .replace(/[^a-z0-9]+/g, '-')
-        .replace(/^-+|-+$/g, '') || 'sharether-content';
+        .replace(/^-+|-+$/g, '') || 'learnda-content';
 
       res.setHeader('Content-Type', 'image/svg+xml; charset=utf-8');
       res.setHeader('Cache-Control', 'no-store');

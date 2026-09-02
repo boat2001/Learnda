@@ -1653,7 +1653,7 @@ export const resolveUploadUrl = (url) => {
       const isKnownWebOrigin =
         parsed.origin === _siteOrigin ||
         (typeof window !== 'undefined' && parsed.origin === window.location.origin) ||
-        parsed.hostname === 'sharether-web.onrender.com';
+        parsed.hostname === 'learnda-web.onrender.com';
 
       if (isUploadPath && isKnownWebOrigin && _apiOrigin) {
         return `${_apiOrigin}${parsed.pathname}${parsed.search}${parsed.hash}`;

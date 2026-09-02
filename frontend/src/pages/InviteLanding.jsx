@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import api from '../services/api';
 import './SharedPages.css';
 
-const VISITOR_KEY = 'sharether_visitor_id';
+const VISITOR_KEY = 'learnda_visitor_id';
 
 const getVisitorId = () => {
   if (typeof window === 'undefined') return null;
@@ -45,7 +45,7 @@ export default function InviteLanding() {
         <div className="hero-grid">
           <div>
             <span className="hero-tag">You are invited</span>
-            <h1 className="hero-title">Welcome to Sharether.</h1>
+            <h1 className="hero-title">Welcome to Learnda.</h1>
             <p className="hero-subtitle">
               Sign up to start learning, keep streaks, and unlock rewards with your invite.
             </p>

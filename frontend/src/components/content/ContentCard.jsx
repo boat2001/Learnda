@@ -172,7 +172,7 @@ function ContentCard({
         <div className="content-meta">
           <span className="meta-item">
             <span className="meta-icon"><FiUser /></span>
-            {content.creator_name || content.creator?.full_name || "Sharether"}
+            {content.creator_name || content.creator?.full_name || "Learnda"}
           </span>
           <span className="meta-item">
             <span className="meta-icon"><FiCalendar /></span>

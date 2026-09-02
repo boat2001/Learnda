@@ -203,7 +203,7 @@ export default function ResourceCategory() {
                 <span className="panel-dot"></span>
                 <div>
                   <strong>Verified sources</strong>
-                  <p>Resources curated by the Sharether community.</p>
+                  <p>Resources curated by the Learnda community.</p>
                 </div>
               </div>
               <div className="panel-list-item">

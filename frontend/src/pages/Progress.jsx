@@ -44,7 +44,7 @@ import { FEATURE_FLAGS } from '../config/featureFlags';
 
 // ── constants ─────────────────────────────────────────────────────────────────
 const RARITY_COLORS = {
-  legendary: '#f59e0b',
+  legendary: '#fab82c',
   epic: '#8b5cf6',
   rare: '#3b82f6',
   uncommon: '#10b981',
@@ -146,7 +146,7 @@ function formatHowToEarn(criteria) {
         ? `Reach the ${RANK_NAMES[n] || `rank ${n}`} rank by earning enough total XP across lessons, practice, and other activities that award XP.`
         : 'Reach the required rank through total XP earned.';
     case 'first_lesson':
-      return 'Complete any course lesson on Sharether. Your first completed lesson unlocks this badge.';
+      return 'Complete any course lesson on Learnda. Your first completed lesson unlocks this badge.';
     case 'first_contribution':
       return 'Submit resources or suggestions through the contribution flow and have one submission reviewed and approved by the team.';
     case 'perfect_quizzes':
@@ -158,7 +158,7 @@ function formatHowToEarn(criteria) {
         ? `Within a single calendar day, complete at least ${n} course lessons. Progress is counted when lessons are marked complete.`
         : 'Complete multiple lessons within one calendar day.';
     default:
-      return 'Keep learning, practicing, and engaging on Sharether. This badge unlocks automatically when the tracked conditions are met.';
+      return 'Keep learning, practicing, and engaging on Learnda. This badge unlocks automatically when the tracked conditions are met.';
   }
 }
 
@@ -198,7 +198,7 @@ function BadgeDetailModal({ detail, onClose, displayName }) {
   const rarity = resolveBadgeRarity(badge);
   const rarityColor = RARITY_COLORS[rarity] || RARITY_COLORS.common;
   const standFor = String(badge.description || '').trim()
-    || 'This badge celebrates progress on your learning journey with Sharether.';
+    || 'This badge celebrates progress on your learning journey with Learnda.';
   const howTo = formatHowToEarn(criteria);
   const xpReward = Number(badge.xp_reward) || 0;
 
@@ -521,8 +521,8 @@ export default function Progress() {
       ? `1st of ${Number(award.rank_of).toLocaleString()} ${isStudent ? 'students' : 'contributors'}`
       : 'top';
     const text = isStudent
-      ? `I just won Student of the Week on Sharether! 🏆 ${rank} this week. Let's celebrate together.`
-      : `I'm Contributor of the Month on Sharether! ⭐ ${rank} this month. Let's celebrate together.`;
+      ? `I just won Student of the Week on Learnda! 🏆 ${rank} this week. Let's celebrate together.`
+      : `I'm Contributor of the Month on Learnda! ⭐ ${rank} this month. Let's celebrate together.`;
     const url = typeof window !== 'undefined' ? `${window.location.origin}/home` : '/home';
     const full = `${text}\n${url}`;
 
@@ -773,7 +773,7 @@ export default function Progress() {
             icon={<FiAward />}
             label="Badges earned"
             value={`${earnedBadgeCount} / ${progressBadges.length || '—'}`}
-            tooltip="Badges you have unlocked out of every achievement on Sharether, including Speed Learner."
+            tooltip="Badges you have unlocked out of every achievement on Learnda, including Speed Learner."
             color="#8b5cf6"
           />
         </StatGroup>
@@ -818,7 +818,7 @@ export default function Progress() {
             icon={<FiDownload />}
             label="Files Downloaded"
             value={filesDownloaded}
-            color="#f59e0b"
+            color="#fab82c"
             tooltip="Content saves or bookmarks plus completed resource downloads tracked from your account."
           />
           <StatCard
@@ -826,7 +826,7 @@ export default function Progress() {
             label="Contributions"
             value={totalContributions}
             tooltip="Approved contributions you uploaded (from your contributor record and progress)."
-            color="#16a34a"
+            color="#5b8439"
           />
         </StatGroup>
       )}
@@ -842,7 +842,7 @@ export default function Progress() {
           <StatCard icon={<FiFeather />} label="Stories" value={edutStories} color="#7c3aed" />
           <StatCard icon={<FiInfo />} label="Did You Know" value={edutFacts} color="#0891b2" />
           <StatCard icon={<FiMessageSquare />} label="Quotes" value={edutQuotes} color="#d97706" />
-          <StatCard icon={<FiSmile />} label="Joculars" value={edutJoculars} color="#16a34a" />
+          <StatCard icon={<FiSmile />} label="Joculars" value={edutJoculars} color="#5b8439" />
         </StatGroup>
       )}
 
@@ -871,9 +871,9 @@ export default function Progress() {
         </div>
       ) : (
         <StatGroup title="Community Engagement">
-          <StatCard icon={<FiMessageSquare />} label="Posts" value={communityPosts} color="#f59e0b" />
+          <StatCard icon={<FiMessageSquare />} label="Posts" value={communityPosts} color="#fab82c" />
           <StatCard icon={<FiMessageSquare />} label="Replies" value={communityReplies} color="#f97316" />
-          <StatCard icon={<FiTrendingUp />} label="Engagement Score" value={communityScore} color="#ef4444" />
+          <StatCard icon={<FiTrendingUp />} label="Engagement Score" value={communityScore} color="#fb6334" />
         </StatGroup>
       ))}
 
@@ -1085,7 +1085,7 @@ export default function Progress() {
         </section>
       ) : null}
 
-          <section className="pg-contribution-appeal-section" aria-label="Support Sharether">
+          <section className="pg-contribution-appeal-section" aria-label="Support Learnda">
             <ContributionAppeal showPlansCta />
           </section>
 

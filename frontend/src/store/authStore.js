@@ -7,7 +7,7 @@ import { emitStateChanged, APP_STATE_SCOPES } from '../utils/appEvents';
 const resolveNextStep = (user, nextStep) =>
   nextStep || getNextOnboardingStep(user) || ONBOARDING_STEPS.DONE;
 
-const INCOMPLETE_ONBOARDING_FLAG_KEY = 'sharether_incomplete_onboarding_v1';
+const INCOMPLETE_ONBOARDING_FLAG_KEY = 'learnda_incomplete_onboarding_v1';
 
 const setIncompleteOnboardingFlag = (nextStep) => {
   if (typeof window === 'undefined') return;

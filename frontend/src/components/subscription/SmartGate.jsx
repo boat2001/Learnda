@@ -20,7 +20,7 @@ export default function SmartGate({ onClose, onContribute, downloadCount }) {
       <div className="smart-gate__icon" aria-hidden="true">📥</div>
       <h3 className="smart-gate__title">That&apos;s your downloads for today</h3>
       <p className="smart-gate__body">
-        You&apos;ve used {countMsg} — clearly Sharether is doing its job. Chip in to raise your
+        You&apos;ve used {countMsg} — clearly Learnda is doing its job. Chip in to raise your
         daily limit, or come back tomorrow and pick up where you left off.
       </p>
 

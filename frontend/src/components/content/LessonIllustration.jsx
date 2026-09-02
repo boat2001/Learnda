@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 
 /**
  * LessonIllustration
- * Renders lesson illustrations. Local Sharether SVG diagrams
+ * Renders lesson illustrations. Local Learnda SVG diagrams
  * (/lesson-images/*.svg) are fetched and inlined into the DOM so that
  * CSS/JS interactivity inside the SVG works (hover, tap-to-reveal,
  * animations). Anything else — photos, external URLs — renders as a

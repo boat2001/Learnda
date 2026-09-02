@@ -37,7 +37,7 @@ function hasOcrNoise(text) {
 }
 
 function hasWatermark(text) {
-  return /sharether\.com|Downloaded from|get files/i.test(safeText(text));
+  return /learnda\.com|Downloaded from|get files/i.test(safeText(text));
 }
 
 function hasAnswerSpill(text) {

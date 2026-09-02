@@ -127,16 +127,16 @@
   border-radius: 16px 16px 0 0;
 }
 
-.cr-podium-gold::before   { background: linear-gradient(90deg, #f59e0b, #fbbf24, #f59e0b); }
+.cr-podium-gold::before   { background: linear-gradient(90deg, #fab82c, #fbbf24, #fab82c); }
 .cr-podium-silver::before { background: linear-gradient(90deg, #94a3b8, #cbd5e1, #94a3b8); }
 .cr-podium-bronze::before { background: linear-gradient(90deg, #b45309, #d97706, #b45309); }
 
 /* #1 gets elevated treatment */
 .cr-podium-first {
   box-shadow:
-    0 4px 24px rgba(245, 158, 11, 0.16),
+    0 4px 24px rgba(250, 184, 44, 0.16),
     0 1px 4px rgba(0, 0, 0, 0.06);
-  border-color: rgba(245, 158, 11, 0.26);
+  border-color: rgba(250, 184, 44, 0.26);
 }
 
 /* Medal badge */
@@ -514,7 +514,7 @@
 
 [data-theme='dark'] .cr-podium-first {
   box-shadow:
-    0 4px 24px rgba(245, 158, 11, 0.10),
+    0 4px 24px rgba(250, 184, 44, 0.10),
     0 1px 4px rgba(0, 0, 0, 0.35);
 }
 

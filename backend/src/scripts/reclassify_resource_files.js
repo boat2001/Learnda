@@ -27,7 +27,7 @@ function shouldRetitle(record) {
   const title = (record.title || '').trim();
   if (!title) return true;
   if (/\.pdf$/i.test(title)) return true;
-  if (/sharether\.com/i.test(title)) return true;
+  if (/learnda\.com/i.test(title)) return true;
   if (title === record.file_name) return true;
   return false;
 }

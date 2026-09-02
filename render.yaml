@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: sharether-api
+    name: learnda-api
     runtime: node
     # Paid: avoids free-tier spin-down; smallest web instance type.
     plan: starter
@@ -27,13 +27,13 @@ services:
         value: "false"
       - key: DEFAULT_SEMESTER
         value: "1"
-      # Canonical public SPA URL (links, emails). Keep in sync with VITE_SITE_URL on sharether-web.
+      # Canonical public SPA URL (links, emails). Keep in sync with VITE_SITE_URL on learnda-web.
       - key: APP_PUBLIC_URL
-        value: https://beta.sharether.com
+        value: https://beta.learnda.app
       # Comma-separated frontend origins only (no paths). Required for Google OAuth redirectUri validation.
-      # Add https://sharether.com when apex DNS points at sharether-web. See docs/deploy/GOOGLE_OAUTH_RENDER.md.
+      # Add https://learnda.app when apex DNS points at learnda-web. See docs/deploy/GOOGLE_OAUTH_RENDER.md.
       - key: CORS_ORIGIN
-        value: https://beta.sharether.com,https://sharether-web-r74a.onrender.com,https://sharether.com
+        value: https://beta.learnda.app,https://learnda-web.onrender.com,https://learnda.app
       - key: JWT_EXPIRES_IN
         value: 24h
       - key: JWT_REFRESH_EXPIRES_IN
@@ -46,7 +46,7 @@ services:
         generateValue: true
       - key: JWT_RESET_SECRET
         generateValue: true
-      # Same OAuth Web Client ID as sharether-web VITE_GOOGLE_CLIENT_ID (Google Cloud Web client).
+      # Same OAuth Web Client ID as learnda-web VITE_GOOGLE_CLIENT_ID (Google Cloud Web client).
       - key: GOOGLE_CLIENT_ID
         sync: false
       - key: GOOGLE_CLIENT_SECRET
@@ -98,7 +98,7 @@ services:
         sync: false
       # Sender ID registered with Arkesel (max 11 chars, no spaces)
       - key: ARKESEL_SENDER_ID
-        value: Sharether
+        value: Learnda
       - key: BETA_GATE_ENABLED
         value: "true"
       - key: BETA_CODE_LENGTH
@@ -129,7 +129,7 @@ services:
         value: "false"
 
   - type: web
-    name: sharether-web
+    name: learnda-web
     runtime: static
     rootDir: frontend
     buildFilter:
@@ -146,10 +146,10 @@ services:
       - key: NODE_VERSION
         value: 20.19.0
       - key: VITE_API_BASE_URL
-        value: https://api.sharether.com/api
+        value: https://api.learnda.app/api
       # Canonical SPA URL; should match APP_PUBLIC_URL and primary Google OAuth origins.
       - key: VITE_SITE_URL
-        value: https://beta.sharether.com
+        value: https://beta.learnda.app
       # Required for Google sign-in. Set in Render dashboard (sync: false), then redeploy — Vite embeds at build time.
       - key: VITE_GOOGLE_CLIENT_ID
         sync: false
@@ -161,8 +161,8 @@ services:
         value: ""
 
 databases:
-  - name: sharether-db
+  - name: learnda-db
     # Paid Postgres: no 30-day free DB expiry; smallest flexible instance.
     plan: basic-256mb
-    databaseName: sharether
-    user: sharether
+    databaseName: learnda
+    user: learnda

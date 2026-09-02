@@ -109,18 +109,18 @@ const cleanSeparators = (value) => String(value || '')
   .trim();
 
 const stripBrand = (value) => String(value || '')
-  .replace(/(?:\s*[-–—]?\s*sharether\s*\.?\s*com\b)+/gi, '')
+  .replace(/(?:\s*[-–—]?\s*learnda\s*\.?\s*com\b)+/gi, '')
   .trim();
 
 const countBrandMentions = (value) => {
-  const matches = String(value || '').match(/sharether\s*\.?\s*com\b/gi);
+  const matches = String(value || '').match(/learnda\s*\.?\s*com\b/gi);
   return matches ? matches.length : 0;
 };
 
 const hasSingleTrailingBrand = (fileName) => {
   const extension = path.extname(fileName);
   const base = fileName.slice(0, -extension.length);
-  return countBrandMentions(base) === 1 && /\s-\sSharether\.com$/i.test(base);
+  return countBrandMentions(base) === 1 && /\s-\sLearnda\.com$/i.test(base);
 };
 
 const stripExtensionWords = (value) => String(value || '')
@@ -207,7 +207,7 @@ const buildNormalizedName = (absolutePath) => {
   const parts = [courseName];
   parts.push(years ? `${years} ${label}` : label);
   if (section) parts.push(section);
-  parts.push('Sharether.com');
+  parts.push('Learnda.com');
 
   const normalizedBase = parts
     .filter(Boolean)
@@ -224,8 +224,8 @@ const buildNormalizedName = (absolutePath) => {
 const withSetSuffix = (fileName, setNumber) => {
   const extension = path.extname(fileName);
   const base = fileName.slice(0, -extension.length);
-  const nextBase = /\s-\sSharether\.com$/i.test(base)
-    ? base.replace(/\s-\sSharether\.com$/i, ` - Set ${setNumber} - Sharether.com`)
+  const nextBase = /\s-\sLearnda\.com$/i.test(base)
+    ? base.replace(/\s-\sLearnda\.com$/i, ` - Set ${setNumber} - Learnda.com`)
     : `${base} - Set ${setNumber}`;
   return `${nextBase}${extension}`;
 };

@@ -92,7 +92,7 @@ function parseLines(text) {
 
   for (const raw of lines) {
     if (!raw || raw.startsWith('---') || raw.startsWith('..........')) continue;
-    if (/^Sharether second semester/i.test(raw)) continue;
+    if (/^Learnda second semester/i.test(raw)) continue;
 
     if (raw.toLowerCase().includes('core courses')) {
       group = 'core';

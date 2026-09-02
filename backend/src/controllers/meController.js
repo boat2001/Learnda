@@ -107,8 +107,8 @@ const buildAcademicStateNotice = async (user) => {
     applied_at: academicState.applied_at,
     title: isLevelUpgradeNotice ? `Welcome to ${levelLabel}` : 'Welcome to Semester 2',
     message: isLevelUpgradeNotice
-      ? `${institution.name || 'Your college'} has moved to a new level, so we have moved your Sharether courses to ${levelLabel}, Semester 1. You can change your level or semester anytime in Settings.`
-      : `${institution.name || 'Your college'} is now in Semester 2, so we have moved your Sharether courses to Semester 2 as well. You can switch back to Semester 1 anytime in Settings.`
+      ? `${institution.name || 'Your college'} has moved to a new level, so we have moved your Learnda courses to ${levelLabel}, Semester 1. You can change your level or semester anytime in Settings.`
+      : `${institution.name || 'Your college'} is now in Semester 2, so we have moved your Learnda courses to Semester 2 as well. You can switch back to Semester 1 anytime in Settings.`
   };
 };
 

@@ -23,9 +23,9 @@ const { ensureAcademicCatalogInstitutions } = require('../services/academicCatal
 
 const BACKEND_ROOT = path.resolve(__dirname, '..', '..');
 const PROJECT_ROOT = path.resolve(BACKEND_ROOT, '..');
-const LEGACY_ROOT = fs.existsSync(path.join(PROJECT_ROOT, 'sharether_onit'))
-  ? path.join(PROJECT_ROOT, 'sharether_onit')
-  : path.join(path.dirname(PROJECT_ROOT), 'sharether_onit');
+const LEGACY_ROOT = fs.existsSync(path.join(PROJECT_ROOT, 'learnda_onit'))
+  ? path.join(PROJECT_ROOT, 'learnda_onit')
+  : path.join(path.dirname(PROJECT_ROOT), 'learnda_onit');
 const DOCS_ROOT = path.join(PROJECT_ROOT, 'docs');
 const UPLOADS_ROOT = path.join(BACKEND_ROOT, 'uploads');
 const INVENTORY_PATH = path.join(__dirname, 'seed_inventory.json');
@@ -1110,9 +1110,9 @@ async function seed() {
   await connectAndSync();
 
   const [systemUser] = await User.findOrCreate({
-    where: { email: 'system@sharether.com' },
+    where: { email: 'system@learnda.app' },
     defaults: {
-      full_name: 'Sharether System',
+      full_name: 'Learnda System',
       password_hash: `seed-${Date.now()}`,
       role: 'admin'
     }
@@ -1254,13 +1254,13 @@ async function seed() {
       creator_id: systemUser.id,
       status: 'published',
       tags: ['quote'],
-      metadata: { source: 'sharether_onit' },
+      metadata: { source: 'learnda_onit' },
       published_at: new Date()
     });
   });
 
   Object.keys(siteSections).forEach((sectionKey) => {
-    const title = `Sharether ${sectionKey.replace(/-/g, ' ')}`.replace(/\b\w/g, (m) => m.toUpperCase());
+    const title = `Learnda ${sectionKey.replace(/-/g, ' ')}`.replace(/\b\w/g, (m) => m.toUpperCase());
     const key = `site_info::${title}`;
     const legacyKey = `text_lesson::${title}`;
     if (contentKeys.has(key) || contentKeys.has(legacyKey)) return;

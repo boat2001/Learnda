@@ -93,7 +93,7 @@ export default function Layout() {
       const requiredPlan = detail.requiredPlan || "Serious Student";
       const featureLabel = detail.featureLabel || "This feature";
       const message =
-        detail.message || `Chip in to open up ${featureLabel.toLowerCase()} — and help keep Sharether free for everyone else.`;
+        detail.message || `Chip in to open up ${featureLabel.toLowerCase()} — and help keep Learnda free for everyone else.`;
 
       setFeatureLockModal({
         isOpen: true,

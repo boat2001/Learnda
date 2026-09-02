@@ -1,4 +1,4 @@
-const STORAGE_KEY = 'sharether_last_login_method';
+const STORAGE_KEY = 'learnda_last_login_method';
 
 /** @typedef {'google' | 'email' | 'phone'} LoginMethod */
 

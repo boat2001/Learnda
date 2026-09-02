@@ -39,7 +39,7 @@ const {
 } = require('../utils/reengagementContent');
 const {
   STUDY_TIPS,
-  SHARETHER_TIPS,
+  LEARNDA_TIPS,
   resolveEngagementTip,
 } = require('../utils/engagementTips');
 const { sendOtpSms, sendSms } = require('../services/smsService');
@@ -67,11 +67,11 @@ const ROADMAP_FILE          = path.join(__dirname, '../data/roadmap.json');
 const SERVICES_FILE         = path.join(__dirname, '../data/services.json');
 const SOCIAL_LINKS_FILE     = path.join(__dirname, '../data/social_links.json');
 const ACADEMIC_STATE_ACTIONS = new Set(['semester_switch', 'level_upgrade']);
-const PLACEHOLDER_EMAIL_RE = /^phone\.\d+@auth\.sharether\.(app|local)$/i;
+const PLACEHOLDER_EMAIL_RE = /^phone\.\d+@auth\.learnda\.(app|local)$/i;
 
 const isDeliverableEmail = (email) => {
   const value = String(email || '').trim().toLowerCase();
-  return Boolean(value && value.includes('@') && !PLACEHOLDER_EMAIL_RE.test(value) && !value.endsWith('@guest.sharether.local'));
+  return Boolean(value && value.includes('@') && !PLACEHOLDER_EMAIL_RE.test(value) && !value.endsWith('@guest.learnda.local'));
 };
 
 const escapeHtml = (value = '') => String(value)
@@ -92,7 +92,7 @@ const notifyUserModeration = async (user, { title, body, action }) => {
         <div style="font-family:Arial,sans-serif;line-height:1.6;color:#111827;">
           <h2 style="margin:0 0 12px;color:#0f172a;">${escapeHtml(title)}</h2>
           <p>${escapeHtml(body)}</p>
-          <p style="color:#64748b;font-size:13px;">This message was sent by Sharether account support.</p>
+          <p style="color:#64748b;font-size:13px;">This message was sent by Learnda account support.</p>
         </div>
       `,
     }));
@@ -118,13 +118,12 @@ const DEFAULT_ROADMAP = [
 ];
 
 const DEFAULT_SOCIAL_LINKS = [
-  { id: 'x',         name: 'X (Twitter)',      handle: '@sharether', href: 'https://x.com/sharether',                                  purpose: 'Fast conversations, public announcements' },
-  { id: 'facebook',  name: 'Facebook',         handle: 'Sharether',  href: 'https://www.facebook.com/people/Sharether/61573786536620/', purpose: 'Community posts, page updates' },
-  { id: 'whatsapp',  name: 'WhatsApp Channel', handle: '@sharether', href: 'https://whatsapp.com/channel/0029Vaf7UpGBKfhrqDPK6B1M',    purpose: 'Announcements and platform updates' },
-  { id: 'telegram',  name: 'Telegram',         handle: '@sharether', href: 'https://t.me/sharether',                                   purpose: 'Learning tips and launch notes' },
-  { id: 'youtube',   name: 'YouTube',          handle: '@sharether', href: 'https://www.youtube.com/@sharether',                       purpose: 'Tutorials and walkthroughs' },
-  { id: 'tiktok',    name: 'TikTok',           handle: '@sharether', href: 'https://tiktok.com/@sharether',                            purpose: 'Short study tips and product moments' },
-  { id: 'instagram', name: 'Instagram',        handle: '@sharether', href: 'https://instagram.com/sharether',                          purpose: 'Photos, reels, community stories' },
+  { id: 'x',         name: 'X (Twitter)',      handle: '@learnda', href: 'https://x.com/learnda',                                  purpose: 'Fast conversations, public announcements' },
+  { id: 'facebook',  name: 'Facebook',         handle: 'Learnda',  href: 'https://www.facebook.com/learnda', purpose: 'Community posts, page updates' },
+  { id: 'telegram',  name: 'Telegram',         handle: '@learnda', href: 'https://t.me/learnda',                                   purpose: 'Learning tips and launch notes' },
+  { id: 'youtube',   name: 'YouTube',          handle: '@learnda', href: 'https://www.youtube.com/@learnda',                       purpose: 'Tutorials and walkthroughs' },
+  { id: 'tiktok',    name: 'TikTok',           handle: '@learnda', href: 'https://tiktok.com/@learnda',                            purpose: 'Short study tips and product moments' },
+  { id: 'instagram', name: 'Instagram',        handle: '@learnda', href: 'https://instagram.com/learnda',                          purpose: 'Photos, reels, community stories' },
 ];
 
 const DEFAULT_SERVICES = [
@@ -1383,7 +1382,7 @@ router.delete('/users/:id', async (req, res) => {
       admin_title: null,
     });
 
-    const deleteMessage = `Your Sharether account has been removed. Reason: ${deleteReason}`;
+    const deleteMessage = `Your Learnda account has been removed. Reason: ${deleteReason}`;
     notifyUserModeration(target, {
       action: 'delete',
       title: 'Account removed',
@@ -1704,9 +1703,9 @@ router.get('/content/pending', async (req, res) => {
         depth_level: row.depth_level,
         visual_type: row.metadata?.visual_type || 'static',
         is_premium: row.is_premium,
-        creator_name: row.creator_name || row.creator_email || 'Sharether import',
+        creator_name: row.creator_name || row.creator_email || 'Learnda import',
         contributor: {
-          name: row.creator_name || row.creator_email || 'Sharether import',
+          name: row.creator_name || row.creator_email || 'Learnda import',
           email: row.creator_email || null,
         },
         course: row.course_name ? { title: row.course_name } : null,
@@ -2277,7 +2276,7 @@ router.post('/notifications/trigger', authenticate, checkRole(['admin']), async 
       limit: 5000,
     });
 
-    const triggerTitle = label || 'Sharether Update';
+    const triggerTitle = label || 'Learnda Update';
     let sentCount = 0;
     for (const user of users) {
       try {
@@ -2834,12 +2833,12 @@ router.post('/reengagement/send', authenticate, checkRole(['admin']), async (req
   }
 });
 
-// ── Study & Sharether tips ────────────────────────────────────────────────────
+// ── Study & Learnda tips ────────────────────────────────────────────────────
 router.get('/engagement-tips/catalog', authenticate, checkRole(['admin']), (req, res) => {
   res.json({
     success: true,
     studyTips: STUDY_TIPS,
-    sharetherTips: SHARETHER_TIPS,
+    learndaTips: LEARNDA_TIPS,
   });
 });
 
@@ -2910,7 +2909,7 @@ router.post('/engagement-tips/send', authenticate, checkRole(['admin']), async (
         tipCategory: resolved.category,
         tipId: resolved.tipId,
         tipLabel: resolved.tipMeta?.label,
-        reason: `${resolved.category === 'sharether' ? 'Sharether tip' : 'Study tip'}: ${resolved.tipMeta?.label || resolved.tipId}`,
+        reason: `${resolved.category === 'learnda' ? 'Learnda tip' : 'Study tip'}: ${resolved.tipMeta?.label || resolved.tipId}`,
         targetMode: mode,
       });
       results.push(entry);
@@ -2994,7 +2993,7 @@ function saveInvites(invites) {
 }
 
 router.get('/lecturer-invites', (req, res) => {
-  const siteUrl = process.env.APP_PUBLIC_URL || 'https://beta.sharether.com';
+  const siteUrl = process.env.APP_PUBLIC_URL || 'https://beta.learnda.app';
   const invites = loadInvites().map(({ token, ...rest }) => ({
     ...rest,
     link: rest.status === 'pending' ? `${siteUrl}/lecturer-invite/${token}` : null,
@@ -3033,26 +3032,26 @@ router.post('/lecturer-invites', async (req, res) => {
     invites.push(invite);
     saveInvites(invites);
 
-    const siteUrl = process.env.APP_PUBLIC_URL || 'https://beta.sharether.com';
+    const siteUrl = process.env.APP_PUBLIC_URL || 'https://beta.learnda.app';
     const link = `${siteUrl}/lecturer-invite/${token}`;
 
     if (isEmail) {
       await sendEmail({
         to: contact.trim(),
-        subject: 'You\'ve been invited to join Sharether as a Lecturer',
+        subject: 'You\'ve been invited to join Learnda as a Lecturer',
         html: `
           <p>Hello,</p>
-          <p>You've been invited by the Sharether admin team to register as a lecturer on our platform.</p>
+          <p>You've been invited by the Learnda admin team to register as a lecturer on our platform.</p>
           <p>Please click the link below to complete your registration. The link expires in <strong>7 days</strong>.</p>
-          <p><a href="${link}" style="display:inline-block;padding:12px 24px;background:#1f7177;color:#fff;border-radius:6px;text-decoration:none;font-weight:600;">Complete Lecturer Registration</a></p>
+          <p><a href="${link}" style="display:inline-block;padding:12px 24px;background:#1f56db;color:#fff;border-radius:6px;text-decoration:none;font-weight:600;">Complete Lecturer Registration</a></p>
           <p>Or copy this link: <br/><a href="${link}">${link}</a></p>
           <p>If you weren't expecting this invitation, you can safely ignore this email.</p>
-          <p>— The Sharether Team</p>
+          <p>— The Learnda Team</p>
         `,
       }).catch((e) => console.error('Lecturer invite email error:', e));
     } else {
       await sendSms(contact.trim(),
-        `You've been invited to join Sharether as a Lecturer. Complete your registration here: ${link} (expires in 7 days)`
+        `You've been invited to join Learnda as a Lecturer. Complete your registration here: ${link} (expires in 7 days)`
       ).catch((e) => console.error('Lecturer invite SMS error:', e));
     }
 
@@ -3146,7 +3145,7 @@ router.post('/messages/:id/reply', async (req, res) => {
     if (!message) {
       return res.status(404).json({ success: false, error: 'Message not found.' });
     }
-    if (String(message.email || '').toLowerCase().endsWith('@guest.sharether.local')) {
+    if (String(message.email || '').toLowerCase().endsWith('@guest.learnda.local')) {
       return res.status(400).json({ success: false, error: 'This message does not include a reply email.' });
     }
 
@@ -3263,7 +3262,7 @@ router.post('/team-broadcast', authenticate, checkRole(['admin']), async (req, r
       return true;
     });
 
-    const resolvedSubject = subject?.trim() || `Message from the Sharether team`;
+    const resolvedSubject = subject?.trim() || `Message from the Learnda team`;
 
     let sent = 0;
     for (const app of unique) {
@@ -3278,8 +3277,8 @@ router.post('/team-broadcast', authenticate, checkRole(['admin']), async (req, r
 <div style="font-family:'Helvetica Neue',Arial,sans-serif;max-width:520px;margin:0 auto;padding:32px 16px;">
   <p style="font-size:15px;line-height:1.7;color:#374151;white-space:pre-wrap;">${personalised}</p>
   <hr style="margin:24px 0;border:none;border-top:1px solid #f0f0f0;" />
-  <p style="font-size:12px;color:#9ca3af;">— The Sharether Team &nbsp;·&nbsp;
-    <a href="https://beta.sharether.com" style="color:#1f7177;text-decoration:none;">sharether.com</a>
+  <p style="font-size:12px;color:#9ca3af;">— The Learnda Team &nbsp;·&nbsp;
+    <a href="https://beta.learnda.app" style="color:#1f56db;text-decoration:none;">learnda.app</a>
   </p>
 </div>`,
         });

@@ -132,7 +132,7 @@ export default function LecturerInvite() {
             <div style={{ fontSize: 40, marginBottom: 12 }}>🔗</div>
             <h2 style={{ margin: '0 0 8px', fontSize: 20 }}>Link Not Valid</h2>
             <p style={{ color: '#64748b', margin: '0 0 20px' }}>{errorMsg}</p>
-            <button type="button" onClick={() => navigate('/')} style={btnStyle}>Go to Sharether</button>
+            <button type="button" onClick={() => navigate('/')} style={btnStyle}>Go to Learnda</button>
           </div>
         </div>
       </div>
@@ -146,7 +146,7 @@ export default function LecturerInvite() {
           <Logo />
           <div style={{ textAlign: 'center', padding: '24px 0' }}>
             <div style={{ fontSize: 48, marginBottom: 12 }}>🎉</div>
-            <h2 style={{ margin: '0 0 8px', fontSize: 22 }}>Welcome to Sharether!</h2>
+            <h2 style={{ margin: '0 0 8px', fontSize: 22 }}>Welcome to Learnda!</h2>
             <p style={{ color: '#64748b', margin: 0 }}>Your lecturer account is ready. Taking you to the platform…</p>
           </div>
         </div>
@@ -168,7 +168,7 @@ export default function LecturerInvite() {
         <Logo />
         <h1 style={{ fontSize: 22, fontWeight: 700, margin: '0 0 4px', textAlign: 'center' }}>Lecturer Registration</h1>
         <p style={{ color: '#64748b', fontSize: 13, textAlign: 'center', marginBottom: 28 }}>
-          Complete your profile to join Sharether as a lecturer.
+          Complete your profile to join Learnda as a lecturer.
         </p>
 
         {errors._form && (
@@ -293,7 +293,7 @@ export default function LecturerInvite() {
 function Logo() {
   return (
     <div style={{ textAlign: 'center', marginBottom: 24 }}>
-      <img src="https://pub-1dec8067cfda47ef9b8088c56989e07e.r2.dev/brand/sharether-logo.png" alt="Sharether" style={{ height: 36 }} />
+      <img src={`${import.meta.env.BASE_URL}learnda-logo.webp`} alt="Learnda" style={{ height: 36 }} />
     </div>
   );
 }
@@ -346,7 +346,7 @@ const inputStyle = (err) => ({
 
 const btnStyle = {
   padding: '11px 24px',
-  background: '#1f7177',
+  background: '#2b62c4',
   color: '#fff',
   border: 'none',
   borderRadius: 8,

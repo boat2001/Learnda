@@ -5,7 +5,7 @@ const config = require('../config/env');
 const adminRecipients = () =>
   config.resend?.supportRecipients?.length
     ? config.resend.supportRecipients
-    : [config.resend?.from || 'admin@sharether.com'];
+    : [config.resend?.from || 'admin@learnda.app'];
 
 class NewsletterController {
   async subscribe(req, res) {
@@ -31,8 +31,8 @@ class NewsletterController {
       // Notify admin of new subscriber (fire-and-forget)
       emailService.sendSupportReport({
         to: adminRecipients(),
-        subject: 'New newsletter subscriber — Sharether',
-        message: `${email} just subscribed to the Sharether newsletter.`,
+        subject: 'New newsletter subscriber — Learnda',
+        message: `${email} just subscribed to the Learnda newsletter.`,
         reporter: email,
         category: source ? `Newsletter · ${source}` : 'Newsletter',
       }).catch((err) => console.error('Newsletter notify error:', err));

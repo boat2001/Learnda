@@ -1,4 +1,4 @@
-const STORAGE_KEY = 'sharether_guest_daily_content_views_v1';
+const STORAGE_KEY = 'learnda_guest_daily_content_views_v1';
 const DAILY_LIMIT_PER_TYPE = 2;
 
 const pad = (value) => String(value).padStart(2, '0');

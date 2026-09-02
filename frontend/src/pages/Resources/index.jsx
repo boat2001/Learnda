@@ -270,7 +270,7 @@ const getResourceFileCardModel = (file = {}, index = 0, courseMetaMap = new Map(
     'CRS 100'
   );
   const uploader = toTitleCase(
-    file?.uploader || file?.uploader_name || file?.uploaded_by || file?.creator_name || 'Sharether Creator'
+    file?.uploader || file?.uploader_name || file?.uploaded_by || file?.creator_name || 'Learnda Creator'
   );
   const year = getFileYearLabel({
     year: file?.year,

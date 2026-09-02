@@ -13,9 +13,9 @@ function fmt(n) {
   return String(n);
 }
 
-const TEAL = '#1f7177';
+const TEAL = '#2b62c4';
 const BLUE = '#2563eb';
-const COLORS = ['#1f7177', '#4fb3ad', '#2563eb', '#d97706', '#059669', '#7c3aed'];
+const COLORS = ['#2b62c4', '#4fb3ad', '#2563eb', '#d97706', '#059669', '#7c3aed'];
 
 function chartColors() {
   const s = getComputedStyle(document.documentElement);

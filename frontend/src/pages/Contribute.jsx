@@ -9,7 +9,7 @@ import CelebrationContributors from '../components/common/CelebrationContributor
 import './SharedPages.css';
 import './Contribute.css';
 
-const SUPPORTER_ACCENTS = ['#38bdf8', '#34d399', '#f97316', '#1f7177', '#eab308'];
+const SUPPORTER_ACCENTS = ['#38bdf8', '#34d399', '#f97316', '#2b62c4', '#eab308'];
 
 const FALLBACK_SUPPORTERS = [
   { id: '1', name: 'Samuel Heighty', from: 'Student at Fosco' },
@@ -29,16 +29,16 @@ const getInitials = (name) => {
 const IMPACT_AREAS = [
   {
     title: 'Domain & Hosting',
-    description: 'Keeps sharether.com online and fast, every day of the semester — exam week included.',
+    description: 'Keeps learnda.app online and fast, every day of the semester — exam week included.',
     icon: FiGlobe,
-    color: '#1f7177',
+    color: '#2b62c4',
     num: '01',
   },
   {
     title: 'Storage & Content delivery',
     description: 'Delivers millions of downloads a year. Every note, past question and lesson you open is served from here.',
     icon: FiDatabase,
-    color: '#2a6f97',
+    color: '#3e7fdd',
     num: '02',
   },
   {
@@ -121,7 +121,7 @@ export default function Contribute() {
       .then((res) => {
         const d = res?.data || res;
         const amountStr = d?.amount ? ` with ${d?.currency || 'GHS'} ${d.amount}` : '';
-        setStatus(`Contribution received. Thank you for supporting Sharether${amountStr}.`);
+        setStatus(`Contribution received. Thank you for supporting Learnda${amountStr}.`);
         setFormState((prev) => ({ ...prev, amount: '50', message: '' }));
       })
       .catch((err) => {
@@ -174,7 +174,7 @@ export default function Contribute() {
     try {
       const response = await api.payment.verifyContribution(pendingPayment.reference, pendingPayment.provider);
       const data = response?.data || response;
-      setStatus(`Contribution received. Thank you for supporting Sharether with ${data?.currency || 'GHS'} ${data?.amount || pendingPayment.amount}.`);
+      setStatus(`Contribution received. Thank you for supporting Learnda with ${data?.currency || 'GHS'} ${data?.amount || pendingPayment.amount}.`);
       setPendingPayment(null);
       setFormState((prev) => ({ ...prev, amount: '50', message: '' }));
     } catch (err) {
@@ -271,7 +271,7 @@ export default function Contribute() {
 
             <div className="form-row">
               <label htmlFor="d-message">Message <span style={{ fontWeight: 400, opacity: 0.7 }}>(optional)</span></label>
-              <textarea id="d-message" name="message" rows="3" value={formState.message} onChange={handleChange} placeholder="Optional note for the Sharether team" />
+              <textarea id="d-message" name="message" rows="3" value={formState.message} onChange={handleChange} placeholder="Optional note for the Learnda team" />
             </div>
 
             <div className="fm-summary">
@@ -389,9 +389,9 @@ export default function Contribute() {
               </defs>
               <path d="M 8 8 L 392 8 L 392 192 L 8 192 Z" filter="url(#crb-sketch-contribute)" />
             </svg>
-            <p>Sharether runs on real costs &mdash; domain, hosting, storage, SSL, content design and development.</p>
-            <p>A handful of people have carried those costs so far. Now anyone who finds Sharether useful can share the load, at whatever amount works for them.</p>
-            <p className="cost-reality-banner__cta">Your contribution keeps Sharether online, free to start, and getting better each semester.</p>
+            <p>Learnda runs on real costs &mdash; domain, hosting, storage, SSL, content design and development.</p>
+            <p>A handful of people have carried those costs so far. Now anyone who finds Learnda useful can share the load, at whatever amount works for them.</p>
+            <p className="cost-reality-banner__cta">Your contribution keeps Learnda online, free to start, and getting better each semester.</p>
           </div>
           <CelebrationContributors contributors={supporters} totalAmount={1888} />
         </section>
@@ -400,7 +400,7 @@ export default function Contribute() {
       <section className="page-section">
         <div className="section-heading">
           <h2>Where your contribution goes</h2>
-          <p>No overheads, no middlemen — every cedi goes straight into keeping Sharether online and improving.</p>
+          <p>No overheads, no middlemen — every cedi goes straight into keeping Learnda online and improving.</p>
         </div>
         <div className="dn-impact-grid">
           {IMPACT_AREAS.map((area) => {

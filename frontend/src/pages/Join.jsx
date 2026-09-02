@@ -16,8 +16,8 @@ const WAYS_TO_JOIN = [
   },
   {
     title: 'Join as a developer',
-    body: 'Help build Sharether features, improve platform reliability, and shape student-first tools.',
-    action: '/contact?topic=Partnerships&message=I%20want%20to%20apply%20as%20a%20developer%20for%20Sharether.',
+    body: 'Help build Learnda features, improve platform reliability, and shape student-first tools.',
+    action: '/contact?topic=Partnerships&message=I%20want%20to%20apply%20as%20a%20developer%20for%20Learnda.',
     actionLabel: 'Apply as Developer',
   },
 ];
@@ -31,11 +31,11 @@ export default function Join() {
             <span className="hero-tag">Movement, not marketing</span>
             <h1 className="hero-title">Choose your role in the student-first learning movement.</h1>
             <p className="hero-subtitle">
-              Sharether grows when learners, creators, and builders push the same mission from different angles.
+              Learnda grows when learners, creators, and builders push the same mission from different angles.
             </p>
             <div className="hero-actions">
               <Link className="btn btn-primary" to="/register">
-                Join Sharether
+                Join Learnda
               </Link>
               <Link className="btn btn-secondary" to="/about">
                 Learn Our Mission

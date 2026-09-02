@@ -6,8 +6,8 @@ function makeItem(title, body, sourceName, tags) {
   const clean = normalize(body);
   return {
     id: fingerprint(`jokes:${clean}`), category: 'jokes', title, body: clean, summary: clean,
-    author: 'Sharether Editorial', sourceName, sourceUrl: 'https://sharether.com',
-    license: 'Sharether original', imageUrl: null, tags, collectedAt: new Date().toISOString()
+    author: 'Learnda Editorial', sourceName, sourceUrl: 'https://learnda.app',
+    license: 'Learnda original', imageUrl: null, tags, collectedAt: new Date().toISOString()
   };
 }
 
@@ -16,10 +16,10 @@ function run() {
   const unsuitable = /\b(kidnap\w*|drugs?|cross-eyed|hate|poutine)\b/i;
   const sourcedJokes = current.entries.filter((entry) => !entry.tags?.includes('riddle')
     && !entry.tags?.includes('brain-teaser') && !unsuitable.test(entry.body));
-  const originalJokes = jokes.map(([title, body]) => makeItem(title, body, 'Sharether teacher-life jokes', [
+  const originalJokes = jokes.map(([title, body]) => makeItem(title, body, 'Learnda teacher-life jokes', [
     'joke', 'funny', 'teacher', 'student-teacher', 'classroom', 'education'
   ]));
-  const riddles = current.entries.filter((entry) => entry.sourceName === 'Sharether learning riddles').slice(0, 10);
+  const riddles = current.entries.filter((entry) => entry.sourceName === 'Learnda learning riddles').slice(0, 10);
   const unique = new Map([...sourcedJokes, ...originalJokes, ...riddles]
     .map((entry) => [fingerprint(entry.body), entry]));
   const entries = [...unique.values()];

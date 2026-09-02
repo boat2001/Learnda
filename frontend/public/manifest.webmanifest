@@ -1,8 +1,8 @@
 {
   "id": "/",
-  "name": "Sharether",
-  "short_name": "Sharether",
-  "description": "Learn smarter with courses, study resources, and personalized learning tools.",
+  "name": "Learnda",
+  "short_name": "Learnda",
+  "description": "Ghana's K-12 learning platform. Lessons, practice and revision scoped to your class, from KG to SHS.",
   "lang": "en",
   "dir": "ltr",
   "start_url": "/",
@@ -11,7 +11,7 @@
   "display_override": ["standalone", "minimal-ui", "browser"],
   "orientation": "portrait",
   "background_color": "#ffffff",
-  "theme_color": "#1f7177",
+  "theme_color": "#2b62c4",
   "categories": ["education", "productivity"],
   "icons": [
     {

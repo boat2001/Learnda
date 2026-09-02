@@ -1,53 +1,65 @@
 :root {
-  /* ===== COLOR SYSTEM ===== */
-  --color-primary-50: #e8f3f3;
-  --color-primary-100: #cfe7e6;
-  --color-primary-200: #a6d2d1;
-  --color-primary-300: #76b9b7;
-  --color-primary-400: #4aa19e;
-  --color-primary-500: #2d8785;
-  --color-primary-600: #1f7177;
-  --color-primary-700: #195c61;
-  --color-primary-800: #13464b;
-  --color-primary-900: #0b2f33;
+  /* ===== COLOR SYSTEM =====
+     Derived from the Learnda logo (open-book butterfly).
+     Brand marks, exact: blue #3e7fdd | navy #1f3049 | orange #fb6334
+                         amber #fab82c | green #73a24b             */
 
-  --color-secondary-50: #f8fafb;
-  --color-secondary-100: #eef2f5;
-  --color-secondary-200: #d6dee6;
-  --color-secondary-300: #b4c0cb;
-  --color-secondary-400: #91a0ad;
-  --color-secondary-500: #6f7f8f;
-  --color-secondary-600: #586574;
-  --color-secondary-700: #445160;
-  --color-secondary-800: #303b46;
-  --color-secondary-900: #1f2730;
+  /* Primary: logo blue at 500, logo navy at 900.
+     600 is the button/link step -- 5.76:1 on white (WCAG AA). */
+  --color-primary-50: #eef4fd;
+  --color-primary-100: #d8e6fa;
+  --color-primary-200: #b6d0f5;
+  --color-primary-300: #8cb4ee;
+  --color-primary-400: #6398e6;
+  --color-primary-500: #3e7fdd;
+  --color-primary-600: #2b62c4;
+  --color-primary-700: #234f9e;
+  --color-primary-800: #1e3f78;
+  --color-primary-900: #1f3049;
 
-  --color-accent-green: #5ef46d;
-  --color-accent-orange: #f4a261;
-  --color-accent-red: #e76f51;
-  --color-accent-purple: #5b7b9a;
-  --color-accent-blue: #2a6f97;
-  --color-accent-teal: #2a9d8f;
+  /* Secondary: navy-tinted neutrals, so greys sit under the brand blue */
+  --color-secondary-50: #f8fafc;
+  --color-secondary-100: #eef1f6;
+  --color-secondary-200: #dce1ea;
+  --color-secondary-300: #bcc5d4;
+  --color-secondary-400: #94a1b6;
+  --color-secondary-500: #6e7d95;
+  --color-secondary-600: #566579;
+  --color-secondary-700: #42505f;
+  --color-secondary-800: #2e3a48;
+  --color-secondary-900: #1f3049;
 
-  --color-success: #1f9d6e;
-  --color-warning: #f4a261;
-  --color-error: #e76f51;
-  --color-info: #2a6f97;
+  /* Accents: the four logo wing colors, used as-is */
+  --color-accent-orange: #fb6334;
+  --color-accent-amber: #fab82c;
+  --color-accent-green: #73a24b;
+  --color-accent-blue: #3e7fdd;
+  --color-accent-navy: #1f3049;
+  /* Retained for components that still reference them */
+  --color-accent-red: #fb6334;
+  --color-accent-teal: #73a24b;
+  --color-accent-purple: #8b5cf6;
+
+  /* Semantic: darkened off the logo hues so they pass AA as text on white */
+  --color-success: #5b8439;
+  --color-warning: #c2820c;
+  --color-error: #d94318;
+  --color-info: #2b62c4;
 
   --color-bg-light: #ffffff;
-  --color-bg-default: #f7f5f0;
-  --color-bg-dark: #0f172a;
-  --color-bg-gradient: linear-gradient(135deg, #fdfcf9 0%, #f1f4f6 100%);
+  --color-bg-default: #f7f8fb;
+  --color-bg-dark: #1f3049;
+  --color-bg-gradient: linear-gradient(135deg, #fcfdff 0%, #eff2f8 100%);
 
-  --color-text-primary: #1f2730;
-  --color-text-secondary: #4b5a67;
-  --color-text-light: #7b8a95;
+  --color-text-primary: #1f3049;
+  --color-text-secondary: #4b5a6b;
+  --color-text-light: #7b8798;
   --color-text-on-dark: #f8fafc;
   --color-text-on-primary: #ffffff;
 
-  --color-border-light: #e4e8ec;
-  --color-border-default: #d2d9df;
-  --color-border-dark: #b7c2cc;
+  --color-border-light: #e6eaf0;
+  --color-border-default: #d3dae4;
+  --color-border-dark: #b8c2cf;
 
   /* ===== TYPOGRAPHY ===== */
   --font-family-sans: "Plus Jakarta Sans", "Trebuchet MS", "Segoe UI", sans-serif;
@@ -150,10 +162,10 @@
     rgb(248, 251, 252) 52%,
     rgb(248, 244, 237) 100%
   );
-  --sidebar-bg: radial-gradient(circle at top left, rgba(31, 113, 119, 0.08), transparent 30%),
+  --sidebar-bg: radial-gradient(circle at top left, rgba(43, 98, 196, 0.08), transparent 30%),
     linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(246, 250, 250, 0.98) 100%);
-  --footer-bg: radial-gradient(circle at top left, rgba(31, 113, 119, 0.09), transparent 24%),
-    radial-gradient(circle at top right, rgba(244, 162, 97, 0.08), transparent 22%),
+  --footer-bg: radial-gradient(circle at top left, rgba(43, 98, 196, 0.09), transparent 24%),
+    radial-gradient(circle at top right, rgba(250, 184, 44, 0.08), transparent 22%),
     linear-gradient(180deg, rgba(248, 246, 240, 0.96) 0%, rgba(240, 244, 247, 0.98) 100%);
   --scrollbar-track: rgba(214, 222, 230, 0.92);
   --scrollbar-thumb: rgba(111, 127, 143, 0.62);
@@ -179,14 +191,14 @@
   --accent-orange: var(--color-accent-orange);
 
   --success-color: var(--color-success);
-  --success-light: rgba(31, 157, 110, 0.16);
+  --success-light: rgba(91, 132, 57, 0.16);
   --success-dark: #158a5e;
 
   --warning-color: var(--color-warning);
-  --warning-light: rgba(244, 162, 97, 0.18);
+  --warning-light: rgba(250, 184, 44, 0.18);
 
   --error-color: var(--color-error);
-  --error-light: rgba(231, 111, 81, 0.16);
+  --error-light: rgba(251, 99, 52, 0.16);
 
   --transition-normal: var(--transition-base);
 
@@ -243,10 +255,10 @@
   --bg-medium: #1f2937;
   --primary-light: rgba(79, 179, 173, 0.18);
   --secondary-light: rgba(106, 164, 201, 0.16);
-  --success-light: rgba(31, 157, 110, 0.2);
+  --success-light: rgba(91, 132, 57, 0.2);
   --success-dark: #1b7a57;
   --warning-light: rgba(242, 163, 101, 0.2);
-  --error-light: rgba(231, 111, 81, 0.2);
+  --error-light: rgba(251, 99, 52, 0.2);
 
   /* ── card / surface tokens used by page components ── */
   --card-bg: #1b2430;

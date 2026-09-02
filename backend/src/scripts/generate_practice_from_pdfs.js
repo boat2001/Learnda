@@ -101,7 +101,7 @@ function buildPracticePrompt({ resource, subtype, course, extractedText }) {
     ? `Prefer objective multiple-choice questions with four options and one answer. If the answer cannot be confidently inferred from the paper, keep the question but set "needs_review": true.`
     : `Preserve paper structure where visible: Section A, Section B, marks, duration, year, and course code. Objective questions should be auto-gradable multiple_choice items. Theory or essay questions should use type "theory" with keywords or a marking guide for self-review, not strict grading.`;
 
-  return `You are converting an extracted Sharether PDF into a draft ${typeLabel} for Ghanaian university students.
+  return `You are converting an extracted Learnda PDF into a draft ${typeLabel} for Ghanaian university students.
 
 SOURCE CONTEXT
 File title: ${sourceTitle(resource)}

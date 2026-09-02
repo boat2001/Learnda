@@ -26,7 +26,7 @@
 }
 
 .pls-page-breadcrumb a:hover {
-  color: #1f7177;
+  color: #2b62c4;
 }
 
 .pls-page-breadcrumb [aria-current="page"] {
@@ -374,7 +374,7 @@
 .pls-row-divider {
   width: 100%;
   height: 1px;
-  background: linear-gradient(90deg, rgba(30, 96, 182, 0.08), rgba(30, 96, 182, 0.32), rgba(34, 197, 94, 0.22));
+  background: linear-gradient(90deg, rgba(30, 96, 182, 0.08), rgba(30, 96, 182, 0.32), rgba(115, 162, 75, 0.22));
   background-size: 220% 100%;
   animation: plsDividerFlow 12s linear infinite;
 }
@@ -929,7 +929,7 @@
   border: 1px solid rgba(30, 96, 182, 0.22);
   border-radius: 1rem;
   padding: 1rem 1.1rem;
-  background: linear-gradient(140deg, rgba(31, 118, 192, 0.12), rgba(34, 197, 94, 0.1));
+  background: linear-gradient(140deg, rgba(31, 118, 192, 0.12), rgba(115, 162, 75, 0.1));
 }
 
 .pls-kicker {
@@ -1648,7 +1648,7 @@
 }
 
 .pls-saved-lesson-badge.in-progress {
-  background: rgba(42, 111, 151, 0.92);
+  background: rgba(62, 127, 221, 0.92);
 }
 
 .pls-saved-lesson-type-icon {
@@ -1663,7 +1663,7 @@
   align-items: center;
   justify-content: center;
   color: #fff;
-  background: rgba(42, 111, 151, 0.9);
+  background: rgba(62, 127, 221, 0.9);
   box-shadow: 0 8px 16px rgba(15, 55, 90, 0.25);
 }
 

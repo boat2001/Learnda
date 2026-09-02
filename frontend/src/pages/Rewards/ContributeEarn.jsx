@@ -45,7 +45,7 @@ export default function ContributeEarn() {
       <section className="rewards-hero">
         <div className="hero-text">
           <span className="hero-tag">Rewards & Contributions</span>
-          <h1>Contribute to earn XP on Sharether</h1>
+          <h1>Contribute to earn XP on Learnda</h1>
           <p>
             Upload study resources, create lessons, and help other learners. Every approved
             contribution earns you XP based on how students engage with it.

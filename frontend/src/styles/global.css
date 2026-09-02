@@ -47,9 +47,9 @@ body {
   z-index: -1;
   pointer-events: none;
   background-image:
-    radial-gradient(circle at 12% 8%, rgba(31, 113, 119, 0.15), transparent 45%),
-    radial-gradient(circle at 88% 0%, rgba(244, 162, 97, 0.16), transparent 40%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(247, 245, 240, 0.98));
+    radial-gradient(circle at 12% 8%, rgba(43, 98, 196, 0.15), transparent 45%),
+    radial-gradient(circle at 88% 0%, rgba(250, 184, 44, 0.16), transparent 40%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(247, 248, 251, 0.98));
   transition: background-image var(--transition-base);
 }
 
@@ -250,7 +250,7 @@ textarea:focus,
 select:focus {
   outline: none;
   border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(31, 113, 119, 0.15);
+  box-shadow: 0 0 0 3px rgba(43, 98, 196, 0.15);
 }
 
 /* Saved-credential autofill: browsers (Chrome/Safari/Edge incl. iOS) force their
@@ -409,7 +409,7 @@ pre {
 }
 
 .btn-outline:hover {
-  background: rgba(31, 113, 119, 0.08);
+  background: rgba(43, 98, 196, 0.08);
 }
 
 /* Utilities */
@@ -527,7 +527,7 @@ pre {
 }
 
 ::selection {
-  background-color: rgba(31, 113, 119, 0.2);
+  background-color: rgba(43, 98, 196, 0.2);
   color: var(--text-color);
 }
 

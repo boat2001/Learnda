@@ -162,7 +162,7 @@ export default function Partnerships() {
             <div className="stat-grid">
               <div className="stat-card">
                 <span className="stat-value">Institutions</span>
-                <span className="stat-label">Work with colleges to connect Sharether to real student contexts.</span>
+                <span className="stat-label">Work with colleges to connect Learnda to real student contexts.</span>
               </div>
               <div className="stat-card">
                 <span className="stat-value">Communities</span>

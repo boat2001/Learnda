@@ -10,7 +10,7 @@ import { loadRegistrationDraft } from '../../utils/registrationDraft';
 import { playUiSound } from '../../utils/uiSounds';
 import './Auth.css';
 
-const LOGO_SRC = `${import.meta.env.BASE_URL}sharether-logo.webp`;
+const LOGO_SRC = `${import.meta.env.BASE_URL}learnda-logo.webp`;
 const AUTH_BROWSER_THEME_COLOR = '#f6b450';
 
 export default function AuthModal({
@@ -86,7 +86,7 @@ export default function AuthModal({
   const handleAuthSuccess = useCallback((nextStep) => {
     if (authMode === 'register') {
       try {
-        localStorage.setItem('sharether_device_registered_v1', '1');
+        localStorage.setItem('learnda_device_registered_v1', '1');
       } catch {
         // Local storage can be blocked without blocking auth completion.
       }
@@ -187,7 +187,7 @@ export default function AuthModal({
         <header className="auth-shell-header">
           <span className="auth-brand">
             <img src={LOGO_SRC} alt="" className="auth-brand-mark" />
-            <span className="auth-brand-text">Sharether</span>
+            <span className="auth-brand-text">Learnda</span>
           </span>
           {!isLockEnforced ? (
             <button

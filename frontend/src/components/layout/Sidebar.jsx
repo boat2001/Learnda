@@ -91,7 +91,7 @@ export default function Sidebar({
           {user ? (
             <div className="footer-actions">
               <div className="app-version">
-                <span>Sharether v3.0</span>
+                <span>Learnda v3.0</span>
               </div>
             </div>
           ) : (
@@ -100,13 +100,13 @@ export default function Sidebar({
                 className="auth-prompt-button"
                 onClick={handleAuthPrompt}
                 type="button"
-                title="Sign in to Sharether"
+                title="Sign in to Learnda"
               >
                 <MdPerson />
-                <span>Sign in to Sharether</span>
+                <span>Sign in to Learnda</span>
               </button>
               <div className="app-version">
-                <span>Sharether v3.0</span>
+                <span>Learnda v3.0</span>
               </div>
             </div>
           )}

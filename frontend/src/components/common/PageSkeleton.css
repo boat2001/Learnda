@@ -156,7 +156,7 @@
 
 [data-theme='dark'] .page-skeleton {
   background:
-    radial-gradient(circle at top left, rgba(31, 113, 119, 0.12), transparent 34%),
+    radial-gradient(circle at top left, rgba(43, 98, 196, 0.12), transparent 34%),
     linear-gradient(180deg, #0d1117 0%, #0f1923 100%);
 }
 

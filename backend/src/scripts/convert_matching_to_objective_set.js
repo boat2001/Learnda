@@ -4,7 +4,7 @@
  * (a two-column term/definition matching UI) into 'objective_set' — a series
  * of standalone multiple-choice questions answered one at a time. Matching
  * required scanning two separately-scrolling lists to find a pair, which
- * doesn't work well on the small screens most of Sharether's users are on;
+ * doesn't work well on the small screens most of Learnda's users are on;
  * objective_set reuses the same battle-tested single-question MC UI already
  * used everywhere else in the lesson flow.
  *

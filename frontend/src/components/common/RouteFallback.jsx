@@ -18,7 +18,7 @@ export default function RouteFallback({ compact = false }) {
 
   return (
     <PageSkeleton
-      title="Loading Sharether"
+      title="Loading Learnda"
       subtitle="Preparing the next experience."
       cardCount={8}
       compact={compact}

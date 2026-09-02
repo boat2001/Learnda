@@ -126,7 +126,7 @@ export default function OnboardingContent({
 
         <div className="auth-actions">
           <button className="auth-btn primary" type="button" onClick={handleGoToHome}>
-            Enjoy Sharether
+            Enjoy Learnda
           </button>
         </div>
       </div>

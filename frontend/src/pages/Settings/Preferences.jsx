@@ -220,7 +220,7 @@ export default function Preferences() {
               <div className="sounds-details">
                 <div className="preference-label">Auto update level and semester</div>
                 <div className="preference-toggle-hint">
-                  Let Sharether move your courses when your college switches semester or level
+                  Let Learnda move your courses when your college switches semester or level
                 </div>
               </div>
             </div>

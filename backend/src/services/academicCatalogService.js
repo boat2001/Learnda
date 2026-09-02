@@ -102,7 +102,7 @@ const buildInstitutionMetadata = (existingMetadata, college) => {
     ),
     college_code: college.college_code || existingMetadata.college_code || null,
     academic_catalog_version: ACADEMIC_CATALOG_VERSION,
-    academic_catalog_source: 'sharether_manual_catalog'
+    academic_catalog_source: 'learnda_manual_catalog'
   };
 };
 

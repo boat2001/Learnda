@@ -5,8 +5,8 @@ let googleScriptPromise = null;
 export const GOOGLE_OAUTH_CALLBACK_PATH = "/auth/google/callback";
 
 export const GOOGLE_OAUTH_SESSION_KEYS = {
-  RETURN: "sharether_google_oauth_return",
-  STATE: "sharether_google_oauth_state",
+  RETURN: "learnda_google_oauth_return",
+  STATE: "learnda_google_oauth_state",
 };
 
 export const getGoogleOAuthRedirectUri = () => {

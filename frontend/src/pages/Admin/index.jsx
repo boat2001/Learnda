@@ -253,11 +253,11 @@ export default function AdminDashboard() {
       <aside className={`adm-sidebar${sidebarOpen ? ' is-open' : ''}`}>
         <div className="adm-sidebar-logo">
           <img
-            src="https://pub-1dec8067cfda47ef9b8088c56989e07e.r2.dev/brand/sharether-logo.png"
-            alt="Sharether"
+            src={`${import.meta.env.BASE_URL}learnda-logo.webp`}
+            alt="Learnda"
           />
           <div>
-            <span>Sharether</span>
+            <span>Learnda</span>
             <small>Admin Console</small>
           </div>
         </div>

@@ -18,7 +18,7 @@ const APP_LINKS = {
 
 const PWA_BENEFITS = [
   'Install in seconds—no app store account required on most devices.',
-  'Home screen or taskbar shortcut: open Sharether in one tap.',
+  'Home screen or taskbar shortcut: open Learnda in one tap.',
   'Same account and contribution plan as the website—nothing to re-buy.',
   'Smaller footprint than a typical native app; updates roll out automatically.',
   'Repeat visits feel snappier thanks to smart caching of core assets.',
@@ -93,9 +93,9 @@ export default function Download() {
       <section className="page-hero page-hero-compact page-hero-lean">
         <div className="download-page__intro">
           <span className="hero-tag">Download app</span>
-          <h1 className="hero-title">Take Sharether with you.</h1>
+          <h1 className="hero-title">Take Learnda with you.</h1>
           <p className="hero-subtitle">
-            Pick how you want Sharether on your device. The web app is ready today; Play Store and App Store builds
+            Pick how you want Learnda on your device. The web app is ready today; Play Store and App Store builds
             will land here when they are ready.
           </p>
         </div>
@@ -204,7 +204,7 @@ export default function Download() {
           ))}
         </ol>
         <p className="pwa-manual-install__footer">
-          You can keep using Sharether in the browser—installing is optional and only adds a shortcut.
+          You can keep using Learnda in the browser—installing is optional and only adds a shortcut.
         </p>
       </FormModal>
     </div>

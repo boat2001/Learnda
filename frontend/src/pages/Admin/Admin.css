@@ -8,14 +8,14 @@
   --adm-sidebar-text: rgba(255,255,255,0.65);
   --adm-sidebar-text-active: #ffffff;
   --adm-sidebar-item-hover: rgba(255,255,255,0.07);
-  --adm-sidebar-item-active: rgba(31,113,119,0.25);
+  --adm-sidebar-item-active: rgba(43, 98, 196,0.25);
   --adm-sidebar-section: rgba(255,255,255,0.28);
   --adm-sidebar-logo-sub: rgba(255,255,255,0.4);
-  --adm-sidebar-avatar-bg: #1f7177;
+  --adm-sidebar-avatar-bg: #2b62c4;
   --adm-sidebar-user-border: rgba(255,255,255,0.08);
 
-  --adm-primary: #1f7177;
-  --adm-primary-light: rgba(31,113,119,0.15);
+  --adm-primary: #2b62c4;
+  --adm-primary-light: rgba(43, 98, 196,0.15);
   --adm-accent: #4fb3ad;
   --adm-bg: #f0f4f8;
   --adm-surface: #ffffff;
@@ -61,7 +61,7 @@ body.admin-shell-active {
 [data-theme="dark"] .adm {
   --adm-sidebar-bg: #0c1520;
   --adm-sidebar-border: rgba(255,255,255,0.06);
-  --adm-sidebar-item-active: rgba(31,113,119,0.3);
+  --adm-sidebar-item-active: rgba(43, 98, 196,0.3);
 
   --adm-bg: #0b1118;
   --adm-surface: #131e2b;
@@ -656,7 +656,7 @@ body.admin-shell-active {
   padding: 12px;
   border: 1px solid var(--adm-border);
   border-radius: 12px;
-  background: rgba(31, 113, 119, 0.07);
+  background: rgba(43, 98, 196, 0.07);
   color: var(--adm-text);
   text-align: left;
   cursor: pointer;
@@ -719,7 +719,7 @@ body.admin-shell-active {
   padding: 13px 14px;
   border: 1px solid var(--adm-border);
   border-radius: 12px;
-  background: rgba(31, 113, 119, 0.06);
+  background: rgba(43, 98, 196, 0.06);
 }
 
 .adm-permission-groups {
@@ -843,7 +843,7 @@ body.admin-shell-active {
 .adm-stat.accent-red { --adm-stat-accent: var(--adm-red); }
 .adm-stat.accent-red .adm-stat-icon { background: rgba(220,38,38,0.12); color: var(--adm-red); }
 .adm-stat.accent-teal { --adm-stat-accent: var(--adm-primary); }
-.adm-stat.accent-teal .adm-stat-icon { background: rgba(31,113,119,0.12); color: var(--adm-primary); }
+.adm-stat.accent-teal .adm-stat-icon { background: rgba(43, 98, 196,0.12); color: var(--adm-primary); }
 
 /* ─── Grid layouts ────────────────────────────────────────────────────────── */
 .adm-grid-2 { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; }
@@ -912,7 +912,7 @@ body.admin-shell-active {
 
 .adm-table tr:last-child td { border-bottom: none; }
 
-.adm-table tr:hover td { background: rgba(31,113,119,0.03); }
+.adm-table tr:hover td { background: rgba(43, 98, 196,0.03); }
 
 /* ─── Badges / pills ──────────────────────────────────────────────────────── */
 .adm-badge {
@@ -928,7 +928,7 @@ body.admin-shell-active {
 .adm-badge-red   { background: rgba(220,38,38,0.12); color: var(--adm-red); }
 .adm-badge-amber { background: rgba(217,119,6,0.12); color: var(--adm-amber); }
 .adm-badge-blue  { background: rgba(37,99,235,0.12); color: var(--adm-blue); }
-.adm-badge-teal  { background: rgba(31,113,119,0.12); color: var(--adm-primary); }
+.adm-badge-teal  { background: rgba(43, 98, 196,0.12); color: var(--adm-primary); }
 .adm-badge-gray  { background: rgba(100,116,139,0.12); color: var(--adm-text-muted); }
 
 /* ─── Section header ──────────────────────────────────────────────────────── */
@@ -1502,8 +1502,8 @@ body.admin-shell-active {
 
 /* Standalone content review route */
 .content-review {
-  --adm-primary: #1f7177;
-  --adm-primary-light: rgba(31,113,119,0.15);
+  --adm-primary: #2b62c4;
+  --adm-primary-light: rgba(43, 98, 196,0.15);
   --adm-bg: #f0f4f8;
   --adm-surface: #ffffff;
   --adm-border: rgba(15,23,42,0.08);

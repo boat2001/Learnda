@@ -13,7 +13,7 @@ const ScoreRing = memo(function ScoreRing({ percent, passed }) {
   }, [percent]);
 
   const offset = CIRCUMFERENCE - (animPercent / 100) * CIRCUMFERENCE;
-  const color = passed ? '#10b981' : percent >= 40 ? '#f59e0b' : '#ef4444';
+  const color = passed ? '#10b981' : percent >= 40 ? '#fab82c' : '#fb6334';
 
   return (
     <div className="ps-score-ring" aria-label={`Score: ${percent}%`}>

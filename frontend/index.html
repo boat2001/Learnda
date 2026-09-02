@@ -4,26 +4,26 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light dark" />
-    <meta name="description" content="Sharether — free course notes, past questions &amp; learning tools for every college of education student in Ghana. Learn Like Never Before." />
-    <meta name="keywords" content="Sharether, Ghana college of education, UCC affiliated colleges, course notes, past questions, student learning platform, Ghana education, free study materials" />
+    <meta name="description" content="Learnda is Ghana's K-12 learning platform, following the NaCCA curriculum from KG to SHS. Lessons, practice and revision scoped to your exact class level." />
+    <meta name="keywords" content="Learnda, Ghana K-12, NaCCA curriculum, kindergarten, basic school, JHS, SHS, BECE, WASSCE, Ghana education, class-scoped lessons" />
     <meta name="robots" content="index,follow" />
-    <meta property="og:site_name" content="Sharether" />
+    <meta property="og:site_name" content="Learnda" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Sharether | Learn Like Never Before" />
-    <meta property="og:description" content="Sharether — free course notes, past questions &amp; learning tools for every college of education student in Ghana. Learn Like Never Before." />
-    <meta property="og:url" content="https://sharether.com/" />
-    <meta property="og:image" content="https://sharether.com/sharether-logo.webp" />
+    <meta property="og:title" content="Learnda | Learn one class at a time" />
+    <meta property="og:description" content="Learnda is Ghana's K-12 learning platform, following the NaCCA curriculum from KG to SHS. Lessons, practice and revision scoped to your exact class level." />
+    <meta property="og:url" content="https://learnda.app/" />
+    <meta property="og:image" content="https://learnda.app/learnda-logo.webp" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Sharether | Learn Like Never Before" />
-    <meta name="twitter:description" content="Sharether — free course notes, past questions &amp; learning tools for every college of education student in Ghana. Learn Like Never Before." />
-    <meta name="twitter:image" content="https://sharether.com/sharether-logo.webp" />
-    <link rel="canonical" href="https://sharether.com/" />
+    <meta name="twitter:title" content="Learnda | Learn one class at a time" />
+    <meta name="twitter:description" content="Learnda is Ghana's K-12 learning platform, following the NaCCA curriculum from KG to SHS. Lessons, practice and revision scoped to your exact class level." />
+    <meta name="twitter:image" content="https://learnda.app/learnda-logo.webp" />
+    <link rel="canonical" href="https://learnda.app/" />
     <link rel="manifest" href="/manifest.webmanifest" />
-    <meta name="theme-color" id="theme-color-meta" content="#1f7177" />
+    <meta name="theme-color" id="theme-color-meta" content="#2b62c4" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-title" content="Sharether" />
+    <meta name="apple-mobile-web-app-title" content="Learnda" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
@@ -36,32 +36,26 @@
       "@graph": [
         {
           "@type": "Organization",
-          "@id": "https://sharether.com/#organization",
-          "name": "Sharether",
-          "url": "https://sharether.com",
-          "logo": "https://sharether.com/sharether-logo.webp",
-          "foundingDate": "2023-02-07",
-          "description": "Sharether is a student-built learning platform serving Ghana's colleges of education with free course notes, past questions, teaching resources, and interactive learning tools.",
-          "founder": {
-            "@type": "Person",
-            "name": "Kwabena Boateng Adjei",
-            "jobTitle": "Founder & CEO"
-          },
+          "@id": "https://learnda.app/#organization",
+          "name": "Learnda",
+          "url": "https://learnda.app",
+          "logo": "https://learnda.app/learnda-logo.webp",
+          "description": "Learnda is a Ghanaian K-12 digital learning platform aligned to the NaCCA curriculum, serving learners from Kindergarten through Senior High School.",
           "areaServed": "Ghana",
           "audience": {
             "@type": "Audience",
-            "audienceType": "College of Education students in Ghana"
+            "audienceType": "K-12 learners in Ghana (Kindergarten to Senior High School)"
           }
         },
         {
           "@type": "WebSite",
-          "@id": "https://sharether.com/#website",
-          "url": "https://sharether.com",
-          "name": "Sharether",
-          "publisher": { "@id": "https://sharether.com/#organization" },
+          "@id": "https://learnda.app/#website",
+          "url": "https://learnda.app",
+          "name": "Learnda",
+          "publisher": { "@id": "https://learnda.app/#organization" },
           "potentialAction": {
             "@type": "SearchAction",
-            "target": "https://sharether.com/resources?q={search_term_string}",
+            "target": "https://learnda.app/learn?q={search_term_string}",
             "query-input": "required name=search_term_string"
           }
         }
@@ -73,14 +67,22 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <title>Sharether | Learn Like Never Before</title>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9MBDQZ48EH"></script>
+    <title>Learnda | Learn one class at a time</title>
+    <!-- Analytics: set VITE_GA_MEASUREMENT_ID to enable. Inert when unset. -->
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-9MBDQZ48EH');
+      (function () {
+        var id = "%VITE_GA_MEASUREMENT_ID%";
+        if (!id || id.charAt(0) === "%") return;
+        var s = document.createElement("script");
+        s.async = true;
+        s.src = "https://www.googletagmanager.com/gtag/js?id=" + id;
+        document.head.appendChild(s);
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        window.gtag = gtag;
+        gtag('js', new Date());
+        gtag('config', id);
+      })();
     </script>
     <script>
       (function () {
@@ -91,10 +93,10 @@
           var root = document.documentElement;
           root.setAttribute("data-theme", pref);
           root.style.colorScheme = pref;
-          root.style.backgroundColor = pref === "dark" ? "#131b24" : "#f7f5f0";
+          root.style.backgroundColor = pref === "dark" ? "#131b24" : "#f7f8fb";
           var themeColorMeta = document.getElementById("theme-color-meta");
           if (themeColorMeta) {
-            themeColorMeta.setAttribute("content", pref === "dark" ? "#0f141c" : "#1f7177");
+            themeColorMeta.setAttribute("content", pref === "dark" ? "#0f141c" : "#2b62c4");
           }
         } catch (e) {
           // no-op
@@ -108,7 +110,7 @@
         try {
           var t = document.documentElement.getAttribute('data-theme');
           var dark = t === 'dark';
-          document.body.style.backgroundColor = dark ? '#131b24' : '#f7f5f0';
+          document.body.style.backgroundColor = dark ? '#131b24' : '#f7f8fb';
           document.body.style.backgroundImage = 'none';
           document.body.style.transition = 'none';
           requestAnimationFrame(function () {

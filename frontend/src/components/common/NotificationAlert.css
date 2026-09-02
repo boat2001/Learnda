@@ -90,7 +90,7 @@
   left: 0;
   height: 3px;
   width: 100%;
-  background: var(--primary-color, #1f7177);
+  background: var(--primary-color, #2b62c4);
   transform-origin: left;
   animation: notifProgress linear forwards;
 }
@@ -153,7 +153,7 @@
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--primary-color, #1f7177);
+  color: var(--primary-color, #2b62c4);
 }
 
 .notif-welcome__title {
@@ -178,7 +178,7 @@
   min-height: 2.9rem;
   border: none;
   border-radius: 999px;
-  background: var(--primary-color, #1f7177);
+  background: var(--primary-color, #2b62c4);
   color: #ffffff;
   font-size: 0.98rem;
   font-weight: 800;
@@ -188,7 +188,7 @@
 
 .notif-welcome__cta:hover {
   background: var(--primary-color-dark, #185b61);
-  box-shadow: 0 10px 24px rgba(31, 113, 119, 0.24);
+  box-shadow: 0 10px 24px rgba(43, 98, 196, 0.24);
   transform: translateY(-1px);
 }
 

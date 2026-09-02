@@ -6,7 +6,7 @@
 // it reflects this device's activity and never blocks anything if storage is
 // unavailable.
 
-const STORAGE_KEY = 'sharether_last_activity';
+const STORAGE_KEY = 'learnda_last_activity';
 
 export const ACTIVITY_TYPES = {
   LEARNING: 'learning',

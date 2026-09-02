@@ -1,10 +1,10 @@
-const CACHE_NAME = 'sharether-pwa-v7';
+const CACHE_NAME = 'learnda-pwa-v7';
 const APP_SHELL = [
   '/',
   '/manifest.webmanifest',
   '/pwa-192.png',
   '/pwa-512.png',
-  '/sharether-logo.webp',
+  '/learnda-logo.webp',
 ];
 
 const HASHED_ASSET = /\/assets\/[^/]+\.[a-f0-9]{8,}\.(js|css|woff2?)$/i;

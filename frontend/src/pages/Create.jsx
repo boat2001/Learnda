@@ -172,7 +172,7 @@ export default function Create() {
           </h1>
           <p className="contribute-hero__sub">
             Your files, insights, and ideas could be exactly what another student needs right now.
-            Every piece of content you add makes Sharether stronger for everyone.
+            Every piece of content you add makes Learnda stronger for everyone.
           </p>
           <div className="contribute-hero__actions">
             <a className="btn btn-primary" href="#creator-studio">Go to Creator Studio</a>

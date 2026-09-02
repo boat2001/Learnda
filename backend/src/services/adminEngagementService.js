@@ -15,8 +15,8 @@ const USER_ATTRS = ['id', 'full_name', 'email', 'phone_number', 'last_active_at'
 
 const isDeliverableEmail = (email) => {
   const value = String(email || '').trim().toLowerCase();
-  const placeholder = /^phone\.\d+@auth\.sharether\.(app|local)$/i;
-  return Boolean(value && value.includes('@') && !placeholder.test(value) && !value.endsWith('@guest.sharether.local'));
+  const placeholder = /^phone\.\d+@auth\.learnda\.(app|local)$/i;
+  return Boolean(value && value.includes('@') && !placeholder.test(value) && !value.endsWith('@guest.learnda.local'));
 };
 
 const buildLogEntry = (user, message, channelsUsed, prefix, extra = {}) => ({
@@ -46,8 +46,8 @@ const deliverEngagementToUser = async (user, {
   const name = (user.full_name || '').split(' ')[0] || 'there';
   const body = personalizeMessage(messageTemplate, name);
   const ctaUrl = getEngagementCta(ctaPath);
-  const label = ctaLabel || 'Open Sharether';
-  const title = notificationTitle || 'Sharether';
+  const label = ctaLabel || 'Open Learnda';
+  const title = notificationTitle || 'Learnda';
   const channelsUsed = [];
 
   if (channels?.push !== false) {

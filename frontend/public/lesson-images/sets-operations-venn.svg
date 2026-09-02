@@ -40,17 +40,17 @@
 
   <!-- highlight layers (toggled) -->
   <g id="hl-union" class="hl">
-    <circle cx="180" cy="232" r="92" fill="#16a34a" fill-opacity="0.42"/>
-    <circle cx="300" cy="232" r="92" fill="#16a34a" fill-opacity="0.42"/>
+    <circle cx="180" cy="232" r="92" fill="#5b8439" fill-opacity="0.42"/>
+    <circle cx="300" cy="232" r="92" fill="#5b8439" fill-opacity="0.42"/>
   </g>
   <g id="hl-inter" class="hl">
-    <circle cx="300" cy="232" r="92" fill="#16a34a" fill-opacity="0.55" clip-path="url(#clipS)"/>
+    <circle cx="300" cy="232" r="92" fill="#5b8439" fill-opacity="0.55" clip-path="url(#clipS)"/>
   </g>
   <g id="hl-diff" class="hl">
-    <circle cx="180" cy="232" r="92" fill="#16a34a" fill-opacity="0.5" mask="url(#maskNotD)"/>
+    <circle cx="180" cy="232" r="92" fill="#5b8439" fill-opacity="0.5" mask="url(#maskNotD)"/>
   </g>
   <g id="hl-comp" class="hl">
-    <rect x="40" y="92" width="400" height="292" rx="14" fill="#16a34a" fill-opacity="0.4" mask="url(#maskNotS)"/>
+    <rect x="40" y="92" width="400" height="292" rx="14" fill="#5b8439" fill-opacity="0.4" mask="url(#maskNotS)"/>
   </g>
 
   <!-- circle outlines -->
@@ -93,7 +93,7 @@
   <text id="res-set" class="vn-body" x="56" y="540" fill="#1e293b" font-size="13">{Ama, Kofi, Yaa, Mensah, Adjoa, Kweku}</text>
 
   <!-- footer -->
-  <text class="vn-body" x="240" y="582" text-anchor="middle" fill="#94a3b8" font-size="11">Sharether Learning Platform &#8226; EBS 210 &#8226; Lesson 4: The Algebra of Sets</text>
+  <text class="vn-body" x="240" y="582" text-anchor="middle" fill="#94a3b8" font-size="11">Learnda Learning Platform &#8226; EBS 210 &#8226; Lesson 4: The Algebra of Sets</text>
 
   <script><![CDATA[
     (function () {

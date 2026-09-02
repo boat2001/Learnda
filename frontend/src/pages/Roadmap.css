@@ -4,7 +4,7 @@
   width: 100%;
   aspect-ratio: 12 / 5;
   background:
-    radial-gradient(circle, rgba(31, 113, 119, 0.045) 1px, transparent 1px),
+    radial-gradient(circle, rgba(43, 98, 196, 0.045) 1px, transparent 1px),
     linear-gradient(150deg, #f8fafc 0%, #f0f7ff 52%, #f8fafc 100%);
   background-size: 28px 28px, 100% 100%;
   border: 1px solid var(--border-color, rgba(15, 23, 42, 0.08));
@@ -31,7 +31,7 @@
 
 /* CSS overrides SVG presentation attributes for theme-aware glow */
 .rm-glow-path {
-  stroke: color-mix(in srgb, #1f7177 7%, transparent);
+  stroke: color-mix(in srgb, #2b62c4 7%, transparent);
 }
 [data-theme='dark'] .rm-glow-path {
   stroke: rgba(255, 255, 255, 0.04);

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { FaFacebookF, FaInstagram, FaTelegram, FaTiktok, FaWhatsapp, FaXTwitter, FaYoutube } from "react-icons/fa6";
+import { FaFacebookF, FaInstagram, FaTelegram, FaTiktok, FaXTwitter, FaYoutube } from "react-icons/fa6";
 import {
   FiActivity,
   FiAlertCircle,
@@ -76,8 +76,8 @@ function ComingSoonPopup({ feature, onClose }) {
   );
 }
 
-const LOGO_SRC = `${import.meta.env.BASE_URL}sharether-logo.webp`;
-const LOGO_DARK_SRC = `${import.meta.env.BASE_URL}sharether-logo.webp`;
+const LOGO_SRC = `${import.meta.env.BASE_URL}learnda-logo.webp`;
+const LOGO_DARK_SRC = `${import.meta.env.BASE_URL}learnda-logo.webp`;
 const MAX_FEEDBACK_RATING = 5;
 const FEEDBACK_PLACEHOLDERS = {
   1: "What went wrong?",
@@ -152,7 +152,7 @@ export default function Footer() {
   const audioContextRef = useRef(null);
 
   const feedbackName =
-    user?.full_name || user?.name || [user?.first_name, user?.last_name].filter(Boolean).join(" ") || "Sharether User";
+    user?.full_name || user?.name || [user?.first_name, user?.last_name].filter(Boolean).join(" ") || "Learnda User";
   const feedbackEmail = user?.email || "";
   const reporterName = isAuthenticated ? feedbackName : "Anonymous Guest";
 
@@ -238,7 +238,7 @@ export default function Footer() {
     event.preventDefault();
     if (!feedbackRating || !feedbackMessage.trim()) return;
 
-    const reporterEmail = isAuthenticated ? feedbackEmail : `anonymous-guest-${Date.now()}@sharether.local`;
+    const reporterEmail = isAuthenticated ? feedbackEmail : `anonymous-guest-${Date.now()}@learnda.local`;
 
     setFeedbackLoading(true);
     setFeedbackStatus("");
@@ -272,11 +272,11 @@ export default function Footer() {
           <div className="footer-section">
             <Link to="/" className="footer-logo">
               <div className="logo-icon">
-                <img src={LOGO_SRC} alt="Sharether logo" className="logo-light" />
-                <img src={LOGO_DARK_SRC} alt="Sharether logo" className="logo-dark" />
+                <img src={LOGO_SRC} alt="Learnda logo" className="logo-light" />
+                <img src={LOGO_DARK_SRC} alt="Learnda logo" className="logo-dark" />
               </div>
               <div className="footer-brand">
-                <h4>Sharether</h4>
+                <h4>Learnda</h4>
                 <span className="footer-tagline">Learn Like Never Before</span>
               </div>
             </Link>
@@ -288,7 +288,7 @@ export default function Footer() {
               </div>
               <form onSubmit={handleFeedbackSubmit} className="newsletter-form feedback-form">
                   <div className="feedback-rating-shell">
-                    <div className="feedback-stars" role="radiogroup" aria-label="Rate Sharether">
+                    <div className="feedback-stars" role="radiogroup" aria-label="Rate Learnda">
                       {Array.from({ length: MAX_FEEDBACK_RATING }, (_, index) => {
                         const ratingValue = index + 1;
                         const isActive = ratingValue <= (feedbackHover || feedbackRating);
@@ -367,7 +367,7 @@ export default function Footer() {
             <div className="link-group">
               <h5>Platform</h5>
               <ul>
-                <li><Link to="/about"><FiInfo aria-hidden /> About Sharether</Link></li>
+                <li><Link to="/about"><FiInfo aria-hidden /> About Learnda</Link></li>
                 <li><Link to="/team"><FiUsers aria-hidden /> Meet the Team</Link></li>
                 <li><Link to="/features"><FiGrid aria-hidden /> Contribution Plans</Link></li>
                 <li><Link to="/blog"><FiActivity aria-hidden /> Updates Blog</Link></li>
@@ -421,7 +421,7 @@ export default function Footer() {
         <div className="footer-bottom">
           <div className="copyright">
             <p>
-              &copy; {new Date().getFullYear()}, Sharether Learning Platform. &nbsp; All rights reserved.
+              &copy; {new Date().getFullYear()}, Learnda Learning Platform. &nbsp; All rights reserved.
             </p>
           </div>
 
@@ -429,7 +429,7 @@ export default function Footer() {
             <span className="social-label">Follow us:</span>
             <div className="social-icons">
               <a
-                href="https://www.facebook.com/people/Sharether/61573786536620/"
+                href="https://www.facebook.com/learnda"
                 className="social-icon"
                 aria-label="Facebook"
                 target="_blank"
@@ -438,16 +438,7 @@ export default function Footer() {
                 <FaFacebookF />
               </a>
               <a
-                href="https://whatsapp.com/channel/0029Vaf7UpGBKfhrqDPK6B1M"
-                className="social-icon"
-                aria-label="WhatsApp"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FaWhatsapp />
-              </a>
-              <a
-                href="https://t.me/sharether"
+                href="https://t.me/learnda"
                 className="social-icon"
                 aria-label="Telegram"
                 target="_blank"
@@ -456,7 +447,7 @@ export default function Footer() {
                 <FaTelegram />
               </a>
               <a
-                href="https://www.youtube.com/@sharether"
+                href="https://www.youtube.com/@learnda"
                 className="social-icon"
                 aria-label="YouTube"
                 target="_blank"
@@ -465,7 +456,7 @@ export default function Footer() {
                 <FaYoutube />
               </a>
               <a
-                href="https://tiktok.com/@sharether"
+                href="https://tiktok.com/@learnda"
                 className="social-icon"
                 aria-label="TikTok"
                 target="_blank"
@@ -474,7 +465,7 @@ export default function Footer() {
                 <FaTiktok />
               </a>
               <a
-                href="https://x.com/sharether"
+                href="https://x.com/learnda"
                 className="social-icon"
                 aria-label="X"
                 target="_blank"
@@ -483,7 +474,7 @@ export default function Footer() {
                 <FaXTwitter />
               </a>
               <a
-                href="https://instagram.com/sharether"
+                href="https://instagram.com/learnda"
                 className="social-icon"
                 aria-label="Instagram"
                 target="_blank"

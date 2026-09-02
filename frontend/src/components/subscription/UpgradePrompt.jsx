@@ -11,7 +11,7 @@ export default function UpgradePrompt({
   trigger = 'feature',
   feature = null,
   plan = null,
-  title = 'Open up more of Sharether',
+  title = 'Open up more of Learnda',
   message = 'Chip in what fits and unlock this — plus everything that comes with it',
   showClose = true,
   onClose,
@@ -217,7 +217,7 @@ export default function UpgradePrompt({
         <ContributionAppeal />
         <div className="plans-header">
           <h3>Pick what fits your budget</h3>
-          <p>Any amount keeps Sharether running — and opens up more for you</p>
+          <p>Any amount keeps Learnda running — and opens up more for you</p>
           {showClose && (
             <button 
               className="close-plans"

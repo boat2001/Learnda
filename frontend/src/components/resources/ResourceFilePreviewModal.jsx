@@ -292,7 +292,7 @@ export default function ResourceFilePreviewModal({ open, file, onClose, fetchBlo
       if (navigator.share) {
         await navigator.share({
           title,
-          text: `Check out ${title} on Sharether.`,
+          text: `Check out ${title} on Learnda.`,
           url: shareUrl,
         });
         setActionStatus('Share sheet opened.');
@@ -347,8 +347,8 @@ export default function ResourceFilePreviewModal({ open, file, onClose, fetchBlo
           </h2>
           <div className="resource-file-preview-header-right">
             <img
-              src="/sharether-logo.webp"
-              alt="Sharether"
+              src="/learnda-logo.webp"
+              alt="Learnda"
               className="resource-file-preview-logo"
             />
             <button type="button" className="resource-file-preview-close" onClick={onClose} aria-label="Close preview">

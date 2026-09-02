@@ -1,4 +1,4 @@
-import { FaFacebookF, FaInstagram, FaTelegram, FaTiktok, FaWhatsapp, FaXTwitter, FaYoutube } from 'react-icons/fa6';
+import { FaFacebookF, FaInstagram, FaTelegram, FaTiktok, FaXTwitter, FaYoutube } from 'react-icons/fa6';
 import './OurSocials.css';
 import './SharedPages.css';
 
@@ -8,22 +8,11 @@ const SOCIAL_GROUPS = [
     desc: 'Stay in the loop with announcements, tips, and platform news.',
     channels: [
       {
-        name: 'WhatsApp Channel',
-        handle: '@sharether',
-        purpose: 'Community communication, announcements, and platform updates delivered directly to your phone.',
-        cta: 'Join Channel',
-        href: 'https://whatsapp.com/channel/0029Vaf7UpGBKfhrqDPK6B1M',
-        icon: FaWhatsapp,
-        color: '#25d366',
-        bg: 'rgba(37, 211, 102, 0.08)',
-        border: 'rgba(37, 211, 102, 0.22)',
-      },
-      {
         name: 'Telegram Channel',
-        handle: '@sharether',
+        handle: '@learnda',
         purpose: 'Quick updates, learning tips, and community news in a distraction-free channel.',
         cta: 'Join Channel',
-        href: 'https://t.me/sharether',
+        href: 'https://t.me/learnda',
         icon: FaTelegram,
         color: '#2aabee',
         bg: 'rgba(42, 171, 238, 0.08)',
@@ -31,10 +20,10 @@ const SOCIAL_GROUPS = [
       },
       {
         name: 'X (Twitter)',
-        handle: '@sharether',
-        purpose: 'Real-time communication, lighter updates, and the occasional cute moment from the Sharether team.',
+        handle: '@learnda',
+        purpose: 'Real-time communication, lighter updates, and the occasional cute moment from the Learnda team.',
         cta: 'Follow',
-        href: 'https://x.com/sharether',
+        href: 'https://x.com/learnda',
         icon: FaXTwitter,
         color: '#000000',
         bg: 'rgba(0, 0, 0, 0.06)',
@@ -48,10 +37,10 @@ const SOCIAL_GROUPS = [
     channels: [
       {
         name: 'YouTube Channel',
-        handle: '@sharether',
-        purpose: 'Full-length video tutorials, feature walkthroughs, and learning guides to help you get the most out of Sharether.',
+        handle: '@learnda',
+        purpose: 'Full-length video tutorials, feature walkthroughs, and learning guides to help you get the most out of Learnda.',
         cta: 'Subscribe',
-        href: 'https://www.youtube.com/@sharether',
+        href: 'https://www.youtube.com/@learnda',
         icon: FaYoutube,
         color: '#ff0000',
         bg: 'rgba(255, 0, 0, 0.07)',
@@ -59,10 +48,10 @@ const SOCIAL_GROUPS = [
       },
       {
         name: 'TikTok Account',
-        handle: '@sharether',
+        handle: '@learnda',
         purpose: 'Short promotional videos, quick study tips, and bite-sized updates about new features and events.',
         cta: 'Follow',
-        href: 'https://tiktok.com/@sharether',
+        href: 'https://tiktok.com/@learnda',
         icon: FaTiktok,
         color: '#010101',
         bg: 'rgba(1, 1, 1, 0.06)',
@@ -72,14 +61,14 @@ const SOCIAL_GROUPS = [
   },
   {
     group: 'Photos & Community',
-    desc: 'See the faces, stories, and moments behind the Sharether community.',
+    desc: 'See the faces, stories, and moments behind the Learnda community.',
     channels: [
       {
         name: 'Facebook Page',
-        handle: 'Sharether',
+        handle: 'Learnda',
         purpose: 'Platform updates, community highlights, and photo content — a great place to share and stay connected.',
         cta: 'Like Page',
-        href: 'https://www.facebook.com/people/Sharether/61573786536620/',
+        href: 'https://www.facebook.com/learnda',
         icon: FaFacebookF,
         color: '#1877f2',
         bg: 'rgba(24, 119, 242, 0.08)',
@@ -87,10 +76,10 @@ const SOCIAL_GROUPS = [
       },
       {
         name: 'Instagram',
-        handle: '@sharether',
-        purpose: 'Photos, reels, and visual stories from the Sharether team and the students who use the platform.',
+        handle: '@learnda',
+        purpose: 'Photos, reels, and visual stories from the Learnda team and the students who use the platform.',
         cta: 'Follow',
-        href: 'https://instagram.com/sharether',
+        href: 'https://instagram.com/learnda',
         icon: FaInstagram,
         color: '#e1306c',
         bg: 'rgba(225, 48, 108, 0.08)',
@@ -108,7 +97,7 @@ export default function OurSocials() {
         <div className="hero-grid">
           <div>
             <span className="hero-tag">Stay connected</span>
-            <h1 className="hero-title">Find Sharether where you already spend your time.</h1>
+            <h1 className="hero-title">Find Learnda where you already spend your time.</h1>
             <p className="hero-subtitle">
               We are active across multiple platforms — each one with a distinct purpose. Pick the channels that fit how you like to stay informed.
             </p>

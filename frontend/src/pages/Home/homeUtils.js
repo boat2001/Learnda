@@ -1,15 +1,15 @@
 import { getDisplayCourseCode } from "../../utils/courseCode";
 
-export const LOGO_SRC = `${import.meta.env.BASE_URL}sharether-logo.webp`;
-export const DAILY_TAKEN_STORAGE_PREFIX = "sharether-home-daily-taken:v2:";
-export const WEEKLY_TAKEN_STORAGE_PREFIX = "sharether-home-weekly-taken:v2:";
-export const STUDY_OPENED_STORAGE_PREFIX = "sharether-home-study-opened:v1:";
-export const SPOTLIGHT_OPENED_STORAGE_PREFIX = "sharether-home-spotlight-opened:v1:";
+export const LOGO_SRC = `${import.meta.env.BASE_URL}learnda-logo.webp`;
+export const DAILY_TAKEN_STORAGE_PREFIX = "learnda-home-daily-taken:v2:";
+export const WEEKLY_TAKEN_STORAGE_PREFIX = "learnda-home-weekly-taken:v2:";
+export const STUDY_OPENED_STORAGE_PREFIX = "learnda-home-study-opened:v1:";
+export const SPOTLIGHT_OPENED_STORAGE_PREFIX = "learnda-home-spotlight-opened:v1:";
 export const EDUTAINMENT_DAILY_TYPES = ['quote', 'fact', 'joke', 'article', 'story'];
 export const EDUTAINMENT_TYPE_META = {
   quote: { label: 'Quote', plural: 'Quotes', accent: '#1d7d9a', glyph: '“' },
   fact: { label: 'Did You Know', plural: 'Facts', accent: '#0ea5a5', glyph: '?' },
-  joke: { label: 'Jocular', plural: 'Joculars', accent: '#f59e0b', glyph: '☺' },
+  joke: { label: 'Jocular', plural: 'Joculars', accent: '#fab82c', glyph: '☺' },
   article: { label: 'Article', plural: 'Articles', accent: '#1f6feb', glyph: '✎' },
   story: { label: 'Story', plural: 'Stories', accent: '#a855f7', glyph: '▶' },
 };
@@ -811,7 +811,7 @@ export const getContentAuthor = (item, fallback = "Unknown author") =>
   item?.creator?.full_name ||
   fallback;
 
-export const getContentUploader = (item, fallback = "Sharether Daily") =>
+export const getContentUploader = (item, fallback = "Learnda Daily") =>
   item?.uploader_name ||
   item?.uploaded_by ||
   item?.creator_name ||
@@ -1068,7 +1068,7 @@ export const buildHomeTrendingFileCardModel = (file = {}, index = 0, courseMetaM
     questionType,
     questionTone,
     uploader: toTitleCase(
-      file?.uploader || file?.uploader_name || file?.uploaded_by || file?.creator_name || "Sharether Creator"
+      file?.uploader || file?.uploader_name || file?.uploaded_by || file?.creator_name || "Learnda Creator"
     ),
     year: getHomeTrendingFileYearLabel({
       year: file?.year,

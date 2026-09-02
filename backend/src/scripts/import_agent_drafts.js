@@ -1,6 +1,6 @@
 'use strict';
 /**
- * Import no-API agent-generated JSON drafts into Sharether.
+ * Import no-API agent-generated JSON drafts into Learnda.
  *
  * Put completed JSON files in:
  *   uploads/_generated-content/agent-drafts/lessons/*.json

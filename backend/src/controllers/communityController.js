@@ -3,7 +3,7 @@ const { CommunityPost, CommunityReply, User } = require('../models');
 const { getFileUrl } = require('../config/upload');
 
 /** Internal marker for the single site-wide student chat anchor post (replies = chat messages). */
-const STUDENT_CHAT_ANCHOR_CATEGORY = '__sharether_student_chat_anchor__';
+const STUDENT_CHAT_ANCHOR_CATEGORY = '__learnda_student_chat_anchor__';
 
 const { processMessage, MAX_LENGTH: MESSAGE_BODY_MAX } = require('../utils/chatFilter');
 const LINK_CAPTION_MAX = 50_000;
@@ -52,7 +52,7 @@ async function findOrCreateLoungePost() {
     user_id: firstUser.id,
     title: 'Student community',
     body:
-      'Welcome to the Sharether student community. Chat below — everyone sees the same room. For course-specific live chat, use study groups.',
+      'Welcome to the Learnda student community. Chat below — everyone sees the same room. For course-specific live chat, use study groups.',
     category: STUDENT_CHAT_ANCHOR_CATEGORY,
     last_activity_at: new Date()
   });

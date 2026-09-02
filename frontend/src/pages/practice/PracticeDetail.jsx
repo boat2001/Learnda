@@ -334,8 +334,8 @@ export default function PracticeDetail() {
       setPrelimProgressMap(loadPrelimProgress(prelimProgressStorageKey));
     };
 
-    window.addEventListener('sharether:prelim-progress-updated', handlePrelimProgressUpdated);
-    return () => window.removeEventListener('sharether:prelim-progress-updated', handlePrelimProgressUpdated);
+    window.addEventListener('learnda:prelim-progress-updated', handlePrelimProgressUpdated);
+    return () => window.removeEventListener('learnda:prelim-progress-updated', handlePrelimProgressUpdated);
   }, [course?.id, courseIdParam, prelimProgressStorageKey]);
 
   const loadPracticeCourseData = async () => {

@@ -64,7 +64,7 @@
 }
 
 .eb-btn--primary {
-  background: var(--primary-color, #1f7177);
+  background: var(--primary-color, #2b62c4);
   color: #fff;
   border: none;
 }
@@ -82,7 +82,7 @@
 }
 
 .eb-link {
-  color: var(--primary-color, #1f7177);
+  color: var(--primary-color, #2b62c4);
   text-decoration: underline;
 }
 

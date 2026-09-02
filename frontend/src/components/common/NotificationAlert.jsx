@@ -4,7 +4,7 @@ import api from '../../services/api';
 import './NotificationAlert.css';
 
 const POLL_MS = 30_000;
-const SEEN_KEY_PREFIX = 'sharether_last_notif_ts';
+const SEEN_KEY_PREFIX = 'learnda_last_notif_ts';
 const AUTO_DISMISS_MS = 7000;
 const WELCOME_NOTIFICATION_TYPE = 'welcome_signup';
 
@@ -121,9 +121,9 @@ export default function NotificationAlert() {
             >
               x
             </button>
-            <p className="notif-welcome__eyebrow">Sharether Learning Platform</p>
+            <p className="notif-welcome__eyebrow">Learnda Learning Platform</p>
             <h2 id="notif-welcome-title" className="notif-welcome__title">
-              {(welcomeNotification.title || 'Welcome to Sharether v3.0').replace(/,\s*.+$/, '')}
+              {(welcomeNotification.title || 'Welcome to Learnda v3.0').replace(/,\s*.+$/, '')}
             </h2>
             {welcomeNotification.body ? (
               <p id="notif-welcome-body" className="notif-welcome__body">
@@ -147,7 +147,7 @@ export default function NotificationAlert() {
             <div key={n.id} className="notif-alert">
               <div className="notif-alert__icon">!</div>
               <div className="notif-alert__body">
-                <p className="notif-alert__title">{n.title || 'Sharether'}</p>
+                <p className="notif-alert__title">{n.title || 'Learnda'}</p>
                 {n.body ? <p className="notif-alert__text">{n.body}</p> : null}
               </div>
               <button

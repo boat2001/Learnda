@@ -3,7 +3,7 @@ import { FiUserPlus, FiMail, FiPhone, FiTrash2, FiRefreshCw, FiCopy, FiCheck } f
 import api from '../../../services/api';
 import { displayContact } from '../adminUtils';
 
-const SITE_URL = import.meta.env.VITE_SITE_URL || 'https://beta.sharether.com';
+const SITE_URL = import.meta.env.VITE_SITE_URL || 'https://beta.learnda.app';
 
 const STATUS_LABEL = {
   pending:   'Invited',

@@ -8,7 +8,7 @@ import {
 } from '../../utils/pwaInstall';
 import './PwaInstallBanner.css';
 
-const DISMISS_KEY = 'sharether_pwa_install_banner_dismissed';
+const DISMISS_KEY = 'learnda_pwa_install_banner_dismissed';
 
 export default function PwaInstallBanner() {
   const [, setTick] = useState(0);
@@ -49,7 +49,7 @@ export default function PwaInstallBanner() {
           <FiDownload />
         </span>
         <div className="pwa-install-banner__text">
-          <strong>Install Sharether</strong>
+          <strong>Install Learnda</strong>
           <span>Add the web app to your home screen for quicker access.</span>
         </div>
         <button type="button" className="pwa-install-banner__install" onClick={handleInstall}>

@@ -58,7 +58,7 @@ const isPaymentSuccessStatus = (status) => {
 
 const normalizeString = (value) => String(value || '').trim();
 const normalizePhoneDigits = (value) => String(value || '').replace(/\D/g, '');
-const PLACEHOLDER_EMAIL_PATTERN = /^phone\.(\d+)@auth\.sharether\.(?:local|app)$/i;
+const PLACEHOLDER_EMAIL_PATTERN = /^phone\.(\d+)@auth\.learnda\.(?:local|app)$/i;
 const isValidCheckoutEmail = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizeString(value));
 
 const extractPlaceholderPhoneDigits = (email) => {
@@ -68,12 +68,12 @@ const extractPlaceholderPhoneDigits = (email) => {
 };
 
 const buildPhoneCheckoutEmail = (phoneDigits) => (
-  `phone.${normalizePhoneDigits(phoneDigits)}@auth.sharether.app`
+  `phone.${normalizePhoneDigits(phoneDigits)}@auth.learnda.app`
 );
 
 const resolveCheckoutEmail = (userLike = {}) => {
   const rawEmail = normalizeString(userLike?.email || userLike).toLowerCase();
-  if (isValidCheckoutEmail(rawEmail) && !rawEmail.endsWith('@auth.sharether.local')) {
+  if (isValidCheckoutEmail(rawEmail) && !rawEmail.endsWith('@auth.learnda.local')) {
     return rawEmail;
   }
 
@@ -144,8 +144,8 @@ const findUserByPaymentCustomerEmail = async (customerEmail) => {
   if (!placeholderPhoneDigits) return null;
 
   const [localVariant, appVariant] = [
-    `phone.${placeholderPhoneDigits}@auth.sharether.local`,
-    `phone.${placeholderPhoneDigits}@auth.sharether.app`
+    `phone.${placeholderPhoneDigits}@auth.learnda.local`,
+    `phone.${placeholderPhoneDigits}@auth.learnda.app`
   ];
 
   if (normalizedEmail !== localVariant) {
@@ -378,7 +378,7 @@ router.post('/donations/verify', optionalAuth, async (req, res) => {
     if (supportRecipients.length) {
       await emailService.sendSupportReport({
         to: supportRecipients,
-        subject: `Sharether contribution received (${paymentResult.currency || 'GHS'} ${paidAmount ?? expectedAmount ?? 0})`,
+        subject: `Learnda contribution received (${paymentResult.currency || 'GHS'} ${paidAmount ?? expectedAmount ?? 0})`,
         reporter: donorEmail ? `${donorName || 'Contributor'} (${donorEmail})` : (donorName || 'Contributor'),
         category: 'Contribution',
         message: [
@@ -395,7 +395,7 @@ router.post('/donations/verify', optionalAuth, async (req, res) => {
     if (isReceiptEmail(donorEmail)) {
       await emailService.sendEmail({
         to: donorEmail,
-        subject: 'Your Sharether contribution was received',
+        subject: 'Your Learnda contribution was received',
         text: [
           `Hi ${donorName || 'there'},`,
           '',
@@ -403,7 +403,7 @@ router.post('/donations/verify', optionalAuth, async (req, res) => {
           `Reference: ${paymentResult.reference || reference}`,
           supportType ? `Support type: ${supportType}` : null,
           '',
-          'Thank you for supporting Sharether.'
+          'Thank you for supporting Learnda.'
         ].filter(Boolean).join('\n')
       });
     }

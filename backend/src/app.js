@@ -108,7 +108,7 @@ if (r2PublicBase) {
 
 // Health
 app.get(['/health', '/api/health'], (req, res) => {
-  res.json({ ok: true, name: 'sharether-api', version: config.version });
+  res.json({ ok: true, name: 'learnda-api', version: config.version });
 });
 
 // Vercel runs Express as a function instead of executing server.js. Initialize

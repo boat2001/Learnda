@@ -115,14 +115,14 @@ export default function Events() {
     const ics = [
       'BEGIN:VCALENDAR',
       'VERSION:2.0',
-      'PRODID:-//Sharether//Campus Events//EN',
+      'PRODID:-//Learnda//Campus Events//EN',
       'BEGIN:VEVENT',
-      `UID:${event.id}@sharether.com`,
+      `UID:${event.id}@learnda.app`,
       `DTSTAMP:${toIcsDate(new Date())}`,
       `DTSTART:${toIcsDate(startDate)}`,
       `DTEND:${toIcsDate(endDate)}`,
       `SUMMARY:${event.title}`,
-      `DESCRIPTION:${event.type} hosted by Sharether`,
+      `DESCRIPTION:${event.type} hosted by Learnda`,
       `LOCATION:${event.location}`,
       'END:VEVENT',
       'END:VCALENDAR',
@@ -184,7 +184,7 @@ export default function Events() {
                 <span className="panel-dot"></span>
                 <div>
                   <strong>Local leadership</strong>
-                  <p>Campus organizers can turn Sharether into a real-world support system.</p>
+                  <p>Campus organizers can turn Learnda into a real-world support system.</p>
                 </div>
               </div>
               <div className="panel-list-item">

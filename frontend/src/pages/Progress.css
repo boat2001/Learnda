@@ -112,9 +112,9 @@
 }
 
 .pg-hero-pill--streak {
-  color: #f59e0b;
-  background: rgba(245, 158, 11, 0.08);
-  border-color: rgba(245, 158, 11, 0.22);
+  color: #fab82c;
+  background: rgba(250, 184, 44, 0.08);
+  border-color: rgba(250, 184, 44, 0.22);
 }
 
 [data-theme="dark"] .pg-hero-pill {
@@ -266,7 +266,7 @@
 
 .pg-streak-bar__icon {
   font-size: 1.4rem;
-  color: #f59e0b;
+  color: #fab82c;
   animation: pg-streak-pulse 1.8s ease-in-out infinite alternate;
 }
 
@@ -278,7 +278,7 @@
 .pg-streak-bar__count {
   font-size: 1.8rem;
   font-weight: 900;
-  color: #f59e0b;
+  color: #fab82c;
   line-height: 1;
 }
 
@@ -306,7 +306,7 @@
 .pg-streak-bar__fill {
   height: 100%;
   width: var(--spct, 0%);
-  background: linear-gradient(90deg, #f59e0b, #f97316);
+  background: linear-gradient(90deg, #fab82c, #f97316);
   border-radius: 99px;
   transition: width 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -489,7 +489,7 @@ button.pg-badge {
   border-radius: inherit;
   background: radial-gradient(
     circle at 50% 22%,
-    color-mix(in srgb, var(--badge-rarity, #f59e0b) 28%, transparent),
+    color-mix(in srgb, var(--badge-rarity, #fab82c) 28%, transparent),
     transparent 58%
   );
   pointer-events: none;
@@ -497,12 +497,12 @@ button.pg-badge {
 }
 
 .pg-badge--earned {
-  border-color: color-mix(in srgb, var(--badge-rarity, #f59e0b) 48%, transparent);
+  border-color: color-mix(in srgb, var(--badge-rarity, #fab82c) 48%, transparent);
   background: linear-gradient(
     165deg,
-    color-mix(in srgb, var(--badge-rarity, #f59e0b) 9%, var(--color-bg-light, #fff)) 0%,
+    color-mix(in srgb, var(--badge-rarity, #fab82c) 9%, var(--color-bg-light, #fff)) 0%,
     var(--color-bg-light, #fff) 55%,
-    color-mix(in srgb, var(--badge-rarity, #f59e0b) 5%, var(--color-bg-light, #fff)) 100%
+    color-mix(in srgb, var(--badge-rarity, #fab82c) 5%, var(--color-bg-light, #fff)) 100%
   );
 }
 
@@ -511,7 +511,7 @@ button.pg-badge {
     transform: translateY(-3px);
     box-shadow:
       0 14px 32px rgba(15, 23, 42, 0.12),
-      0 0 0 1px color-mix(in srgb, var(--badge-rarity, #f59e0b) 32%, transparent);
+      0 0 0 1px color-mix(in srgb, var(--badge-rarity, #fab82c) 32%, transparent);
   }
 
   .pg-badge--locked:hover {
@@ -560,7 +560,7 @@ button.pg-badge {
 }
 
 .pg-badge__earned-mark {
-  background: linear-gradient(145deg, #22c55e, #059669);
+  background: linear-gradient(145deg, #73a24b, #059669);
   color: #fff;
 }
 
@@ -748,8 +748,8 @@ button.pg-badge {
 }
 
 .pg-badge-modal__pill--earned {
-  background: rgba(22, 163, 74, 0.12);
-  border: 1px solid rgba(22, 163, 74, 0.28);
+  background: rgba(91, 132, 57, 0.12);
+  border: 1px solid rgba(91, 132, 57, 0.28);
   color: #15803d;
 }
 
@@ -805,7 +805,7 @@ button.pg-badge {
 .pg-badge-modal__xp svg {
   flex-shrink: 0;
   margin-top: 0.12rem;
-  color: #f59e0b;
+  color: #fab82c;
 }
 
 .pg-badge-modal__xp strong {
@@ -934,10 +934,10 @@ button.pg-badge {
 }
 
 [data-theme="dark"] .pg-badge--earned {
-  border-color: color-mix(in srgb, var(--badge-rarity, #f59e0b) 42%, transparent);
+  border-color: color-mix(in srgb, var(--badge-rarity, #fab82c) 42%, transparent);
   background: linear-gradient(
     165deg,
-    color-mix(in srgb, var(--badge-rarity, #f59e0b) 16%, rgba(30, 41, 59, 0.95)) 0%,
+    color-mix(in srgb, var(--badge-rarity, #fab82c) 16%, rgba(30, 41, 59, 0.95)) 0%,
     rgba(15, 23, 42, 0.58) 100%
   );
 }
@@ -978,7 +978,7 @@ button.pg-badge {
 }
 
 [data-theme="dark"] .pg-badge-modal__pill--earned {
-  background: rgba(22, 163, 74, 0.14);
+  background: rgba(91, 132, 57, 0.14);
   border-color: rgba(52, 211, 153, 0.28);
   color: #4ade80;
 }
@@ -1352,7 +1352,7 @@ button.pg-badge {
 
 @keyframes pg-lb-flash-up {
   0% {
-    background: rgba(34, 197, 94, 0.28);
+    background: rgba(115, 162, 75, 0.28);
     transform: translateX(-4px);
   }
   100% {
@@ -1382,7 +1382,7 @@ button.pg-badge {
 
 @keyframes pg-lb-flash-up-dark {
   0% {
-    background: rgba(34, 197, 94, 0.22);
+    background: rgba(115, 162, 75, 0.22);
     transform: translateX(-4px);
   }
   100% {

@@ -1,4 +1,4 @@
-const LOCK_STATE_KEY = '__sharetherBodyScrollLockState__';
+const LOCK_STATE_KEY = '__learndaBodyScrollLockState__';
 
 const getLockState = () => {
   if (typeof window === 'undefined') return null;

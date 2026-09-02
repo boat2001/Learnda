@@ -69,7 +69,7 @@ module.exports = {
   database: {
     username: process.env.DB_USERNAME || 'postgres',
     password: process.env.DB_PASSWORD || 'password',
-    database: process.env.DB_DATABASE || 'sharether',
+    database: process.env.DB_DATABASE || 'learnda',
     host: process.env.DB_HOST || 'localhost',
     port: process.env.DB_PORT || 5433,
     dialect: 'postgres',
@@ -97,7 +97,7 @@ module.exports = {
     accessKeyId: process.env.R2_ACCESS_KEY_ID,
     secretAccessKey: process.env.R2_SECRET_ACCESS_KEY,
     accountId: process.env.R2_ACCOUNT_ID,
-    bucket: process.env.R2_BUCKET || 'sharether-content',
+    bucket: process.env.R2_BUCKET || 'learnda-content',
     endpoint: process.env.R2_ENDPOINT,
     publicUrl: process.env.R2_PUBLIC_URL || '',
   },
@@ -113,7 +113,7 @@ module.exports = {
   // Email (Resend)
   resend: {
     apiKey: process.env.RESEND_API_KEY,
-    from: process.env.EMAIL_FROM || 'Sharether <noreply@sharether.com>',
+    from: process.env.EMAIL_FROM || 'Learnda <noreply@learnda.app>',
     supportRecipients: (process.env.SUPPORT_EMAIL_RECIPIENTS || process.env.REPORT_RECIPIENTS || '')
       .split(',')
       .map((e) => e.trim())
@@ -125,7 +125,7 @@ module.exports = {
     provider: process.env.SMS_PROVIDER || 'arkesel',
     arkesel: {
       apiKey: process.env.ARKESEL_API_KEY,
-      senderId: process.env.ARKESEL_SENDER_ID || 'Sharether',
+      senderId: process.env.ARKESEL_SENDER_ID || 'Learnda',
       baseUrl: process.env.ARKESEL_BASE_URL || 'https://sms.arkesel.com/api/v2',
     },
   },

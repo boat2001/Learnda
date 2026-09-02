@@ -22,7 +22,7 @@ const requestJson = async (url, { method = 'GET', headers = {}, body } = {}) => 
   return payload;
 };
 
-class SharetherGPT {
+class LearndaGPT {
   constructor() {
     this.apiKey = process.env.OPENAI_API_KEY;
     this.baseUrl = 'https://api.openai.com/v1';
@@ -263,7 +263,7 @@ class SharetherGPT {
             messages: [
               {
                 role: 'system',
-                content: `You are Sharether GPT, an educational assistant for the Sharether learning platform. 
+                content: `You are Learnda GPT, an educational assistant for the Learnda learning platform. 
                 Your role is to help students understand concepts, generate learning materials, and guide them 
                 through their learning journey. Be clear, concise, and encouraging. Avoid unnecessary jargon.
                 ${context ? `Context: ${context}` : ''}`
@@ -319,4 +319,4 @@ class SharetherGPT {
   }
 }
 
-module.exports = new SharetherGPT();
+module.exports = new LearndaGPT();

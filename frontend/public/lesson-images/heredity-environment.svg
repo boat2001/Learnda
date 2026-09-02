@@ -20,9 +20,9 @@
   <text x="200" y="288" text-anchor="middle" font-size="10.5" font-weight="600" fill="#701a75">Fixed at conception — the blueprint</text>
 
   <!-- RIGHT: Environment -->
-  <rect x="480" y="95" width="280" height="220" rx="14" fill="#f0fdf4" stroke="#16a34a" stroke-width="2.5"/>
-  <rect x="480" y="95" width="280" height="48" rx="14" fill="#16a34a"/>
-  <rect x="480" y="125" width="280" height="18" fill="#16a34a"/>
+  <rect x="480" y="95" width="280" height="220" rx="14" fill="#f0fdf4" stroke="#5b8439" stroke-width="2.5"/>
+  <rect x="480" y="95" width="280" height="48" rx="14" fill="#5b8439"/>
+  <rect x="480" y="125" width="280" height="18" fill="#5b8439"/>
   <text x="620" y="125" text-anchor="middle" font-size="15" font-weight="700" fill="#fff">🌍 ENVIRONMENT (Nurture)</text>
   <text x="620" y="166" text-anchor="middle" font-size="11.5" font-weight="600" fill="#15803d">What surrounds the child</text>
   <text x="502" y="192" font-size="11" fill="#166534">• Nutrition and health care</text>
@@ -41,10 +41,10 @@
   <!-- Result -->
   <line x1="200" y1="318" x2="380,358" stroke="none"/>
   <path d="M 200,318 Q 230,360 380,372" fill="none" stroke="#c026d3" stroke-width="2" stroke-dasharray="5,3"/>
-  <path d="M 620,318 Q 590,360 440,372" fill="none" stroke="#16a34a" stroke-width="2" stroke-dasharray="5,3"/>
+  <path d="M 620,318 Q 590,360 440,372" fill="none" stroke="#5b8439" stroke-width="2" stroke-dasharray="5,3"/>
   <rect x="280" y="350" width="260" height="64" rx="14" fill="#1a2e5a"/>
   <text x="410" y="377" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">THE CHILD'S DEVELOPMENT</text>
   <text x="410" y="398" text-anchor="middle" font-size="10.5" fill="#93c5fd">Example: genes set a height range; nutrition decides the final height</text>
 
-  <text x="410" y="444" text-anchor="middle" font-size="10" fill="#94a3b8">Sharether Learning Platform • Lesson 2: Principles and Patterns of Development</text>
+  <text x="410" y="444" text-anchor="middle" font-size="10" fill="#94a3b8">Learnda Learning Platform • Lesson 2: Principles and Patterns of Development</text>
 </svg>

@@ -1,7 +1,7 @@
 const { RegistrationSession, RegistrationSecurityEvent } = require('../models');
 const { normalizeEmailAddress, normalizePhoneNumber } = require('../utils/contact');
 
-const PLACEHOLDER_PHONE_EMAIL_PATTERN = /^phone\.(\d+)@auth\.sharether\.(?:local|app)$/i;
+const PLACEHOLDER_PHONE_EMAIL_PATTERN = /^phone\.(\d+)@auth\.learnda\.(?:local|app)$/i;
 
 const pickHeader = (headers, key) => {
   const raw = headers?.[key];

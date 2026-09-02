@@ -43,7 +43,7 @@
   background:
     radial-gradient(120% 140% at 100% 0%, rgba(56, 189, 248, 0.16) 0%, transparent 55%),
     linear-gradient(135deg, #e9f5f4 0%, #eef4fb 100%);
-  border: 1px solid rgba(31, 113, 119, 0.14);
+  border: 1px solid rgba(43, 98, 196, 0.14);
   overflow: hidden;
 }
 
@@ -109,7 +109,7 @@
   gap: var(--space-3);
   min-width: 0;
   padding-top: var(--space-4);
-  border-top: 1px solid rgba(31, 113, 119, 0.16);
+  border-top: 1px solid rgba(43, 98, 196, 0.16);
 }
 
 .home-resume-label {
@@ -603,7 +603,7 @@
     justify-content: center;
     padding: 0 0 0 var(--space-5);
     border-top: 0;
-    border-left: 1px solid rgba(31, 113, 119, 0.18);
+    border-left: 1px solid rgba(43, 98, 196, 0.18);
   }
 
   .home-hero .home-resume-card {
@@ -711,7 +711,7 @@
 [data-theme="dark"] .home-hero {
   background:
     radial-gradient(120% 140% at 100% 0%, rgba(56, 189, 248, 0.14) 0%, transparent 55%),
-    linear-gradient(135deg, rgba(31, 113, 119, 0.22) 0%, rgba(37, 99, 235, 0.14) 100%);
+    linear-gradient(135deg, rgba(43, 98, 196, 0.22) 0%, rgba(37, 99, 235, 0.14) 100%);
   border-color: rgba(79, 179, 173, 0.22);
 }
 
@@ -756,7 +756,7 @@
     background:
       radial-gradient(120% 140% at 100% 0%, rgba(56, 189, 248, 0.16) 0%, transparent 55%),
       linear-gradient(135deg, #e9f5f4 0%, #eef4fb 100%);
-    border: 1px solid rgba(31, 113, 119, 0.14);
+    border: 1px solid rgba(43, 98, 196, 0.14);
     overflow: hidden;
   }
 
@@ -782,7 +782,7 @@
   [data-theme="dark"] .home-hero.has-resume .home-hero-intro {
     background:
       radial-gradient(120% 140% at 100% 0%, rgba(56, 189, 248, 0.14) 0%, transparent 55%),
-      linear-gradient(135deg, rgba(31, 113, 119, 0.22) 0%, rgba(37, 99, 235, 0.14) 100%);
+      linear-gradient(135deg, rgba(43, 98, 196, 0.22) 0%, rgba(37, 99, 235, 0.14) 100%);
     border-color: rgba(79, 179, 173, 0.22);
   }
 

@@ -186,7 +186,7 @@ const buildCourseSummary = (course, offerings = [], resourceStats = {}, options 
     progress_percentage: toSafeNumber(options.progress, 0),
     image: normalizeCourseImage(course),
     image_url: normalizeCourseImage(course),
-    instructor: 'Sharether Instructor',
+    instructor: 'Learnda Instructor',
     rating: 4.7,
     enrolled: true,
     programs: Array.from(programNames),

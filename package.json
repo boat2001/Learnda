@@ -1,6 +1,6 @@
 {
-  "name": "sharether",
-  "description": "Command hub for the Sharether frontend and backend packages.",
+  "name": "learnda",
+  "description": "Command hub for the Learnda frontend and backend packages.",
   "private": true,
   "version": "0.0.0",
   "type": "module",

@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-const WORDMARK = 'Sharether';
+const WORDMARK = 'Learnda';
 const TAGLINE = 'Learn Like Never Before';
 
 /** Logical width 100 = 100% of chat pane; approximate text half-extents in same units. */
@@ -157,9 +157,9 @@ function buildShards(seedStr, logoUrl) {
   return shards;
 }
 
-export function SharetherChatBackdrop({ patternSeed = 'sharether-chat' }) {
+export function LearndaChatBackdrop({ patternSeed = 'learnda-chat' }) {
   const shards = useMemo(() => {
-    const logoUrl = `${import.meta.env.BASE_URL}sharether-logo.webp`;
+    const logoUrl = `${import.meta.env.BASE_URL}learnda-logo.webp`;
     return buildShards(patternSeed, logoUrl);
   }, [patternSeed]);
 

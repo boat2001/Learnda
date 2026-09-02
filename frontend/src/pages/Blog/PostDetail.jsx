@@ -340,7 +340,7 @@ export default function PostDetail() {
               )}
             </div>
             <div className="author-info">
-              <strong>{post.author_name || 'Sharether'}</strong>
+              <strong>{post.author_name || 'Learnda'}</strong>
               <span>{post.author_title || 'Creator'}</span>
             </div>
           </div>
