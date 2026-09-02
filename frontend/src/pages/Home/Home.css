@@ -10179,3 +10179,73 @@ button.highlight-card:focus-visible {
 [data-theme="dark"] .student-home .home-action-list span {
   box-shadow: none;
 }
+
+/* ── Guest landing: the KG-to-SHS class ladder ─────────────────────────────
+   Replaced a "Colleges on Learnda" strip. This is the clearest statement of
+   what Learnda is, so it earns a real block on the landing page. */
+
+.guest-levels {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px;
+}
+
+.guest-level-card {
+  position: relative;
+  padding: 22px 20px;
+  border: 1px solid var(--color-border-light);
+  border-radius: 18px;
+  background: var(--color-bg-light);
+}
+
+.guest-level-card__badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--color-primary-50);
+  color: var(--color-primary-700);
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+}
+
+.guest-level-card h3 {
+  margin: 0 0 8px;
+  font-family: var(--font-family-heading);
+  font-size: 1.15rem;
+  color: var(--color-text-primary);
+}
+
+.guest-level-card__desc {
+  margin: 0 0 14px;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  line-height: 1.55;
+}
+
+.guest-level-card__classes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.guest-level-card__classes span {
+  padding: 4px 10px;
+  border-radius: 8px;
+  background: var(--color-secondary-100);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+}
+
+[data-theme="dark"] .guest-level-card {
+  background: var(--color-secondary-800);
+  border-color: var(--color-secondary-700);
+}
+
+[data-theme="dark"] .guest-level-card h3 { color: var(--color-text-on-dark); }
+
+[data-theme="dark"] .guest-level-card__classes span {
+  background: var(--color-secondary-900);
+}

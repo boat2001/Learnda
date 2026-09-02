@@ -9,8 +9,6 @@ const {
 } = require('../models');
 const { Op } = require('sequelize');
 const subscriptionService = require('../services/subscriptionService');
-const notificationService = require('../services/notificationService');
-const config = require('../config/env');
 const {
   registrationStageFromOnboardingStep,
   updateRegistrationSessionForUser,
@@ -272,14 +270,7 @@ module.exports = {
           {
             model: AcademicProfile,
             as: 'academic_profile',
-            required: false,
-            include: [
-              {
-                model: Program,
-                as: 'program_record',
-                required: false
-              }
-            ]
+            required: false
           },
           {
             model: UserContact,
@@ -291,7 +282,6 @@ module.exports = {
       if (!user) {
         return res.status(404).json({ success: false, error: 'User not found' });
       }
-      await syncAcademicColumnsFromProfile(user);
       await syncUserContacts(user);
       await maybePersistAcademicProgression(user);
 
@@ -307,9 +297,7 @@ module.exports = {
       await persistOnboardingState(user, onboarding);
       await syncRegistrationSessionFromOnboarding(user, onboarding);
       const billingIntent = await resolveBillingIntent(user);
-      const academicStateNotice = await buildAcademicStateNotice(user);
-
-      return res.json(buildMeResponse(user, onboarding, subscription, selectedPlan, billingIntent, academicStateNotice));
+      return res.json(buildMeResponse(user, onboarding, subscription, selectedPlan, billingIntent, buildPromotionNotice(user)));
     } catch (error) {
       console.error('Get /me error:', error);
       return res.status(500).json({ success: false, error: 'Failed to load session' });
@@ -364,7 +352,7 @@ module.exports = {
       const onboarding = buildOnboardingState(user);
       await persistOnboardingState(user, onboarding);
 
-      const subscription = await findActiveSubscription(user.id);
+      const subscription = await getActiveSubscription(user.id);
       const selectedPlan = user.selected_plan_id
         ? await Plan.findByPk(user.selected_plan_id)
         : null;
@@ -379,7 +367,7 @@ module.exports = {
       }
 
       const billingIntent = await resolveBillingIntent(user);
-      return res.json(buildMeResponse(user, onboarding, subscription, selectedPlan, billingIntent));
+      return res.json(buildMeResponse(user, onboarding, subscription, selectedPlan, billingIntent, buildPromotionNotice(user)));
     } catch (error) {
       console.error('PATCH /me/profile error:', error);
       return res.status(500).json({ success: false, error: 'Failed to update profile' });
@@ -666,7 +654,7 @@ module.exports = {
         source: 'me.password'
       });
       const billingIntent = await resolveBillingIntent(user);
-      return res.json(buildMeResponse(user, onboarding, subscription, selectedPlan, billingIntent));
+      return res.json(buildMeResponse(user, onboarding, subscription, selectedPlan, billingIntent, buildPromotionNotice(user)));
     } catch (error) {
       console.error('PATCH /me/password error:', error);
       return res.status(500).json({ success: false, error: 'Failed to update password' });

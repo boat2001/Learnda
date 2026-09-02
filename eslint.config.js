@@ -35,6 +35,21 @@ export default defineConfig([
     rules: commonRules,
   },
   {
+    // Test files use Jest globals (describe/it/expect), which are injected by
+    // the runner rather than imported.
+    files: ['**/__tests__/**/*.js', '**/*.test.js'],
+    extends: [js.configs.recommended],
+    languageOptions: {
+      ecmaVersion: 2022,
+      sourceType: 'commonjs',
+      globals: {
+        ...globals.node,
+        ...globals.jest,
+      },
+    },
+    rules: commonRules,
+  },
+  {
     files: ['frontend/src/**/*.{js,jsx}'],
     extends: [js.configs.recommended],
     languageOptions: {

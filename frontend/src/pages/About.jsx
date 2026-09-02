@@ -7,87 +7,69 @@ import './SharedPages.css';
 import './About.css';
 import './Team.css';
 
+// Learnda's own story. The previous chapters narrated the founder's experience
+// at a Ghanaian college of education, the "share + together" naming, and the
+// GH₵5 / GH₵10 contribution tiers -- all inherited from the platform Learnda
+// was forked from, and none of it true of Learnda (dev guide §10, §14).
 const CHAPTERS = [
   {
-    id: 'spark',
-    year: 'January 2022',
-    label: 'The Spark',
-    color: '#26c9d0',
+    id: 'problem',
+    year: 'The problem',
+    label: 'One class at a time',
+    color: '#fb6334',
     Icon: FiMapPin,
-    headline: 'Denied. Shut out. And somehow, still showing up.',
+    headline: 'Most learning apps let children wander anywhere.',
     summary: [
-      "In January 2022, Kwabena came to Foso College of Education wanting to study Mathematics and ICT, but was placed in Performing Arts. He applied to switch programmes. They said no. But he didn't leave. He kept attending Maths and IT lectures, buying their books, and even wrote the external quizzes with them, even though he wasn't officially in the programme.",
-      "Then, just weeks before final exams, he was told he couldn't write with them. He was denied an index number. All that effort, and he couldn't write a single exam. He had to return to his original programme, now far behind.",
-      "He needed course materials fast, but physical copies were hard to come by at that stage. That struggle planted an idea, what if there was one place where every student could find everything they needed, at any time? And with that, the spark of Learnda was born.",
+      'A learner opens an app and can tap into any topic at any level. It looks generous. In practice a Basic 3 child meets JHS work they cannot yet read, decides they are bad at the subject, and stops.',
+      'Ghanaian schooling does not work that way. A learner sits in one class for one year, studies what that class teaches, and moves up when the year turns. That structure is not a limitation — it is what makes learning feel possible.',
     ],
   },
   {
-    id: 'build',
-    year: '2022',
-    label: 'The Build',
-    color: '#fab82c',
-    Icon: FiEdit,
-    headline: 'No laptop. Just code, a flash drive, and a reason.',
-    summary: "After exams, vacation started, and that's when the work began. He sat down at his brother's desktop computer and started coding. PHP. MySQL. HTML. CSS. JavaScript. He worked day and night. Not for any reward, but because he knew what it felt like to be a student with nowhere to turn for files. Back on campus, he had no laptop of his own. Bismark offered his, so the work could keep going. Two full vacations of building later, Learnda was done.",
-  },
-  {
-    id: 'launch',
-    year: 'February 7, 2023',
-    label: 'Going Live',
-    color: '#60a5fa',
+    id: 'approach',
+    year: 'The approach',
+    label: 'The real school timeline',
+    color: '#3e7fdd',
     Icon: FiGlobe,
-    headline: 'The name changed. The mission never did.',
-    summary: "The platform was first called Foscoshare, after the college. But that name felt too small. The motto, \"Let's share and learn together\", gave a better idea. Take \"share\" and \"together\", press them into one word: Learnda. To get it online, close friends and siblings chipped in for the domain and hosting. On February 7, 2023, learnda.app went live. The link went into school WhatsApp groups, and within hours, students who had been struggling to find materials were finally getting what they needed.",
+    headline: 'Learnda mirrors the school year, not a content library.',
+    summary: [
+      'Every lesson, practice set and question in Learnda is tied to exactly one class, from KG 1 to SHS 3. You study your class. You can revise every class behind you, as often as you like. Classes ahead of you stay closed until the school year turns.',
+      'Nobody can skip ahead, and nobody has to. Progression happens the way it happens at school: by the calendar, confirmed by an adult, never by choosing it in a menu.',
+    ],
   },
   {
-    id: 'people',
-    year: '2023',
-    label: 'Not Alone',
-    color: '#f472b6',
+    id: 'curriculum',
+    year: 'The curriculum',
+    label: 'Aligned to NaCCA',
+    color: '#73a24b',
+    Icon: FiEdit,
+    headline: 'Ghana’s curriculum, not a generic one.',
+    summary: [
+      'Kindergarten follows Learning Areas — Language and Literacy, Numeracy, Environmental Studies, Creative Arts and the rest — taught through audio and pictures, with no tests at all.',
+      'Basic school covers the NaCCA subjects including Our World Our People, Ghanaian Language and Culture, Computing and French. JHS builds towards BECE. SHS adds learning areas and electives, from Science and General Arts through Business, Applied Technology, Home Economics, Art, Agriculture, Languages and STEM.',
+    ],
+  },
+  {
+    id: 'age',
+    year: 'The learners',
+    label: 'Built for the age in front of it',
+    color: '#fab82c',
     Icon: FiHeart,
-    headline: 'I reached out. And people came.',
+    headline: 'A five-year-old and a seventeen-year-old need different apps.',
     summary: [
-      "Once the platform was live, the scope of what still needed to happen became clear. Sir Philip and Sis. Abigail, the SRC Academic Coordinators, were already scanning files at the library and stepped in to help build up the course material collection.",
-      "Think Twice, who had already been sharing files on WhatsApp for students long before Learnda existed, joined to help grow the content and community. Mubarack, who had built a COE past questions app, and Sarkodie, another programmer, came in to help with development.",
-      "Pedro, Sir Rahman, and Sikapa, iTech executives, gave their time, knowledge, and experience freely. Gideon Ofori, Akwasi Obeng, Stephen Boateng, and Sir Paul offered early financial support to keep things going, and Sir Paul also designed the flyers that helped put Learnda in front of more students.",
-      "Fosco's ICT officer, Mr. Eddie Essel Dadzie, gave guidance on hosting and domain matters. Christopher and Ohojo literally took the platform to people through a campaign. And when a video was needed, Arhinsco made it.",
-      "Learnda was started alone. But it was carried forward by people who believed it was worth carrying.",
+      'Kindergarten gets big pictures, tap-to-listen audio and no text walls. There are no quizzes, no exams, no scores and no chat — the app is for looking, listening and playing, and a parent sits alongside.',
+      'Basic school keeps the visuals and adds gentle practice. JHS and SHS get structured lessons, heavier practice and exam preparation, with community and study groups opening up only at that age.',
     ],
   },
   {
-    id: 'growth',
-    year: '2024 – 2025',
-    label: 'Growing Strong',
-    color: '#a78bfa',
+    id: 'access',
+    year: 'Access',
+    label: 'Wherever learners are',
+    color: '#1f3049',
     Icon: FiUsers,
-    headline: 'Other students found it. And everything shifted.',
-    summary: "Learnda was built for Fosco. But students from other colleges across Ghana started reaching out, asking to be included, sending in their materials, hoping they hadn't been forgotten. College after college was added until Learnda covered every UCC-affiliated college of education in Ghana. A resource that began as the answer to one student's problem at one college had grown into something the whole country could use.",
-  },
-  {
-    id: 'expanding',
-    year: '2026 – Present',
-    label: 'Expanding',
-    color: '#34d399',
-    Icon: FiRefreshCw,
-    headline: 'Rebuilt to last. Designed to go further.',
+    headline: 'Ghana is not evenly connected, and learning should not depend on that.',
     summary: [
-      "With a more stable foundation in place, the focus shifted to building something that could grow with the students using it. Learnda was rebuilt from the ground up in React and Node.js, faster, more reliable, and ready for what was coming next.",
-      "A proper mobile experience was added. New features designed to make studying more engaging are being rolled out. The platform that started as a simple file-sharing site is becoming a full learning companion. There's still a lot ahead. But for the first time, the foundation is strong enough to hold it.",
-    ],
-  },
-  {
-    id: 'contribution',
-    year: '2026 – Present',
-    label: 'Staying Alive',
-    color: '#fb923c',
-    Icon: FiDollarSign,
-    headline: 'Free to use was never free to run.',
-    summary: [
-      "Learnda had been running free for users since it launched. But there were always real expenses behind it, domain, hosting, storage, and SSL certificate. Those were funded by the team and some generous people. But the amount being contributed sometimes wasn't enough to cover everything.",
-      "Advertisements were added at one point to help generate some funds. But they were so distracting and annoying that users complained, and they were removed. Without money coming in, users kept seeing domain expirations, hosting shutdowns, and long stretches of downtime.",
-      "A call went out for contributions. Some people gave funds, and every one of them is appreciated. But very few people contributed, which made things unfair. Some people were funding a platform others used for free.",
-      "To fix this, the cost needed to be shared evenly, so everyone pays for what they need, and all those small contributions together cover the expenses of keeping the platform running for everyone. That brought in the contribution model.",
-      "Files are free to access and will always be free, but with some limits. Free Learners get the content and tools for one course, along with access to other platform features. Helpers who contribute GH₵5 get access to four courses, plus downloads, study groups, and more. Heroes who contribute GH₵10 get access to everything Learnda has to offer. Whenever you contribute, consider it a direct contribution to keep Learnda alive for every student who needs it.",
+      'Lessons work offline once opened, at every level, so a learner in a town with patchy data is not locked out of their own class.',
+      'Audio matters as much as text. A learner who reads slowly, or not yet at all, should still be able to use the app on their own.',
     ],
   },
 ];
@@ -122,29 +104,17 @@ export default function About() {
       <div className="tm-celebrate about-ceo-quote">
         <span className="tm-celebrate__mark" aria-hidden="true">&ldquo;</span>
         <blockquote className="tm-celebrate__line">
-          The site that began as a simple place to access past questions and learning resources
-          is now an interactive learning platform built to make learning interesting, simple and collaborative. <br />
-          And the funny thing is that, we&rsquo;re just getting started. <br />
-          Thank you for being part of this journey.
+          Learnda follows Ghana&rsquo;s real education timeline. <br />
+          Subjects are taught only at the learner&rsquo;s class level. <br />
+          Progression happens by academic year, not by choice.
         </blockquote>
-        <div className="tm-celebrate__author">
-          <img
-            src={`${import.meta.env.BASE_URL}team/members/boateng.jpg`}
-            alt="Kwabena Boateng"
-            className="tm-celebrate__photo"
-          />
-          <div className="tm-celebrate__author-text">
-            <strong className="tm-celebrate__name">Kwabena Boateng Adjei</strong>
-            <span className="tm-celebrate__role">Founder &amp; CEO, Learnda</span>
-          </div>
-        </div>
       </div>
 
       {/* Origin Story Timeline */}
       <section className="page-section">
         <div className="section-heading section-heading--wide">
-          <h2>How it all started</h2>
-          <p>From the ideation, through development, to deployment and to a platform that helps thousands of students learn.</p>
+          <h2>Why Learnda works this way</h2>
+          <p>Five decisions that shape everything in the app, from Kindergarten through Senior High School.</p>
         </div>
         <div className="about-timeline">
           {CHAPTERS.map((chapter, index) => {

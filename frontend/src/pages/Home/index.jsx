@@ -461,8 +461,8 @@ export default function Home() {
   const homeTrendingRailRef = useRef(null);
   const homeTrendingSegmentRefs = useRef({});
 
-  const displayName = user?.full_name || "Kwabena";
-  const firstNameToken = String(displayName).trim().split(/\s+/)[0] || "Kwabena";
+  const displayName = user?.full_name || "there";
+  const firstNameToken = String(displayName).trim().split(/\s+/)[0] || "there";
   const firstName = toDisplayNameCase(firstNameToken);
   const userKey = user?.id || user?.uuid || user?.email || user?.username || displayName;
   const dailyHeader = getDailyHeaderMessage({ userKey, firstName });
@@ -1587,7 +1587,7 @@ export default function Home() {
         awardType: "student",
         userId: studentAward?.user_id || studentAward?.id || null,
         title: studentAward?.title || student?.title || "Student of the Week",
-        name: studentAward?.name || student?.author_name || student?.author?.name || "Kwabena Boateng Adjei",
+        name: studentAward?.name || student?.author_name || student?.author?.name || null,
         college: studentAward?.college || student?.college || student?.institution || "Foso College of Education",
         program: studentAward?.program || student?.program || student?.programme_category || "Performing Arts (Primary)",
         level: studentAward?.level || levelLabel,
@@ -1608,7 +1608,7 @@ export default function Home() {
         awardType: "contributor",
         userId: contributorAward?.user_id || contributorAward?.id || null,
         title: contributorAward?.title || contributor?.title || "Contributor of the Month",
-        name: contributorAward?.name || contributor?.author_name || contributor?.author?.name || "Kwabena Boateng",
+        name: contributorAward?.name || contributor?.author_name || contributor?.author?.name || null,
         subtitle: contributorAward?.college || contributor?.subtitle || "Learnda Creator",
         college: contributorAward?.college || contributor?.college || contributor?.institution || "Learnda community",
         program: contributorAward?.program || contributor?.program || programLabel,

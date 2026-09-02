@@ -43,7 +43,7 @@ module.exports = (sequelize) => {
     ]
   });
 
-  Course.associate = (models) => {
+  Course.associate = () => {
   };
 
   return Course;

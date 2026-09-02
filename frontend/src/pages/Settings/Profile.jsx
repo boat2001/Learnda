@@ -37,7 +37,6 @@ export default function Profile() {
       setProfileForm({ full_name: user.full_name || '' });
       setAcademicForm({
         level: user.level || '',
-        semester: user.semester || '',
       });
     }
   }, [user]);
@@ -268,7 +267,7 @@ export default function Profile() {
     <ConfirmModal
       isOpen={showAcademicConfirm}
       title="Update Academic Standing"
-      message="Changing your level or semester will update the courses shown in your PLS. Your progress, downloads, and history will remain intact. Continue?"
+      message="Save these changes to your profile?"
       confirmLabel="Yes, Update"
       cancelLabel="Cancel"
       onConfirm={handleAcademicSubmit}

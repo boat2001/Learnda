@@ -11,13 +11,9 @@ import './Contribute.css';
 
 const SUPPORTER_ACCENTS = ['#38bdf8', '#34d399', '#f97316', '#2b62c4', '#eab308'];
 
-const FALLBACK_SUPPORTERS = [
-  { id: '1', name: 'Samuel Heighty', from: 'Student at Fosco' },
-  { id: '2', name: 'Abigail Frimpong', from: 'Student at Fosco' },
-  { id: '3', name: 'Kofi Boamah', from: 'Student' },
-  { id: '4', name: 'Carlos', from: 'Student' },
-  { id: '5', name: 'Christian', from: 'Student' },
-];
+// No placeholder supporters. The previous list named real students at a
+// Ghanaian college of education, carried over from the forked platform.
+const FALLBACK_SUPPORTERS = [];
 
 const getInitials = (name) => {
   const parts = String(name || '').trim().split(/\s+/).filter(Boolean);

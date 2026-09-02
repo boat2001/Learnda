@@ -1,11 +1,11 @@
 import { Children, useCallback, useEffect, useMemo, useState, useRef } from 'react';
 import { playUiSound } from '../../utils/uiSounds';
-import { FiLink, FiMapPin } from 'react-icons/fi';
 import PlanCard from '../../components/subscription/PlanCard';
 import ContributionAppeal from '../../components/subscription/ContributionAppeal';
 import FormModal from '../../components/common/FormModal';
 import useHorizontalAutoScroll from '../../hooks/useHorizontalAutoScroll';
 import api from '../../services/api';
+import { LEVEL_GROUPS, LEVEL_GROUP_LABELS, CLASS_LEVELS_BY_GROUP } from '../../constants/education';
 
 function AutoSwipeStrip({ children, interval = 3800 }) {
   const sliderRef = useRef(null);
@@ -38,13 +38,22 @@ function GuestSection({ title, subtitle, className, children }) {
   );
 }
 
-const getCollegeMetaParts = (college) => ({
-  location: String(college?.established || '').trim(),
-  affiliation: String(college?.affiliation || '').trim(),
-});
+// Built from the canonical class list, so adding a class level never leaves
+// this section stale (§2.2).
+const LEVEL_BLURBS = {
+  KINDERGARTEN: 'Audio-first, picture-led learning. No tests, no scores — just listening, looking and playing.',
+  PRIMARY: 'Simple language and visual lessons, with gentle practice that builds confidence.',
+  JHS: 'Structured lessons and practice-heavy revision, building towards BECE.',
+  SHS: 'Core subjects plus electives from your learning area, building towards WASSCE.',
+};
 
-const formatProgramLabel = (program = '') =>
-  String(program || '')
+const LEVEL_SHOWCASE = Object.values(LEVEL_GROUPS).map((group) => ({
+  code: group,
+  label: LEVEL_GROUP_LABELS[group],
+  blurb: LEVEL_BLURBS[group],
+  classes: CLASS_LEVELS_BY_GROUP[group],
+}));
+
     .replace(/\s+Education$/i, '')
     .trim();
 
@@ -52,7 +61,6 @@ const HERO_SLIDES = ['/learning-1.jpg', '/learning-2.jpg', '/learning-3.jpg'];
 
 export default function GuestHomeView({
   normalizedGuestPlans,
-  guestColleges,
   guestSuccessStories,
   logoSrc,
   navigate,
@@ -85,13 +93,11 @@ export default function GuestHomeView({
     story: '',
     rating: 5,
   });
-  const storyCollegeOptions = useMemo(() => (
-    [...new Set(
-      guestColleges
-        .map((college) => String(college?.name || '').trim())
-        .filter(Boolean)
-    )].sort((left, right) => left.localeCompare(right))
-  ), [guestColleges]);
+  // Stories are tagged with a class, in §2.3 order, rather than a college.
+  const storyClassOptions = useMemo(
+    () => Object.values(LEVEL_GROUPS).flatMap((group) => CLASS_LEVELS_BY_GROUP[group]),
+    []
+  );
   const visibleStories = publicStories;
 
   const loadPublicStories = useCallback(async (isActive = () => true) => {
@@ -201,46 +207,28 @@ export default function GuestHomeView({
         </div>
       </section>
 
+      {/* What Learnda actually is: the real Ghanaian school timeline, KG to SHS.
+          This replaced a "Colleges on Learnda" strip, which had no meaning for
+          a K-12 audience. */}
       <GuestSection
-        title="Colleges on Learnda"
-        subtitle="Institutions actively learning on Learnda."
-        className="home-section colleges-section"
+        title="From KG 1 to SHS 3"
+        subtitle="Learnda follows Ghana's school timeline. Learners study their own class, revise the classes behind them, and move up when the school year turns."
+        className="home-section levels-section"
       >
-        <AutoSwipeStrip interval={4200}>
-          {guestColleges.map((college, index) => {
-            const meta = getCollegeMetaParts(college);
-            return (
-              <article
-                key={`${college.id}-${index}`}
-                className="guest-college-card"
-              >
-                <div className="guest-college-media">
-                  <img src={college.image || logoSrc} alt={college.name} loading="lazy" />
-                </div>
-                <h3>{college.name}</h3>
-                <div className="guest-college-programs">
-                  {(college.programs || []).map((program) => (
-                    <span key={`${college.id}-${program}`}>{formatProgramLabel(program)}</span>
-                  ))}
-                </div>
-                <div className="guest-college-meta">
-                  {meta.location ? (
-                    <span className="guest-college-location">
-                      <FiMapPin aria-hidden="true" />
-                      <span>{meta.location}</span>
-                    </span>
-                  ) : null}
-                  {meta.affiliation ? (
-                    <span className="guest-college-affiliation">
-                      <FiLink aria-hidden="true" />
-                      <span>{meta.affiliation}</span>
-                    </span>
-                  ) : null}
-                </div>
-              </article>
-            );
-          })}
-        </AutoSwipeStrip>
+        <div className="guest-levels">
+          {LEVEL_SHOWCASE.map((group) => (
+            <article key={group.code} className="guest-level-card">
+              <span className="guest-level-card__badge">{group.classes.length} classes</span>
+              <h3>{group.label}</h3>
+              <p className="guest-level-card__desc">{group.blurb}</p>
+              <div className="guest-level-card__classes">
+                {group.classes.map((cls) => (
+                  <span key={cls.code}>{cls.label}</span>
+                ))}
+              </div>
+            </article>
+          ))}
+        </div>
       </GuestSection>
 
       <GuestSection
@@ -368,20 +356,20 @@ export default function GuestHomeView({
             />
           </div>
           <div className="form-row">
-            <label htmlFor="guest-story-college">College</label>
+            <label htmlFor="guest-story-college">Your class</label>
             <input
               id="guest-story-college"
               name="college"
-              list="guest-story-college-options"
+              list="guest-story-class-options"
               value={storyForm.college}
               onChange={onStoryInput}
-              placeholder="Start typing your college"
+              placeholder="e.g. Basic 4"
               autoComplete="off"
               required
             />
-            <datalist id="guest-story-college-options">
-              {storyCollegeOptions.map((college) => (
-                <option key={college} value={college} />
+            <datalist id="guest-story-class-options">
+              {storyClassOptions.map((level) => (
+                <option key={level.code} value={level.label} />
               ))}
             </datalist>
           </div>

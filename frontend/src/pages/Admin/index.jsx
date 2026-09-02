@@ -20,7 +20,6 @@ import NotificationsSection from './sections/NotificationsSection';
 import MessagesSection from './sections/MessagesSection';
 import RevenueSection from './sections/RevenueSection';
 import ApplicationsSection from './sections/ApplicationsSection';
-import LecturersSection from './sections/LecturersSection';
 import PlansSection from './sections/PlansSection';
 import AmbassadorsSection from './sections/AmbassadorsSection';
 import PublishingSection from './sections/PublishingSection';
@@ -45,7 +44,6 @@ const NAV = [
   { id: 'messages',      label: 'Messages & Feedback', icon: FiInbox,    group: 'OPERATIONS'},
   { id: 'applications',  label: 'Applications',      icon: FiUserPlus,   group: 'OPERATIONS'},
   { id: 'ambassadors',   label: 'Ambassadors',icon: FiUsers,      group: 'OPERATIONS'},
-  { id: 'lecturers',     label: 'Lecturers',         icon: FiBookOpen,   group: 'OPERATIONS'},
   { id: 'revenue',       label: 'Revenue',           icon: FiDollarSign, group: 'FINANCE'   },
   { id: 'plans',         label: 'Plan Pricing',       icon: FiDollarSign, group: 'FINANCE'   },
   { id: 'roadmap',       label: 'Roadmap',            icon: FiMap,        group: 'PLATFORM'  },
@@ -77,7 +75,6 @@ const SECTION_MAP = {
   messages:      MessagesSection,
   applications:  ApplicationsSection,
   ambassadors:   AmbassadorsSection,
-  lecturers:     LecturersSection,
   revenue:       RevenueSection,
   plans:         PlansSection,
   roadmap:       RoadmapSection,

@@ -1,4 +1,5 @@
 const express = require('express');
+const { getClassLevel } = require('../config/educationStructure');
 const { Op } = require('sequelize');
 
 const router = express.Router();

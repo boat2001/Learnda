@@ -108,11 +108,11 @@ function ActivenessTable({ users }) {
   );
 }
 
-const ROLES = ['student', 'lecturer', 'admin'];
+const ROLES = ['student', 'teacher', 'admin'];
 
 const ROLE_BADGE = {
   admin:       'adm-badge-red',
-  lecturer:    'adm-badge-blue',
+  teacher:     'adm-badge-blue',
   contributor: 'adm-badge-teal',
   student:     'adm-badge-gray',
 };
@@ -634,7 +634,7 @@ export default function UsersSection({ period }) {
       <div className="adm-stats">
         <StatCard label="Daily Active Users"     value={fmt(data?.dau)}  sub="DAU"  icon={FiActivity}    accent="green" />
         <StatCard label="Monthly Active Users"   value={fmt(data?.mau)}  sub="MAU"  icon={FiUsers}        />
-        <StatCard label="Semester Active Users"  value={fmt(data?.sau)}  sub="SAU"  icon={FiUsers}        accent="blue"  />
+        <StatCard label="Termly Active Users"    value={fmt(data?.sau)}  sub="TAU"  icon={FiUsers}        accent="blue"  />
         <StatCard label="Annual Active Users"    value={fmt(data?.aau)}  sub="AAU"  icon={FiTrendingUp}   accent="amber" />
       </div>
 

@@ -6,7 +6,7 @@ import { displayContact, isPhoneEmail } from '../adminUtils';
 
 const ROLE_BADGE = {
   admin:       { cls: 'adm-badge-red',   label: 'Admin'       },
-  lecturer:    { cls: 'adm-badge-blue',  label: 'Lecturer'    },
+  teacher:     { cls: 'adm-badge-blue',  label: 'Teacher'     },
   contributor: { cls: 'adm-badge-teal',  label: 'Contributor' },
   student:     { cls: 'adm-badge-gray',  label: 'Student'     },
 };
@@ -33,7 +33,7 @@ function Field({ label, value, icon: Icon }) {
   );
 }
 
-const ROLES = ['student', 'lecturer', 'admin'];
+const ROLES = ['student', 'teacher', 'admin'];
 
 export default function UserDetailModal({ user, onClose, onRoleChanged }) {
   const [tab, setTab]       = useState('info');
@@ -122,7 +122,6 @@ export default function UserDetailModal({ user, onClose, onRoleChanged }) {
           <Field label="Gender"       value={user.gender}                           />
           <Field label="Joined"       value={joinDate}           icon={FiCalendar} />
           <Field label="Last Active"  value={lastActive}         icon={FiActivity} />
-          <Field label="Index Number" value={user.index_number}                    />
           <Field label="Referral Code" value={user.referral_code}                  />
         </div>
       )}
@@ -131,10 +130,10 @@ export default function UserDetailModal({ user, onClose, onRoleChanged }) {
         <div className="adm-modal-field-grid">
           <Field label="Institution"       value={user.institution}         icon={FiBook} />
           <Field label="Affiliate Uni."    value={user.affiliate_university}             />
-          <Field label="Programme Category" value={user.programme_category}              />
+          <Field label="Class"             value={user.class_level}                      />
           <Field label="Program"           value={user.program}                          />
           <Field label="Level"             value={user.level}                            />
-          <Field label="Semester"          value={user.semester}                         />
+          <Field label="Academic year"     value={user.academic_year}                    />
           <Field label="Contribution Status" value={user.subscription_status}           />
           <Field label="Institution Type"  value={user.institution_type}                 />
         </div>

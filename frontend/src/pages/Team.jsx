@@ -118,19 +118,8 @@ export default function Team() {
         <blockquote className="tm-celebrate__line">
           Behind every resource downloaded, every lesson completed, every student
           who found what they needed &mdash; there is someone on this page who made
-          it happen. This is their platform as much as it is yours. Let's honour them all. 🎉
+          it happen. This is their platform as much as it is yours. Let&rsquo;s honour them all. 🎉
         </blockquote>
-        <div className="tm-celebrate__author">
-          <img
-            src={resolveTeamPhoto('/team/members/boateng.jpg')}
-            alt="Kwabena Boateng"
-            className="tm-celebrate__photo"
-          />
-          <div className="tm-celebrate__author-text">
-            <strong className="tm-celebrate__name">Kwabena Boateng Adjei</strong>
-            <span className="tm-celebrate__role">Founder &amp; CEO, Learnda</span>
-          </div>
-        </div>
       </div>
 
       {/* Section 1: Immediate team */}

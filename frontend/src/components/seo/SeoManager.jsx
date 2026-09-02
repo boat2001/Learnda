@@ -10,7 +10,7 @@ const DEFAULT_META = {
   description:
     'Learnda helps students learn smarter with courses, study resources, progress tracking, and focused learning tools.',
   keywords:
-    'Learnda, student learning platform, online courses, study resources, college students, Ghana education',
+    'Learnda, Ghana K-12, NaCCA curriculum, kindergarten, basic school, JHS, SHS, BECE, WASSCE, class-scoped lessons',
   robots: 'index,follow',
   type: 'website'
 };
@@ -66,7 +66,6 @@ const ROUTE_META = [
   { match: (path) => path === '/edutainment',      title: 'Edutainment | Learnda',      description: 'Entertaining content that makes learning stick — videos, facts, and study inspiration.' },
   { match: (path) => path === '/edutainment/feed', title: 'Edutainment Feed | Learnda', description: 'Your personalised edutainment feed — bite-sized content to keep you learning.' },
   { match: (path) => path === '/blog',             title: 'Blog | Learnda',             description: 'Study tips, platform updates, and student learning insights from the Learnda team.' },
-  { match: (path) => path === '/college-rankings', title: 'College Rankings | Learnda', description: 'Explore college and university rankings across Ghana.' },
   { match: (path) => path === '/success-stories',  title: 'Success Stories | Learnda',  description: 'Read how Learnda students are achieving their academic goals.' },
   { match: (path) => path === '/create',            title: 'Create Content | Learnda',   description: 'Share notes, past questions, and study materials to help fellow students.' },
   { match: (path) => path === '/contribute',        title: 'Contribute | Learnda',        description: 'Contribute funds to help keep Learnda alive and improving for students.' },
@@ -76,7 +75,7 @@ const ROUTE_META = [
   { match: (path) => path === '/about',            title: 'Our Story | Learnda',           description: "One student couldn't find his course materials — so he built Learnda. Today it serves 200,000+ students across Ghana." },
   { match: (path) => path === '/features',         title: 'Contribution Plans | Learnda',    description: 'Start free, then chip in whatever fits your budget. Every contribution keeps Learnda online for students across Ghana.' },
   { match: (path) => path === '/roadmap',          title: 'Platform Roadmap | Learnda',    description: "See what's coming next on Learnda — upcoming features, improvements, and plans." },
-  { match: (path) => path === '/events',           title: 'Ambassadors | Learnda',  description: 'Join the Learnda campus ambassador programme and represent your college.' },
+  { match: (path) => path === '/events',           title: 'Ambassadors | Learnda',  description: 'Join the Learnda ambassador programme and represent your school.' },
   { match: (path) => path === '/contact',          title: 'Contact Us | Learnda',          description: 'Get in touch with the Learnda team for support, feedback, and partnership enquiries.' },
   { match: (path) => path === '/download',         title: 'Download Learnda',              description: 'Get the Learnda app and take your learning anywhere.' },
   { match: (path) => path === '/team',             title: 'Meet the Team | Learnda',       description: 'The people building Learnda — a student-led team on a mission to improve education in Ghana.' },
@@ -95,7 +94,7 @@ const ROUTE_META = [
     match: (path) => path === '/pls',
     title: 'Personal Learning Space | Learnda',
     description:
-      'Track your semester progress, continue your courses, and manage your study flow.',
+      'Track your progress, continue your lessons, and keep learning at your own class level.',
     robots: 'noindex,nofollow'
   },
 

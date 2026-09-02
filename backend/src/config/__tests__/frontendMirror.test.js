@@ -30,7 +30,7 @@ describe('frontend education mirror', () => {
   });
 
   it('declares the same level groups', () => {
-    const groups = [...mirror.matchAll(/^  ([A-Z]+): '([A-Z]+)',$/gm)]
+    const groups = [...mirror.matchAll(/^ {2}([A-Z]+): '([A-Z]+)',$/gm)]
       .filter(([, key, value]) => key === value)
       .map(([, key]) => key);
     expect(groups).toEqual(expect.arrayContaining([...E.LEVEL_GROUP_VALUES]));
@@ -39,7 +39,7 @@ describe('frontend education mirror', () => {
   it('applies the same §7 feature gates', () => {
     const block = mirror.slice(mirror.indexOf('export const FEATURE_GATES'), mirror.indexOf('/** Unknown feature'));
     const rows = [...block.matchAll(
-      /(\w+): \{ KINDERGARTEN: '(\w+)', PRIMARY: '(\w+)', JHS: '(\w+)', SHS: '(\w+)' \}/g
+      /(\w+):\s\{\sKINDERGARTEN:\s'(\w+)',\sPRIMARY:\s'(\w+)',\sJHS:\s'(\w+)',\sSHS:\s'(\w+)'\s\}/g
     )];
     expect(rows.length).toBeGreaterThan(0);
 
