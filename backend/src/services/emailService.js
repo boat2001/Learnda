@@ -116,12 +116,12 @@ module.exports = {
     return sendEmail({
       to: email,
       subject: 'Welcome to Learnda!',
-      text: `Hi ${name}, welcome to Learnda! We're glad you're here. Start exploring courses and study resources at https://learnda.app.`,
+      text: `Hi ${name}, welcome to Learnda! We're glad you're here. Start exploring courses and study resources at ${SITE_URL}.`,
       html: wrap(`
         ${h1(`Welcome, ${name}! 🎉`)}
         ${p('You\'ve successfully joined Learnda — the smarter way to learn.')}
         ${p('Explore courses, study resources, and personalised learning tools tailored to your programme.')}
-        <a href="https://learnda.app" style="display:inline-block;margin-top:8px;background:#1f56db;color:#ffffff;text-decoration:none;padding:12px 28px;border-radius:8px;font-size:15px;font-weight:600;">Get started</a>
+        <a href="${SITE_URL}" style="display:inline-block;margin-top:8px;background:#1f56db;color:#ffffff;text-decoration:none;padding:12px 28px;border-radius:8px;font-size:15px;font-weight:600;">Get started</a>
         ${muted('If you did not create an account, you can safely ignore this email.')}
       `),
     });
@@ -200,7 +200,7 @@ module.exports = {
         ${h1('Subscription confirmed ✓')}
         ${p('Your Learnda subscription is now active. You have full access to all content on your plan.')}
         ${p(`<strong>Plan:</strong> ${planId}<br/><strong>Transaction:</strong> ${transactionId}`)}
-        <a href="https://learnda.app" style="display:inline-block;margin-top:8px;background:#1f56db;color:#ffffff;text-decoration:none;padding:12px 28px;border-radius:8px;font-size:15px;font-weight:600;">Start learning</a>
+        <a href="${SITE_URL}" style="display:inline-block;margin-top:8px;background:#1f56db;color:#ffffff;text-decoration:none;padding:12px 28px;border-radius:8px;font-size:15px;font-weight:600;">Start learning</a>
       `),
     });
   },
@@ -215,7 +215,7 @@ module.exports = {
         ${h1('Subscription cancelled')}
         ${p(`Your <strong>${planName}</strong> subscription has been cancelled. You will retain access until the end of your current billing period.`)}
         ${p('We\'d love to have you back. You can resubscribe at any time.')}
-        <a href="https://learnda.app" style="display:inline-block;margin-top:8px;background:#1f56db;color:#ffffff;text-decoration:none;padding:12px 28px;border-radius:8px;font-size:15px;font-weight:600;">View Plans</a>
+        <a href="${SITE_URL}" style="display:inline-block;margin-top:8px;background:#1f56db;color:#ffffff;text-decoration:none;padding:12px 28px;border-radius:8px;font-size:15px;font-weight:600;">View Plans</a>
       `),
     });
   },
@@ -229,7 +229,7 @@ module.exports = {
       html: wrap(`
         ${h1('Your subscription has expired')}
         ${p(`Your <strong>${planId}</strong> subscription has expired. Renew now to keep access to all your courses and study materials.`)}
-        <a href="https://learnda.app" style="display:inline-block;margin-top:8px;background:#1f56db;color:#ffffff;text-decoration:none;padding:12px 28px;border-radius:8px;font-size:15px;font-weight:600;">Renew subscription</a>
+        <a href="${SITE_URL}" style="display:inline-block;margin-top:8px;background:#1f56db;color:#ffffff;text-decoration:none;padding:12px 28px;border-radius:8px;font-size:15px;font-weight:600;">Renew subscription</a>
       `),
     });
   },
