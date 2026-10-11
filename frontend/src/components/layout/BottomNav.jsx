@@ -1,33 +1,17 @@
 import { useEffect, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import {
-  MdHome,
-  MdSchool,
-  MdQuiz,
-  MdFolder,
-  MdSettings,
-  MdWorkspacePremium,
-  MdMoreHoriz,
-  MdClose,
-} from "react-icons/md";
+import { MdMoreHoriz, MdClose } from "react-icons/md";
+import { useAuth } from "../../hooks/useAuth";
+import { getMoreNav, getPrimaryNav } from "./navItems";
 import "./BottomNav.css";
-
-const NAV_ITEMS = [
-  { name: "Home", path: "/", icon: <MdHome /> },
-  { name: "Learn", path: "/learn", icon: <MdSchool /> },
-  { name: "Practice", path: "/practice", icon: <MdQuiz /> },
-  { name: "My Space", path: "/my-space", icon: <MdFolder /> },
-];
 
 export default function BottomNav() {
   const location = useLocation();
+  const { user } = useAuth();
   const [moreOpen, setMoreOpen] = useState(false);
 
-  const moreItems = [
-    { name: "Files", path: "/resources", icon: <MdFolder /> },
-    { name: "Spotlights", path: "/spotlights", icon: <MdWorkspacePremium /> },
-    { name: "Settings", path: "/settings", icon: <MdSettings /> },
-  ];
+  const primaryItems = getPrimaryNav(user);
+  const moreItems = getMoreNav(user);
   const isMoreActive = moreItems.some((item) => location.pathname.startsWith(item.path));
 
   useEffect(() => {
@@ -37,70 +21,84 @@ export default function BottomNav() {
   useEffect(() => {
     if (!moreOpen) return undefined;
     document.body.style.overflow = "hidden";
+    const onKey = (e) => { if (e.key === "Escape") setMoreOpen(false); };
+    document.addEventListener("keydown", onKey);
     return () => {
       document.body.style.overflow = "";
+      document.removeEventListener("keydown", onKey);
     };
   }, [moreOpen]);
 
   return (
     <>
-      <nav className="bottom-nav" aria-label="Primary">
-        {NAV_ITEMS.map((item) => (
+      <nav className="bottom-nav" aria-label="Main">
+        {primaryItems.map((item) => (
           <NavLink
-            key={item.path}
+            key={item.key}
             to={item.path}
-            end={item.path === "/"}
-            className={({ isActive }) => `bottom-nav-item ${isActive ? "active" : ""}`}
+            end={item.end}
+            className={({ isActive }) => `bottom-nav__item${isActive ? " is-active" : ""}`}
           >
-            <span className="bottom-nav-icon">{item.icon}</span>
-            <span className="bottom-nav-label">{item.name}</span>
+            {({ isActive }) => {
+              const Icon = isActive && item.activeIcon ? item.activeIcon : item.icon;
+              return (
+                <>
+                  <span className="bottom-nav__icon" aria-hidden="true"><Icon /></span>
+                  <span className="bottom-nav__label">{item.name}</span>
+                </>
+              );
+            }}
           </NavLink>
         ))}
         <button
           type="button"
-          className={`bottom-nav-item bottom-nav-more ${isMoreActive ? "active" : ""}`}
+          className={`bottom-nav__item${isMoreActive ? " is-active" : ""}`}
           onClick={() => setMoreOpen(true)}
-          aria-haspopup="true"
+          aria-haspopup="dialog"
           aria-expanded={moreOpen}
         >
-          <span className="bottom-nav-icon"><MdMoreHoriz /></span>
-          <span className="bottom-nav-label">More</span>
+          <span className="bottom-nav__icon" aria-hidden="true"><MdMoreHoriz /></span>
+          <span className="bottom-nav__label">More</span>
         </button>
       </nav>
 
       {moreOpen && (
-        <div className="bottom-nav-sheet-overlay" onClick={() => setMoreOpen(false)}>
+        <div className="bottom-sheet__overlay" onClick={() => setMoreOpen(false)}>
           <div
-            className="bottom-nav-sheet"
+            className="bottom-sheet"
             role="dialog"
             aria-modal="true"
-            aria-label="More navigation"
+            aria-label="More"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="bottom-nav-sheet-header">
-              <span>More</span>
+            <div className="bottom-sheet__head">
+              <span className="bottom-sheet__grip" aria-hidden="true" />
+              <h2>More</h2>
               <button
                 type="button"
-                className="bottom-nav-sheet-close"
+                className="bottom-sheet__close"
                 onClick={() => setMoreOpen(false)}
                 aria-label="Close"
               >
-                <MdClose />
+                <MdClose aria-hidden="true" />
               </button>
             </div>
-            <div className="bottom-nav-sheet-grid">
-              {moreItems.map((item) => (
-                <NavLink
-                  key={item.path}
-                  to={item.path}
-                  className={({ isActive }) => `bottom-nav-sheet-item ${isActive ? "active" : ""}`}
-                  onClick={() => setMoreOpen(false)}
-                >
-                  <span className="bottom-nav-sheet-item-icon">{item.icon}</span>
-                  <span className="bottom-nav-sheet-item-label">{item.name}</span>
-                </NavLink>
-              ))}
-            </div>
+            <ul className="bottom-sheet__list">
+              {moreItems.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <li key={item.key}>
+                    <NavLink
+                      to={item.path}
+                      className={({ isActive }) => `bottom-sheet__link${isActive ? " is-active" : ""}`}
+                    >
+                      <span className="bottom-sheet__icon" aria-hidden="true"><Icon /></span>
+                      {item.name}
+                    </NavLink>
+                  </li>
+                );
+              })}
+            </ul>
           </div>
         </div>
       )}

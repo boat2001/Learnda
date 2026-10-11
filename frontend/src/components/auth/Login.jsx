@@ -90,7 +90,7 @@ export default function Login({
   const [showResetPassword, setShowResetPassword] = useState(false);
   const [showResetConfirmPassword, setShowResetConfirmPassword] = useState(false);
   const [statusMessage, setStatusMessage] = useState('');
-  const [isGoogleReady, setIsGoogleReady] = useState(false);
+  const [googleLoading, setGoogleLoading] = useState(false);
   const [lastUsedMethod, setLastUsedMethod] = useState(() => getLastLoginMethod());
   const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
   const isGoogleEnabled = Boolean(googleClientId);
@@ -119,13 +119,10 @@ export default function Login({
       };
     }
 
+    // Preload the Google script so the button opens quickly when tapped.
     loadGoogleIdentityScript()
-      .then(() => {
-        if (isMounted) setIsGoogleReady(true);
-      })
       .catch(() => {
         if (isMounted) {
-          setIsGoogleReady(false);
           setError('Google sign-in is unavailable right now.');
         }
       });
@@ -134,6 +131,16 @@ export default function Login({
       isMounted = false;
     };
   }, [isGoogleEnabled]);
+
+  // The OAuth redirect leaves this page in the back/forward cache. If the
+  // learner comes back with the Back button, clear the "Opening Google…" state.
+  useEffect(() => {
+    const handlePageShow = (event) => {
+      if (event.persisted) setGoogleLoading(false);
+    };
+    window.addEventListener('pageshow', handlePageShow);
+    return () => window.removeEventListener('pageshow', handlePageShow);
+  }, []);
 
   const handleChange = (e) => {
     setFormData({
@@ -321,23 +328,20 @@ export default function Login({
 
   const handleGoogleUnavailable = () => {
     setError(
-      'Google sign-in is not configured. Set VITE_GOOGLE_CLIENT_ID on the frontend and redeploy.'
+      'Google sign-in is temporarily unavailable. Please use email or phone.'
     );
     trackEvent('google_login_unavailable', { reason: 'missing_client_id' });
   };
 
   const handleGoogleClick = async () => {
+    if (googleLoading) return;
     if (!isGoogleEnabled || !googleClientId) {
       handleGoogleUnavailable();
       return;
     }
-    if (!isGoogleReady) {
-      setError('Google sign-in is still loading. Try again in a moment.');
-      trackEvent('google_login_unavailable', { reason: 'not_ready' });
-      return;
-    }
 
     setError('');
+    setGoogleLoading(true);
 
     try {
       await loadGoogleIdentityScript();
@@ -371,6 +375,7 @@ export default function Login({
 
       client.requestCode();
     } catch (err) {
+      setGoogleLoading(false);
       setError('Google sign-in is unavailable right now.');
       trackEvent('google_login_error', { error: err.message });
     }
@@ -415,11 +420,12 @@ export default function Login({
                       type="button"
                       className="social-btn google google-custom-button auth-login-choice"
                       onClick={handleGoogleClick}
-                      disabled={loading}
+                      disabled={loading || googleLoading}
+                      aria-busy={googleLoading}
                     >
                       <span className="social-btn__leading">
-                        <span className="social-icon"><FcGoogle /></span>
-                        Continue with Google
+                        <span className="social-icon">{googleLoading ? <span className="spinner" aria-hidden="true" /> : <FcGoogle />}</span>
+                        {googleLoading ? 'Opening Google…' : 'Continue with Google'}
                       </span>
                       {lastUsedMethod === 'google' ? (
                         <span className="auth-last-used-badge">Last used</span>

@@ -5,6 +5,9 @@ import api from '../services/api';
 import FormContactIdentity from '../components/common/FormContactIdentity';
 import FormModal from '../components/common/FormModal';
 import { FEATURE_FLAGS } from '../config/featureFlags';
+import PageHeader from '../components/common/PageHeader';
+import PrimaryPageAction from '../components/common/PrimaryPageAction';
+import RelatedPageLink from '../components/common/RelatedPageLink';
 import './SharedPages.css';
 
 const PRIORITIES = [
@@ -67,7 +70,7 @@ export default function FeatureRequests() {
   };
 
   return (
-    <div className="page-shell">
+    <div className="page-shell action-page">
       <FormModal
         isOpen={showModal}
         onClose={closeModal}
@@ -123,99 +126,24 @@ export default function FeatureRequests() {
         )}
       </FormModal>
 
-      <section className="page-hero page-hero-compact page-hero-lean hero-theme-development">
-        <div className="hero-grid">
-          <div>
-            <span className="hero-tag">Product input</span>
-            <h1 className="hero-title">Pitch the improvement students would actually feel.</h1>
-            <p className="hero-subtitle">
-              Share ideas for improvements to Learn, Practice, and Resources.
-            </p>
-            <div className="hero-actions">
-              <button className="btn btn-primary" type="button" onClick={() => setShowModal(true)}>
-                Make a wish
-              </button>
-              {FEATURE_FLAGS.community && (
-                <Link className="btn btn-secondary" to="/forum">
-                  Open community forum
-                </Link>
-              )}
-            </div>
-            <div className="stat-grid">
-              <div className="stat-card">
-                <span className="stat-value">Impact-first</span>
-                <span className="stat-label">Requests that improve outcomes or remove friction rise faster.</span>
-              </div>
-              <div className="stat-card">
-                <span className="stat-value">Community-shaped</span>
-                <span className="stat-label">Repeated requests carry more weight than isolated wish lists.</span>
-              </div>
-              <div className="stat-card">
-                <span className="stat-value">Roadmap-bound</span>
-                <span className="stat-label">The strongest ideas influence both release planning and future priorities.</span>
-              </div>
-            </div>
-          </div>
-          <div className="hero-panel">
-            <p className="panel-title">What makes a request strong</p>
-            <div className="panel-list">
-              <div className="panel-list-item">
-                <span className="panel-dot" />
-                <div>
-                  <strong>Be specific</strong>
-                  <p>Describe the exact friction, not just the feature name you want.</p>
-                </div>
-              </div>
-              <div className="panel-list-item">
-                <span className="panel-dot" />
-                <div>
-                  <strong>Anchor it in workflow</strong>
-                  <p>Strong requests explain where the current experience breaks down.</p>
-                </div>
-              </div>
-              <div className="panel-list-item">
-                <span className="panel-dot" />
-                <div>
-                  <strong>Show the payoff</strong>
-                  <p>Requests move faster when the learning benefit is obvious and defensible.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="page-section">
-        <div className="section-heading">
-          <h2>Prioritization criteria</h2>
-          <p>We use the same criteria for all product requests.</p>
-        </div>
-        <div className="card-grid">
-          {PRIORITIES.map((item) => (
-            <div key={item.title} className="info-card">
-              <h3>{item.title}</h3>
-              <p>{item.body}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="page-section split-grid">
-        <div className="info-card">
-          <h3>Got a wish?</h3>
-          <p>Send your idea with a clear title and the workflow problem it solves. The product team reviews every submission.</p>
-          <button className="btn btn-primary" type="button" onClick={() => setShowModal(true)}>
-            Make a wish
-          </button>
-        </div>
-        <div className="info-card">
-          <h3>Already requested?</h3>
-          <p>Check the platform roadmap to see what's been acknowledged, planned, or in progress.</p>
-          <Link className="btn btn-secondary" to="/roadmap">
-            Review roadmap
+      <PageHeader icon="feature" title="Suggest a feature" description="Share what would make Learnda better.">
+        <button className="btn btn-primary" type="button" onClick={() => setShowModal(true)}>
+          Make a wish
+        </button>
+        {FEATURE_FLAGS.community && (
+          <Link className="btn btn-secondary" to="/forum">
+            Open community forum
           </Link>
-        </div>
-      </section>
+        )}
+      </PageHeader>
+      <PrimaryPageAction icon="wish" label="Make a wish" onClick={() => setShowModal(true)} />
+      <details className="action-page-details">
+        <summary>How we prioritise</summary>
+        <ul>
+          {PRIORITIES.map((item) => <li key={item.title}><strong>{item.title}:</strong> {item.body}</li>)}
+        </ul>
+      </details>
+      <RelatedPageLink to="/roadmap" icon="roadmap" title="Explore the roadmap" description="See what is coming next." />
     </div>
   );
 }

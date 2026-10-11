@@ -99,10 +99,10 @@
 [data-theme='dark'] .dn-supporter-card {
   background: linear-gradient(
     160deg,
-    color-mix(in srgb, var(--dn-accent, #6ed4dd) 10%, rgba(15, 23, 42, 0.92)) 0%,
+    color-mix(in srgb, var(--dn-accent, #8ab4f5) 10%, rgba(15, 23, 42, 0.92)) 0%,
     rgba(15, 23, 42, 0.96) 100%
   );
-  border-color: color-mix(in srgb, var(--dn-accent, #6ed4dd) 22%, transparent);
+  border-color: color-mix(in srgb, var(--dn-accent, #8ab4f5) 22%, transparent);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.22);
 }
 
@@ -116,7 +116,7 @@
 
 [data-theme='dark'] .dn-supporters-note {
   background: rgba(30, 41, 59, 0.65);
-  border-color: rgba(110, 212, 221, 0.2);
+  border-color: rgba(138, 180, 245, 0.2);
   color: #94a3b8;
 }
 

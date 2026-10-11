@@ -6,7 +6,7 @@ const morgan = require('morgan');
 
 const config = require('./config/env');
 const logger = require('./config/logger');
-const { connectAndSync } = require('./models');
+const { connectAndSync, Badge } = require('./models');
 
 // Routes
 const authRoutes = require('./routes/auth');
@@ -40,6 +40,7 @@ const cronRoutes = require('./routes/cron');
 const contentController = require('./controllers/contentController');
 const { optionalAuth } = require('./middleware/auth');
 const { uploadDir } = require('./config/upload');
+const wrapAsyncRoutes = require('./utils/wrapAsyncRoutes');
 
 const app = express();
 let initializationPromise = null;
@@ -78,7 +79,9 @@ app.use(cors({
       return callback(null, true);
     }
 
-    return callback(new Error('Not allowed by CORS'));
+    const error = new Error('Not allowed by CORS');
+    error.status = 403;
+    return callback(error);
   },
   credentials: true
 }));
@@ -186,6 +189,7 @@ app.use('/api/notifications', notificationsRoutes);
 app.use('/api/rewards', rewardsRoutes);
 app.use('/api/community', communityRoutes);
 app.use('/api/resources', resourcesRoutes);
+app.use('/api/applications', applicationsRoutes);
 app.use('/api/blog', blogRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/me', meRoutes);
@@ -197,6 +201,7 @@ app.use('/api/cron', cronRoutes);
 
 // Mobile alias
 app.get('/search', optionalAuth, contentController.search);
+wrapAsyncRoutes(app._router);
 
 // 404
 app.use((req, res) => {
@@ -207,7 +212,14 @@ app.use((req, res) => {
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
   logger.error(err);
-  res.status(500).json({ success: false, error: 'Server error' });
+  if (res.headersSent) return next(err);
+  const status = Number(err.status || err.statusCode) || 500;
+  const message = err.type === 'entity.parse.failed'
+    ? 'Invalid JSON body'
+    : err.type === 'entity.too.large'
+      ? 'Request body too large'
+      : status < 500 ? err.message : 'Server error';
+  res.status(status).json({ success: false, error: message });
 });
 
 // Initialize DB on first import
@@ -218,8 +230,10 @@ app.init = () => {
   initializationPromise = (async () => {
     await connectAndSync();
     try {
-      const gamificationService = require('./services/gamificationService');
-      await gamificationService.initializeDefaultBadges();
+      if (config.features.enableGamification && await Badge.count() === 0) {
+        const gamificationService = require('./services/gamificationService');
+        await gamificationService.initializeDefaultBadges();
+      }
     } catch (err) {
       logger.error('Badge seeding failed:', err);
     }

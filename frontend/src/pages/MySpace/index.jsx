@@ -9,7 +9,7 @@
 import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import {
-  MdFolder, MdBookmark, MdSchool, MdLocalFireDepartment, MdChevronRight,
+  MdFolder, MdBookmark, MdSchool, MdMenuBook, MdChevronRight, MdBackpack,
 } from 'react-icons/md';
 import { usePLS } from '../../hooks/usePLS';
 import { useAuth } from '../../hooks/useAuth';
@@ -32,8 +32,11 @@ export default function MySpace() {
   return (
     <div className="my-space">
       <header className="my-space__header">
-        <h1 className="my-space__title">My Space</h1>
-        <p className="my-space__sub">Everything you have saved, in one place.</p>
+        <span className="my-space__icon" aria-hidden="true"><MdBackpack /></span>
+        <div>
+          <h1 className="my-space__title">My Space</h1>
+          <p className="my-space__sub">Your school bag: everything you have saved, in one place.</p>
+        </div>
       </header>
 
       {classLevel && (
@@ -53,7 +56,7 @@ export default function MySpace() {
             </div>
           </div>
           <div className="my-space__status-item">
-            <span className="my-space__status-icon" aria-hidden="true"><MdLocalFireDepartment /></span>
+            <span className="my-space__status-icon" aria-hidden="true"><MdMenuBook /></span>
             <div>
               <span className="my-space__status-label">{unitNoun.plural}</span>
               <strong className="my-space__status-value">{currentCourses?.length || 0}</strong>

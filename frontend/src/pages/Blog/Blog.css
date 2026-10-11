@@ -28,6 +28,14 @@
   margin-top: 0.9rem;
 }
 
+.blog-toolbar {
+  margin-top: -0.35rem;
+}
+
+.blog-toolbar .search-bar {
+  flex: 1 1 16rem;
+}
+
 .blog-contribute {
   margin-top: 0;
 }
@@ -70,7 +78,8 @@
   cursor: pointer;
 }
 
-.blog-hero .search-button svg {
+.blog-hero .search-button svg,
+.blog-toolbar .search-button svg {
   width: 16px;
   height: 16px;
 }
@@ -437,12 +446,12 @@
 }
 
 [data-theme="dark"] .blog-hero {
-  background: linear-gradient(118deg, rgba(43, 98, 196, 0.12) 0%, rgba(79, 179, 173, 0.06) 62%, rgba(15, 23, 42, 0.12) 100%);
-  border-color: rgba(79, 179, 173, 0.16);
+  background: linear-gradient(118deg, rgba(43, 98, 196, 0.12) 0%, rgba(91, 149, 234, 0.06) 62%, rgba(15, 23, 42, 0.12) 100%);
+  border-color: rgba(91, 149, 234, 0.16);
 }
 
 [data-theme="dark"] .blog-hero .hero-tag {
-  background: rgba(79, 179, 173, 0.14);
+  background: rgba(91, 149, 234, 0.14);
   color: #7dd3d0;
 }
 
@@ -469,7 +478,7 @@
 [data-theme="dark"] .featured-card,
 [data-theme="dark"] .empty-state,
 [data-theme="dark"] .loading-state {
-  border-top-color: #4fb3ad;
+  border-top-color: #5b95ea;
   box-shadow: none;
 }
 
@@ -505,7 +514,7 @@
 
 [data-theme="dark"] .category-card.active {
   background: #2b62c4;
-  border-color: #4fb3ad;
+  border-color: #5b95ea;
   color: #ffffff;
 }
 
@@ -516,7 +525,7 @@
 [data-theme="dark"] .blog-cta {
   background: linear-gradient(160deg, rgba(17, 24, 39, 0.96) 0%, rgba(15, 23, 42, 0.86) 100%);
   border-color: rgba(148, 163, 184, 0.16);
-  border-top-color: #4fb3ad;
+  border-top-color: #5b95ea;
 }
 
 @media (max-width: 900px) {

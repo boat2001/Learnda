@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { FaApple } from 'react-icons/fa6';
 import { MdAndroid, MdAppShortcut } from 'react-icons/md';
 import FormModal from '../components/common/FormModal';
+import PageHeader from '../components/common/PageHeader';
 import {
   getManualInstallInstructions,
   getPwaDeferredPrompt,
@@ -17,25 +18,21 @@ const APP_LINKS = {
 };
 
 const PWA_BENEFITS = [
-  'Install in seconds—no app store account required on most devices.',
-  'Home screen or taskbar shortcut: open Learnda in one tap.',
-  'Same account and contribution plan as the website—nothing to re-buy.',
-  'Smaller footprint than a typical native app; updates roll out automatically.',
-  'Repeat visits feel snappier thanks to smart caching of core assets.',
+  'Installs in seconds, no app store needed.',
+  'Opens from your home screen in one tap.',
+  'Same account and plan as the website.',
 ];
 
 const ANDROID_BENEFITS = [
-  'Install and updates through Google Play, with familiar Android permissions.',
-  'Room for tighter phone integrations—richer notifications and widgets as we add them.',
-  'Optimized for Material-style navigation and different screen sizes.',
-  'Easy to reinstall or move when you change devices via your Google account.',
+  'Install and update through Google Play.',
+  'Richer notifications as we add them.',
+  'Easy to reinstall on a new phone.',
 ];
 
 const IOS_BENEFITS = [
-  'Discover and install from the App Store with ratings, screenshots, and privacy labels.',
-  'Polished experience tuned for iPhone and iPad, including safe-area layouts.',
-  'Potential for deeper Apple integrations—Sign in with Apple, Handoff, and more over time.',
-  'Family Sharing and standard iOS backup/restore when we publish to the store.',
+  'Install from the App Store.',
+  'Tuned for iPhone and iPad screens.',
+  'Works with Family Sharing.',
 ];
 
 export default function Download() {
@@ -89,16 +86,9 @@ export default function Download() {
   };
 
   return (
-    <div className="page-shell download-page">
-      <section className="page-hero page-hero-compact page-hero-lean">
-        <div className="download-page__intro">
-          <span className="hero-tag">Download app</span>
-          <h1 className="hero-title">Take Learnda with you.</h1>
-          <p className="hero-subtitle">
-            Pick how you want Learnda on your device. The web app is ready today; Play Store and App Store builds
-            will land here when they are ready.
-          </p>
-        </div>
+    <div className="page-shell footer-page download-page">
+      <PageHeader icon="download" title="Get the app" description="The web app is ready today. Play Store and App Store are coming." />
+      <section className="page-section download-page__content">
 
         <div className="download-install-grid">
           <article className="download-option download-option--pwa">

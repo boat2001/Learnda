@@ -24,7 +24,7 @@ const dismiss = () => {
 /**
  * Gentle nudge for signed-in users who deferred their academic details at
  * sign-up. Dismissible (24h). Tapping "Add details" routes to /learn, where the
- * AcademicProfileGate collects the deferred information.
+ * class placement prompt asks for it.
  */
 export default function ProfileCompletionBanner() {
   const { user, isAuthenticated } = useAuth();
@@ -58,10 +58,10 @@ export default function ProfileCompletionBanner() {
     <div className="supporter-banner" role="complementary" aria-label="Complete your profile">
       <div className="supporter-banner__inner">
         <p className="supporter-banner__text">
-          Add your <strong>college and programme</strong> to unlock the courses made for your class.
+          Tell us <strong>which class you are in</strong> to see your lessons.
         </p>
         <button type="button" className="supporter-banner__cta" onClick={handleAdd}>
-          Add details
+          Choose class
         </button>
       </div>
       <button

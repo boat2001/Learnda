@@ -7,8 +7,6 @@ const { sendSms } = require('./smsService');
 const {
   getEngagementCta,
   personalizeMessage,
-  buildEngagementEmailHtml,
-  buildEngagementEmailText,
   buildEngagementSmsText,
 } = require('../utils/reengagementContent');
 

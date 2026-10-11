@@ -1,8 +1,10 @@
-import { useNavigate } from 'react-router-dom';
 import {
   FiUsers, FiGlobe, FiEdit, FiMapPin, FiRefreshCw,
   FiHeart, FiDollarSign,
 } from 'react-icons/fi';
+import PageHeader from '../components/common/PageHeader';
+import RelatedPageLink from '../components/common/RelatedPageLink';
+import SectionHeadingIcon from '../components/common/SectionHeadingIcon';
 import './SharedPages.css';
 import './About.css';
 import './Team.css';
@@ -76,29 +78,10 @@ const CHAPTERS = [
 
 
 export default function About() {
-  const navigate = useNavigate();
-
   return (
-    <div className="page-shell">
+    <div className="page-shell footer-page">
 
-      {/* Hero */}
-      <section className="page-hero hero-theme-mission page-hero-compact">
-        <div className="hero-grid">
-          <div>
-            <span className="hero-tag">Our story</span>
-            <h1 className="hero-title">One student's problem.<br />Every student's solution.</h1>
-            <div className="hero-actions">
-              <button
-                className="btn btn-primary"
-                type="button"
-                onClick={() => navigate('/team')}
-              >
-                Meet the team
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
+      <PageHeader icon="about" title="About Learnda" description="Lessons and practice for every class from KG 1 to SHS 3." />
 
       {/* CEO quote */}
       <div className="tm-celebrate about-ceo-quote">
@@ -113,8 +96,8 @@ export default function About() {
       {/* Origin Story Timeline */}
       <section className="page-section">
         <div className="section-heading section-heading--wide">
-          <h2>Why Learnda works this way</h2>
-          <p>Five decisions that shape everything in the app, from Kindergarten through Senior High School.</p>
+          <h2><SectionHeadingIcon name="journey" /><span className="section-heading__title">Why Learnda works this way</span></h2>
+          <p>Five decisions that shape everything in the app.</p>
         </div>
         <div className="about-timeline">
           {CHAPTERS.map((chapter, index) => {
@@ -138,12 +121,14 @@ export default function About() {
                     <span className="about-chapter__year">{chapter.year}</span>
                   </div>
                   <h3 className="about-chapter__headline">{chapter.headline}</h3>
-                  {Array.isArray(chapter.summary) ? (
-                    chapter.summary.map((para, i) => (
-                      <p key={i} className="about-chapter__body">{para}</p>
-                    ))
-                  ) : (
-                    <p className="about-chapter__body">{chapter.summary}</p>
+                  <p className="about-chapter__body">{chapter.summary[0]}</p>
+                  {chapter.summary.length > 1 && (
+                    <details className="about-chapter__more">
+                      <summary>Read more</summary>
+                      {chapter.summary.slice(1).map((para) => (
+                        <p key={para} className="about-chapter__body">{para}</p>
+                      ))}
+                    </details>
                   )}
                 </div>
               </div>
@@ -179,30 +164,9 @@ export default function About() {
         </div>
       </section>
 
-      {/* CTA */}
       <section className="page-section about-cta-grid">
-        <div className="info-card">
-          <h3>Join the team</h3>
-          <p>Learnda is student-built and student-run. Contribute your skills &mdash; dev, design, content &mdash; and help build it.</p>
-          <button
-            className="btn btn-secondary"
-            type="button"
-            onClick={() => navigate('/contribute')}
-          >
-            Get involved
-          </button>
-        </div>
-        <div className="info-card">
-          <h3>Support the mission</h3>
-          <p>Every contribution helps Learnda to keep growing, stay updated, and remain accessible for every student who needs it.</p>
-          <button
-            className="btn btn-secondary"
-            type="button"
-            onClick={() => navigate('/contribute')}
-          >
-            Contribute funds
-          </button>
-        </div>
+        <RelatedPageLink to="/team" icon="join" title="Meet the team" description="The people building Learnda." />
+        <RelatedPageLink to="/contribute" icon="support" title="Support the mission" description="Every contribution helps Learnda grow." />
       </section>
 
 

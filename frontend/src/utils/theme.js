@@ -36,7 +36,7 @@ export const applyThemePreference = (preference) => {
     root.setAttribute("data-theme", resolvedTheme);
     root.setAttribute("data-theme-mode", normalizedPreference);
     root.style.colorScheme = resolvedTheme;
-    root.style.backgroundColor = resolvedTheme === "dark" ? "#131b24" : "#f7f8fb";
+    root.style.backgroundColor = resolvedTheme === "dark" ? "#0f1a2b" : "#fbf7ef";
 
     // Keep the mobile browser chrome (address bar) in step with the chosen
     // theme, not just the OS preference.
@@ -44,11 +44,11 @@ export const applyThemePreference = (preference) => {
       document.getElementById("theme-color-meta") ||
       document.querySelector('meta[name="theme-color"]');
     if (themeColorMeta) {
-      themeColorMeta.setAttribute("content", resolvedTheme === "dark" ? "#0f141c" : "#2b62c4");
+      themeColorMeta.setAttribute("content", resolvedTheme === "dark" ? "#0f1a2b" : "#fbf7ef");
     }
 
     if (document.body) {
-      document.body.style.backgroundColor = resolvedTheme === "dark" ? "#131b24" : "#f7f8fb";
+      document.body.style.backgroundColor = resolvedTheme === "dark" ? "#0f1a2b" : "#fbf7ef";
     }
 
     if (typeof window !== "undefined" && typeof window.requestAnimationFrame === "function") {

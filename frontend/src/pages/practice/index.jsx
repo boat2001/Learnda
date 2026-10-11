@@ -7,19 +7,16 @@
 // assessments; JHS and SHS get the full practice-heavy surface.
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import {
-  MdQuiz, MdLock, MdHistory, MdRefresh, MdChevronRight, MdAutoAwesome,
-} from 'react-icons/md';
+import { MdRefresh, MdAutoAwesome, MdTimer, MdEditNote } from 'react-icons/md';
 import usePageTitle from '../../hooks/usePageTitle';
 import api from '../../services/api';
 import {
-  ACCESS_MODES,
-  LEVEL_GROUPS,
   getPresentation,
   getUnitNoun,
   getFeatureAccess,
 } from '../../constants/education';
 import ClassPlacementPrompt from '../learn/ClassPlacementPrompt';
+import SubjectTile from '../../components/learning/SubjectTile';
 import './Practice.css';
 
 /** §7: what practice looks like at this level, in the learner's own words. */
@@ -31,54 +28,28 @@ const practiceCopyFor = (levelGroup) => {
 
   if (exams === 'limited') {
     return {
-      title: 'Practice what you have learnt',
-      sub: 'Short, friendly question sets. There is no score to worry about — just try your best.',
-      cta: 'Start practice',
+      title: 'Practise what you learnt',
+      sub: 'Short, friendly questions. No pressure, just try your best.',
+      exam: null,
     };
   }
 
+  const exam = levelGroup === 'SHS' ? 'WASSCE' : 'BECE';
   return {
-    title: 'Practice and past questions',
-    sub: 'Work through question sets for your class, then test yourself under exam conditions.',
-    cta: 'Start practice',
+    title: `Practice and ${exam} prep`,
+    sub: `Question sets for your class, then timed papers in the style of the ${exam}.`,
+    exam,
   };
 };
 
-function PracticeCard({ subject, unitNoun, presentation }) {
-  const initials = subject.name.slice(0, 2).toUpperCase();
-  return (
-    <Link to={`/practice/${subject.slug}`} className="practice-card">
-      <span className="practice-card__mark" aria-hidden="true">
-        {subject.icon || initials}
-      </span>
-      <span className="practice-card__body">
-        <h3 className="practice-card__title">{subject.name}</h3>
-        {presentation.textDensity === 'full' && (
-          <p className="practice-card__meta">
-            {subject.required ? `Core ${unitNoun.singular.toLowerCase()}` : unitNoun.singular}
-          </p>
-        )}
-      </span>
-      <MdChevronRight className="practice-card__chevron" aria-hidden="true" />
-    </Link>
-  );
-}
-
 export default function PracticeIndex() {
   const [state, setState] = useState({ loading: true, error: '', data: null });
-  const [classLevels, setClassLevels] = useState([]);
-  const [viewingClass, setViewingClass] = useState(null);
 
   const load = useCallback(async () => {
     setState((s) => ({ ...s, loading: true, error: '' }));
     try {
-      const [subjectsRes, levelsRes] = await Promise.all([
-        api.subjects.getAll(),
-        api.subjects.getClassLevels().catch(() => null),
-      ]);
+      const subjectsRes = await api.subjects.getAll();
       setState({ loading: false, error: '', data: subjectsRes?.data || null });
-      setClassLevels(levelsRes?.data?.class_levels || []);
-      setViewingClass(subjectsRes?.data?.class_level || null);
     } catch (err) {
       setState({
         loading: false,
@@ -150,6 +121,7 @@ export default function PracticeIndex() {
   }
 
   const subjects = data?.subjects || [];
+  const tileMode = presentation.mode === 'structured' ? 'structured' : 'visual';
 
   return (
     <div
@@ -157,43 +129,19 @@ export default function PracticeIndex() {
       data-level-group={levelGroup}
     >
       <header className="practice-header">
-        <p className="practice-header__eyebrow">
-          <MdQuiz aria-hidden="true" /> {data?.class_label}
-        </p>
-        <h1 className="practice-header__title">{copy.title}</h1>
-        <p className="practice-header__sub">{copy.sub}</p>
+        <span className="practice-header__icon" aria-hidden="true"><MdEditNote /></span>
+        <div>
+          <span className="practice-header__class">{data?.class_label}</span>
+          <h1 className="practice-header__title">{copy.title}</h1>
+          <p className="practice-header__sub">{copy.sub}</p>
+        </div>
       </header>
 
-      {levelGroup !== LEVEL_GROUPS.KINDERGARTEN && classLevels.length > 0 && (
-        <nav className="class-ladder" aria-label="Your classes">
-          <ul className="class-ladder__list">
-            {classLevels.map((level) => {
-              const isLocked = level.access === ACCESS_MODES.LOCKED;
-              return (
-                <li key={level.code}>
-                  <button
-                    type="button"
-                    className={[
-                      'class-ladder__item',
-                      level.code === viewingClass ? 'is-active' : '',
-                      isLocked ? 'is-locked' : '',
-                      level.access === ACCESS_MODES.REVISION ? 'is-revision' : '',
-                    ].filter(Boolean).join(' ')}
-                    onClick={() => !isLocked && setViewingClass(level.code)}
-                    disabled={isLocked}
-                    title={isLocked ? level.note : undefined}
-                  >
-                    <span className="class-ladder__label">{level.label}</span>
-                    {isLocked && <MdLock className="class-ladder__icon" aria-hidden="true" />}
-                    {level.access === ACCESS_MODES.REVISION && (
-                      <MdHistory className="class-ladder__icon" aria-hidden="true" />
-                    )}
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
-        </nav>
+      {copy.exam && (
+        <p className="practice-tip">
+          <MdTimer aria-hidden="true" />
+          Open a subject to choose quick practice or a timed {copy.exam}-style paper.
+        </p>
       )}
 
       {subjects.length === 0 ? (
@@ -202,16 +150,20 @@ export default function PracticeIndex() {
           <p>Practice sets for {data?.class_label} are being prepared.</p>
         </div>
       ) : (
-        <div className="practice-list">
-          {subjects.map((subject) => (
-            <PracticeCard
-              key={subject.id || subject.slug}
-              subject={subject}
-              unitNoun={unitNoun}
-              presentation={presentation}
-            />
-          ))}
-        </div>
+        <section aria-label={`Practise by ${unitNoun.singular.toLowerCase()}`}>
+          <h2 className="practice-list__title">Choose a {unitNoun.singular.toLowerCase()}</h2>
+          <div className={`practice-list practice-list--${tileMode}`}>
+            {subjects.map((subject) => (
+              <SubjectTile
+                key={subject.id || subject.slug}
+                subject={subject}
+                mode={tileMode}
+                showProgress={false}
+                to={`/practice/${subject.slug}`}
+              />
+            ))}
+          </div>
+        </section>
       )}
     </div>
   );

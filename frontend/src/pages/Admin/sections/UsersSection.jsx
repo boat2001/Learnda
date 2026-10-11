@@ -29,7 +29,7 @@ function fmt(n) {
 }
 
 const TEAL = '#2b62c4';
-const COLORS = ['#2b62c4', '#4fb3ad', '#2563eb', '#d97706', '#059669', '#dc2626', '#7c3aed', '#94a3b8'];
+const COLORS = ['#2b62c4', '#5b95ea', '#2563eb', '#d97706', '#059669', '#dc2626', '#7c3aed', '#94a3b8'];
 
 function chartColors() {
   const s = getComputedStyle(document.documentElement);

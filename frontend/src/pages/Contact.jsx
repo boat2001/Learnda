@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useAnalyticsWithContext } from '../hooks/useAnalytics';
-import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { FiMail, FiMessageSquare, FiPhone } from 'react-icons/fi';
 import { FaWhatsapp } from 'react-icons/fa6';
 import { useAuth } from '../hooks/useAuth';
 import api from '../services/api';
 import FormContactIdentity from '../components/common/FormContactIdentity';
 import FormModal from '../components/common/FormModal';
+import PageHeader from '../components/common/PageHeader';
+import RelatedPageLink from '../components/common/RelatedPageLink';
 import './SharedPages.css';
 
 
@@ -16,10 +18,9 @@ const getDisplayName = (user) =>
 
 export default function Contact() {
   const [searchParams] = useSearchParams();
-  const navigate = useNavigate();
   const { user, isAuthenticated } = useAuth();
   const { trackEvent } = useAnalyticsWithContext();
-const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const [formState, setFormState] = useState({ name: '', email: '', topic: 'General', message: '' });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -73,7 +74,7 @@ const [showModal, setShowModal] = useState(false);
   };
 
   return (
-    <div className="page-shell">
+    <div className="page-shell footer-page compact-info-page">
       <FormModal
         isOpen={showModal}
         onClose={closeModal}
@@ -126,74 +127,15 @@ const [showModal, setShowModal] = useState(false);
         )}
       </FormModal>
 
-      <section className="page-hero page-hero-compact page-hero-lean hero-theme-support">
-        <div className="hero-grid">
-          <div>
-            <span className="hero-tag">Support and outreach</span>
-            <h1 className="hero-title">Get answers, raise issues, or start the conversation that moves things forward.</h1>
-            <p className="hero-subtitle">
-              This page combines direct contact, quick support answers, and the main paths for reaching the Learnda team.
-            </p>
-            <div className="hero-actions">
-              <button className="btn btn-primary" type="button" onClick={() => setShowModal(true)}>
-                Send us a message
-              </button>
-              <button className="btn btn-secondary" type="button" onClick={() => navigate('/contribute')}>
-                Chip in to Learnda
-              </button>
-            </div>
-            <div className="stat-grid">
-              <div className="stat-card">
-                <span className="stat-value">Direct contact</span>
-                <span className="stat-label">Support, partnerships, billing, and account questions.</span>
-              </div>
-<div className="stat-card">
-                <span className="stat-value">Issue-ready</span>
-                <span className="stat-label">When something is broken, jump straight to the bug-report path.</span>
-              </div>
-            </div>
-          </div>
-          <div className="hero-panel">
-            <p className="panel-title">Support highlights</p>
-            <div className="panel-list">
-              <div className="panel-list-item">
-                <span className="panel-dot" />
-                <div>
-                  <strong>Fast replies</strong>
-                  <p>Average response time under 6 hours.</p>
-                </div>
-              </div>
-              <div className="panel-list-item">
-                <span className="panel-dot" />
-                <div>
-                  <strong>Guided setup</strong>
-                  <p>Step-by-step help for learners getting started.</p>
-                </div>
-              </div>
-              <div className="panel-list-item">
-                <span className="panel-dot" />
-                <div>
-                  <strong>Safety</strong>
-                  <p>Clear flow for reporting community issues.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <PageHeader icon="contact" title="Contact us" description="Questions from parents, teachers or learners. We reply within 24‑48 hours." />
 
       <section className="page-section">
-        <div className="section-heading">
-          <h2>Reach us directly</h2>
-          <p>Pick the channel that works best for you.</p>
-        </div>
         <div className="contact-grid">
           <a className="contact-box" href="mailto:support@learnda.app">
             <div className="contact-box__icon"><FiMail /></div>
             <div className="contact-box__body">
               <span className="contact-box__label">Email</span>
               <span className="contact-box__value">support@learnda.app</span>
-              <span className="contact-box__desc">For support, billing, and partnerships.</span>
             </div>
           </a>
           <a className="contact-box" href="https://wa.me/233591661816" target="_blank" rel="noopener noreferrer">
@@ -201,7 +143,6 @@ const [showModal, setShowModal] = useState(false);
             <div className="contact-box__body">
               <span className="contact-box__label">WhatsApp</span>
               <span className="contact-box__value">+233 591 661 816</span>
-              <span className="contact-box__desc">Quick messages and community announcements.</span>
             </div>
           </a>
           <a className="contact-box" href="tel:+233591661816">
@@ -209,20 +150,19 @@ const [showModal, setShowModal] = useState(false);
             <div className="contact-box__body">
               <span className="contact-box__label">Phone</span>
               <span className="contact-box__value">+233 591 661 816</span>
-              <span className="contact-box__desc">Call us during business hours.</span>
             </div>
           </a>
           <button className="contact-box" type="button" onClick={() => setShowModal(true)}>
             <div className="contact-box__icon contact-box__icon--message"><FiMessageSquare /></div>
             <div className="contact-box__body">
               <span className="contact-box__label">Send a message</span>
-              <span className="contact-box__value">Contact form</span>
-              <span className="contact-box__desc">For detailed enquiries that need a written response.</span>
+              <span className="contact-box__value">Open contact form</span>
             </div>
           </button>
         </div>
       </section>
 
+      <RelatedPageLink to="/report" icon="idea" title="Something not working?" description="Report a problem instead." />
     </div>
   );
 }

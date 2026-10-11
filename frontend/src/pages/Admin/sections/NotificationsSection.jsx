@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { FiBell, FiSend, FiCalendar, FiChevronDown, FiChevronRight, FiRefreshCw, FiClock, FiMail, FiSmartphone, FiUsers, FiBarChart2, FiBookOpen } from 'react-icons/fi';
 import api from '../../../services/api';
+import { CLASS_LEVELS } from '../../../constants/education';
 
 const TRIGGERS = [
   {
@@ -316,233 +317,6 @@ function TriggerCard({ item }) {
   );
 }
 
-function AcademicStateSection() {
-  const [scope, setScope]               = useState('single');
-  const [institutions, setInstitutions] = useState([]);
-  const [universities, setUniversities] = useState([]);
-  const [selectedId, setSelectedId]     = useState('');
-  const [selectedUni, setSelectedUni]   = useState('');
-  const [action, setAction]             = useState('semester_switch');
-  const [vacationEndsOn, setVacationEndsOn] = useState('');
-  const [loading, setLoading]           = useState(true);
-  const [uniLoading, setUniLoading]     = useState(false);
-  const [saving, setSaving]             = useState(false);
-  const [result, setResult]             = useState(null);
-
-  const loadInstitutions = useCallback(async () => {
-    setLoading(true);
-    try {
-      const res = await api.admin.getAcademicStateInstitutions();
-      if (res?.success) {
-        const list = res.institutions || [];
-        setInstitutions(list);
-        setSelectedId((cur) => cur || list[0]?.id || '');
-      }
-    } catch { setInstitutions([]); }
-    finally { setLoading(false); }
-  }, []);
-
-  useEffect(() => { loadInstitutions(); }, [loadInstitutions]);
-
-  const handleScopeChange = async (next) => {
-    setScope(next);
-    setResult(null);
-    if (next === 'university' && universities.length === 0) {
-      setUniLoading(true);
-      try {
-        const res = await api.admin.getAcademicStateUniversities();
-        if (res?.success) {
-          const list = res.universities || [];
-          setUniversities(list);
-          setSelectedUni((cur) => cur || list[0]?.name || '');
-        }
-      } catch { /* ignore */ }
-      finally { setUniLoading(false); }
-    }
-  };
-
-  const selectedInstitution = institutions.find((i) => i.id === selectedId) || null;
-  const selectedUniversity  = universities.find((u) => u.name === selectedUni) || null;
-
-  const handleApply = async () => {
-    if (scope === 'single' && !selectedId) return;
-    if (scope === 'university' && !selectedUni) return;
-    setSaving(true);
-    setResult(null);
-    try {
-      const payload = { scope, action, vacationEndsOn: vacationEndsOn || null };
-      if (scope === 'single') payload.institutionId = selectedId;
-      if (scope === 'university') payload.universityName = selectedUni;
-      const res = await api.admin.applyAcademicState(payload);
-      if (res?.success) {
-        const u = res.updated_users;
-        const s = res.skipped_users;
-        const c = res.institutions_updated;
-        const suffix = scope !== 'single' ? ` across ${c} college${c !== 1 ? 's' : ''}` : '';
-        setResult({ ok: true, msg: `${u} student${u !== 1 ? 's' : ''} updated${s ? `, ${s} skipped` : ''}${suffix}.` });
-        await loadInstitutions();
-      } else {
-        setResult({ ok: false, msg: res?.error || 'Failed to apply state.' });
-      }
-    } catch { setResult({ ok: false, msg: 'Server error.' }); }
-    finally { setSaving(false); }
-  };
-
-  const scopeButtons = [
-    { id: 'single',     label: 'Single College' },
-    { id: 'university', label: 'By University'  },
-    { id: 'all',        label: 'All Colleges'   },
-  ];
-
-  return (
-    <div className="adm-card">
-      <div className="adm-card-header">
-        <h3 className="adm-card-title">College Academic State</h3>
-        <span className="adm-badge adm-badge-gray">{institutions.length} colleges</span>
-      </div>
-      <div style={{ padding: '0 20px 20px', display: 'grid', gap: 16 }}>
-        <div style={{ fontSize: 13, color: 'var(--adm-text-muted)' }}>
-          Apply a new academic state to one college, all colleges affiliated to a university, or every college at once. Semester switch moves students to Semester 2 on the same level; level upgrade moves students to the next level, Semester 1. Only students who turned off academic auto updates are skipped.
-        </div>
-
-        {/* Scope selector */}
-        <div>
-          <div style={{ fontSize: 12, fontWeight: 700, color: 'var(--adm-text-muted)', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: 8 }}>
-            Apply To
-          </div>
-          <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-            {scopeButtons.map((btn) => (
-              <button
-                key={btn.id}
-                type="button"
-                onClick={() => handleScopeChange(btn.id)}
-                className={`adm-btn ${scope === btn.id ? 'adm-btn-primary' : 'adm-btn-outline'}`}
-                style={{ fontSize: 12, padding: '5px 14px' }}
-              >
-                {btn.label}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {loading ? (
-          <div className="adm-loading"><div className="adm-spinner" /> Loading colleges…</div>
-        ) : (
-          <>
-            {/* Scope-specific picker */}
-            {scope === 'single' && (
-              <div>
-                <label style={{ display: 'grid', gap: 6, fontSize: 12, color: 'var(--adm-text-muted)', maxWidth: 340 }}>
-                  College
-                  <select
-                    className="adm-select"
-                    value={selectedId}
-                    onChange={(e) => setSelectedId(e.target.value)}
-                  >
-                    {institutions.map((inst) => (
-                      <option key={inst.id} value={inst.id}>{inst.name}</option>
-                    ))}
-                  </select>
-                </label>
-                {selectedInstitution && (
-                  <div style={{ fontSize: 12, color: 'var(--adm-text-muted)', marginTop: 8 }}>
-                    <strong style={{ color: 'var(--adm-text)' }}>{selectedInstitution.student_count}</strong> students linked.
-                    {selectedInstitution.academic_state?.action && (
-                      <> Last state: <strong style={{ color: 'var(--adm-text)' }}>{selectedInstitution.academic_state.action.replace('_', ' ')}</strong>
-                      {selectedInstitution.academic_state.applied_at
-                        ? ` on ${new Date(selectedInstitution.academic_state.applied_at).toLocaleDateString()}`
-                        : ''}.
-                      </>
-                    )}
-                  </div>
-                )}
-              </div>
-            )}
-
-            {scope === 'university' && (
-              <div>
-                {uniLoading ? (
-                  <div className="adm-loading"><div className="adm-spinner" /> Loading universities…</div>
-                ) : (
-                  <>
-                    <label style={{ display: 'grid', gap: 6, fontSize: 12, color: 'var(--adm-text-muted)', maxWidth: 340 }}>
-                      Affiliated University
-                      <select
-                        className="adm-select"
-                        value={selectedUni}
-                        onChange={(e) => setSelectedUni(e.target.value)}
-                      >
-                        {universities.map((u) => (
-                          <option key={u.name} value={u.name}>{u.name}</option>
-                        ))}
-                      </select>
-                    </label>
-                    {selectedUniversity && (
-                      <div style={{ marginTop: 10, padding: '10px 12px', background: 'var(--adm-surface)', borderRadius: 'var(--adm-radius-sm)', border: '1px solid var(--adm-border)' }}>
-                        <div style={{ fontSize: 12, fontWeight: 700, color: 'var(--adm-text)', marginBottom: 6 }}>
-                          {selectedUniversity.colleges.length} affiliated college{selectedUniversity.colleges.length !== 1 ? 's' : ''} will be updated:
-                        </div>
-                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
-                          {selectedUniversity.colleges.map((c) => (
-                            <span key={c.id} className="adm-badge adm-badge-blue" style={{ fontSize: 11 }}>{c.name}</span>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-                  </>
-                )}
-              </div>
-            )}
-
-            {scope === 'all' && (
-              <div style={{ padding: '10px 12px', background: 'rgba(251, 99, 52,0.06)', border: '1px solid rgba(251, 99, 52,0.2)', borderRadius: 'var(--adm-radius-sm)', fontSize: 13, color: 'var(--adm-text)' }}>
-                ⚠️ This will apply the selected state to <strong>all {institutions.length} colleges</strong> and every student linked to them. Proceed carefully.
-              </div>
-            )}
-
-            {/* Shared controls */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: 10 }}>
-              <label style={{ display: 'grid', gap: 6, fontSize: 12, color: 'var(--adm-text-muted)' }}>
-                New State
-                <select className="adm-select" value={action} onChange={(e) => setAction(e.target.value)}>
-                  <option value="semester_switch">Semester switch: same level, Semester 2</option>
-                  <option value="level_upgrade">Level upgrade: next level, Semester 1</option>
-                </select>
-              </label>
-              <label style={{ display: 'grid', gap: 6, fontSize: 12, color: 'var(--adm-text-muted)' }}>
-                Vacation Ends
-                <input
-                  type="date"
-                  className="adm-input"
-                  value={vacationEndsOn}
-                  onChange={(e) => setVacationEndsOn(e.target.value)}
-                />
-              </label>
-            </div>
-
-            <div style={{ display: 'flex', gap: 10, alignItems: 'center', flexWrap: 'wrap' }}>
-              {result && (
-                <span style={{ fontSize: 12, color: result.ok ? 'var(--adm-green)' : 'var(--adm-red)' }}>
-                  {result.msg}
-                </span>
-              )}
-              <div style={{ flex: 1 }} />
-              <button
-                type="button"
-                className="adm-btn adm-btn-primary"
-                onClick={handleApply}
-                disabled={saving || (scope === 'single' && !selectedId) || (scope === 'university' && !selectedUni)}
-              >
-                {saving ? 'Applying…' : scope === 'all' ? `Apply to All ${institutions.length} Colleges` : 'Apply State'}
-              </button>
-            </div>
-          </>
-        )}
-      </div>
-    </div>
-  );
-}
-
 function ReengagementSection() {
   const [settings, setSettings] = useState(DEFAULT_SETTINGS);
   const [templates, setTemplates] = useState([]);
@@ -561,8 +335,8 @@ function ReengagementSection() {
   const [searchingUsers, setSearchingUsers] = useState(false);
   const [groupType, setGroupType] = useState('role');
   const [groupRole, setGroupRole] = useState('student');
-  const [groupInstitutionId, setGroupInstitutionId] = useState('');
-  const [institutions, setInstitutions] = useState([]);
+  const [groupClassLevel, setGroupClassLevel] = useState('');
+  const [classes, setClasses] = useState([]);
   const HIST_PER_PAGE = 15;
 
   const loadSettings = useCallback(async () => {
@@ -599,15 +373,9 @@ function ReengagementSection() {
   useEffect(() => { loadHistory(); }, [loadHistory]);
 
   useEffect(() => {
-    api.admin.getAcademicStateInstitutions()
-      .then((res) => {
-        if (res?.success) {
-          const list = res.institutions || [];
-          setInstitutions(list);
-          setGroupInstitutionId((cur) => cur || list[0]?.id || '');
-        }
-      })
-      .catch(() => setInstitutions([]));
+    const list = CLASS_LEVELS.map(level => ({ id: level.code, name: level.label }));
+    setClasses(list);
+    setGroupClassLevel(cur => cur || list[0]?.id || '');
   }, []);
 
   useEffect(() => {
@@ -675,8 +443,8 @@ function ReengagementSection() {
       setTimeout(() => setSendResult(null), 6000);
       return;
     }
-    if (targetMode === 'group' && groupType === 'institution' && !groupInstitutionId) {
-      setSendResult({ ok: false, msg: 'Choose a college for the group.' });
+    if (targetMode === 'group' && groupType === 'class' && !groupClassLevel) {
+      setSendResult({ ok: false, msg: 'Choose a class for the group.' });
       setTimeout(() => setSendResult(null), 6000);
       return;
     }
@@ -700,7 +468,7 @@ function ReengagementSection() {
       } else if (targetMode === 'group') {
         payload.group = { type: groupType };
         if (groupType === 'role') payload.group.role = groupRole;
-        if (groupType === 'institution') payload.group.institutionId = groupInstitutionId;
+        if (groupType === 'class') payload.group.classLevel = groupClassLevel;
       }
 
       const res = await api.admin.sendReengagement(payload);
@@ -967,7 +735,7 @@ function ReengagementSection() {
                   Group type
                   <select className="adm-select" value={groupType} onChange={(e) => setGroupType(e.target.value)}>
                     <option value="role">By role</option>
-                    <option value="institution">By college</option>
+                    <option value="class">By class</option>
                     <option value="inactive">Inactive users (same threshold)</option>
                   </select>
                 </label>
@@ -981,11 +749,11 @@ function ReengagementSection() {
                     </select>
                   </label>
                 )}
-                {groupType === 'institution' && (
+                {groupType === 'class' && (
                   <label style={{ display: 'grid', gap: 6, fontSize: 12, color: 'var(--adm-text-muted)' }}>
-                    College
-                    <select className="adm-select" value={groupInstitutionId} onChange={(e) => setGroupInstitutionId(e.target.value)}>
-                      {institutions.map((inst) => (
+                    Class
+                    <select className="adm-select" value={groupClassLevel} onChange={(e) => setGroupClassLevel(e.target.value)}>
+                      {classes.map((inst) => (
                         <option key={inst.id} value={inst.id}>{inst.name}</option>
                       ))}
                     </select>
@@ -1111,8 +879,8 @@ function EngagementTipsSection() {
   const [searchingUsers, setSearchingUsers] = useState(false);
   const [groupType, setGroupType] = useState('role');
   const [groupRole, setGroupRole] = useState('student');
-  const [groupInstitutionId, setGroupInstitutionId] = useState('');
-  const [institutions, setInstitutions] = useState([]);
+  const [groupClassLevel, setGroupClassLevel] = useState('');
+  const [classes, setClasses] = useState([]);
   const [sending, setSending] = useState(false);
   const [sendResult, setSendResult] = useState(null);
   const [history, setHistory] = useState([]);
@@ -1179,15 +947,9 @@ function EngagementTipsSection() {
   useEffect(() => { loadHistory(); }, [loadHistory]);
 
   useEffect(() => {
-    api.admin.getAcademicStateInstitutions()
-      .then((res) => {
-        if (res?.success) {
-          const list = res.institutions || [];
-          setInstitutions(list);
-          setGroupInstitutionId((cur) => cur || list[0]?.id || '');
-        }
-      })
-      .catch(() => setInstitutions([]));
+    const list = CLASS_LEVELS.map(level => ({ id: level.code, name: level.label }));
+    setClasses(list);
+    setGroupClassLevel(cur => cur || list[0]?.id || '');
   }, []);
 
   useEffect(() => {
@@ -1246,8 +1008,8 @@ function EngagementTipsSection() {
       setTimeout(() => setSendResult(null), 6000);
       return;
     }
-    if (targetMode === 'group' && groupType === 'institution' && !groupInstitutionId) {
-      setSendResult({ ok: false, msg: 'Choose a college for the group.' });
+    if (targetMode === 'group' && groupType === 'class' && !groupClassLevel) {
+      setSendResult({ ok: false, msg: 'Choose a class for the group.' });
       setTimeout(() => setSendResult(null), 6000);
       return;
     }
@@ -1271,7 +1033,7 @@ function EngagementTipsSection() {
       } else if (targetMode === 'group') {
         payload.group = { type: groupType };
         if (groupType === 'role') payload.group.role = groupRole;
-        if (groupType === 'institution') payload.group.institutionId = groupInstitutionId;
+        if (groupType === 'class') payload.group.classLevel = groupClassLevel;
       }
 
       const res = await api.admin.sendEngagementTips(payload);
@@ -1506,7 +1268,7 @@ function EngagementTipsSection() {
                   Group type
                   <select className="adm-select" value={groupType} onChange={(e) => setGroupType(e.target.value)}>
                     <option value="role">By role</option>
-                    <option value="institution">By college</option>
+                    <option value="class">By class</option>
                     <option value="inactive">Inactive users</option>
                   </select>
                 </label>
@@ -1520,11 +1282,11 @@ function EngagementTipsSection() {
                     </select>
                   </label>
                 )}
-                {groupType === 'institution' && (
+                {groupType === 'class' && (
                   <label style={{ display: 'grid', gap: 6, fontSize: 12, color: 'var(--adm-text-muted)' }}>
-                    College
-                    <select className="adm-select" value={groupInstitutionId} onChange={(e) => setGroupInstitutionId(e.target.value)}>
-                      {institutions.map((inst) => (
+                    Class
+                    <select className="adm-select" value={groupClassLevel} onChange={(e) => setGroupClassLevel(e.target.value)}>
+                      {classes.map((inst) => (
                         <option key={inst.id} value={inst.id}>{inst.name}</option>
                       ))}
                     </select>
@@ -1887,7 +1649,6 @@ export default function NotificationsSection() {
             </div>
           </div>
 
-          <AcademicStateSection />
 
           {TRIGGERS.map((group) => (
             <div key={group.group} className="adm-card">

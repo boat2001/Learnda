@@ -1,13 +1,16 @@
+import CompactInfoList from '../components/common/CompactInfoList';
+import PageHeader from '../components/common/PageHeader';
+import RelatedPageLink from '../components/common/RelatedPageLink';
 import './SharedPages.css';
 
 const TERMS = [
   {
     title: 'Account responsibilities',
-    body: 'Keep your login details secure and update your profile information accurately.',
+    body: 'Keep your login secure and your profile accurate.',
   },
   {
     title: 'Content guidelines',
-    body: 'Respect copyright, avoid plagiarism, and keep discussions respectful.',
+    body: 'Respect copyright, avoid plagiarism, and be kind in discussions.',
   },
   {
     title: 'Payments and contributions',
@@ -15,79 +18,20 @@ const TERMS = [
   },
   {
     title: 'Termination',
-    body: 'We may suspend accounts that violate guidelines or threaten platform safety.',
+    body: 'Accounts that break these rules or threaten safety may be suspended.',
   },
 ];
 
 export default function Terms() {
   return (
-    <div className="page-shell">
-      <section className="page-hero page-hero-compact page-hero-lean hero-theme-legal">
-        <div className="hero-grid">
-          <div>
-            <span className="hero-tag">Ground rules</span>
-            <h1 className="hero-title">The practical rules for using Learnda well and safely.</h1>
-            <p className="hero-subtitle">
-              These terms outline the responsibilities, boundaries, and protections that keep the platform usable for everyone.
-            </p>
-            <div className="stat-grid">
-              <div className="stat-card">
-                <span className="stat-value">Accounts</span>
-                <span className="stat-label">Your login, identity details, and usage behavior all come with clear responsibilities.</span>
-              </div>
-              <div className="stat-card">
-                <span className="stat-value">Content</span>
-                <span className="stat-label">Shared material has to respect ownership, quality, and community standards.</span>
-              </div>
-              <div className="stat-card">
-                <span className="stat-value">Safety</span>
-                <span className="stat-label">The rules exist to protect the platform, contributors, and learners from abuse.</span>
-              </div>
-            </div>
-          </div>
-          <div className="hero-panel">
-            <p className="panel-title">What to pay attention to first</p>
-            <div className="panel-list">
-              <div className="panel-list-item">
-                <span className="panel-dot"></span>
-                <div>
-                  <strong>Respect the community</strong>
-                  <p>Keep discussions supportive and professional.</p>
-                </div>
-              </div>
-              <div className="panel-list-item">
-                <span className="panel-dot"></span>
-                <div>
-                  <strong>Protect content</strong>
-                  <p>Only share materials you own or can license.</p>
-                </div>
-              </div>
-              <div className="panel-list-item">
-                <span className="panel-dot"></span>
-                <div>
-                  <strong>Stay secure</strong>
-                  <p>Report suspicious activity quickly.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+    <div className="page-shell footer-page compact-info-page">
+      <PageHeader icon="terms" title="Terms of use" description="The ground rules for using Learnda well and safely." />
 
       <section className="page-section">
-        <div className="section-heading">
-          <h2>Terms overview</h2>
-          <p>Here are the most important sections to review.</p>
-        </div>
-        <div className="card-grid">
-          {TERMS.map((item) => (
-            <div key={item.title} className="info-card">
-              <h3>{item.title}</h3>
-              <p>{item.body}</p>
-            </div>
-          ))}
-        </div>
+        <CompactInfoList items={TERMS} />
       </section>
+
+      <RelatedPageLink to="/policies" icon="privacy" title="Privacy & child safety" description="How we look after your data." />
     </div>
   );
 }

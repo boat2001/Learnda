@@ -619,7 +619,6 @@ export default function Progress() {
 
   const totalLessons = stats?.total_lessons_completed ?? 0;
   const totalQuizzes = stats?.total_quizzes_completed ?? 0;
-  const totalContributions = stats?.total_contributions ?? 0;
   const groupsJoined = overview?.groups_joined ?? 0;
   const networkActivenessScore = overview?.network_activeness_score ?? 0;
   const communityPosts = overview?.community_posts ?? 0;
@@ -627,11 +626,6 @@ export default function Progress() {
   const communityScore = overview?.community_engagement_score ?? 0;
   const filesViewed = overview?.files_viewed ?? 0;
   const filesDownloaded = overview?.files_downloaded ?? 0;
-  const edutArticles = overview?.edutainment_articles ?? 0;
-  const edutStories = overview?.edutainment_stories ?? 0;
-  const edutFacts = overview?.edutainment_facts ?? 0;
-  const edutQuotes = overview?.edutainment_quotes ?? 0;
-  const edutJoculars = overview?.edutainment_joculars ?? 0;
 
   const rankLabel = formatOrdinalRank(leaderboardRank);
   const rankSub = leaderboardRank != null
@@ -804,7 +798,7 @@ export default function Progress() {
             icon={<FiClipboard />}
             label="Practice Quizzes"
             value={totalQuizzes}
-            color="#0d9488"
+            color="#2b62c4"
             tooltip="Distinct quizzes and past-paper items you have marked complete (from your completion history)."
           />
           <StatCard
@@ -821,28 +815,6 @@ export default function Progress() {
             color="#fab82c"
             tooltip="Content saves or bookmarks plus completed resource downloads tracked from your account."
           />
-          <StatCard
-            icon={<FiShare2 />}
-            label="Contributions"
-            value={totalContributions}
-            tooltip="Approved contributions you uploaded (from your contributor record and progress)."
-            color="#5b8439"
-          />
-        </StatGroup>
-      )}
-
-      {/* Edutainment */}
-      {loading ? (
-        <div className="pg-stats-grid pg-section">
-          {[1, 2, 3, 4, 5].map((i) => <div key={i} className="pg-shimmer pg-shimmer--stat" />)}
-        </div>
-      ) : (
-        <StatGroup title="Edutainment">
-          <StatCard icon={<FiBookOpen />} label="Articles" value={edutArticles} color="#4f46e5" />
-          <StatCard icon={<FiFeather />} label="Stories" value={edutStories} color="#7c3aed" />
-          <StatCard icon={<FiInfo />} label="Did You Know" value={edutFacts} color="#0891b2" />
-          <StatCard icon={<FiMessageSquare />} label="Quotes" value={edutQuotes} color="#d97706" />
-          <StatCard icon={<FiSmile />} label="Joculars" value={edutJoculars} color="#5b8439" />
         </StatGroup>
       )}
 
@@ -858,7 +830,7 @@ export default function Progress() {
             icon={<FiActivity />}
             label="Activeness score"
             value={networkActivenessScore}
-            color="#0d9488"
+            color="#2b62c4"
             tooltip="Combines active group memberships and study-group messages you have posted (5 points per group, 1 per message)."
           />
         </StatGroup>

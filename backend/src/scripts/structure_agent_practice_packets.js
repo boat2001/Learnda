@@ -87,7 +87,7 @@ function cleanText(value) {
     text = text.replace(pattern, ' ');
   }
   return text
-    .replace(/\u0000/g, '')
+    .split(String.fromCharCode(0)).join('')
     .replace(/\s+/g, ' ')
     .replace(/\.{5,}/g, '____')
     .replace(/\s+([?.!,;:])/g, '$1')
@@ -176,12 +176,12 @@ function normalizeType(question) {
 
 function extractPromptOptions(prompt) {
   const text = cleanText(prompt);
-  const lettered = [...text.matchAll(/\b([A-D])[\).]\s*([^A-D]+?)(?=\s+[A-D][\).]\s+|$)/gi)]
+  const lettered = [...text.matchAll(/\b([A-D])[).]\s*([^A-D]+?)(?=\s+[A-D][).]\s+|$)/gi)]
     .map((match) => cleanText(match[2]))
     .filter(Boolean);
   if (lettered.length >= 4) {
     return {
-      prompt: cleanText(text.replace(/\b[A-D][\).]\s*([^A-D]+?)(?=\s+[A-D][\).]\s+|$)/gi, '')),
+      prompt: cleanText(text.replace(/\b[A-D][).]\s*([^A-D]+?)(?=\s+[A-D][).]\s+|$)/gi, '')),
       options: lettered.slice(0, 4),
     };
   }

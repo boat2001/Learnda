@@ -9,6 +9,9 @@
     "dev": "node ../sync-ip.cjs && nodemon src/server.js",
     "test": "jest --coverage",
     "test:watch": "jest --watch",
+    "verify:api": "node src/scripts/verify_api_readonly.js",
+    "verify:api:transactional": "node src/scripts/verify_api_transactional.js",
+    "seed:catalog": "node src/scripts/seed_curriculum_catalog.js",
     "lint": "eslint src/",
     "lint:fix": "eslint src/ --fix",
     "migrate": "sequelize-cli db:migrate",
@@ -122,7 +125,9 @@
   "nodemonConfig": {
     "ignore": [
       "data/edutainment/collected/**",
-      "last-notes/**"
+      "last-notes/**",
+      "src/data/*.json",
+      "uploads/**"
     ]
   }
 }

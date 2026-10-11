@@ -1,185 +1,103 @@
-/* Practice page. Shares the class-ladder styles defined in Learn.css — the two
- * pages present the same §6.3 ladder and should stay visually identical. */
+.practice-page { display: grid; gap: var(--space-5); }
 
-@import '../learn/Learn.css';
-
-.practice-page {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 24px 16px 96px;
-}
-
-.practice-header { margin-bottom: 20px; }
-
-.practice-header__eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  margin: 0 0 6px;
-  padding: 5px 12px;
-  border-radius: 999px;
-  background: var(--color-accent-amber);
-  color: var(--color-accent-navy);
-  font-size: var(--font-size-sm);
-  font-weight: 700;
-}
-
-.practice-header__title {
-  margin: 0;
-  font-family: var(--font-family-heading);
-  font-size: 1.6rem;
-  line-height: 1.2;
-  color: var(--color-text-primary);
-}
-
-.practice-header__sub {
-  margin: 6px 0 0;
-  color: var(--color-text-secondary);
-  font-size: var(--font-size-sm);
-  max-width: 56ch;
-}
-
-/* Primary gets a gentler surface (§8: "gentle assessments"): softer rows,
-   no dense metadata, more breathing room. */
-.practice-page--visual .practice-card { padding: 20px 18px; }
-.practice-page--visual .practice-card__title { font-size: 1.15rem; }
-
-.practice-list { display: grid; gap: 10px; }
-
-.practice-card {
+.practice-header {
   display: flex;
   align-items: center;
-  gap: 14px;
-  padding: 16px 18px;
-  border: 1px solid var(--color-border-light);
-  border-radius: 14px;
-  background: var(--color-bg-light);
-  color: inherit;
-  text-decoration: none;
-  transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+  gap: var(--space-4);
+  padding: var(--space-5);
+  border-radius: var(--radius-2xl);
+  background: var(--tint-amber);
+  border: 2px solid color-mix(in srgb, var(--brand-amber) 50%, transparent);
 }
 
-.practice-card:hover {
-  transform: translateY(-1px);
-  border-color: var(--color-primary-400);
-  box-shadow: 0 6px 18px rgba(31, 48, 73, 0.08);
-}
-
-.practice-card__mark {
+.practice-header__icon {
+  flex: none;
   display: grid;
   place-items: center;
-  flex-shrink: 0;
-  width: 46px;
-  height: 46px;
-  border-radius: 12px;
-  background: var(--color-primary-50);
-  color: var(--color-primary-700);
-  font-family: var(--font-family-heading);
-  font-weight: 700;
+  width: 4rem;
+  height: 4rem;
+  border-radius: var(--radius-lg);
+  background: var(--brand-amber);
+  color: var(--brand-navy);
+  font-size: 2.4rem;
+  box-shadow: 0 4px 0 #c98c0b;
 }
 
-.practice-card__body { min-width: 0; flex: 1; }
+.practice-header__class { font-size: 0.82rem; font-weight: 900; color: var(--ink-amber); }
+.practice-header__title { font-size: clamp(1.6rem, 4vw, 2.2rem); font-weight: 800; line-height: 1.1; }
+.practice-header__sub { margin: var(--space-1) 0 0; color: var(--ink-soft); font-weight: 600; }
 
-.practice-card__title {
+.practice-tip {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
   margin: 0;
-  font-family: var(--font-family-heading);
-  font-size: var(--font-size-lg);
-  color: var(--color-text-primary);
+  font-weight: 700;
+  color: var(--ink-soft);
 }
 
-.practice-card__meta {
-  margin: 2px 0 0;
-  color: var(--color-text-light);
-  font-size: var(--font-size-sm);
+.practice-tip svg { flex: none; font-size: 1.3rem; color: var(--ink-orange); }
+
+.practice-list__title {
+  margin-bottom: var(--space-3);
+  font-family: var(--font-family-sans);
+  font-size: 0.85rem;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
 }
 
-.practice-card__chevron { flex-shrink: 0; color: var(--color-text-light); }
+.practice-list { display: grid; gap: var(--space-3); }
+.practice-list--visual { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.practice-list--structured { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-2) var(--space-3); }
 
-/* §4.1: the Kindergarten "no tests" state. Deliberately warm and final —
-   this is a design decision to explain, not a feature to unlock. */
+.practice-empty,
 .practice-kg {
-  max-width: 460px;
-  margin: 48px auto 0;
-  padding: 40px 28px;
-  border-radius: 24px;
-  background: var(--color-primary-50);
+  display: grid;
+  justify-items: center;
+  gap: var(--space-3);
+  padding: var(--space-7) var(--space-4);
   text-align: center;
+  border-radius: var(--radius-2xl);
+  background: var(--surface);
+  border: 2px dashed var(--line-strong);
 }
+
+.practice-empty h2,
+.practice-kg__title { font-size: 1.6rem; font-weight: 800; }
+.practice-empty p,
+.practice-kg__body { margin: 0; color: var(--ink-soft); max-width: 30rem; }
 
 .practice-kg__icon {
   display: grid;
   place-items: center;
-  width: 72px;
-  height: 72px;
-  margin: 0 auto 16px;
-  border-radius: 50%;
-  background: var(--color-bg-light);
-  color: var(--color-accent-amber);
-  font-size: 2.2rem;
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: var(--radius-full);
+  background: var(--tint-amber);
+  color: var(--ink-amber);
+  font-size: 2.5rem;
 }
 
-.practice-kg__title {
-  margin: 0 0 10px;
-  font-family: var(--font-family-heading);
-  font-size: 1.5rem;
-  color: var(--color-primary-900);
-}
-
-.practice-kg__body {
-  margin: 0 0 22px;
-  color: var(--color-text-secondary);
-  line-height: 1.6;
-}
-
-.practice-empty {
-  padding: 48px 24px;
-  border: 1px dashed var(--color-border-default);
-  border-radius: 20px;
-  text-align: center;
-  color: var(--color-text-secondary);
-}
-
-.practice-empty h2 {
-  margin: 0 0 8px;
-  font-family: var(--font-family-heading);
-  color: var(--color-text-primary);
-}
-
-.practice-page__skeleton { display: grid; gap: 10px; }
+.practice-page__skeleton { display: grid; gap: var(--space-3); }
 
 .practice-page__skeleton-row {
-  height: 78px;
-  border-radius: 14px;
-  background: linear-gradient(
-    90deg,
-    var(--color-secondary-100) 25%,
-    var(--color-secondary-200) 37%,
-    var(--color-secondary-100) 63%
-  );
-  background-size: 400% 100%;
-  animation: learn-shimmer 1.4s ease infinite;
+  height: 5rem;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(90deg, var(--surface-sunken), var(--surface), var(--surface-sunken));
+  background-size: 200% 100%;
+  animation: practice-shimmer 1.2s linear infinite;
 }
 
-@media (min-width: 720px) {
-  .practice-page { padding: 32px 24px 96px; }
+@keyframes practice-shimmer { to { background-position: -200% 0; } }
+
+@media (max-width: 960px) {
+  .practice-list--visual { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .practice-card { transition: none; }
-  .practice-card:hover { transform: none; }
-  .practice-page__skeleton-row { animation: none; }
+@media (max-width: 640px) {
+  .practice-header { padding: var(--space-4); align-items: flex-start; }
+  .practice-header__icon { width: 3.25rem; height: 3.25rem; font-size: 1.9rem; }
+  .practice-list--structured { grid-template-columns: 1fr; }
 }
-
-[data-theme="dark"] .practice-card {
-  background: var(--color-secondary-800);
-  border-color: var(--color-secondary-700);
-}
-
-[data-theme="dark"] .practice-card__title,
-[data-theme="dark"] .practice-header__title { color: var(--color-text-on-dark); }
-
-[data-theme="dark"] .practice-kg {
-  background: color-mix(in srgb, var(--color-primary-600) 18%, transparent);
-}
-
-[data-theme="dark"] .practice-kg__title { color: var(--color-primary-100); }

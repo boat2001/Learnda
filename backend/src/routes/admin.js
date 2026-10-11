@@ -42,7 +42,6 @@ const {
   resolveEngagementTip,
 } = require('../utils/engagementTips');
 const { sendOtpSms, sendSms } = require('../services/smsService');
-const { sendPushNotifications } = require('../services/pushNotificationService');
 const {
   ADMIN_SECTIONS,
   normalizeAdminPermissions,
@@ -145,16 +144,6 @@ const DEFAULT_TEAM_LINKS = {
   designer:    { whatsapp: '' },
 };
 
-const shouldAutoUpdateAcademicState = (preferences = {}) => {
-  const source = preferences && typeof preferences === 'object' ? preferences : {};
-  if (typeof source.auto_update_academic_state === 'boolean') {
-    return source.auto_update_academic_state;
-  }
-  if (source.settings && typeof source.settings.auto_update_academic_state === 'boolean') {
-    return source.settings.auto_update_academic_state;
-  }
-  return true;
-};
 
 function loadJsonFile(filePath, fallback) {
   try {
@@ -426,18 +415,6 @@ const timeAgo = (value) => {
   return new Date(value).toLocaleDateString();
 };
 
-const mapContributionKind = (kind) => {
-  switch (kind) {
-    case 'blog':
-      return 'blog';
-    case 'quiz':
-      return 'quiz';
-    case 'lesson':
-    case 'file':
-    default:
-      return 'text_lesson';
-  }
-};
 
 const toNum = (value) => {
   const num = Number(value);
@@ -1953,13 +1930,14 @@ router.get('/analytics/users', async (req, res) => {
         order: [[fn('COUNT', col('id')), 'DESC']],
         raw: true,
       }).catch(() => []),
-      User.findAll({
-        attributes: ['level', [fn('COUNT', col('id')), 'count']],
-        where: { level: { [Op.and]: [{ [Op.ne]: null }, { [Op.ne]: '' }] } },
-        group: ['level'],
+      // users.level was removed in the K-12 refactor; class levels live on AcademicProfile.
+      AcademicProfile.findAll({
+        attributes: ['class_level', [fn('COUNT', col('id')), 'count']],
+        where: { class_level: { [Op.ne]: null } },
+        group: ['class_level'],
         order: [[fn('COUNT', col('id')), 'DESC']],
         raw: true,
-      }).catch(() => []),
+      }).then((rows) => rows.map((r) => ({ level: r.class_level, count: r.count }))).catch(() => []),
       User.findAll({
         include: [{ model: Subscription, as: 'subscription', include: [{ model: Plan, as: 'plan', attributes: ['name'] }], required: false }],
         order: [['created_at', 'DESC']],

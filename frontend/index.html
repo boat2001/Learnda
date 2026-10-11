@@ -19,7 +19,7 @@
     <meta name="twitter:image" content="https://learnda.app/learnda-logo.webp" />
     <link rel="canonical" href="https://learnda.app/" />
     <link rel="manifest" href="/manifest.webmanifest" />
-    <meta name="theme-color" id="theme-color-meta" content="#2b62c4" />
+    <meta name="theme-color" id="theme-color-meta" content="#fbf7ef" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -66,7 +66,10 @@
     <script src="https://js.paystack.co/v1/inline.js" async defer></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Fonts load without blocking first paint: on a slow mobile connection the
+         page renders immediately in the system font and swaps when ready. -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@500;600;700;800;900&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@500;600;700;800;900&display=swap"></noscript>
     <title>Learnda | Learn one class at a time</title>
     <!-- Analytics: set VITE_GA_MEASUREMENT_ID to enable. Inert when unset. -->
     <script>
@@ -93,10 +96,10 @@
           var root = document.documentElement;
           root.setAttribute("data-theme", pref);
           root.style.colorScheme = pref;
-          root.style.backgroundColor = pref === "dark" ? "#131b24" : "#f7f8fb";
+          root.style.backgroundColor = pref === "dark" ? "#0f1a2b" : "#fbf7ef";
           var themeColorMeta = document.getElementById("theme-color-meta");
           if (themeColorMeta) {
-            themeColorMeta.setAttribute("content", pref === "dark" ? "#0f141c" : "#2b62c4");
+            themeColorMeta.setAttribute("content", pref === "dark" ? "#0f1a2b" : "#fbf7ef");
           }
         } catch (e) {
           // no-op
@@ -110,7 +113,7 @@
         try {
           var t = document.documentElement.getAttribute('data-theme');
           var dark = t === 'dark';
-          document.body.style.backgroundColor = dark ? '#131b24' : '#f7f8fb';
+          document.body.style.backgroundColor = dark ? '#0f1a2b' : '#fbf7ef';
           document.body.style.backgroundImage = 'none';
           document.body.style.transition = 'none';
           requestAnimationFrame(function () {

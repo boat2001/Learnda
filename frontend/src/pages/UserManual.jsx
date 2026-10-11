@@ -3,11 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import {
   FiBookOpen, FiPlay, FiFolder, FiUsers,
   FiUploadCloud, FiAward, FiSearch, FiSettings,
-  FiMessageSquare, FiHelpCircle, FiFlag,
+  FiMessageSquare,
   FiBarChart2, FiStar, FiX, FiArrowRight, FiLayers,
   FiZap,
 } from 'react-icons/fi';
 import { FEATURE_FLAGS } from '../config/featureFlags';
+import PageHeader from '../components/common/PageHeader';
+import RelatedPageLink from '../components/common/RelatedPageLink';
+import SectionHeadingIcon from '../components/common/SectionHeadingIcon';
 import './SharedPages.css';
 
 /* ─── Feature card data ─────────────────────────────────────────────────── */
@@ -266,11 +269,21 @@ const ALL_SECTIONS = [
       },
       {
         q: 'Something is wrong. How do I report it?',
-        a: 'Use the Report an issue button at the top of this page, or contact support directly.',
+        a: 'Use Report an Issue at the bottom of this page, or contact support.',
       },
     ],
   },
 ];
+
+// Heading icon for each FAQ section (names from SectionHeadingIcon).
+const SECTION_ICONS = {
+  'getting-started': 'journey',
+  'classes-and-content': 'school',
+  kindergarten: 'kids',
+  progress: 'award',
+  community: 'community',
+  account: 'help',
+};
 
 const SECTIONS = ALL_SECTIONS.filter(
   (section) => section.id !== 'community' || FEATURE_FLAGS.studyGroups || FEATURE_FLAGS.community
@@ -334,13 +347,15 @@ function FeatureModal({ feature, onClose }) {
           <button type="button" className="um-modal-cancel" onClick={onClose}>
             Close
           </button>
-          <button
-            type="button"
-            className="um-modal-go"
-            onClick={() => { onClose(); navigate(feature.href); }}
-          >
-            Go to {feature.label} <FiArrowRight />
-          </button>
+          {feature.href && (
+            <button
+              type="button"
+              className="um-modal-go"
+              onClick={() => { onClose(); navigate(feature.href); }}
+            >
+              Go to {feature.label} <FiArrowRight />
+            </button>
+          )}
         </div>
       </div>
     </div>
@@ -349,14 +364,13 @@ function FeatureModal({ feature, onClose }) {
 
 /* ─── Page ──────────────────────────────────────────────────────────────── */
 export default function UserManual() {
-  const navigate = useNavigate();
   const [openItem, setOpenItem] = useState(null);
   const [activeFeature, setActiveFeature] = useState(null);
 
   const toggle = (id) => setOpenItem((prev) => (prev === id ? null : id));
 
   return (
-    <div className="page-shell">
+    <div className="page-shell footer-page um-page">
       {activeFeature && (
         <FeatureModal
           feature={activeFeature}
@@ -364,51 +378,11 @@ export default function UserManual() {
         />
       )}
 
-      <section className="page-hero page-hero-compact page-hero-lean hero-theme-support">
-        <div className="hero-grid">
-          <div>
-            <span className="hero-tag">Help centre</span>
-            <h1 className="hero-title">
-              Everything you need to get the most out of Learnda.
-            </h1>
-            <p className="hero-subtitle">
-              Step-by-step answers for every part of Learnda — from choosing your class to
-              revising an earlier year and keeping track of your progress.
-            </p>
-            <div className="hero-actions">
-              <button className="btn btn-primary" type="button" onClick={() => navigate('/contact')}>
-                Contact support
-              </button>
-              <button className="btn btn-secondary" type="button" onClick={() => navigate('/report')}>
-                Report an issue
-              </button>
-            </div>
-          </div>
-          <div className="hero-panel">
-            <p className="panel-title">Jump to a section</p>
-            <div className="panel-list">
-              {SECTIONS.slice(0, 5).map((section) => (
-                <div
-                  key={section.id}
-                  className="panel-list-item"
-                  style={{ cursor: 'pointer' }}
-                  onClick={() => {
-                    document.getElementById(section.id)?.scrollIntoView({ behavior: 'smooth' });
-                  }}
-                >
-                  <span className="panel-dot" />
-                  <div><strong>{section.title}</strong></div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+      <PageHeader icon="manual" title="User Guide" />
 
       <section className="page-section">
         <div className="section-heading">
-          <h2>Platform features</h2>
-          <p>Click any card to see what it does and how to use it.</p>
+          <h2><SectionHeadingIcon name="resources" /><span className="section-heading__title">Platform features</span></h2>
         </div>
         <div className="trending-highlights-grid">
           {FEATURES.map((feature) => {
@@ -422,9 +396,8 @@ export default function UserManual() {
               >
                 <div className="um-card-icon-row">
                   <span className="um-card-icon"><Icon size={16} /></span>
-                  <span className="um-card-tap-hint">Tap to learn more</span>
+                  <h3>{feature.label}</h3>
                 </div>
-                <h3>{feature.label}</h3>
                 <p>{feature.tagline}</p>
               </button>
             );
@@ -435,7 +408,10 @@ export default function UserManual() {
       {SECTIONS.map((section) => (
         <section key={section.id} id={section.id} className="page-section">
           <div className="section-heading">
-            <h2>{section.title}</h2>
+            <h2>
+              <SectionHeadingIcon name={SECTION_ICONS[section.id]} />
+              <span className="section-heading__title">{section.title}</span>
+            </h2>
           </div>
           <div className="faq-list">
             {section.items.map((item) => {
@@ -459,23 +435,9 @@ export default function UserManual() {
         </section>
       ))}
 
-      <section className="page-section split-grid">
-        <div className="info-card">
-          <FiHelpCircle size={18} style={{ color: 'var(--primary-color)' }} />
-          <h3>Still need help?</h3>
-          <p>Our support team replies within 24–48 hours. Reach out with your account email and a clear description of the issue.</p>
-          <button className="btn btn-primary" type="button" onClick={() => navigate('/contact')}>
-            Contact support
-          </button>
-        </div>
-        <div className="info-card">
-          <FiFlag size={18} style={{ color: 'var(--primary-color)' }} />
-          <h3>Found a bug?</h3>
-          <p>Report broken features, incorrect content, or anything that isn't working the way it should.</p>
-          <button className="btn btn-secondary" type="button" onClick={() => navigate('/report')}>
-            Report an issue
-          </button>
-        </div>
+      <section className="page-section about-cta-grid um-help-links">
+        <RelatedPageLink to="/contact" icon="contact" title="Contact Support" />
+        <RelatedPageLink to="/report" icon="idea" title="Report an Issue" />
       </section>
     </div>
   );

@@ -1,0 +1,102 @@
+.journey {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 2fr 6fr 3fr 3fr;
+  gap: var(--space-2);
+}
+
+.journey__group {
+  display: grid;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.journey__group-name {
+  font-size: 0.7rem;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--group-ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.journey__stops {
+  list-style: none;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  gap: 2px;
+  padding: var(--space-2) var(--space-1);
+  border-radius: var(--radius-full);
+  background: var(--group-tint);
+}
+
+.journey__stop {
+  position: relative;
+  flex: 1;
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  min-width: 0;
+}
+
+.journey__dot {
+  display: grid;
+  place-items: center;
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: var(--radius-full);
+  background: var(--surface);
+  border: 2px solid var(--group);
+  color: var(--group-ink);
+  font-size: 0.95rem;
+}
+
+.journey__label {
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+
+.journey__stop.is-done .journey__dot { background: var(--group); color: #fff; }
+
+.journey__stop.is-current .journey__dot {
+  width: 2.1rem;
+  height: 2.1rem;
+  margin-top: -0.25rem;
+  background: var(--brand-navy);
+  border-color: var(--brand-amber);
+  border-width: 3px;
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--brand-amber) 35%, transparent);
+}
+
+[data-theme="dark"] .journey__stop.is-current .journey__dot { background: var(--brand-amber); }
+
+.journey__stop.is-current .journey__label { color: var(--ink); font-weight: 900; }
+
+.journey__stop.is-locked .journey__dot {
+  border-style: dashed;
+  border-color: var(--line-strong);
+  color: var(--ink-faint);
+  font-size: 0.8rem;
+}
+
+.journey__stop.is-locked .journey__label { color: var(--ink-faint); }
+
+/* Phones: stack the four stages so 14 stops never squeeze. */
+.journey__group-short { display: none; }
+
+@media (max-width: 640px) {
+  .journey { grid-template-columns: 1fr; gap: var(--space-3); }
+  .journey__group { grid-template-columns: 4.25rem 1fr; align-items: center; }
+  .journey__group-full { display: none; }
+  .journey__group-short { display: inline; font-size: 0.8rem; }
+}
+
+.journey--compact .journey__group-name { display: none; }
+@media (max-width: 640px) {
+  .journey--compact .journey__group { grid-template-columns: 1fr; }
+}

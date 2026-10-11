@@ -1,0 +1,42 @@
+.page-shell.compact-info-page { gap: 1.25rem; }
+.compact-info-list {
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: var(--surface);
+  box-shadow: 0 3px 0 var(--press-neutral);
+  overflow: hidden;
+}
+.compact-info-list__row {
+  display: grid;
+  grid-template-columns: minmax(10rem, 0.35fr) minmax(0, 1fr);
+  align-items: baseline;
+  gap: 0.5rem 1.25rem;
+  padding: 0.9rem 1rem;
+}
+.compact-info-list__row + .compact-info-list__row { border-top: 1px dashed var(--line); }
+.compact-info-list dt {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  color: var(--ink);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+/* A small dot per row, cycling through the logo wing colours. */
+.compact-info-list dt::before {
+  content: '';
+  flex: 0 0 auto;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: var(--brand-blue);
+}
+.compact-info-list__row:nth-child(4n + 2) dt::before { background: var(--brand-orange); }
+.compact-info-list__row:nth-child(4n + 3) dt::before { background: var(--brand-amber); }
+.compact-info-list__row:nth-child(4n + 4) dt::before { background: var(--brand-green); }
+.compact-info-list dd { margin: 0; color: var(--ink-soft); font-size: 0.86rem; line-height: 1.5; }
+@media (max-width: 600px) {
+  .compact-info-list__row { grid-template-columns: 1fr; gap: 0.2rem; }
+  .compact-info-list dd { padding-left: 1.05rem; }
+}

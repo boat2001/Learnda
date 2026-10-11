@@ -1,0 +1,51 @@
+.page-shell.action-page { gap: 1.25rem; }
+.primary-page-action {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  width: 100%;
+  min-height: 76px;
+  padding: 1.1rem 1.3rem;
+  border: 0;
+  border-radius: 1.1rem;
+  background: var(--color-primary-600);
+  color: #fff;
+  font: inherit;
+  font-size: clamp(1.05rem, 2vw, 1.22rem);
+  font-weight: 800;
+  text-align: left;
+  cursor: pointer;
+  box-shadow: 0 5px 0 var(--press-primary);
+  transition: transform 140ms ease, box-shadow 140ms ease;
+}
+.primary-page-action__icon {
+  display: grid;
+  place-items: center;
+  flex: 0 0 2.6rem;
+  height: 2.6rem;
+  border-radius: 0.85rem;
+  background: var(--brand-amber);
+  color: var(--brand-navy);
+  font-size: 1.3rem;
+  transform: rotate(-5deg);
+}
+.primary-page-action__arrow { flex: 0 0 auto; margin-left: auto; transition: transform 160ms ease; }
+.primary-page-action:hover { transform: translateY(-2px); box-shadow: 0 7px 0 var(--press-primary); }
+.primary-page-action:hover .primary-page-action__arrow { transform: translateX(4px); }
+.primary-page-action:active { transform: translateY(4px); box-shadow: 0 1px 0 var(--press-primary); }
+.primary-page-action:focus-visible { outline: 3px solid var(--brand-amber); outline-offset: 4px; }
+.action-page-details {
+  border: 1px solid var(--line);
+  border-radius: 0.9rem;
+  background: var(--surface);
+  color: var(--ink);
+  padding: 0.9rem 1rem;
+}
+.action-page-details summary { cursor: pointer; font-size: 0.9rem; font-weight: 700; }
+.action-page-details summary:focus-visible { outline: 2px solid var(--primary-color); outline-offset: 4px; }
+.action-page-details ul { margin: 0.85rem 0 0; padding-left: 1.2rem; display: grid; gap: 0.55rem; font-size: 0.85rem; color: var(--ink-soft); }
+.action-page-details li strong { color: var(--ink); }
+@media (prefers-reduced-motion: reduce) {
+  .primary-page-action, .primary-page-action__arrow { transition: none; }
+  .primary-page-action:hover, .primary-page-action:active, .primary-page-action:hover .primary-page-action__arrow { transform: none; }
+}

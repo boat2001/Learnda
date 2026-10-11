@@ -1,0 +1,23 @@
+.bee-lesson { width: 100%; max-width: 32rem; justify-self: center; }
+.bee-lesson > svg { display: block; width: 100%; height: auto; overflow: visible; }
+@media (max-width: 640px) {
+  .landing-hero > .bee-lesson { width: calc(100% + 1rem); max-width: 30rem; }
+  .bee-lesson > svg { aspect-ratio: 480 / 340; }
+}
+.bee-lesson__trail { fill: none; stroke: var(--brand-amber); stroke-width: 3; stroke-dasharray: 4 9; stroke-linecap: round; }
+.bee-lesson__bee { animation: bee-lesson-hover 3s ease-in-out infinite; }
+.bee-lesson__wing { transform-box: fill-box; transform-origin: center; animation: bee-lesson-flutter .24s ease-in-out infinite alternate; }
+.bee-lesson__wing--right { animation-delay: -.12s; }
+.bee-lesson__pointer { transform-origin: 191px 234px; animation: bee-lesson-point 3s ease-in-out infinite; }
+.bee-lesson__eyes { transform-box: fill-box; transform-origin: center; animation: bee-lesson-blink 5s infinite; }
+.bee-lesson__sparkles { animation: bee-lesson-glow 3s ease-in-out infinite; }
+.bee-lesson__underline { stroke-dasharray: 98; animation: bee-lesson-draw 6s ease-in-out infinite; }
+@keyframes bee-lesson-hover { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+@keyframes bee-lesson-flutter { from { transform: scaleX(1) rotate(-3deg); } to { transform: scaleX(.85) rotate(3deg); } }
+@keyframes bee-lesson-point { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(-9deg); } }
+@keyframes bee-lesson-blink { 0%, 43%, 47%, 100% { transform: scaleY(1); } 45% { transform: scaleY(.1); } }
+@keyframes bee-lesson-glow { 0%, 100% { opacity: .55; } 50% { opacity: 1; } }
+@keyframes bee-lesson-draw { 0%, 15% { stroke-dashoffset: 98; } 40%, 85% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: 98; } }
+@media (prefers-reduced-motion: reduce) {
+  .bee-lesson * { animation: none !important; }
+}

@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
 import { FiCode, FiDatabase, FiDollarSign, FiGlobe } from 'react-icons/fi';
-import { useNavigate, useSearchParams, Link } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import api from '../services/api';
 import FormContactIdentity from '../components/common/FormContactIdentity';
 import FormModal from '../components/common/FormModal';
 import CelebrationContributors from '../components/common/CelebrationContributors';
+import PageHeader from '../components/common/PageHeader';
+import SectionHeadingIcon from '../components/common/SectionHeadingIcon';
 import './SharedPages.css';
 import './Contribute.css';
 
@@ -319,59 +321,11 @@ export default function Contribute() {
         )}
       </FormModal>
 
-      <section className="page-hero page-hero-compact page-hero-lean hero-theme-support">
-        <div className="hero-grid">
-          <div>
-            <span className="hero-tag">Mission support</span>
-            <h1 className="hero-title">Every contribution keeps a student learning.</h1>
-            <div className="hero-actions">
-              <button className="btn btn-primary" type="button" onClick={() => setShowModal(true)}>
-                <FiDollarSign aria-hidden /> Contribute funds
-              </button>
-            </div>
-            <div className="stat-grid">
-              <div className="stat-card">
-                <span className="stat-value">Paystack</span>
-                <span className="stat-label">Card and mobile money checkout in a secure redirect flow.</span>
-              </div>
-              <div className="stat-card">
-                <span className="stat-value">Flexible</span>
-                <span className="stat-label">One-time, monthly pledge, or institutional support options.</span>
-              </div>
-              <div className="stat-card">
-                <span className="stat-value">Verified</span>
-                <span className="stat-label">Complete payment, then verify so the team can track and confirm it.</span>
-              </div>
-            </div>
-          </div>
-          <div className="hero-panel">
-            <p className="panel-title">What your support helps fund</p>
-            <div className="panel-list">
-              <div className="panel-list-item">
-                <span className="panel-dot" />
-                <div>
-                  <strong>Learning resources</strong>
-                  <p>More structured materials and student-ready study support.</p>
-                </div>
-              </div>
-              <div className="panel-list-item">
-                <span className="panel-dot" />
-                <div>
-                  <strong>Platform reliability</strong>
-                  <p>Ongoing fixes, performance work, and a smoother experience.</p>
-                </div>
-              </div>
-              <div className="panel-list-item">
-                <span className="panel-dot" />
-                <div>
-                  <strong>Long-term growth</strong>
-                  <p>More room to invest in features that help students learn with less friction.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <PageHeader icon="support" title="Support Learnda" description="Every contribution keeps a child learning.">
+        <button className="btn btn-primary" type="button" onClick={() => setShowModal(true)}>
+          <FiDollarSign aria-hidden /> Contribute funds
+        </button>
+      </PageHeader>
 
       {supporters.length > 0 && (
         <section className="page-section">
@@ -395,7 +349,7 @@ export default function Contribute() {
 
       <section className="page-section">
         <div className="section-heading">
-          <h2>Where your contribution goes</h2>
+          <h2><SectionHeadingIcon name="support" /><span className="section-heading__title">Where your contribution goes</span></h2>
           <p>No overheads, no middlemen — every cedi goes straight into keeping Learnda online and improving.</p>
         </div>
         <div className="dn-impact-grid">

@@ -187,8 +187,8 @@
 }
 
 [data-theme='dark'] .sgr-theme-toggle:hover {
-  background: rgba(79, 179, 173, 0.18);
-  border-color: rgba(79, 179, 173, 0.35);
+  background: rgba(91, 149, 234, 0.18);
+  border-color: rgba(91, 149, 234, 0.35);
   color: #a8e1dd;
 }
 
@@ -246,8 +246,8 @@
 
 [data-theme='dark'] .sgr-panel-toggle.is-active,
 [data-theme='dark'] .sgr-panel-toggle:hover {
-  background: rgba(79, 179, 173, 0.18);
-  border-color: rgba(79, 179, 173, 0.35);
+  background: rgba(91, 149, 234, 0.18);
+  border-color: rgba(91, 149, 234, 0.35);
   color: #a8e1dd;
 }
 
@@ -457,7 +457,7 @@
 
 [data-theme='dark'] .sgr-side-panel__head {
   border-bottom-color: rgba(148, 163, 184, 0.12);
-  background: linear-gradient(135deg, rgba(79, 179, 173, 0.14), rgba(250, 184, 44, 0.1));
+  background: linear-gradient(135deg, rgba(91, 149, 234, 0.14), rgba(250, 184, 44, 0.1));
 }
 
 .sgr-side-panel__eyebrow {
@@ -519,8 +519,8 @@
 }
 
 [data-theme='dark'] .sgr-members-summary span {
-  background: rgba(79, 179, 173, 0.12);
-  border-color: rgba(79, 179, 173, 0.22);
+  background: rgba(91, 149, 234, 0.12);
+  border-color: rgba(91, 149, 234, 0.22);
   color: #cbd5e1;
 }
 
@@ -684,8 +684,8 @@
 }
 
 [data-theme='dark'] .sgr-group-card {
-  background: rgba(79, 179, 173, 0.12);
-  border-color: rgba(79, 179, 173, 0.22);
+  background: rgba(91, 149, 234, 0.12);
+  border-color: rgba(91, 149, 234, 0.22);
 }
 
 [data-theme='dark'] .sgr-group-card p {
@@ -816,7 +816,7 @@
 [data-theme='dark'] .sgr-chat {
   border-right-color: rgba(148, 163, 184, 0.12);
   background:
-    linear-gradient(128deg, rgba(79, 179, 173, 0.09) 0%, transparent 48%),
+    linear-gradient(128deg, rgba(91, 149, 234, 0.09) 0%, transparent 48%),
     linear-gradient(300deg, rgba(62, 127, 221, 0.1) 0%, transparent 46%),
     radial-gradient(ellipse 110% 70% at 50% 0%, rgba(62, 127, 221, 0.12), transparent 58%),
     #0c1420;
@@ -1215,8 +1215,8 @@
 }
 
 [data-theme='dark'] .sgr-rich-card {
-  background: rgba(79, 179, 173, 0.1);
-  border-color: rgba(79, 179, 173, 0.25);
+  background: rgba(91, 149, 234, 0.1);
+  border-color: rgba(91, 149, 234, 0.25);
 }
 
 .sgr-rich-card__icon {
@@ -1232,8 +1232,8 @@
 }
 
 [data-theme='dark'] .sgr-rich-card__icon {
-  background: rgba(79, 179, 173, 0.2);
-  color: #4fb3ad;
+  background: rgba(91, 149, 234, 0.2);
+  color: #5b95ea;
 }
 
 .sgr-bubble--mine .sgr-rich-card__icon {
@@ -1258,7 +1258,7 @@
 }
 
 [data-theme='dark'] .sgr-rich-card__tag {
-  color: #4fb3ad;
+  color: #5b95ea;
 }
 
 .sgr-bubble--mine .sgr-rich-card__tag {
@@ -1417,8 +1417,8 @@
 }
 
 [data-theme='dark'] .sgr-attach-preview {
-  background: rgba(79, 179, 173, 0.1);
-  border-color: rgba(79, 179, 173, 0.25);
+  background: rgba(91, 149, 234, 0.1);
+  border-color: rgba(91, 149, 234, 0.25);
 }
 
 .sgr-attach-preview__thumb {
@@ -1444,8 +1444,8 @@
 }
 
 [data-theme='dark'] .sgr-attach-preview__icon {
-  background: rgba(79, 179, 173, 0.2);
-  color: #4fb3ad;
+  background: rgba(91, 149, 234, 0.2);
+  color: #5b95ea;
 }
 
 .sgr-attach-preview__info {
@@ -1505,8 +1505,8 @@
 }
 
 [data-theme='dark'] .sgr-file-card {
-  background: rgba(79, 179, 173, 0.1);
-  border-color: rgba(79, 179, 173, 0.25);
+  background: rgba(91, 149, 234, 0.1);
+  border-color: rgba(91, 149, 234, 0.25);
 }
 
 .sgr-bubble--mine .sgr-file-card {
@@ -1555,8 +1555,8 @@
 }
 
 [data-theme='dark'] .sgr-file-card__icon {
-  background: rgba(79, 179, 173, 0.2);
-  color: #4fb3ad;
+  background: rgba(91, 149, 234, 0.2);
+  color: #5b95ea;
 }
 
 .sgr-bubble--mine .sgr-file-card__icon {
@@ -1677,8 +1677,8 @@
 }
 
 [data-theme='dark'] .sgr-composer__field:focus-within {
-  border-color: rgba(79, 179, 173, 0.42);
-  box-shadow: 0 0 0 2px rgba(79, 179, 173, 0.12);
+  border-color: rgba(91, 149, 234, 0.42);
+  box-shadow: 0 0 0 2px rgba(91, 149, 234, 0.12);
 }
 
 .sgr-composer__field .sgr-input {
@@ -1754,7 +1754,7 @@
 }
 
 [data-theme='dark'] .sgr-field-action:hover {
-  background: rgba(79, 179, 173, 0.2);
+  background: rgba(91, 149, 234, 0.2);
   color: #a8e1dd;
 }
 
@@ -1764,7 +1764,7 @@
 }
 
 [data-theme='dark'] .sgr-field-action.is-active {
-  background: rgba(79, 179, 173, 0.22);
+  background: rgba(91, 149, 234, 0.22);
   color: #a8e1dd;
 }
 
@@ -1774,8 +1774,8 @@
 }
 
 [data-theme='dark'] .sgr-field-action.is-attached {
-  color: #4fb3ad;
-  background: rgba(79, 179, 173, 0.15);
+  color: #5b95ea;
+  background: rgba(91, 149, 234, 0.15);
 }
 
 .sgr-tool {
@@ -1822,9 +1822,9 @@
 }
 
 [data-theme='dark'] .sgr-tool.is-attached {
-  color: #4fb3ad;
-  border-color: rgba(79, 179, 173, 0.4);
-  background: rgba(79, 179, 173, 0.12);
+  color: #5b95ea;
+  border-color: rgba(91, 149, 234, 0.4);
+  background: rgba(91, 149, 234, 0.12);
 }
 
 .sgr-composer__field .sgr-file-input {

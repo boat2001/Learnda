@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { FiBell, FiCheck } from 'react-icons/fi';
 import api from '../services/api';
 import { getNotificationDisplay } from '../utils/notifications';
+import PageHeader from '../components/common/PageHeader';
 import './SharedPages.css';
 import './Notifications.css';
 
@@ -82,26 +83,16 @@ export default function Notifications() {
 
   return (
     <div className="page-shell notifications-page">
-      <section className="page-hero page-hero-compact">
-        <div className="hero-grid">
-          <div>
-            <span className="hero-tag">
-              <FiBell aria-hidden /> Notifications
-            </span>
-            <h1 className="hero-title">Stay on top of what matters</h1>
-            <div className="hero-actions">
-              <button
-                type="button"
-                className="btn btn-secondary"
-                onClick={handleMarkAllRead}
-                disabled={!unreadCount || markingAll}
-              >
-                <FiCheck aria-hidden /> {markingAll ? 'Marking…' : 'Mark all as read'}
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
+      <PageHeader icon="notifications" title="Notifications" description="Your latest updates in one place.">
+        <button
+          type="button"
+          className="btn btn-secondary"
+          onClick={handleMarkAllRead}
+          disabled={!unreadCount || markingAll}
+        >
+          <FiCheck aria-hidden /> {markingAll ? 'Marking…' : 'Mark all as read'}
+        </button>
+      </PageHeader>
 
       <div className="tab-row notifications-filter-row">
         {FILTERS.map((item) => (

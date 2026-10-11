@@ -9,7 +9,7 @@
  */
 
 const ALL_CONTENT_VIEW_SQL = `
-  CREATE VIEW all_content AS
+  CREATE OR REPLACE VIEW all_content AS
     SELECT
       id, 'lesson'::TEXT AS content_type, NULL::TEXT AS subtype,
       title, description, status, is_premium, creator_id, depth_level, tags,
@@ -50,12 +50,24 @@ const ALL_CONTENT_VIEW_SQL = `
 `;
 
 /**
- * Drop and recreate the all_content view on the given connected pg client.
+ * Create or replace the all_content view on the given connected pg client.
  * Idempotent and safe to run repeatedly — a view holds no data of its own.
  */
-async function refreshAllContentView(client) {
-  await client.query('DROP VIEW IF EXISTS all_content');
-  await client.query(ALL_CONTENT_VIEW_SQL);
+function buildAllContentViewSql(lessonColumns) {
+  const columns = new Set(lessonColumns);
+  const course = columns.has('course_id') ? 'course_id' : 'NULL::UUID AS course_id';
+  const level = columns.has('class_level_code') ? 'class_level_code::TEXT AS level'
+    : columns.has('level') ? 'level::TEXT AS level' : 'NULL::TEXT AS level';
+  return ALL_CONTENT_VIEW_SQL.replace('course_id, lesson_number, level,', `${course}, lesson_number, ${level},`);
 }
 
-module.exports = { ALL_CONTENT_VIEW_SQL, refreshAllContentView };
+async function refreshAllContentView(client) {
+  const { rows } = await client.query(`
+    SELECT column_name FROM information_schema.columns
+    WHERE table_schema = 'public' AND table_name = 'lessons'
+  `);
+  if (!rows.length) throw new Error('The lessons table is missing; apply the database schema first.');
+  await client.query(buildAllContentViewSql(rows.map(row => row.column_name)));
+}
+
+module.exports = { ALL_CONTENT_VIEW_SQL, buildAllContentViewSql, refreshAllContentView };

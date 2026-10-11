@@ -250,7 +250,7 @@ class ApiService {
           try {
             const nextToken = await this.refreshAccessToken();
             if (nextToken) {
-              return this.request(endpoint, { ...requestOptions, _retry: true });
+              return this.request(endpoint, { ...options, _retry: true });
             }
           } catch (error) {
             console.error('Token refresh error:', error);
@@ -271,12 +271,12 @@ class ApiService {
             localStorage.removeItem('refreshToken');
             localStorage.removeItem('auth-storage');
           }
-          if (typeof window !== 'undefined') {
+          if (hadSession && typeof window !== 'undefined') {
             window.dispatchEvent(new CustomEvent('sessionExpired', {
               detail: isDeviceConflict ? { reason: 'device_conflict' } : {}
             }));
           }
-          return null;
+          throw buildRequestError(errorMessage, errorData, response.status);
         }
 
         throw buildRequestError(errorMessage, errorData, response.status);
@@ -742,17 +742,17 @@ class ApiService {
         body: JSON.stringify(payload),
       }),
 
-    updateAcademic: (payload) =>
-      this.request('/me/academic', {
-        method: 'PATCH',
+    setClassPlacement: (payload) =>
+      this.request('/me/class-placement', {
+        method: 'PUT',
         body: JSON.stringify(payload),
       }).then((response) => {
-        this.invalidateCache(['/me', '/courses/current', '/study-groups/current', '/pls']);
+        this.invalidateCache(['/me', '/subjects', '/study-groups/current', '/pls']);
         return response;
       }),
 
-    markAcademicStateNoticeSeen: (key) =>
-      this.request('/me/academic-state-notice/seen', {
+    markPromotionNoticeSeen: (key) =>
+      this.request('/me/promotion-notice/seen', {
         method: 'POST',
         body: JSON.stringify({ key }),
       }),
@@ -968,16 +968,6 @@ class ApiService {
       const q = new URLSearchParams(params).toString();
       return this.request(`/admin/notifications/analytics${q ? `?${q}` : ''}`);
     },
-
-    getAcademicStateInstitutions: () =>
-      this.request('/admin/academic-state/institutions'),
-    getAcademicStateUniversities: () =>
-      this.request('/admin/academic-state/universities'),
-    applyAcademicState: (payload) =>
-      this.request('/admin/academic-state/apply', {
-        method: 'POST',
-        body: JSON.stringify(payload),
-      }),
 
     // Lecturer invites
 
@@ -1321,6 +1311,11 @@ class ApiService {
       return this.request(`/subjects/${encodeURIComponent(slug)}/lessons${params}`, {
         cacheTtlMs: 60000,
       });
+    },
+
+    getPractice: (slug, classLevel = null) => {
+      const params = classLevel ? `?class_level=${encodeURIComponent(classLevel)}` : '';
+      return this.request(`/subjects/${encodeURIComponent(slug)}/practice${params}`, { cacheTtlMs: 60000 });
     },
 
     // The §6.3 ladder: which classes are current, revision, or locked.

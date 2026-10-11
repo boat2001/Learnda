@@ -7,6 +7,8 @@ import { useAuth } from '../hooks/useAuth';
 import { useAnalytics } from '../hooks/useAnalytics';
 import { PLANS } from '../data/subscriptionPlans';
 import { toDisplayName } from '../utils/contributionPlans';
+import PageHeader from '../components/common/PageHeader';
+import SectionHeadingIcon from '../components/common/SectionHeadingIcon';
 import './SharedPages.css';
 
 const PLAN_KEY_TO_NAME = {
@@ -68,62 +70,12 @@ export default function Features() {
   return (
     <div className="page-shell">
       {/* ── Hero ── */}
-      <section className="page-hero page-hero-compact page-hero-lean hero-theme-product">
-        <div className="hero-grid">
-          <div>
-            <span className="hero-tag">Contribution Plans</span>
-            <h1 className="hero-title">Support Learnda. Unlock more.</h1>
-            <p className="hero-subtitle">
-              Learnda is funded by students, for students. Contribute to keep it running — and get more tools as our thank you.
-            </p>
-            <div className="stat-grid">
-              <div className="stat-card">
-                <span className="stat-value">Free Learner</span>
-                <span className="stat-label">Free, always. Start studying today and chip in whenever it suits you.</span>
-              </div>
-              <div className="stat-card">
-                <span className="stat-value">Helper</span>
-                <span className="stat-label">GHS 5 a month opens up more courses, downloads and practice.</span>
-              </div>
-              <div className="stat-card">
-                <span className="stat-value">Hero</span>
-                <span className="stat-label">GHS 10 a month unlocks everything, plus new features first.</span>
-              </div>
-            </div>
-          </div>
-          <div className="hero-panel">
-            <p className="panel-title">Why chip in</p>
-            <div className="panel-list">
-              <div className="panel-list-item">
-                <span className="panel-dot" />
-                <div>
-                  <strong>Nobody gets locked out</strong>
-                  <p>Your contribution keeps the core tools free for students who can&apos;t pay.</p>
-                </div>
-              </div>
-              <div className="panel-list-item">
-                <span className="panel-dot" />
-                <div>
-                  <strong>You get more back</strong>
-                  <p>Helper and Hero open up more courses, downloads and practice.</p>
-                </div>
-              </div>
-              <div className="panel-list-item">
-                <span className="panel-dot" />
-                <div>
-                  <strong>Pay what fits</strong>
-                  <p>GHS 5 or GHS 10 a month, and you can stop or switch any time.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <PageHeader icon="plans" title="Contribution plans" description="Support Learnda and unlock more learning tools." />
 
       {/* ── Plans ── */}
       <section className="page-section" id="pricing-plans">
         <div className="section-heading">
-          <h2>Contribution plans</h2>
+          <h2><SectionHeadingIcon name="support" /><span className="section-heading__title">Contribution plans</span></h2>
           <p>Pick what fits your budget — you can change or stop it any time.</p>
           {recommendedPlan && (
             <p className="status-message">What you need for this: <strong>{toDisplayName(recommendedPlan)}</strong></p>

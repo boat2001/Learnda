@@ -11,6 +11,8 @@ import {
   FiShare2,
 } from 'react-icons/fi';
 import api from '../services/api';
+import PageHeader from '../components/common/PageHeader';
+import SectionHeadingIcon from '../components/common/SectionHeadingIcon';
 import './SharedPages.css';
 import './Roadmap.css';
 
@@ -249,71 +251,26 @@ export default function Roadmap() {
 
   return (
     <div className="page-shell">
-      <section className="page-hero page-hero-compact page-hero-lean hero-theme-product">
-        <div className="hero-grid">
-          <div>
-            <span className="hero-tag">10-year vision</span>
-            <h1 className="hero-title">
-              Building the learning infrastructure Africa's students deserve.
-            </h1>
-            <p className="hero-subtitle">
-              Five phases, from Ghana's KG-to-SHS curriculum today to a continent-wide platform. See where we are and where we're going.
-            </p>
-            <div className="hero-actions">
-              <button
-                className="btn btn-primary"
-                type="button"
-                onClick={() => navigate('/feature-requests')}
-              >
-                Suggest a feature
-              </button>
-              <button
-                className="btn btn-secondary"
-                type="button"
-                onClick={() => navigate('/blog')}
-              >
-                Read blog
-              </button>
-            </div>
-            <div className="stat-grid">
-              <div className="stat-card">
-                <span className="stat-value">5 phases</span>
-                <span className="stat-label">From a single campus to global scale.</span>
-              </div>
-              <div className="stat-card">
-                <span className="stat-value">2023 – 2033</span>
-                <span className="stat-label">A ten-year build, one phase at a time.</span>
-              </div>
-              <div className="stat-card">
-                <span className="stat-value">Student-led</span>
-                <span className="stat-label">Every phase shaped by real friction and feedback.</span>
-              </div>
-            </div>
-          </div>
-          <div className="hero-panel">
-            <p className="panel-title">How the phases connect</p>
-            <div className="panel-list">
-              {[
-                ['Each phase builds the next', 'Features, reach, and depth compound with every version.'],
-                ['Platform, not just product', 'The goal is infrastructure — not a feature checklist.'],
-                ['Student-first always', 'Every version traces back to reducing real learning friction.'],
-              ].map(([title, desc]) => (
-                <div key={title} className="panel-list-item">
-                  <span className="panel-dot" />
-                  <div>
-                    <strong>{title}</strong>
-                    <p>{desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+      <PageHeader icon="roadmap" title="Roadmap" description="Where Learnda is headed, from KG–SHS in Ghana to the rest of Africa.">
+        <button
+          className="btn btn-primary"
+          type="button"
+          onClick={() => navigate('/feature-requests')}
+        >
+          Suggest a feature
+        </button>
+        <button
+          className="btn btn-secondary"
+          type="button"
+          onClick={() => navigate('/blog')}
+        >
+          Read blog
+        </button>
+      </PageHeader>
 
       <section className="page-section">
         <div className="section-heading">
-          <h2>The Learnda journey</h2>
+          <h2><SectionHeadingIcon name="journey" /><span className="section-heading__title">The Learnda journey</span></h2>
           <p>
             Five versions, five phases, each with its own milestone, team, and set of students it was built to serve.
           </p>

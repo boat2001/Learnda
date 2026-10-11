@@ -228,7 +228,6 @@ async function importLesson(db, filePath, generated, context, creator, args) {
   if (args.force && existing) {
     // Always preserve the existing status — never downgrade a published/review lesson to pending
     const existingStatus = existing.status || lessonFields.status;
-    const preservedStatus = existingStatus === 'pending' ? existingStatus : existingStatus;
     const preservedPublishedAt = existing.published_at || (existingStatus === 'published' ? new Date() : null);
     const preservedFields = {
       ...lessonFields,

@@ -36,7 +36,7 @@ const MySpace = lazy(() => import('./pages/MySpace'));
 const PracticeIndex = lazy(() => import('./pages/practice'));
 const PracticeDetail = lazy(() => import('./pages/practice/PracticeDetail'));
 const PracticeSession = lazy(() => import('./pages/practice/PracticeSession'));
-const CourseDetail = lazy(() => import('./pages/learn/CourseDetail'));
+const SubjectPage = lazy(() => import('./pages/learn/SubjectPage'));
 const LessonViewer = lazy(() => import('./pages/learn/LessonViewer'));
 const ResourcesIndex = lazy(() => import('./pages/Resources'));
 const ResourceCategory = lazy(() => import('./pages/Resources/Category'));
@@ -59,6 +59,11 @@ const Spotlights = lazy(() => import('./pages/Spotlights'));
 const Contact = lazy(() => import('./pages/Contact'));
 const Terms = lazy(() => import('./pages/Terms'));
 const Policies = lazy(() => import('./pages/Policies'));
+const ChildSafety = lazy(() => import('./pages/ChildSafety'));
+const Curriculums = lazy(() => import('./pages/academics/Curriculums'));
+const Schools = lazy(() => import('./pages/academics/Schools'));
+const SchoolProfile = lazy(() => import('./pages/academics/Schools').then(module => ({ default: module.SchoolProfile })));
+const EducationPolicies = lazy(() => import('./pages/academics/EducationPolicies'));
 const OurSocials = lazy(() => import('./pages/OurSocials'));
 const Download = lazy(() => import('./pages/Download'));
 const InviteFriends = lazy(() => import('./pages/InviteFriends'));
@@ -278,14 +283,14 @@ function AcademicStateNoticeHost() {
   const navigate = useNavigate();
   const [dismissedKey, setDismissedKey] = useState(null);
   const [processing, setProcessing] = useState(false);
-  const notice = user?.academic_state_notice || null;
+  const notice = user?.promotion_notice || null;
   const isOpen = Boolean(notice?.key && dismissedKey !== notice.key);
 
   const closeNotice = async ({ openSettings = false } = {}) => {
     if (!notice?.key || processing) return;
     setProcessing(true);
     try {
-      await api.me.markAcademicStateNoticeSeen(notice.key);
+      await api.me.markPromotionNoticeSeen(notice.key);
       setDismissedKey(notice.key);
       await checkAuth(true);
       if (openSettings) {
@@ -299,8 +304,8 @@ function AcademicStateNoticeHost() {
   return (
     <ConfirmModal
       isOpen={isOpen}
-      title={notice?.title || 'Semester Updated'}
-      message={notice?.message || 'Your college is now in Semester 2, so we have moved your courses to Semester 2. You can switch back in Settings.'}
+      title={notice?.title || 'Welcome to Your New Class'}
+      message={notice?.message || 'Your class has moved up for the new school year. Earlier classes remain open for revision.'}
       confirmLabel="Open Settings"
       cancelLabel="Got It"
       isProcessing={processing}
@@ -517,7 +522,7 @@ function RouteTree() {
                     {/* Learn Routes */}
                     <Route path="learn">
                       <Route index element={<RequireAcademicProfile><LearnIndex /></RequireAcademicProfile>} />
-                      <Route path=":courseSlug" element={<RequireAcademicProfile><CourseDetail /></RequireAcademicProfile>} />
+                      <Route path=":courseSlug" element={<RequireAcademicProfile><SubjectPage /></RequireAcademicProfile>} />
                     </Route>
 
                     <Route path="practice">
@@ -597,6 +602,14 @@ function RouteTree() {
                     <Route path="contact" element={<Contact />} />
                     <Route path="contribute" element={<Contribute />} />
                     <Route path="policies" element={<Policies />} />
+                    <Route path="privacy" element={<Policies />} />
+                    <Route path="child-safety" element={<ChildSafety />} />
+                    <Route path="curriculums" element={<Curriculums />} />
+                    <Route path="schools" element={<Schools />} />
+                    <Route path="schools/:slug" element={<SchoolProfile />} />
+                    <Route path="education-policies" element={<EducationPolicies />} />
+                    <Route path="ges-policies" element={<Navigate to="/education-policies" replace />} />
+                    <Route path="moe-policies" element={<Navigate to="/education-policies" replace />} />
                     <Route path="our-socials" element={<OurSocials />} />
                     <Route path="terms" element={<Terms />} />
                     <Route path="download" element={<Download />} />

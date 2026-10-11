@@ -473,5 +473,5 @@ async function main() {
 main()
   .catch((err) => { console.error(err); process.exitCode = 1; })
   .finally(async () => {
-    try { const db = require('../models'); await db.sequelize.close(); } catch (_) {}
+    try { const db = require('../models'); await db.sequelize.close(); } catch (_) { /* Best-effort cleanup. */ }
   });

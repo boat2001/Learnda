@@ -5,6 +5,8 @@ const { authenticate, optionalAuth, checkRole } = require('../middleware/auth');
 const { requirePlanFeature, enforceContributionLimit } = require('../middleware/planAccess');
 const { upload } = require('../config/upload');
 const contentController = require('../controllers/contentController');
+const { academicContentAccess } = require('../middleware/academicContentAccess');
+router.param('id', (req, res, next) => optionalAuth(req, res, () => academicContentAccess(req, res, next).catch(next)));
 
 // Public feeds
 router.get('/', optionalAuth, contentController.list);

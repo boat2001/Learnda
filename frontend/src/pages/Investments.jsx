@@ -4,6 +4,9 @@ import { useAuth } from '../hooks/useAuth';
 import api from '../services/api';
 import FormContactIdentity from '../components/common/FormContactIdentity';
 import FormModal from '../components/common/FormModal';
+import PageHeader from '../components/common/PageHeader';
+import PrimaryPageAction from '../components/common/PrimaryPageAction';
+import RelatedPageLink from '../components/common/RelatedPageLink';
 import './SharedPages.css';
 
 const HIGHLIGHTS = [
@@ -74,7 +77,7 @@ export default function Investments() {
   };
 
   return (
-    <div className="page-shell">
+    <div className="page-shell action-page">
       <FormModal
         isOpen={showModal}
         onClose={closeModal}
@@ -137,97 +140,22 @@ export default function Investments() {
         )}
       </FormModal>
 
-      <section className="page-hero page-hero-compact page-hero-lean hero-theme-development">
-        <div className="hero-grid">
-          <div>
-            <span className="hero-tag">Growth capital</span>
-            <h1 className="hero-title">Back the infrastructure behind better student outcomes.</h1>
-            <p className="hero-subtitle">
-              Explore investment opportunities supporting Learnda&apos;s long-term growth in student learning.
-            </p>
-            <div className="hero-actions">
-              <button className="btn btn-primary" type="button" onClick={() => setShowModal(true)}>
-                Contact investment desk
-              </button>
-              <Link className="btn btn-secondary" to="/about">
-                About Learnda
-              </Link>
-            </div>
-            <div className="stat-grid">
-              <div className="stat-card">
-                <span className="stat-value">Student-first</span>
-                <span className="stat-label">The product is built around study outcomes, not passive time-on-app.</span>
-              </div>
-              <div className="stat-card">
-                <span className="stat-value">Multi-layered</span>
-                <span className="stat-label">Subscriptions, resources, and creator participation support platform growth.</span>
-              </div>
-              <div className="stat-card">
-                <span className="stat-value">Execution-focused</span>
-                <span className="stat-label">Investment conversations center on traction, operations, and roadmap realism.</span>
-              </div>
-            </div>
-          </div>
-          <div className="hero-panel">
-            <p className="panel-title">What investor conversations can cover</p>
-            <div className="panel-list">
-              <div className="panel-list-item">
-                <span className="panel-dot"></span>
-                <div>
-                  <strong>Product traction</strong>
-                  <p>Usage activity, retention signals, and learning completion metrics.</p>
-                </div>
-              </div>
-              <div className="panel-list-item">
-                <span className="panel-dot"></span>
-                <div>
-                  <strong>Commercial model</strong>
-                  <p>Subscription and creator-revenue growth assumptions.</p>
-                </div>
-              </div>
-              <div className="panel-list-item">
-                <span className="panel-dot"></span>
-                <div>
-                  <strong>Roadmap visibility</strong>
-                  <p>Execution priorities across platform, content, and community tracks.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="page-section">
-        <div className="section-heading">
-          <h2>Investment highlights</h2>
-          <p>Core reasons investors engage with the Learnda mission.</p>
-        </div>
-        <div className="card-grid">
-          {HIGHLIGHTS.map((item) => (
-            <div key={item.title} className="info-card">
-              <h3>{item.title}</h3>
-              <p>{item.body}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="page-section split-grid">
-        <div className="info-card">
-          <h3>Ready to connect?</h3>
-          <p>Open the investment inquiry form and share the context of your interest — stage, focus area, and what you want to review first.</p>
-          <button className="btn btn-primary" type="button" onClick={() => setShowModal(true)}>
-            Contact investment desk
-          </button>
-        </div>
-        <div className="info-card">
-          <h3>Explore partnerships</h3>
-          <p>Looking to collaborate rather than invest? The partnerships track covers institutions, communities, and content teams.</p>
-          <Link className="btn btn-secondary" to="/partnerships">
-            View partnership tracks
-          </Link>
-        </div>
-      </section>
+      <PageHeader icon="investments" title="Invest in Learnda" description="Help build better learning for Ghanaian children.">
+        <button className="btn btn-primary" type="button" onClick={() => setShowModal(true)}>
+          Contact investment desk
+        </button>
+        <Link className="btn btn-secondary" to="/about">
+          About Learnda
+        </Link>
+      </PageHeader>
+      <PrimaryPageAction icon="investment" label="Start an investment inquiry" onClick={() => setShowModal(true)} />
+      <details className="action-page-details">
+        <summary>Why invest</summary>
+        <ul>
+          {HIGHLIGHTS.map((item) => <li key={item.title}><strong>{item.title}:</strong> {item.body}</li>)}
+        </ul>
+      </details>
+      <RelatedPageLink to="/partnerships" icon="partnership" title="Explore partnerships" description="Prefer to collaborate? Find a way to work together." />
     </div>
   );
 }

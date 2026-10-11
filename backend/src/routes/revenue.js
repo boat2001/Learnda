@@ -3,7 +3,7 @@ const router = express.Router();
 const { authenticate, checkRole } = require('../middleware/auth');
 const revenueService = require('../services/revenueService');
 const logger = require('../config/logger');
-const { Subscription, Plan, RewardPayout, User, sequelize: revRouteSeq } = require('../models');
+const { Subscription, Plan, RewardPayout, User } = require('../models');
 const { findById } = require('../utils/contentLookup');
 
 router.get('/earnings', authenticate, async (req, res) => {

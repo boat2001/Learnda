@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useAuth } from '../hooks/useAuth';
 import api from '../services/api';
+import PageHeader from '../components/common/PageHeader';
+import SectionHeadingIcon from '../components/common/SectionHeadingIcon';
 import './SharedPages.css';
 
 const EVENTS = [
@@ -139,69 +141,18 @@ export default function Events() {
 
   return (
     <div className="page-shell">
-      <section className="page-hero page-hero-compact page-hero-lean hero-theme-community">
-        <div className="hero-grid">
-          <div>
-            <span className="hero-tag">Campus energy</span>
-            <h1 className="hero-title">Lead the study culture on campus and keep the momentum moving.</h1>
-            <p className="hero-subtitle">
-              The ambassador program blends events, peer leadership, and visibility so students can turn learning into something social, repeatable, and local.
-            </p>
-            <div className="hero-actions">
-              <button className="btn btn-primary" type="button" onClick={() => document.getElementById('upcoming-events')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}>
-                View calendar
-              </button>
-              <button className="btn btn-secondary" type="button" onClick={() => document.getElementById('event-registration')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}>
-                Register interest
-              </button>
-            </div>
-            <div className="stat-grid">
-              <div className="stat-card">
-                <span className="stat-value">{EVENTS.length} sessions</span>
-                <span className="stat-label">Upcoming events that keep students learning in public, not alone.</span>
-              </div>
-              <div className="stat-card">
-                <span className="stat-value">{types.length - 1} formats</span>
-                <span className="stat-label">Bootcamps, AMAs, study sessions, and more across different contexts.</span>
-              </div>
-              <div className="stat-card">
-                <span className="stat-value">Online + campus</span>
-                <span className="stat-label">Designed to work both for local communities and broader remote audiences.</span>
-              </div>
-            </div>
-          </div>
-          <div className="hero-panel">
-            <p className="panel-title">What ambassadors help create</p>
-            <div className="panel-list">
-              <div className="panel-list-item">
-                <span className="panel-dot"></span>
-                <div>
-                  <strong>Visible consistency</strong>
-                  <p>Students are more likely to keep showing up when learning has a shared rhythm.</p>
-                </div>
-              </div>
-              <div className="panel-list-item">
-                <span className="panel-dot"></span>
-                <div>
-                  <strong>Local leadership</strong>
-                  <p>Campus organizers can turn Learnda into a real-world support system.</p>
-                </div>
-              </div>
-              <div className="panel-list-item">
-                <span className="panel-dot"></span>
-                <div>
-                  <strong>Repeatable impact</strong>
-                  <p>Events become a practical loop for accountability, discovery, and retention.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <PageHeader icon="events" title="Events" description="Learning events for schools and communities.">
+        <button className="btn btn-primary" type="button" onClick={() => document.getElementById('upcoming-events')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}>
+          View calendar
+        </button>
+        <button className="btn btn-secondary" type="button" onClick={() => document.getElementById('event-registration')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}>
+          Register interest
+        </button>
+      </PageHeader>
 
       <section className="page-section" id="upcoming-events">
         <div className="section-heading">
-          <h2>Upcoming events</h2>
+          <h2><SectionHeadingIcon name="events" /><span className="section-heading__title">Upcoming events</span></h2>
           <p>Select a format to find the right session.</p>
         </div>
         <div className="tab-row">
@@ -243,7 +194,7 @@ export default function Events() {
 
       <section className="page-section" id="event-registration">
         <div className="section-heading">
-          <h2>Register interest</h2>
+          <h2><SectionHeadingIcon name="stories" /><span className="section-heading__title">Register interest</span></h2>
           <p>Tell us which event you want to join and the team will follow up with the next step.</p>
         </div>
         <form className="form-card" onSubmit={registerInterest}>

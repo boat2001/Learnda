@@ -195,7 +195,7 @@ function normalizePracticeQuestion(question, index, fallbackSection = '') {
   };
 }
 
-function validatePracticeOutput(generated, expectedSubtype) {
+function validatePracticeOutput(generated, _expectedSubtype) {
   const errors = [];
   if (!generated || typeof generated !== 'object' || Array.isArray(generated)) {
     return ['Generated practice item must be a JSON object.'];

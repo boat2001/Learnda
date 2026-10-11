@@ -8,10 +8,7 @@
 // JHS/SHS get a structured, practice-oriented list.
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import {
-  MdLock, MdVolumeUp, MdHistory, MdSchool, MdRefresh, MdChevronRight,
-} from 'react-icons/md';
-import { useAuth } from '../../hooks/useAuth';
+import { MdLock, MdHistory, MdRefresh, MdCheck } from 'react-icons/md';
 import usePageTitle from '../../hooks/usePageTitle';
 import api from '../../services/api';
 import {
@@ -21,75 +18,8 @@ import {
   LEVEL_GROUPS,
 } from '../../constants/education';
 import ClassPlacementPrompt from './ClassPlacementPrompt';
+import SubjectTile from '../../components/learning/SubjectTile';
 import './Learn.css';
-
-// Subject tiles carry a colour so young learners can recognise them by sight
-// before they can reliably read the label (§8, Kindergarten/Primary).
-const SUBJECT_ACCENTS = [
-  'var(--color-accent-blue)',
-  'var(--color-accent-orange)',
-  'var(--color-accent-green)',
-  'var(--color-accent-amber)',
-  'var(--color-primary-600)',
-  'var(--color-accent-navy)',
-];
-
-const accentFor = (slug = '', index = 0) => {
-  // Hash the slug so a subject keeps its colour across reloads and reorders.
-  const hash = [...slug].reduce((acc, ch) => acc + ch.charCodeAt(0), index);
-  return SUBJECT_ACCENTS[hash % SUBJECT_ACCENTS.length];
-};
-
-/** Speaks a subject name aloud. §8: Kindergarten is audio-first, tap-to-listen. */
-const speak = (text) => {
-  if (!window.speechSynthesis || !text) return;
-  window.speechSynthesis.cancel();
-  const utter = new SpeechSynthesisUtterance(text);
-  utter.rate = 0.85; // slower, for early readers
-  const voices = window.speechSynthesis.getVoices();
-  const preferred = ['en-GH', 'en-NG', 'en-GB'];
-  const chosen = preferred.reduce((found, lang) => found || voices.find((v) => v.lang === lang), null);
-  if (chosen) utter.voice = chosen;
-  else utter.lang = 'en-GB';
-  window.speechSynthesis.speak(utter);
-};
-
-function SubjectCard({ subject, index, presentation, unitNoun, onListen }) {
-  const accent = accentFor(subject.slug, index);
-  const initials = subject.name.slice(0, 2).toUpperCase();
-
-  return (
-    <article className="subject-card" style={{ '--subject-accent': accent }}>
-      <Link to={`/learn/${subject.slug}`} className="subject-card__link">
-        <span className="subject-card__mark" aria-hidden="true">
-          {subject.icon ? <span className="subject-card__emoji">{subject.icon}</span> : initials}
-        </span>
-        <span className="subject-card__body">
-          <h3 className="subject-card__title">{subject.name}</h3>
-          {presentation.textDensity !== 'minimal' && subject.description && (
-            <p className="subject-card__desc">{subject.description}</p>
-          )}
-          {subject.required && (
-            <span className="subject-card__tag">Core {unitNoun.singular.toLowerCase()}</span>
-          )}
-        </span>
-        {!presentation.bigIcons && <MdChevronRight className="subject-card__chevron" aria-hidden="true" />}
-      </Link>
-
-      {/* §8: tap-to-listen, for learners who cannot yet read the label. */}
-      {presentation.audioFirst && (
-        <button
-          type="button"
-          className="subject-card__listen"
-          onClick={() => onListen(subject.name)}
-          aria-label={`Hear "${subject.name}" read aloud`}
-        >
-          <MdVolumeUp aria-hidden="true" />
-        </button>
-      )}
-    </article>
-  );
-}
 
 /**
  * The §6.3 class ladder. Past classes open in revision mode, the current class
@@ -123,8 +53,8 @@ function ClassLadder({ levels, activeCode, onSelect }) {
               >
                 <span className="class-ladder__label">{level.label}</span>
                 {isLocked && <MdLock className="class-ladder__icon" aria-hidden="true" />}
-                {level.access === ACCESS_MODES.REVISION && (
-                  <MdHistory className="class-ladder__icon" aria-hidden="true" />
+                {level.access === ACCESS_MODES.REVISION && !isActive && (
+                  <MdCheck className="class-ladder__icon" aria-hidden="true" />
                 )}
               </button>
             </li>
@@ -132,14 +62,23 @@ function ClassLadder({ levels, activeCode, onSelect }) {
         })}
       </ul>
       <p className="class-ladder__hint">
-        <MdLock aria-hidden="true" /> Locked classes open next academic year.
+        <MdHistory aria-hidden="true" /> Tap an earlier class to revise it.
+        <span><MdLock aria-hidden="true" /> Locked classes open next school year.</span>
       </p>
     </nav>
   );
 }
 
+const RULE_GROUP_LABELS = {
+  CORE: 'Core subjects',
+  PATHWAY_ELECTIVE: 'Learning area electives',
+  ADDITIONAL_ELECTIVE: 'Additional electives',
+  SCIENCE_ELECTIVE: 'Science electives',
+  HUMANITIES_ELECTIVE: 'Humanities electives',
+  INTERVENTION: 'Support subjects',
+};
+
 export default function LearnIndex() {
-  const { user } = useAuth();
   const [state, setState] = useState({ loading: true, error: '', data: null });
   const [classLevels, setClassLevels] = useState([]);
   const [viewingClass, setViewingClass] = useState(null);
@@ -175,13 +114,10 @@ export default function LearnIndex() {
 
   usePageTitle(data?.class_label ? `${unitNoun.plural} · ${data.class_label}` : unitNoun.plural);
 
-  const handleListen = useCallback((name) => speak(name), []);
-
-  const handleSelectClass = useCallback((code) => {
-    setViewingClass(code);
-    // Revision browsing is a per-subject view; the subject list itself is the
-    // learner's own class list and does not change.
-  }, []);
+  // Choosing an earlier class on the ladder puts the page in revision mode:
+  // the subject list stays the learner's own, and each subject opens on that
+  // class's lessons. The API rejects anything above the current class (§5).
+  const handleSelectClass = useCallback((code) => setViewingClass(code), []);
 
   if (state.loading) {
     return (
@@ -228,6 +164,26 @@ export default function LearnIndex() {
 
   const subjects = data?.subjects || [];
   const groups = data?.groups || null;
+  const isRevising = Boolean(viewingClass && data?.class_level && viewingClass !== data.class_level);
+  const revisingLabel = classLevels.find((l) => l.code === viewingClass)?.label || viewingClass;
+  const linkFor = (subject) => (isRevising
+    ? `/learn/${subject.slug}?class=${encodeURIComponent(viewingClass)}`
+    : `/learn/${subject.slug}`);
+
+  const renderGrid = (units) => (
+    <div className={`subject-grid subject-grid--${presentation.mode}`}>
+      {units.map((subject) => (
+        <SubjectTile
+          key={subject.id || subject.slug}
+          subject={subject}
+          mode={presentation.mode}
+          showProgress={!isRevising && presentation.showProgressPercent}
+          badge={subject.required && groups ? 'Core' : null}
+          to={linkFor(subject)}
+        />
+      ))}
+    </div>
+  );
 
   return (
     <div
@@ -235,24 +191,32 @@ export default function LearnIndex() {
       data-level-group={levelGroup}
     >
       <header className="learn-header">
-        <div className="learn-header__text">
-          <p className="learn-header__eyebrow">
-            <MdSchool aria-hidden="true" /> {data?.class_label}
+        <span className="learn-header__class">{data?.class_label}</span>
+        <h1 className="learn-header__title">
+          {levelGroup === LEVEL_GROUPS.KINDERGARTEN ? 'What shall we learn?' : `Your ${unitNoun.plural.toLowerCase()}`}
+        </h1>
+        {presentation.textDensity !== 'minimal' && (
+          <p className="learn-header__sub">
+            {subjects.length} {subjects.length === 1 ? unitNoun.singular.toLowerCase() : unitNoun.plural.toLowerCase()}
+            {' '}for {data?.class_label}{data?.academic_year ? `, ${data.academic_year}` : ''}.
           </p>
-          <h1 className="learn-header__title">{presentation.tone}</h1>
-          {presentation.textDensity === 'full' && (
-            <p className="learn-header__sub">
-              {subjects.length} {subjects.length === 1 ? unitNoun.singular.toLowerCase() : unitNoun.plural.toLowerCase()}
-              {' '}for {data?.class_label}, {data?.academic_year || 'this year'}.
-            </p>
-          )}
-        </div>
+        )}
       </header>
 
       {/* KG has no class ladder: a 4-year-old does not navigate a revision
           timeline, and §8 asks for the simplest possible flow. */}
       {levelGroup !== LEVEL_GROUPS.KINDERGARTEN && (
         <ClassLadder levels={classLevels} activeCode={viewingClass} onSelect={handleSelectClass} />
+      )}
+
+      {isRevising && (
+        <div className="revision-banner" role="status">
+          <MdHistory aria-hidden="true" />
+          <span>Revising <strong>{revisingLabel}</strong>. Lessons open in revision mode.</span>
+          <button type="button" onClick={() => setViewingClass(data.class_level)}>
+            Back to {data.class_label}
+          </button>
+        </div>
       )}
 
       {subjects.length === 0 ? (
@@ -267,37 +231,13 @@ export default function LearnIndex() {
             .filter(([, units]) => units.length > 0)
             .map(([groupKey, units]) => (
               <section key={groupKey} className="subject-group">
-                <h2 className="subject-group__title">
-                  {groupKey.replace(/_/g, ' ').toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase())}
-                </h2>
-                <div className="subject-grid" style={{ '--cards-per-row': presentation.cardsPerRow }}>
-                  {units.map((subject, i) => (
-                    <SubjectCard
-                      key={subject.id || subject.slug}
-                      subject={subject}
-                      index={i}
-                      presentation={presentation}
-                      unitNoun={unitNoun}
-                      onListen={handleListen}
-                    />
-                  ))}
-                </div>
+                <h2 className="subject-group__title">{RULE_GROUP_LABELS[groupKey] || groupKey.replace(/_/g, ' ').toLowerCase()}</h2>
+                {renderGrid(units)}
               </section>
             ))}
         </div>
       ) : (
-        <div className="subject-grid" style={{ '--cards-per-row': presentation.cardsPerRow }}>
-          {subjects.map((subject, i) => (
-            <SubjectCard
-              key={subject.id || subject.slug}
-              subject={subject}
-              index={i}
-              presentation={presentation}
-              unitNoun={unitNoun}
-              onListen={handleListen}
-            />
-          ))}
-        </div>
+        renderGrid(subjects)
       )}
     </div>
   );

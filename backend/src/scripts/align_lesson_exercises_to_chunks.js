@@ -42,9 +42,6 @@ const {
   STOP_WORDS,
   extractSubstantiveChunks,
   isBookendChunk,
-  splitSentences,
-  cleanEdges,
-  looksClean,
   pickDeclarativeSentence,
 } = require('./lib/lesson_text_helpers');
 
@@ -299,9 +296,8 @@ function alignLesson(lesson) {
     // Bookend chunks (welcome/recap/coming-up/achieved) are almost always
     // orientation-only — rather than manufacture a "no-brainer" filler
     // question just to fill the slot, leave them with no exercise at all.
-    // The frontend (LessonViewer.jsx) and progress counter
-    // (learningProgressService.js catalogCountExerciseSteps) both understand
-    // a `null` at a chunk's position as "no exercise for this chunk".
+    // The frontend (LessonViewer.jsx) understands a `null` at a chunk's
+    // position as "no exercise for this chunk".
     if (isBookendChunk(chunk)) {
       skippedBookend += 1;
       return { _noExercise: true, _chunk: chunk.heading };

@@ -1,4 +1,5 @@
 import { FaFacebookF, FaInstagram, FaTelegram, FaTiktok, FaXTwitter, FaYoutube } from 'react-icons/fa6';
+import PageHeader from '../components/common/PageHeader';
 import './OurSocials.css';
 import './SharedPages.css';
 
@@ -93,57 +94,7 @@ export default function OurSocials() {
 
   return (
     <div className="page-shell">
-      <section className="page-hero page-hero-compact page-hero-lean hero-theme-community">
-        <div className="hero-grid">
-          <div>
-            <span className="hero-tag">Stay connected</span>
-            <h1 className="hero-title">Find Learnda where you already spend your time.</h1>
-            <p className="hero-subtitle">
-              We are active across multiple platforms — each one with a distinct purpose. Pick the channels that fit how you like to stay informed.
-            </p>
-            <div className="stat-grid">
-              <div className="stat-card">
-                <span className="stat-value">7</span>
-                <span className="stat-label">Active channels across messaging, video, and social platforms.</span>
-              </div>
-              <div className="stat-card">
-                <span className="stat-value">Updates</span>
-                <span className="stat-label">Platform news, feature drops, and community moments posted regularly.</span>
-              </div>
-              <div className="stat-card">
-                <span className="stat-value">Community</span>
-                <span className="stat-label">Join thousands of students already following our journey.</span>
-              </div>
-            </div>
-          </div>
-          <div className="hero-panel">
-            <p className="panel-title">Why follow us?</p>
-            <div className="panel-list">
-              <div className="panel-list-item">
-                <span className="panel-dot" />
-                <div>
-                  <strong>Be the first to know</strong>
-                  <p>New features, content drops, and platform updates land on our socials first.</p>
-                </div>
-              </div>
-              <div className="panel-list-item">
-                <span className="panel-dot" />
-                <div>
-                  <strong>Learn faster</strong>
-                  <p>Video tutorials and tips help you get more from the platform.</p>
-                </div>
-              </div>
-              <div className="panel-list-item">
-                <span className="panel-dot" />
-                <div>
-                  <strong>Join the community</strong>
-                  <p>Connect with fellow students and stay motivated together.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <PageHeader icon="socials" title="Follow Learnda" description="Find us on your favourite platforms." />
 
       {SOCIAL_GROUPS.map((group) => (
         <section key={group.group} className="page-section">

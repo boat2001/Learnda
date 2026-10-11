@@ -1,23 +1,24 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import api from '../services/api';
 import FormContactIdentity from '../components/common/FormContactIdentity';
 import FormModal from '../components/common/FormModal';
+import PageHeader from '../components/common/PageHeader';
+import PrimaryPageAction from '../components/common/PrimaryPageAction';
 import './SharedPages.css';
 
 const TRACKS = [
   {
-    title: 'Campus institutions',
-    body: 'Partner with colleges for curriculum-aligned content, mentorship programs, and support hubs.',
+    title: 'Schools',
+    body: 'Give your pupils Learnda accounts and follow their progress class by class.',
   },
   {
-    title: 'Academic communities',
-    body: 'Collaborate with study clubs and student groups for focused learning campaigns.',
+    title: 'Teachers and PTAs',
+    body: 'Run homework, revision or holiday-learning campaigns with your class or parents.',
   },
   {
     title: 'Content partners',
-    body: 'Work with subject experts and contributor teams to expand high-quality learning content.',
+    body: 'Help us write, check and illustrate NaCCA-aligned lessons and practice.',
   },
 ];
 
@@ -83,7 +84,7 @@ export default function Partnerships() {
   };
 
   return (
-    <div className="page-shell">
+    <div className="page-shell footer-page action-page">
       <FormModal
         isOpen={showModal}
         onClose={closeModal}
@@ -146,94 +147,14 @@ export default function Partnerships() {
         )}
       </FormModal>
 
-      <section className="page-hero page-hero-compact page-hero-lean hero-theme-development">
-        <div className="hero-grid">
-          <div>
-            <span className="hero-tag">Collaboration model</span>
-            <h1 className="hero-title">Build programs that move from outreach to actual outcomes.</h1>
-            <p className="hero-subtitle">
-              Build meaningful educational partnerships that improve access, outcomes, and student success.
-            </p>
-            <div className="hero-actions">
-              <button className="btn btn-primary" type="button" onClick={() => setShowModal(true)}>
-                Start a partnership
-              </button>
-            </div>
-            <div className="stat-grid">
-              <div className="stat-card">
-                <span className="stat-value">Institutions</span>
-                <span className="stat-label">Work with colleges to connect Learnda to real student contexts.</span>
-              </div>
-              <div className="stat-card">
-                <span className="stat-value">Communities</span>
-                <span className="stat-label">Support study clubs, peer programs, and learning campaigns at scale.</span>
-              </div>
-              <div className="stat-card">
-                <span className="stat-value">Content teams</span>
-                <span className="stat-label">Expand useful academic coverage through aligned expert collaborations.</span>
-              </div>
-            </div>
-          </div>
-          <div className="hero-panel">
-            <p className="panel-title">What strong partnerships usually share</p>
-            <div className="panel-list">
-              <div className="panel-list-item">
-                <span className="panel-dot"></span>
-                <div>
-                  <strong>Clear learner value</strong>
-                  <p>The partnership should make studying more effective, not just more visible.</p>
-                </div>
-              </div>
-              <div className="panel-list-item">
-                <span className="panel-dot"></span>
-                <div>
-                  <strong>Operational fit</strong>
-                  <p>Programs, content, and expectations have to work in practice, not just in theory.</p>
-                </div>
-              </div>
-              <div className="panel-list-item">
-                <span className="panel-dot"></span>
-                <div>
-                  <strong>Measured results</strong>
-                  <p>Good partnerships define success through engagement, learning, and repeatable delivery.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="page-section">
-        <div className="section-heading">
-          <h2>Partnership tracks</h2>
-          <p>Choose the model that best fits your organization.</p>
-        </div>
-        <div className="card-grid">
-          {TRACKS.map((item) => (
-            <div key={item.title} className="info-card">
-              <h3>{item.title}</h3>
-              <p>{item.body}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="page-section split-grid">
-        <div className="info-card">
-          <h3>Ready to partner?</h3>
-          <p>Open the partnership inquiry form and share your organization, collaboration idea, and target outcome.</p>
-          <button className="btn btn-primary" type="button" onClick={() => setShowModal(true)}>
-            Start a partnership
-          </button>
-        </div>
-        <div className="info-card">
-          <h3>Explore investment</h3>
-          <p>Looking to invest rather than collaborate? The investment track covers funding, growth capital, and commercial conversations.</p>
-          <Link className="btn btn-secondary" to="/investments">
-            View investment details
-          </Link>
-        </div>
-      </section>
+      <PageHeader icon="partnerships" title="For schools" description="Bring Learnda to your school, class or community." />
+      <PrimaryPageAction icon="partnership" label="Start a partnership" onClick={() => setShowModal(true)} />
+      <details className="action-page-details">
+        <summary>Ways to partner</summary>
+        <ul>
+          {TRACKS.map((item) => <li key={item.title}><strong>{item.title}:</strong> {item.body}</li>)}
+        </ul>
+      </details>
     </div>
   );
 }

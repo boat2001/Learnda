@@ -2,6 +2,7 @@ const { Op } = require('sequelize');
 const { SupportReport } = require('../models');
 const emailService = require('../services/emailService');
 const config = require('../config/env');
+const Joi = require('joi');
 
 const SUCCESS_STORY_CATEGORY = 'Success Story';
 
@@ -45,7 +46,16 @@ const storyFromReport = (report) => {
 class SupportController {
   async submitReport(req, res) {
     try {
-      const { name, subject, message, category } = req.body || {};
+      const { error: validationError, value } = Joi.object({
+        name: Joi.string().trim().max(200).required(),
+        subject: Joi.string().trim().max(255).required(),
+        message: Joi.string().trim().max(10000).required(),
+        category: Joi.string().trim().max(100).allow('', null),
+        email: Joi.string().trim().email({ tlds: { allow: false } }).max(255).allow('', null),
+        college: Joi.string().trim().max(255).allow('', null),
+      }).validate(req.body || {});
+      if (validationError) return res.status(400).json({ success: false, error: validationError.details[0].message });
+      const { name, subject, message, category } = value;
       const email = String(req.body?.email || '').trim();
       const college = String(req.body?.college || '').trim();
       const normalizedCategory = normalizeCategory(category);

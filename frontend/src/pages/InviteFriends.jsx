@@ -20,6 +20,7 @@ import {
   FaXTwitter,
 } from 'react-icons/fa6';
 import { useAuth } from '../hooks/useAuth';
+import PageHeader from '../components/common/PageHeader';
 import './SharedPages.css';
 
 const encode = (value) => encodeURIComponent(value);
@@ -155,17 +156,7 @@ export default function InviteFriends() {
 
   return (
     <div className="page-shell invite-friends-page">
-      <section className="page-hero page-hero-compact page-hero-lean">
-        <div className="hero-grid">
-          <div>
-            <span className="hero-tag">Invite friends</span>
-            <h1 className="hero-title">Bring your study circle to Learnda.</h1>
-            <p className="hero-subtitle">
-              Share your personal invite link — every friend you bring makes the community stronger.
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHeader icon="invite" title="Invite friends" description="Learning is better together. Share your invite link." />
 
       <section className="invite-share-section">
         <div className="invite-link-row">

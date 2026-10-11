@@ -39,26 +39,6 @@ body {
   position: relative;
 }
 
-/* Decorative ambient gradients on a fixed layer so they never repaint on scroll */
-#root::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background-image:
-    radial-gradient(circle at 12% 8%, rgba(43, 98, 196, 0.15), transparent 45%),
-    radial-gradient(circle at 88% 0%, rgba(250, 184, 44, 0.16), transparent 40%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(247, 248, 251, 0.98));
-  transition: background-image var(--transition-base);
-}
-
-[data-theme="dark"] #root::before {
-  background-image:
-    radial-gradient(circle at 12% 8%, rgba(79, 179, 173, 0.18), transparent 45%),
-    radial-gradient(circle at 88% 0%, rgba(242, 163, 101, 0.18), transparent 45%),
-    linear-gradient(180deg, rgb(9, 13, 20), rgb(9, 13, 20));
-}
 
 /* Dark mode elevation system — raised surfaces get a drop shadow so they read
    as floating above the background instead of flush with it. */
@@ -222,7 +202,7 @@ button {
 }
 
 button:focus-visible {
-  outline: 2px solid var(--primary-color);
+  outline: 3px solid var(--brand-amber);
   outline-offset: 2px;
 }
 
@@ -250,7 +230,7 @@ textarea:focus,
 select:focus {
   outline: none;
   border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(43, 98, 196, 0.15);
+  box-shadow: 0 0 0 3px var(--tint-blue);
 }
 
 /* Saved-credential autofill: browsers (Chrome/Safari/Edge incl. iOS) force their
@@ -289,20 +269,19 @@ textarea::placeholder {
 h1, h2, h3, h4, h5, h6 {
   margin: 0;
   font-family: var(--font-family-heading);
-  font-weight: var(--font-weight-semibold);
+  font-weight: 700;
   line-height: var(--line-height-tight);
   color: var(--text-color);
+  letter-spacing: -0.01em;
 }
 
 h1 {
   font-size: var(--font-size-4xl);
-  font-weight: var(--font-weight-bold);
-  letter-spacing: -0.02em;
+  font-weight: 800;
 }
 
 h2 {
   font-size: var(--font-size-3xl);
-  letter-spacing: -0.02em;
 }
 
 h3 {
@@ -346,70 +325,86 @@ pre {
   margin-bottom: var(--space-4);
 }
 
-/* Buttons */
+/* Buttons
+   Tactile: a solid face sitting on a darker bottom edge that flattens when
+   pressed. Children read it as "this is a button" without needing a label. */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: var(--space-2);
-  padding: var(--space-2) var(--space-5);
-  border-radius: var(--radius-full);
-  font-weight: var(--font-weight-semibold);
+  padding: 0 var(--space-5);
+  border-radius: var(--radius-md);
+  font-family: var(--font-family-sans);
+  font-weight: 800;
+  font-size: 1rem;
+  line-height: 1.1;
+  letter-spacing: 0.01em;
   -webkit-tap-highlight-color: transparent;
-  transition: box-shadow var(--transition-fast), background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
   min-height: var(--button-height);
+  text-decoration: none;
+  white-space: nowrap;
 }
+
+.btn svg { font-size: 1.2em; flex: none; }
 
 .btn-primary {
   background: var(--primary-color);
   color: var(--color-text-on-primary);
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 4px 0 var(--press-primary);
 }
 
-.btn-primary:hover {
-  background: var(--primary-hover);
-  color: var(--color-text-on-primary);
-}
+.btn-primary:hover { background: var(--primary-hover); color: var(--color-text-on-primary); }
 
 .btn-secondary {
-  background: var(--color-bg-light);
-  color: var(--text-color);
-  border: 1px solid var(--border-color);
+  background: var(--surface);
+  color: var(--ink);
+  border: 2px solid var(--line);
+  box-shadow: 0 4px 0 var(--press-neutral);
 }
 
-.btn-secondary:hover {
-  border-color: var(--primary-color);
-  color: var(--primary-color);
+.btn-secondary:hover { border-color: var(--line-strong); color: var(--ink); }
+
+.btn-accent {
+  background: var(--brand-amber);
+  color: var(--brand-navy);
+  box-shadow: 0 4px 0 #c98c0b;
 }
 
-@media (hover: hover) {
-  .btn-primary:hover {
-    transform: translateY(-1px);
-    box-shadow: var(--shadow-md);
-  }
+.btn-accent:hover { background: #ffc642; color: var(--brand-navy); }
 
-  .btn-secondary:hover {
-    transform: translateY(-1px);
-  }
+.btn-primary:active,
+.btn-secondary:active,
+.btn-accent:active {
+  transform: translateY(4px);
+  box-shadow: 0 0 0 transparent;
 }
 
 .btn-ghost {
   background: transparent;
-  color: var(--text-color);
+  color: var(--ink);
 }
 
-.btn-ghost:hover {
-  color: var(--primary-color);
-}
+.btn-ghost:hover { color: var(--primary-color); background: var(--tint-blue); }
 
 .btn-outline {
   background: transparent;
-  border: 1px solid var(--primary-color);
+  border: 2px solid var(--primary-color);
   color: var(--primary-color);
 }
 
-.btn-outline:hover {
-  background: rgba(43, 98, 196, 0.08);
+.btn-outline:hover { background: var(--tint-blue); }
+
+.btn-lg { min-height: 3.5rem; padding: 0 var(--space-6); font-size: 1.1rem; border-radius: var(--radius-lg); }
+.btn-block { width: 100%; }
+
+/* Kente band: the Learnda signature strip. */
+.kente-band {
+  display: block;
+  height: 6px;
+  background: var(--kente);
+  border-radius: var(--radius-full);
 }
 
 /* Utilities */
@@ -527,21 +522,17 @@ pre {
 }
 
 ::selection {
-  background-color: rgba(43, 98, 196, 0.2);
+  background-color: rgba(250, 184, 44, 0.35);
   color: var(--text-color);
 }
 
 :focus-visible {
-  outline: 2px solid var(--primary-color);
+  outline: 3px solid var(--brand-amber);
   outline-offset: 2px;
   border-radius: var(--radius-sm);
 }
 
 @media (max-width: 768px) {
-  html {
-    font-size: 15px;
-  }
-
   h1 { font-size: var(--font-size-3xl); }
   h2 { font-size: var(--font-size-2xl); }
   h3 { font-size: var(--font-size-xl); }
@@ -551,10 +542,6 @@ pre {
 }
 
 @media (max-width: 480px) {
-  html {
-    font-size: 14px;
-  }
-
   h1 { font-size: var(--font-size-2xl); }
   h2 { font-size: var(--font-size-xl); }
   h3 { font-size: var(--font-size-lg); }

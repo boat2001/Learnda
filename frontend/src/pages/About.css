@@ -145,6 +145,30 @@
   margin-top: 0.8rem;
 }
 
+.about-chapter__more {
+  margin-top: 0.5rem;
+}
+
+.about-chapter__more summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--chapter-color, var(--primary-color)) 14%, transparent);
+  color: var(--ink);
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  list-style: none;
+}
+
+.about-chapter__more summary::-webkit-details-marker { display: none; }
+.about-chapter__more summary::after { content: '+'; font-weight: 800; }
+.about-chapter__more[open] summary::after { content: '–'; }
+.about-chapter__more[open] summary { margin-bottom: 0.6rem; }
+.about-chapter__more summary:focus-visible { outline: 2px solid var(--primary-color); outline-offset: 2px; }
+
 /* ═══════════════════════════════════════════════
    CEO Quote
    ═══════════════════════════════════════════════ */
@@ -653,8 +677,8 @@
 }
 
 [data-theme='dark'] .about-feature-card__icon {
-  background: rgba(79, 179, 173, 0.12);
-  color: rgba(79, 179, 173, 0.9);
+  background: rgba(91, 149, 234, 0.12);
+  color: rgba(91, 149, 234, 0.9);
 }
 
 [data-theme='dark'] .about-impact-stat {

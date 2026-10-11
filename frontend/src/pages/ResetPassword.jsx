@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import authService from '../services/authService';
+import PageHeader from '../components/common/PageHeader';
 import './SharedPages.css';
 
 export default function ResetPassword() {
@@ -76,49 +77,15 @@ export default function ResetPassword() {
 
   return (
     <div className="page-shell">
-      <section className="page-hero">
-        <div className="hero-grid">
-          <div>
-            <span className="hero-tag">Password reset</span>
-            <h1 className="hero-title">
-              {isResetFlow ? 'Create a new password.' : 'Forgot your password?'}
-            </h1>
-            <p className="hero-subtitle">
-              {isResetFlow
-                ? 'Enter a new password below to regain access to your Learnda account.'
-                : 'Enter the email address linked to your account and we will send a reset link.'}
-            </p>
-          </div>
-          <div className="hero-panel">
-            <p className="panel-title">Need more help?</p>
-            <div className="panel-list">
-              <div className="panel-list-item">
-                <span className="panel-dot"></span>
-                <div>
-                  <strong>Contact support</strong>
-                  <p>support@learnda.app</p>
-                </div>
-              </div>
-              <div className="panel-list-item">
-                <span className="panel-dot"></span>
-                <div>
-                  <strong>Support guides</strong>
-                  <p>FAQs and contact options now live on the contact page.</p>
-                </div>
-              </div>
-            </div>
-            <div className="hero-actions">
-              <button
-                className="btn btn-secondary"
-                type="button"
-                onClick={() => navigate('/contact')}
-              >
-                Open support page
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
+      <PageHeader icon="password" title={isResetFlow ? 'Set a new password' : 'Forgot your password?'} description={isResetFlow ? 'Choose a new password for your Learnda account.' : 'We will send a reset link to your email.'}>
+        <button
+          className="btn btn-secondary"
+          type="button"
+          onClick={() => navigate('/contact')}
+        >
+          Open support page
+        </button>
+      </PageHeader>
 
       <section className="page-section">
         <div className="section-heading">

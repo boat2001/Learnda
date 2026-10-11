@@ -285,7 +285,7 @@
 }
 
 [data-theme='dark'] .sg-card:hover {
-  border-color: rgba(79, 179, 173, 0.45);
+  border-color: rgba(91, 149, 234, 0.45);
 }
 
 [data-theme='dark'] .sg-card-title {
@@ -299,9 +299,9 @@
 }
 
 [data-theme='dark'] .sg-card-stat {
-  background: rgba(79, 179, 173, 0.18);
+  background: rgba(91, 149, 234, 0.18);
   color: #a8e1dd;
-  border-color: rgba(79, 179, 173, 0.32);
+  border-color: rgba(91, 149, 234, 0.32);
 }
 
 [data-theme='dark'] .sg-card--joined .sg-card-stat {

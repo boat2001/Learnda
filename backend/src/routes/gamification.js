@@ -35,7 +35,6 @@ const formatLeaderboardEntry = (progress, rank, currentUserId = null) => ({
         id: progress.user.id,
         full_name: progress.user.full_name,
         avatar_url: progress.user.avatar_url,
-        level: progress.user.level,
       }
     : null,
 });
@@ -413,7 +412,7 @@ router.get('/leaderboard', optionalAuth, async (req, res) => {
         {
           model: User,
           as: 'user',
-          attributes: ['id', 'full_name', 'avatar_url', 'level'],
+          attributes: ['id', 'full_name', 'avatar_url'],
         },
       ],
       order: [

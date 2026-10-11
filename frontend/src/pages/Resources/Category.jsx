@@ -10,6 +10,8 @@ import { consumeGuestContentView } from '../../utils/guestContentAccess';
 import { playUiSound } from '../../utils/uiSounds';
 import DownloadCountdownModal from '../../components/resources/DownloadCountdownModal';
 import '../SharedPages.css';
+import PageHeader from '../../components/common/PageHeader';
+import SectionHeadingIcon from '../../components/common/SectionHeadingIcon';
 import './Resources.css';
 
 const CATEGORY_META = {
@@ -181,53 +183,11 @@ export default function ResourceCategory() {
   return (
     <>
     <div className="page-shell resources-page">
-      <section className="page-hero">
-        <div className="hero-grid">
-          <div>
-            <span className="hero-tag">Resources library</span>
-            <h1 className="hero-title">{meta.title}</h1>
-            <p className="hero-subtitle">{meta.subtitle}</p>
-            <div className="hero-actions">
-              <button className="btn btn-primary" type="button">
-                Upload a resource
-              </button>
-              <button className="btn btn-secondary" type="button">
-                Save to PLS
-              </button>
-            </div>
-          </div>
-          <div className="hero-panel">
-            <p className="panel-title">What you get</p>
-            <div className="panel-list">
-              <div className="panel-list-item">
-                <span className="panel-dot"></span>
-                <div>
-                  <strong>Verified sources</strong>
-                  <p>Resources curated by the Learnda community.</p>
-                </div>
-              </div>
-              <div className="panel-list-item">
-                <span className="panel-dot"></span>
-                <div>
-                  <strong>Fast filters</strong>
-                  <p>Search by subject, year, and resource type.</p>
-                </div>
-              </div>
-              <div className="panel-list-item">
-                <span className="panel-dot"></span>
-                <div>
-                  <strong>Structured practice</strong>
-                  <p>Move from outline to quiz to solution review.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <PageHeader icon="resources" title={meta.title} description={meta.subtitle} />
 
       <section className="page-section">
         <div className="section-heading">
-          <h2>Explore resources</h2>
+          <h2><SectionHeadingIcon name="resources" /><span className="section-heading__title">Explore resources</span></h2>
           <p>Search, filter, and save what you need for your next study sprint.</p>
         </div>
         <div className="form-card">

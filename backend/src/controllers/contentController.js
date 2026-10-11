@@ -5,6 +5,7 @@ const { ContentEngagement, ContentStats, Comment, User } = db;
 const { findById, findModelInstance, normalizeRow } = require('../utils/contentLookup');
 const { buildCanonicalPayload } = require('../scripts/clean_edutainment_uploads');
 const { getFileUrl } = require('../config/upload');
+const { buildFeedScope } = require('../middleware/academicContentAccess');
 
 const PUBLIC_WHERE = { status: 'published' };
 // Non-learning tags still used for text_lesson filtering across the view
@@ -444,7 +445,9 @@ module.exports = {
       conditions.push(`NOT (ac.content_type = 'lesson' AND ac.tags::text[] && ARRAY['about','team','profile','contributors','donators']::text[])`);
     }
 
-    const extraWhere = conditions.length ? 'AND ' + conditions.join(' AND ') : '';
+    const scope = await buildFeedScope(req.user);
+    Object.assign(replacements, scope.replacements);
+    const extraWhere = (conditions.length ? 'AND ' + conditions.join(' AND ') : '') + ' ' + scope.where;
     const offset = (Number(page) - 1) * Number(limit);
 
     const [content, total] = await Promise.all([
@@ -459,7 +462,8 @@ module.exports = {
     const includeMisc = String(req.query?.include_misc || 'false').toLowerCase() === 'true';
     const extraCondition = buildLearningFeedWhere(includeMisc);
     const extraWhere = extraCondition ? extraCondition : '';
-    const rows = await queryAllContent({ extraWhere, limit: 8 });
+    const scope = await buildFeedScope(req.user);
+    const rows = await queryAllContent({ extraWhere: `${extraWhere} ${scope.where}`, replacements: scope.replacements, limit: 8 });
     res.json({ success: true, content: rows });
   },
 
@@ -468,7 +472,8 @@ module.exports = {
     const extraCondition = buildLearningFeedWhere(includeMisc);
     const extraWhere = extraCondition ? extraCondition : '';
     // MVP: latest; later: order by engagement aggregation
-    const rows = await queryAllContent({ extraWhere, limit: 10 });
+    const scope = await buildFeedScope(req.user);
+    const rows = await queryAllContent({ extraWhere: `${extraWhere} ${scope.where}`, replacements: scope.replacements, limit: 10 });
     res.json({ success: true, content: rows });
   },
 
@@ -483,7 +488,8 @@ module.exports = {
     const extraCondition = buildLearningFeedWhere(includeMisc);
     const extraWhere = extraCondition ? extraCondition : '';
     // MVP: latest; later: use progress + tags + institution
-    const rows = await queryAllContent({ extraWhere, limit: 12 });
+    const scope = await buildFeedScope(req.user);
+    const rows = await queryAllContent({ extraWhere: `${extraWhere} ${scope.where}`, replacements: scope.replacements, limit: 12 });
     res.json({ success: true, content: rows });
   },
 
@@ -551,7 +557,7 @@ module.exports = {
   },
 
   async getById(req, res) {
-    const row = await findById(db, req.params.id);
+    const row = req.contentRow || await findById(db, req.params.id);
     if (!row || row.status !== 'published') return res.status(404).json({ success: false, error: 'Content not found' });
 
     if (row.is_premium && !hasPremiumAccess(req.user)) {

@@ -49,11 +49,11 @@ export default function PwaInstallBanner() {
           <FiDownload />
         </span>
         <div className="pwa-install-banner__text">
-          <strong>Install Learnda</strong>
-          <span>Add the web app to your home screen for quicker access.</span>
+          <strong>Add Learnda to your phone</strong>
+          <span>Opens faster and uses less data.</span>
         </div>
         <button type="button" className="pwa-install-banner__install" onClick={handleInstall}>
-          Install web app
+          Add
         </button>
         <button
           type="button"

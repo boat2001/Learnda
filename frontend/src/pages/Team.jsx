@@ -7,6 +7,8 @@ import { SiTiktok } from 'react-icons/si';
 import { useAuth } from '../hooks/useAuth';
 import { lockBodyScroll } from '../utils/bodyScrollLock';
 import api, { resolveUploadUrl } from '../services/api';
+import PageHeader from '../components/common/PageHeader';
+import SectionHeadingIcon from '../components/common/SectionHeadingIcon';
 import './SharedPages.css';
 import './Team.css';
 
@@ -99,18 +101,7 @@ export default function Team() {
     <div className="page-shell team-page">
 
       {/* Hero */}
-      <section className="page-hero hero-theme-mission page-hero-compact">
-        <div className="hero-grid">
-          <div>
-            <span className="hero-tag">The people</span>
-            <h1 className="hero-title">Built by students,<br />for students.</h1>
-            <p className="hero-subtitle">
-               Meet the team turning academic frustration into a platform
-              thousands of students learn with everyday.
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHeader icon="team" title="Our team" description="The people behind Learnda." />
 
       {/* Celebratory callout */}
       <div className="tm-celebrate">
@@ -125,7 +116,7 @@ export default function Team() {
       {/* Section 1: Immediate team */}
       <section className="page-section">
         <div className="section-heading">
-          <h2>Immediate team</h2>
+          <h2><SectionHeadingIcon name="community" /><span className="section-heading__title">Immediate team</span></h2>
           <p>The people who build, curate, and run Learnda.</p>
         </div>
         <div className="tm-grid">
@@ -158,7 +149,7 @@ export default function Team() {
       {/* Section 2: Content and Support */}
       <section className="page-section">
         <div className="section-heading">
-          <h2>Content and Support</h2>
+          <h2><SectionHeadingIcon name="support" /><span className="section-heading__title">Content and Support</span></h2>
           <p>People who did unimaginable things for Learnda.</p>
         </div>
         <div className="tm-contrib-grid">
@@ -192,7 +183,7 @@ export default function Team() {
       {/* Section 3: Notable Mentions */}
       <section className="page-section">
         <div className="section-heading">
-          <h2>Notable Mentions</h2>
+          <h2><SectionHeadingIcon name="award" /><span className="section-heading__title">Notable Mentions</span></h2>
           <p>People who helped shape what Learnda is today.</p>
         </div>
         <div className="tm-contrib-grid">
@@ -226,7 +217,7 @@ export default function Team() {
       {/* And you */}
       <section className="page-section tm-you-section">
         <div className="section-heading">
-          <h2>And you.</h2>
+          <h2><SectionHeadingIcon name="community" /><span className="section-heading__title">And you.</span></h2>
           <p>Every great platform is shaped by many hands. Yours too.</p>
         </div>
 
@@ -274,7 +265,7 @@ export default function Team() {
       {/* Contributors — celebration stage */}
       <section className="page-section">
         <div className="section-heading" style={{ textAlign: 'center', alignItems: 'center' }}>
-          <h2>Then our superheroes.</h2>
+          <h2><SectionHeadingIcon name="stories" /><span className="section-heading__title">Then our superheroes.</span></h2>
         </div>
         <CelebrationContributors contributors={team.donors || []} totalAmount={1888} />
         <div className="tm-superhero-cta">

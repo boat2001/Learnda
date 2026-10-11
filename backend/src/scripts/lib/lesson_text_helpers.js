@@ -124,7 +124,7 @@ function looksClean(sentence) {
   const letters = (s.match(/[A-Za-z]/g) || []).length;
   const nonSpace = s.replace(/\s/g, '').length;
   if (nonSpace === 0 || letters / nonSpace < 0.72) return false; // too many digits/symbols
-  if (/[^\x09\x0a\x0d\x20-\x7e’‘“”—–…]/.test(s)) return false; // stray non-standard glyphs
+  if (/[^\t\n\r\x20-\x7e’‘“”—–…]/.test(s)) return false; // stray non-standard glyphs
   if (wordy.length / words.length < 0.6) return false; // too many odd tokens
   return true;
 }

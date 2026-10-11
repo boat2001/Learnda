@@ -23,7 +23,7 @@ require('dotenv').config({ path: '.env' });
 const fs = require('fs');
 const path = require('path');
 const { Sequelize, QueryTypes } = require('sequelize');
-const { extractSubstantiveChunks, safeText } = require('./lib/lesson_text_helpers');
+const { safeText } = require('./lib/lesson_text_helpers');
 
 const BACKUP_DIR = path.join(__dirname, '..', '..', 'data', 'lesson-emoji-backups');
 // Extended_Pictographic misses country-flag sequences (two Regional_Indicator

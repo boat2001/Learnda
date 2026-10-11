@@ -1,0 +1,23 @@
+.page-shell.academic-page { gap: 1rem; }
+.academic-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-3); }
+.academic-card { display: grid; align-content: start; gap: .6rem; padding: var(--space-4); background: var(--surface); border: 2px solid var(--line); border-radius: var(--radius-xl); }
+.academic-card h2, .academic-card h3 { margin: 0; font-size: 1.25rem; line-height: 1.2; }
+.academic-card p { margin: 0; color: var(--ink-soft); font-size: .9rem; line-height: 1.5; }
+.academic-card__badge { justify-self: start; padding: .2rem .65rem; border-radius: var(--radius-full); font-size: .75rem; font-weight: 800; background: var(--tint-blue); color: var(--ink-blue); }
+.academic-card__badge--planned { background: var(--tint-amber); color: var(--ink-amber); }
+.academic-card__link { display: inline-flex; align-items: center; gap: .4rem; justify-self: start; font-weight: 800; }
+.academic-sources { display: flex; flex-wrap: wrap; gap: .5rem 1rem; font-size: .85rem; }
+.academic-sources a { text-decoration: underline; text-underline-offset: 3px; }
+.academic-section { display: grid; gap: var(--space-3); }
+.academic-section > h2 { margin: 0; font-size: 1.4rem; }
+.academic-note { padding: .65rem .85rem; border-radius: var(--radius-lg); background: var(--surface-sunken); color: var(--ink-soft); margin: 0; font-size: .85rem; }
+.school-filters { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.school-filters button { padding: .6rem 1rem; border: 2px solid var(--line); border-radius: var(--radius-full); background: var(--surface); color: var(--ink); font: inherit; font-size: .85rem; font-weight: 700; cursor: pointer; }
+.school-filters button[aria-pressed="true"] { background: var(--tint-blue); border-color: var(--brand-blue); color: var(--ink-blue); }
+.school-card__heading { display: flex; align-items: center; gap: .75rem; }
+.school-card__mark { flex-shrink: 0; }
+.school-card__mark { display: grid; place-items: center; width: 3rem; height: 3rem; border-radius: var(--radius-lg); color: var(--brand-navy); background: var(--tint-amber); font-family: var(--font-family-heading); font-weight: 800; }
+.school-card__location { display: flex; align-items: center; gap: .4rem; font-size: .9rem; }
+.school-card__levels { font-size: .85rem; }
+.academic-card:has(a:hover) { border-color: var(--brand-blue); }
+@media (max-width: 640px) { .academic-grid { grid-template-columns: 1fr; } .academic-card { padding: var(--space-4); } }

@@ -31,7 +31,7 @@ const normalizeAdminPermissions = (value) => {
 
 const isSuperAdmin = (user) => {
   if (!user || user.role !== 'admin') return false;
-  if (Boolean(user.is_superadmin)) return true;
+  if (user.is_superadmin) return true;
   return user.admin_permissions == null;
 };
 

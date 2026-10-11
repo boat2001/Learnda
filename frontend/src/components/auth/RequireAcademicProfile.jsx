@@ -2,6 +2,8 @@ import { useCallback } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import { hasClassPlacement } from '../../utils/onboarding';
 import ClassPlacementPrompt from '../../pages/learn/ClassPlacementPrompt';
+import GuestGateModal from './GuestGateModal';
+import RouteFallback from '../common/RouteFallback';
 
 /**
  * Gate for class content (Learn, Practice).
@@ -14,13 +16,17 @@ import ClassPlacementPrompt from '../../pages/learn/ClassPlacementPrompt';
  * Guests keep browsing public pages freely.
  */
 export default function RequireAcademicProfile({ children }) {
-  const { isAuthenticated, user, loading, checkAuth } = useAuth();
+  const { isAuthenticated, user, loading, hasChecked, checkAuth } = useAuth();
 
   // Re-read the session so the freshly saved placement reaches this component.
   const handlePlaced = useCallback(() => { checkAuth?.(true); }, [checkAuth]);
 
-  if (loading) {
-    return children;
+  if (loading || !hasChecked) {
+    return <RouteFallback />;
+  }
+
+  if (!isAuthenticated) {
+    return <GuestGateModal feature="Learning and Practice" message="Sign in to load subjects and practice for your class." />;
   }
 
   if (isAuthenticated && !hasClassPlacement(user)) {

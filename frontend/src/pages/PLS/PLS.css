@@ -2497,7 +2497,7 @@
 }
 
 [data-theme="dark"] .pls-dashboard-header-meta {
-  border-left-color: rgba(110, 212, 221, 0.24);
+  border-left-color: rgba(138, 180, 245, 0.24);
 }
 
 @keyframes pls-header-glass-swipe {
@@ -2573,7 +2573,7 @@
 }
 
 [data-theme="dark"] .pls-meta-pill {
-  border-color: rgba(110, 212, 221, 0.28);
+  border-color: rgba(138, 180, 245, 0.28);
   background: rgba(18, 35, 53, 0.82);
   color: #ddedff;
 }
@@ -2650,7 +2650,7 @@
 }
 
 [data-theme="dark"] .pls-selection-pill {
-  border-color: rgba(110, 212, 221, 0.24);
+  border-color: rgba(138, 180, 245, 0.24);
   background: rgba(19, 37, 56, 0.86);
   color: #cfe5fa;
 }
@@ -2809,7 +2809,7 @@
 }
 
 [data-theme="dark"] .pls-files-course-meta-pill {
-  border-color: rgba(110, 212, 221, 0.24);
+  border-color: rgba(138, 180, 245, 0.24);
   background: rgba(17, 34, 52, 0.84);
   color: #bcd2e7;
 }
@@ -3026,7 +3026,7 @@
 
 @media (max-width: 900px) {
   [data-theme="dark"] .pls-dashboard-header-meta {
-    border-top-color: rgba(110, 212, 221, 0.24);
+    border-top-color: rgba(138, 180, 245, 0.24);
   }
 }
 

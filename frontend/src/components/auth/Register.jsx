@@ -132,7 +132,7 @@ export default function Register({ onClose, onSwitchToLogin, onAuthSuccess = nul
   const [otpCheckStatus, setOtpCheckStatus] = useState('idle'); // idle | checking | valid | invalid
   const [otpCheckError, setOtpCheckError] = useState('');
   const otpCheckAbortRef = useRef(null);
-  const [isGoogleReady, setIsGoogleReady] = useState(false);
+  const [googleLoading, setGoogleLoading] = useState(false);
   const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
   const isGoogleEnabled = Boolean(googleClientId);
 
@@ -227,13 +227,10 @@ export default function Register({ onClose, onSwitchToLogin, onAuthSuccess = nul
       };
     }
 
+    // Preload the Google script so the button opens quickly when tapped.
     loadGoogleIdentityScript()
-      .then(() => {
-        if (isMounted) setIsGoogleReady(true);
-      })
       .catch(() => {
         if (isMounted) {
-          setIsGoogleReady(false);
           setErrors({ submit: 'Google sign-up is unavailable right now.' });
         }
       });
@@ -285,26 +282,33 @@ export default function Register({ onClose, onSwitchToLogin, onAuthSuccess = nul
     setErrors({});
   };
 
+  // The OAuth redirect leaves this page in the back/forward cache. If the
+  // learner comes back with the Back button, clear the "Opening Google…" state.
+  useEffect(() => {
+    const handlePageShow = (event) => {
+      if (event.persisted) setGoogleLoading(false);
+    };
+    window.addEventListener('pageshow', handlePageShow);
+    return () => window.removeEventListener('pageshow', handlePageShow);
+  }, []);
+
   const handleGoogleUnavailable = () => {
     setErrors({
       submit:
-        'Google sign-up is not configured. Set VITE_GOOGLE_CLIENT_ID on the frontend and redeploy.',
+        'Google sign-up is temporarily unavailable. Please use email or phone.',
     });
     trackEvent('google_register_unavailable', { reason: 'missing_client_id' });
   };
 
   const handleGoogleClick = async () => {
+    if (googleLoading) return;
     if (!isGoogleEnabled || !googleClientId) {
       handleGoogleUnavailable();
       return;
     }
-    if (!isGoogleReady) {
-      setErrors({ submit: 'Google sign-up is still loading. Try again in a moment.' });
-      trackEvent('google_register_unavailable', { reason: 'not_ready' });
-      return;
-    }
 
     setErrors({});
+    setGoogleLoading(true);
 
     try {
       await loadGoogleIdentityScript();
@@ -338,6 +342,7 @@ export default function Register({ onClose, onSwitchToLogin, onAuthSuccess = nul
 
       client.requestCode();
     } catch (err) {
+      setGoogleLoading(false);
       setErrors({ submit: 'Google sign-up is unavailable right now.' });
       trackEvent('google_register_error', { error: err.message });
     }
@@ -557,10 +562,11 @@ export default function Register({ onClose, onSwitchToLogin, onAuthSuccess = nul
                   type="button"
                   className="social-btn google google-custom-button"
                   onClick={handleGoogleClick}
-                  disabled={loading}
+                  disabled={loading || googleLoading}
+                  aria-busy={googleLoading}
                 >
-                  <span className="social-icon"><FcGoogle /></span>
-                  Continue with Google
+                  <span className="social-icon">{googleLoading ? <span className="spinner" aria-hidden="true" /> : <FcGoogle />}</span>
+                  {googleLoading ? 'Opening Google…' : 'Continue with Google'}
                 </button>
               </div>
             ) : (

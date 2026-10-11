@@ -1172,7 +1172,7 @@ button.pg-badge {
 
 [data-theme="dark"] .pg-lb-header-toggle {
   background: rgba(30, 41, 59, 0.85);
-  border-color: rgba(110, 212, 221, 0.28);
+  border-color: rgba(138, 180, 245, 0.28);
   color: #e2e8f0;
 }
 
@@ -1235,7 +1235,7 @@ button.pg-badge {
 
 [data-theme="dark"] .pg-lb-drawer-inner {
   background: rgba(19, 31, 46, 0.98);
-  border-left-color: rgba(110, 212, 221, 0.22);
+  border-left-color: rgba(138, 180, 245, 0.22);
 }
 
 .pg-lb-drawer-header {
@@ -1248,7 +1248,7 @@ button.pg-badge {
 }
 
 [data-theme="dark"] .pg-lb-drawer-header {
-  border-bottom-color: rgba(110, 212, 221, 0.16);
+  border-bottom-color: rgba(138, 180, 245, 0.16);
 }
 
 .pg-lb-drawer-title {

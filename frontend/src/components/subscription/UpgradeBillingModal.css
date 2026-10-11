@@ -7,7 +7,7 @@
   align-items: center;
   justify-content: center;
   background:
-    radial-gradient(circle at 16% 12%, rgba(79, 179, 173, 0.2), transparent 28%),
+    radial-gradient(circle at 16% 12%, rgba(91, 149, 234, 0.2), transparent 28%),
     radial-gradient(circle at 82% 78%, rgba(250, 184, 44, 0.18), transparent 30%),
     linear-gradient(135deg, #f6faf9 0%, #f8f4ed 100%);
 }
@@ -23,7 +23,7 @@
   justify-content: center;
   padding: clamp(16px, 3vw, 34px);
   background:
-    radial-gradient(circle at 22% 12%, rgba(79, 179, 173, 0.24), transparent 28%),
+    radial-gradient(circle at 22% 12%, rgba(91, 149, 234, 0.24), transparent 28%),
     radial-gradient(circle at 78% 78%, rgba(250, 184, 44, 0.2), transparent 30%),
     rgba(9, 15, 24, 0.68);
   -webkit-backdrop-filter: blur(14px);
@@ -527,14 +527,14 @@
 
 [data-theme="dark"] .upgrade-billing-modal-overlay {
   background:
-    radial-gradient(circle at 18% 16%, rgba(79, 179, 173, 0.18), transparent 28%),
+    radial-gradient(circle at 18% 16%, rgba(91, 149, 234, 0.18), transparent 28%),
     radial-gradient(circle at 80% 76%, rgba(242, 163, 101, 0.14), transparent 30%),
     rgba(3, 7, 12, 0.74);
 }
 
 [data-theme="dark"] .upgrade-billing-page {
   background:
-    radial-gradient(circle at 18% 16%, rgba(79, 179, 173, 0.16), transparent 28%),
+    radial-gradient(circle at 18% 16%, rgba(91, 149, 234, 0.16), transparent 28%),
     radial-gradient(circle at 80% 76%, rgba(242, 163, 101, 0.12), transparent 30%),
     linear-gradient(135deg, #0f151d 0%, #17202b 100%);
 }
@@ -557,7 +557,7 @@
 [data-theme="dark"] .upgrade-billing-modal-plan-step,
 [data-theme="dark"] .upgrade-billing-modal-benefits span,
 [data-theme="dark"] .upgrade-billing-modal-duration-option {
-  background: rgba(79, 179, 173, 0.1);
+  background: rgba(91, 149, 234, 0.1);
   border-color: rgba(119, 230, 220, 0.14);
 }
 
@@ -565,7 +565,7 @@
 [data-theme="dark"] .upgrade-billing-modal-card-accent {
   background:
     radial-gradient(circle at top right, rgba(242, 163, 101, 0.14), transparent 32%),
-    linear-gradient(135deg, rgba(79, 179, 173, 0.14), rgba(17, 27, 37, 0.86));
+    linear-gradient(135deg, rgba(91, 149, 234, 0.14), rgba(17, 27, 37, 0.86));
 }
 
 [data-theme="dark"] .upgrade-billing-modal-duration-option.is-selected {
@@ -574,7 +574,7 @@
 }
 
 [data-theme="dark"] .upgrade-billing-modal-toggle svg {
-  background: rgba(79, 179, 173, 0.14);
+  background: rgba(91, 149, 234, 0.14);
 }
 
 [data-theme="dark"] .upgrade-billing-modal-credit {

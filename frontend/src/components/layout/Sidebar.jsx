@@ -1,115 +1,79 @@
 import { NavLink } from "react-router-dom";
-import {
-  MdHome,
-  MdSchool,
-  MdQuiz,
-  MdFolder,
-  MdSettings,
-  MdPerson,
-  MdWorkspacePremium,
-} from "react-icons/md";
+import { MdLogin } from "react-icons/md";
 import { useAuth } from "../../hooks/useAuth";
+import { getClassLabel } from "../../constants/education";
+import { getMoreNav, getPrimaryNav } from "./navItems";
 import "./Sidebar.css";
 
-const NAV_ITEMS = [
-  { name: "Home", path: "/", icon: <MdHome /> },
-  { name: "Learn", path: "/learn", icon: <MdSchool /> },
-  { name: "Practice", path: "/practice", icon: <MdQuiz /> },
-  { name: "Files", path: "/resources", icon: <MdFolder /> },
-  { name: "Spotlights", path: "/spotlights", icon: <MdWorkspacePremium /> },
-  { name: "Settings", path: "/settings", icon: <MdSettings /> },
-];
+function SidebarLink({ item, isOpen }) {
+  return (
+    <NavLink
+      to={item.path}
+      end={item.end}
+      className={({ isActive }) => `sidebar__link${isActive ? " is-active" : ""}`}
+      title={!isOpen ? item.name : undefined}
+    >
+      {({ isActive }) => {
+        const Icon = isActive && item.activeIcon ? item.activeIcon : item.icon;
+        return (
+          <>
+            <span className="sidebar__icon" aria-hidden="true"><Icon /></span>
+            <span className="sidebar__label">{item.name}</span>
+          </>
+        );
+      }}
+    </NavLink>
+  );
+}
 
-export default function Sidebar({
-  isOpen,
-  extraItems = [],
-  extraSectionTitle = "",
-}) {
+export default function Sidebar({ isOpen }) {
   const { user } = useAuth();
+  const classLabel = getClassLabel(user?.class_level);
 
-  const handleAuthPrompt = (e) => {
-    e.preventDefault();
+  const openSignIn = () => {
     window.dispatchEvent(new CustomEvent("openAuthModal", { detail: "login" }));
   };
 
-  const renderExtraItem = (item, index) => {
-    if (!item) return null;
-
-    return (
-      <button
-        key={item.key || item.name || `sidebar-extra-${index}`}
-        type="button"
-        className={`menu-item sidebar-extra-item ${item.active ? "active" : ""} ${item.disabled ? "disabled" : ""}`}
-        onClick={() => {
-          if (item.disabled) return;
-          item.onClick?.();
-        }}
-        title={!isOpen ? item.name : undefined}
-        aria-label={item.name}
-        aria-pressed={item.active ? "true" : undefined}
-        disabled={item.disabled}
-      >
-        <span className="menu-icon">{item.icon}</span>
-        {isOpen && <span className="menu-label">{item.name}</span>}
-        {typeof item.badge !== "undefined" && item.badge !== null && (
-          <span className="menu-badge">{item.badge}</span>
-        )}
-      </button>
-    );
-  };
-
   return (
-    <aside className={`sidebar ${isOpen ? "open" : "closed"}`}>
-      <nav className="sidebar-menu">
-        <div className="menu-section">
-          {NAV_ITEMS.map((item) => (
-            <NavLink
-              key={item.path}
-              to={item.path}
-              className={({ isActive }) => `menu-item ${isActive ? "active" : ""}`}
-              end={item.path === "/"}
-              title={!isOpen ? item.name : undefined}
-            >
-              <span className="menu-icon">{item.icon}</span>
-              {isOpen && <span className="menu-label">{item.name}</span>}
-            </NavLink>
+    <aside className={`sidebar ${isOpen ? "is-open" : "is-collapsed"}`} aria-label="Main">
+      {classLabel && (
+        <div className="sidebar__class" title={!isOpen ? classLabel : undefined}>
+          <span className="sidebar__class-badge" aria-hidden="true">
+            {user.class_level.replace(/^([A-Z]+)(\d)$/, "$1 $2").replace(/^B /, "B")}
+          </span>
+          <span className="sidebar__class-text">
+            <strong>{classLabel}</strong>
+            {(user.term || user.academic_year) && (
+              <span>{[user.term, user.academic_year].filter(Boolean).join(" · ")}</span>
+            )}
+          </span>
+        </div>
+      )}
+
+      <nav className="sidebar__nav">
+        <ul className="sidebar__list">
+          {getPrimaryNav(user).map((item) => (
+            <li key={item.key}><SidebarLink item={item} isOpen={isOpen} /></li>
           ))}
+        </ul>
 
-          {extraItems.length > 0 && (
-            <div className="sidebar-extra-section">
-              {isOpen && extraSectionTitle && (
-                <div className="sidebar-extra-title">{extraSectionTitle}</div>
-              )}
-              {extraItems.map(renderExtraItem)}
-            </div>
-          )}
-        </div>
+        <span className="sidebar__divider" aria-hidden="true" />
 
-        <div className="sidebar-footer">
-          {user ? (
-            <div className="footer-actions">
-              <div className="app-version">
-                <span>Learnda v3.0</span>
-              </div>
-            </div>
-          ) : (
-            <div className="guest-footer">
-              <button
-                className="auth-prompt-button"
-                onClick={handleAuthPrompt}
-                type="button"
-                title="Sign in to Learnda"
-              >
-                <MdPerson />
-                <span>Sign in to Learnda</span>
-              </button>
-              <div className="app-version">
-                <span>Learnda v3.0</span>
-              </div>
-            </div>
-          )}
-        </div>
+        <ul className="sidebar__list sidebar__list--secondary">
+          {getMoreNav(user).map((item) => (
+            <li key={item.key}><SidebarLink item={item} isOpen={isOpen} /></li>
+          ))}
+        </ul>
       </nav>
+
+      {!user && (
+        <button type="button" className="sidebar__signin" onClick={openSignIn} title={!isOpen ? "Log in" : undefined}>
+          <MdLogin aria-hidden="true" />
+          <span className="sidebar__label">Log in</span>
+        </button>
+      )}
+
+      <span className="kente-band sidebar__band" aria-hidden="true" />
     </aside>
   );
 }

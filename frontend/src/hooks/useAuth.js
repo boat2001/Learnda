@@ -50,6 +50,7 @@ export function useAuth() {
     isAuthenticated,
     nextStep: derivedNextStep,
     onboardingComplete: isOnboardingComplete(user),
+    hasChecked,
     loading,
     error,
     login,

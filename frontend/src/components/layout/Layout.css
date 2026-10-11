@@ -1,215 +1,83 @@
-@import "../../styles/variables.css";
-
 .app-shell {
   min-height: 100vh;
   min-height: 100svh;
   display: flex;
   flex-direction: column;
   position: relative;
+  background: var(--paper);
 }
 
 .app-body {
   display: flex;
   flex: 1;
   position: relative;
-  min-height: calc(100vh - var(--header-height));
   min-height: calc(100svh - var(--header-height));
   margin-top: var(--header-height);
-  overflow: visible;
 }
 
 .app-content {
   flex: 1;
-  transition: margin-left var(--transition-base), width var(--transition-base);
-  min-height: 100%;
-  background: transparent;
   min-width: 0;
-  overflow-y: visible;
+  min-height: 100%;
   overflow-x: clip;
+  transition: margin-left var(--transition-base);
 }
 
-.app-content.sidebar-open {
-  margin-left: var(--sidebar-width);
-  width: calc(100% - var(--sidebar-width));
-}
-
-.app-content.sidebar-collapsed {
-  margin-left: var(--sidebar-width-collapsed);
-  width: calc(100% - var(--sidebar-width-collapsed));
-}
+.app-content.sidebar-open { margin-left: var(--sidebar-width); }
+.app-content.sidebar-collapsed { margin-left: var(--sidebar-width-collapsed); }
 
 .app-content.has-bottom-nav {
   padding-bottom: calc(var(--bottom-nav-height) + env(safe-area-inset-bottom));
 }
 
+/* One gutter for every page. Pages size themselves inside it and never add
+   their own horizontal padding at the root. */
 .content-wrapper {
   max-width: var(--container-max);
   margin: 0 auto;
-  padding: 0 var(--space-5) var(--space-8);
+  padding: var(--space-5) var(--space-5) var(--space-6);
   min-height: 100%;
-  position: relative;
   min-width: 0;
 }
 
-.content-wrapper:has(> .home-page),
-.content-wrapper:has(> .student-home) {
-  --home-page-gutter: clamp(0.5rem, 1.4vw, 0.9rem);
-  padding-inline: var(--home-page-gutter);
-}
+/* Pages that want the full width of the content area (lesson reader,
+   practice session) opt out of the cap. */
+.content-wrapper:has(> .is-full-bleed) { max-width: none; }
 
-/* Settings: cancel content-wrapper horizontal inset; space above footer only. */
-.content-wrapper:has(> .settings-container) .footer,
-.content-wrapper:has(> .settings-auth-required) .footer {
-  margin-top: var(--space-5);
-  margin-bottom: 0;
-  margin-left: calc(-1 * var(--space-5));
-  margin-right: calc(-1 * var(--space-5));
-  width: auto;
-  max-width: none;
-  box-sizing: border-box;
-}
-
-/* Loading State */
+/* Loading state */
 .app-loading {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
   min-height: 100svh;
-  background: var(--bg-color);
+  background: var(--paper);
 }
 
 .loading-spinner {
-  width: 48px;
-  height: 48px;
-  border: 3px solid var(--color-border-light);
-  border-top-color: var(--primary-color);
+  width: 44px;
+  height: 44px;
+  border: 4px solid var(--line);
+  border-top-color: var(--brand-amber);
   border-radius: 50%;
-  animation: spin 1s linear infinite;
+  animation: spin 0.9s linear infinite;
   margin-bottom: var(--space-4);
 }
 
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-[data-theme="dark"] .app-loading {
-  background: rgba(15, 20, 28, 0.96);
-  color: var(--color-text-primary);
-}
-
-[data-theme="dark"] .loading-spinner {
-  border-color: rgba(255, 255, 255, 0.12);
-  border-top-color: var(--primary-color);
-}
-
+@keyframes spin { to { transform: rotate(360deg); } }
 
 @media (max-width: 1024px) {
-  .content-wrapper {
-    padding: 0 var(--space-4) var(--space-7);
-  }
-
-  .content-wrapper:has(> .home-page),
-  .content-wrapper:has(> .student-home) {
-    --home-page-gutter: 0.75rem;
-    padding-inline: var(--home-page-gutter);
-  }
-
-  .content-wrapper:has(> .settings-container) .footer,
-  .content-wrapper:has(> .settings-auth-required) .footer {
-    margin-left: calc(-1 * var(--space-4));
-    margin-right: calc(-1 * var(--space-4));
-  }
+  .content-wrapper { padding: var(--space-4) var(--space-4) var(--space-6); }
 }
 
 @media (max-width: 768px) {
-  /* No sidebar below this width — the bottom nav takes over, so content
-     should never be offset for it. */
   .app-content.sidebar-open,
-  .app-content.sidebar-collapsed {
-    margin-left: 0;
-    width: 100%;
-  }
+  .app-content.sidebar-collapsed { margin-left: 0; }
 
-  .app-body {
-    margin-top: var(--header-height);
-    min-height: calc(100vh - var(--header-height));
-    min-height: calc(100svh - var(--header-height));
-  }
-
-  /* Single horizontal gutter on the wrapper only. Padding on direct children
-     (e.g. authenticated home) stacked here and caused a squeezed layout on mobile. */
-  .content-wrapper {
-    padding: 0 var(--space-3) 0;
-    min-height: calc(100vh - var(--header-height));
-    min-height: calc(100svh - var(--header-height));
-  }
-
-  /* Course detail owns its own padding; remove wrapper gutter. */
-  .content-wrapper:has(> .course-detail-page) {
-    padding-inline: 0;
-  }
-
-  .content-wrapper:has(> .home-page),
-  .content-wrapper:has(> .student-home) {
-    --home-page-gutter: 0.5rem;
-    padding-inline: var(--home-page-gutter);
-  }
-
-  .content-wrapper:has(> .settings-container) .footer,
-  .content-wrapper:has(> .settings-auth-required) .footer {
-    margin-left: calc(-1 * var(--space-3));
-    margin-right: calc(-1 * var(--space-3));
-  }
-
-  .content-wrapper > .footer {
-    margin-left: calc(-1 * var(--space-3));
-    margin-right: calc(-1 * var(--space-3));
-  }
-
-  .content-wrapper:has(> .home-page) > .footer,
-  .content-wrapper:has(> .student-home) > .footer {
-    margin-left: calc(-1 * var(--home-page-gutter));
-    margin-right: calc(-1 * var(--home-page-gutter));
-  }
-}
-
-@media (max-width: 480px) {
-  .content-wrapper {
-    padding: 0 var(--space-3) 0;
-  }
-
-  /* Course detail owns its own padding; remove wrapper gutter. */
-  .content-wrapper:has(> .course-detail-page) {
-    padding-inline: 0;
-  }
-
-  .content-wrapper:has(> .home-page),
-  .content-wrapper:has(> .student-home) {
-    --home-page-gutter: 0.35rem;
-    padding-inline: var(--home-page-gutter);
-  }
-
-  .content-wrapper > .footer {
-    margin-left: calc(-1 * var(--space-3));
-    margin-right: calc(-1 * var(--space-3));
-  }
-
-  .content-wrapper:has(> .home-page) > .footer,
-  .content-wrapper:has(> .student-home) > .footer {
-    margin-left: calc(-1 * var(--home-page-gutter));
-    margin-right: calc(-1 * var(--home-page-gutter));
-  }
+  .content-wrapper { padding: var(--space-4) var(--space-4) var(--space-5); }
 }
 
 @media print {
-  .app-body {
-    margin-top: 0;
-  }
-
-  .content-wrapper {
-    padding: 0;
-    max-width: 100%;
-  }
+  .app-body { margin-top: 0; }
+  .content-wrapper { padding: 0; max-width: 100%; }
 }

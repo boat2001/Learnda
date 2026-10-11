@@ -1,0 +1,137 @@
+.subject-tile {
+  --subject: var(--brand-blue);
+  --subject-ink: var(--ink-blue);
+  --subject-tint: var(--tint-blue);
+  position: relative;
+  min-width: 0;
+}
+
+.subject-tile__link {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  border: 2px solid var(--line);
+  box-shadow: 0 4px 0 var(--line);
+  color: var(--ink);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+}
+
+.subject-tile__link:hover {
+  color: var(--ink);
+  border-color: var(--subject);
+  box-shadow: 0 4px 0 var(--subject);
+}
+
+.subject-tile__link:active { transform: translateY(4px); box-shadow: 0 0 0 transparent; }
+
+.subject-tile__art {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: var(--radius-md);
+  background: var(--subject-tint);
+  color: var(--subject-ink);
+  font-size: 1.7rem;
+}
+
+.subject-tile__body { flex: 1; min-width: 0; display: grid; gap: var(--space-1); }
+
+.subject-tile__name {
+  font-weight: 800;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+
+.subject-tile__badge {
+  justify-self: start;
+  padding: 1px 8px;
+  border-radius: var(--radius-full);
+  background: var(--surface-sunken);
+  color: var(--ink-soft);
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.subject-tile__progress { display: flex; align-items: center; gap: var(--space-2); }
+
+.subject-tile__bar {
+  flex: 1;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background: var(--surface-sunken);
+  overflow: hidden;
+}
+
+.subject-tile__bar > span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--subject);
+}
+
+.subject-tile__pct { font-size: 0.78rem; font-weight: 800; color: var(--ink-faint); min-width: 2.4em; text-align: right; }
+
+.subject-tile__chevron { flex: none; font-size: 1.5rem; color: var(--ink-faint); }
+
+.subject-tile__listen {
+  position: absolute;
+  top: var(--space-2);
+  right: var(--space-2);
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--radius-full);
+  background: var(--subject-tint);
+  color: var(--subject-ink);
+  font-size: 1.2rem;
+}
+
+.subject-tile__listen:active { transform: scale(0.92); }
+
+/* Primary: picture on top, name below. */
+.subject-tile--visual .subject-tile__link {
+  flex-direction: column;
+  align-items: flex-start;
+  padding: var(--space-4);
+  gap: var(--space-3);
+}
+
+.subject-tile--visual .subject-tile__art { width: 3.5rem; height: 3.5rem; font-size: 2rem; }
+.subject-tile--visual .subject-tile__body { width: 100%; }
+.subject-tile--visual .subject-tile__name { font-size: 1.05rem; padding-right: 0.5rem; }
+
+/* KG: a big picture card. The name is short and the speaker reads it. */
+.subject-tile--playful .subject-tile__link {
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  gap: var(--space-3);
+  min-height: 11rem;
+  padding: var(--space-5) var(--space-3) var(--space-4);
+  background: var(--subject-tint);
+  border-color: transparent;
+  box-shadow: 0 5px 0 color-mix(in srgb, var(--subject) 55%, transparent);
+}
+
+.subject-tile--playful .subject-tile__art {
+  width: 5rem;
+  height: 5rem;
+  border-radius: var(--radius-full);
+  background: var(--subject);
+  color: #fff;
+  font-size: 2.8rem;
+}
+
+.subject-tile--playful .subject-tile__name { font-family: var(--font-family-heading); font-size: 1.15rem; }
+.subject-tile--playful .subject-tile__listen { background: var(--surface); }
+
+/* JHS/SHS: a dense row. */
+.subject-tile--structured .subject-tile__link { padding: var(--space-3) var(--space-3) var(--space-3) var(--space-3); }
+.subject-tile--structured .subject-tile__art { width: 2.75rem; height: 2.75rem; font-size: 1.5rem; }

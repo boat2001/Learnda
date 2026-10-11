@@ -1991,7 +1991,9 @@ class AuthController {
       const user = await this.createUserFromIdentityChallenge({
         channel: identity.channel,
         contact: identity.contact,
-        password: passwordHash,
+        // User.beforeCreate hashes the password; keep the session's stored
+        // hash separate so the account password is hashed exactly once.
+        password,
         fullName: fullName || registrationSession.full_name || null
       }, req);
 

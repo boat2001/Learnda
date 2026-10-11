@@ -320,6 +320,7 @@ async function connectAndSync() {
 
   // Initialize plans if not present
   const shouldSeedPlans = config.startup.seedDefaultPlans;
+  await db.Plan.initializeFreePlan();
   if (shouldSeedPlans && db.Plan && db.Plan.initializeDefaultPlans) {
     await db.Plan.initializeDefaultPlans();
   } else if (db.Plan && db.Plan.initializeDefaultPlans) {

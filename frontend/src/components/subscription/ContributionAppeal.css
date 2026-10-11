@@ -1,181 +1,40 @@
 .contribution-appeal {
-  position: relative;
-  padding: 1.7rem 1.75rem;
-  margin-bottom: 0.25rem;
-  filter: drop-shadow(1px 3px 5px rgba(15, 23, 42, 0.1));
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3) var(--space-4);
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-xl);
+  background: var(--tint-blue);
+  border: 2px solid color-mix(in srgb, var(--brand-blue) 30%, transparent);
 }
 
-.contribution-appeal::before {
-  content: "i";
-  position: absolute;
-  top: 4%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 1.45rem;
-  height: 1.45rem;
-  border-radius: 50%;
-  background: #faf9f5;
-  border: 2px solid #2b62c4;
-  color: #2b62c4;
-  font-size: 0.8rem;
-  font-weight: 800;
-  font-style: italic;
-  font-family: Georgia, serif;
+.contribution-appeal__icon {
+  flex: none;
   display: grid;
   place-items: center;
-  z-index: 2;
-  line-height: 1;
+  width: 3rem;
+  height: 3rem;
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  color: var(--ink-blue);
+  font-size: 1.7rem;
 }
 
-.contribution-appeal__frame {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-  pointer-events: none;
-}
+.contribution-appeal__content { flex: 1 1 16rem; min-width: 0; }
+.contribution-appeal__heading { font-size: 1.15rem; font-weight: 800; margin-bottom: 2px; }
+.contribution-appeal__content p { margin: 0; color: var(--ink-soft); font-weight: 600; }
 
-.contribution-appeal__frame path {
-  stroke: #2b62c4;
-  stroke-width: 2;
-  fill: #faf9f5;
-  vector-effect: non-scaling-stroke;
-}
-
-.contribution-appeal__heading {
-  position: relative;
-  margin: 0 0 0.8rem;
-  color: #1a3040;
-  font-size: 1.1rem;
-  font-weight: 800;
-  line-height: 1.25;
-  text-align: center;
-}
-
-.contribution-appeal p {
-  position: relative;
-  margin: 0 0 0.3rem;
-  font-size: 0.82rem;
-  font-style: italic;
-  line-height: 1.65;
-  color: #3d5068;
-}
-
-.contribution-appeal p:last-child {
-  margin-bottom: 0;
-}
-
-.contribution-appeal__cta {
-  font-style: normal !important;
-  font-weight: 700 !important;
-  color: #1a3040 !important;
-}
-
-/* Placement below a full page (Home, Learn, Practice, Files) for free users. */
-.contribution-appeal.page-contribution-appeal {
-  max-width: 640px;
-  margin-inline: auto;
-  margin-top: 1.35rem;
-}
-
-/* On desktop, page-level appeals align with the full content area instead of
-   floating as a narrow card. Modal and onboarding appeals remain unchanged. */
-@media (min-width: 900px) {
-  .contribution-appeal.page-contribution-appeal {
-    box-sizing: border-box;
-    width: 100%;
-    max-width: none;
-  }
-
-  .contribution-appeal.page-contribution-appeal p {
-    margin-left: clamp(2rem, 4vw, 4rem);
-  }
-}
-
-/* Sits at the bottom of the box on pages that don't show plan cards.
-   Centred and sized to its label on desktop; full-width on narrow screens. */
 .contribution-appeal__button {
-  position: relative;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  gap: 0.4rem;
-  width: fit-content;
-  margin: 1.15rem auto 0;
-  padding: 0.62rem 1.5rem;
-  border: 2px solid #2b62c4;
-  border-radius: 0.65rem;
-  background: #2b62c4;
-  color: #ffffff;
-  font-size: 0.84rem;
-  font-weight: 700;
-  font-style: normal;
-  letter-spacing: 0.01em;
-  text-decoration: none;
-  white-space: nowrap;
-  box-shadow: 0 6px 16px rgba(43, 98, 196, 0.28);
-  transition: background 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+  min-height: 2.75rem;
+  padding: 0 var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--primary-color);
+  color: #fff;
+  font-weight: 800;
+  box-shadow: 0 3px 0 var(--press-primary);
 }
 
-.contribution-appeal__button:hover {
-  background: #185a5f;
-  border-color: #185a5f;
-  color: #ffffff !important;
-  transform: translateY(-1px);
-  box-shadow: 0 9px 20px rgba(43, 98, 196, 0.34);
-}
-
-.contribution-appeal__button:focus-visible {
-  outline: 3px solid rgba(43, 98, 196, 0.35);
-  outline-offset: 2px;
-}
-
-@media (max-width: 560px) {
-  .contribution-appeal__button {
-    width: 100%;
-    padding: 0.72rem 1rem;
-    font-size: 0.86rem;
-  }
-}
-
-[data-theme="dark"] .contribution-appeal__button {
-  background: #4ecdc4;
-  border-color: #4ecdc4;
-  color: #0d1b1a;
-  box-shadow: 0 6px 16px rgba(78, 205, 196, 0.22);
-}
-
-[data-theme="dark"] .contribution-appeal__button:hover {
-  background: #3fb8b0;
-  border-color: #3fb8b0;
-  color: #0d1b1a !important;
-  box-shadow: 0 9px 20px rgba(78, 205, 196, 0.28);
-}
-
-[data-theme="dark"] .contribution-appeal__button:focus-visible {
-  outline-color: rgba(78, 205, 196, 0.45);
-}
-
-[data-theme="dark"] .contribution-appeal::before {
-  background: #1a2535;
-  border-color: #4ecdc4;
-  color: #4ecdc4;
-}
-
-[data-theme="dark"] .contribution-appeal__frame path {
-  stroke: #4ecdc4;
-  fill: #1a2535;
-}
-
-[data-theme="dark"] .contribution-appeal p {
-  color: #8eafc7;
-}
-
-[data-theme="dark"] .contribution-appeal__heading {
-  color: #e6f0f8;
-}
-
-[data-theme="dark"] .contribution-appeal__cta {
-  color: #c8ddef !important;
-}
+.contribution-appeal__button:hover { color: #fff; background: var(--primary-hover); }

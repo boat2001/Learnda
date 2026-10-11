@@ -9,6 +9,7 @@ import { useAuth } from '../../hooks/useAuth';
 import api, { resolveUploadUrl } from '../../services/api';
 import { playUiSound } from '../../utils/uiSounds';
 import '../SharedPages.css';
+import PageHeader from '../../components/common/PageHeader';
 import './Blog.css';
 
 const getCategory = (blog) => blog.category || blog.metadata?.category || blog.tags?.[0] || 'General';
@@ -331,46 +332,36 @@ export default function Blog() {
 
   return (
     <div className="page-shell blog-page">
-      <section className="page-hero page-hero-compact page-hero-lean hero-theme-product blog-hero">
-        <div className="hero-grid">
-          <div>
-            <span className="hero-tag">Updates Blog</span>
-            <h1 className="hero-title">Learnda Blog</h1>
-            <p className="hero-subtitle">
-            Insights, tips, and stories to inspire your learning journey
-            </p>
+      <PageHeader icon="blog" title="Learnda Blog" description="Tips, stories and news for learners and parents." />
 
-            <form
-              className="blog-hero-actions"
-              onSubmit={(event) => {
-                event.preventDefault();
-                const query = searchInput.trim();
-                navigate(query ? `/blog?q=${encodeURIComponent(query)}` : '/blog');
-              }}
-            >
-              <div className="search-bar">
-                <input
-                  type="search"
-                  placeholder="Search articles..."
-                  value={searchInput}
-                  className="search-input"
-                  onChange={(event) => setSearchInput(event.target.value)}
-                />
-                <button className="search-button" aria-label="Search" type="submit">
-                  <FiSearch />
-                </button>
-              </div>
-              <button
-                className="btn btn-secondary blog-contribute"
-                type="button"
-                onClick={() => setWriteModalOpen(true)}
-              >
-                Contribute
-              </button>
-            </form>
-          </div>
+      <form
+        className="blog-hero-actions blog-toolbar"
+        onSubmit={(event) => {
+          event.preventDefault();
+          const query = searchInput.trim();
+          navigate(query ? `/blog?q=${encodeURIComponent(query)}` : '/blog');
+        }}
+      >
+        <div className="search-bar">
+          <input
+            type="search"
+            placeholder="Search articles..."
+            value={searchInput}
+            className="search-input"
+            onChange={(event) => setSearchInput(event.target.value)}
+          />
+          <button className="search-button" aria-label="Search" type="submit">
+            <FiSearch />
+          </button>
         </div>
-      </section>
+        <button
+          className="btn btn-secondary blog-contribute"
+          type="button"
+          onClick={() => setWriteModalOpen(true)}
+        >
+          Contribute
+        </button>
+      </form>
 
       {renderFeaturedSection()}
 

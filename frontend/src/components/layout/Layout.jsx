@@ -8,9 +8,7 @@ import { useAnalytics } from "../../hooks/useAnalytics";
 import { useAuth } from "../../hooks/useAuth";
 import FeatureLockModal from "../subscription/FeatureLockModal";
 import PwaInstallBanner from "../common/PwaInstallBanner";
-import SupporterBanner from "../common/SupporterBanner";
 import ProfileCompletionBanner from "../common/ProfileCompletionBanner";
-import ContributionPromptBanner from "../common/ContributionPromptBanner";
 import RouteFallback from "../common/RouteFallback";
 import SeoManager from "../seo/SeoManager";
 import { getPlanTierClass } from "../../utils/planTheme";
@@ -27,9 +25,9 @@ import "./Layout.css";
 export default function Layout() {
   const { user } = useAuth();
   const { pathname } = useLocation();
-  // The home page renders its own ProfileCompletionBanner placed right after
-  // the greeting, so the global one here would otherwise duplicate it.
-  const showGlobalProfileBanner = pathname !== "/";
+  // Home, Learn and Practice already ask for the class in the page itself,
+  // so the reminder banner would only repeat it there.
+  const showGlobalProfileBanner = !["/", "/learn", "/practice"].includes(pathname);
   // Phone-only threshold — tablets and up keep the sidebar. Matches the
   // @media (max-width: 768px) breakpoint used across the layout CSS.
   const getInitialIsMobile = () => {
@@ -172,7 +170,7 @@ export default function Layout() {
   };
 
   return (
-    <div className={`app-shell ${planTierClass}`}>
+    <div className={`app-shell ${planTierClass}`} data-level-group={user?.level_group || undefined}>
       <SeoManager />
       <Header
         onToggleSidebar={handleToggleSidebar}
@@ -188,8 +186,6 @@ export default function Layout() {
         >
           <PwaInstallBanner />
           {showGlobalProfileBanner && <ProfileCompletionBanner />}
-          <ContributionPromptBanner />
-          <SupporterBanner />
           <div className="content-wrapper">
             <Suspense fallback={<RouteFallback compact />}>
               <Outlet />

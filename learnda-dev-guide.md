@@ -240,7 +240,7 @@ Learnda must support all of these pathways:
 3. Business
 4. Applied Technology
 5. Home Economics
-6. Art
+6. Visual Arts
 7. Agriculture
 8. Languages
 9. STEM — designated STEM schools only
@@ -268,7 +268,7 @@ Learnda must support all of these pathways:
 | Category             | Subjects |
 | -------------------- | -------- |
 | Core                 | Mathematics, Social Studies, English Language, General Science, PEH Core |
-| Business Electives   | Business Studies, Business Management, Accounting, Economics, ICT, Additional Mathematics |
+| Business Electives   | Business Studies, Business Management, Accounting, Economics, ICT, Elective Mathematics |
 | Additional Electives | Geography, Government, History, Religious Studies, Literature in English, Applied Technology, Computing, Design & Communication Technology, Art and Design Foundation, Art and Design Studio, Home Economics, Performing Arts, Ghanaian Languages, Arabic, French |
 | Science Electives    | Agriculture, Biology, Chemistry, Physics, PEH Elective, Agricultural Science |
 

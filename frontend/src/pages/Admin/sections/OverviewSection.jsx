@@ -39,7 +39,7 @@ function fmtCurrency(n) {
 }
 
 const TEAL = '#2b62c4';
-const TEAL_LIGHT = '#4fb3ad';
+const TEAL_LIGHT = '#5b95ea';
 
 function chartColors() {
   const s = getComputedStyle(document.documentElement);

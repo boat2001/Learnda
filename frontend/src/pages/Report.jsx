@@ -4,6 +4,8 @@ import { useAuth } from '../hooks/useAuth';
 import api from '../services/api';
 import FormContactIdentity from '../components/common/FormContactIdentity';
 import FormModal from '../components/common/FormModal';
+import PageHeader from '../components/common/PageHeader';
+import PrimaryPageAction from '../components/common/PrimaryPageAction';
 import './SharedPages.css';
 
 const CATEGORIES = ['Bug', 'Content issue', 'Payment', 'Community', 'Other'];
@@ -64,7 +66,7 @@ export default function Report() {
   };
 
   return (
-    <div className="page-shell">
+    <div className="page-shell footer-page action-page">
       <FormModal
         isOpen={showModal}
         onClose={closeModal}
@@ -118,91 +120,16 @@ export default function Report() {
         )}
       </FormModal>
 
-      <section className="page-hero page-hero-compact page-hero-lean hero-theme-development">
-        <div className="hero-grid">
-          <div>
-            <span className="hero-tag">Issue intake</span>
-            <h1 className="hero-title">Flag the issue before it slows someone else down.</h1>
-            <p className="hero-subtitle">
-              We review every message and respond within 24–48 hours. Use this page for bugs,
-              feedback, or account issues.
-            </p>
-            <div className="hero-actions">
-              <button className="btn btn-primary" type="button" onClick={() => setShowModal(true)}>
-                Report an issue
-              </button>
-            </div>
-            <div className="stat-grid">
-              <div className="stat-card">
-                <span className="stat-value">24–48h</span>
-                <span className="stat-label">Expected response window for most reports that need follow-up.</span>
-              </div>
-              <div className="stat-card">
-                <span className="stat-value">{CATEGORIES.length} categories</span>
-                <span className="stat-label">Enough routing detail to get your issue to the right team.</span>
-              </div>
-              <div className="stat-card">
-                <span className="stat-value">Direct triage</span>
-                <span className="stat-label">Reports are logged for investigation, not dropped into a black box.</span>
-              </div>
-            </div>
-          </div>
-          <div className="hero-panel">
-            <p className="panel-title">What happens next</p>
-            <div className="panel-list">
-              <div className="panel-list-item">
-                <span className="panel-dot" />
-                <div>
-                  <strong>We triage</strong>
-                  <p>Your report is logged and tagged for the right team.</p>
-                </div>
-              </div>
-              <div className="panel-list-item">
-                <span className="panel-dot" />
-                <div>
-                  <strong>We respond</strong>
-                  <p>Expect a reply from a Learnda admin within 2 days.</p>
-                </div>
-              </div>
-              <div className="panel-list-item">
-                <span className="panel-dot" />
-                <div>
-                  <strong>You speed things up</strong>
-                  <p>Clear steps, screenshots, and device context make debugging far easier.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="page-section split-grid">
-        <div className="info-card">
-          <h3>What makes a good report</h3>
-          <p>The more context you include, the faster we can reproduce and fix the issue.</p>
-          <div className="panel-list">
-            <div className="panel-list-item">
-              <span className="panel-dot" />
-              <div><strong>Steps to reproduce</strong><p>What did you click or do before the issue appeared?</p></div>
-            </div>
-            <div className="panel-list-item">
-              <span className="panel-dot" />
-              <div><strong>Device and browser</strong><p>Chrome on Android? Safari on iOS? This narrows the root cause quickly.</p></div>
-            </div>
-            <div className="panel-list-item">
-              <span className="panel-dot" />
-              <div><strong>Expected vs actual</strong><p>What did you expect to happen, and what actually happened?</p></div>
-            </div>
-          </div>
-        </div>
-        <div className="info-card">
-          <h3>Ready to report?</h3>
-          <p>Open the report form, choose a category, and describe the issue with as much detail as you have.</p>
-          <button className="btn btn-primary" type="button" onClick={() => setShowModal(true)}>
-            Report an issue
-          </button>
-        </div>
-      </section>
+      <PageHeader icon="report" title="Report a problem" description="Tell us what needs fixing. We reply within 24‑48 hours." />
+      <PrimaryPageAction icon="report" label="Report an issue" onClick={() => setShowModal(true)} />
+      <details className="action-page-details">
+        <summary>What makes a good report</summary>
+        <ul>
+          <li><strong>Steps:</strong> what you tapped or did before it happened.</li>
+          <li><strong>Device:</strong> for example Chrome on Android or Safari on iPhone.</li>
+          <li><strong>Expected vs actual:</strong> what you thought would happen, and what did.</li>
+        </ul>
+      </details>
     </div>
   );
 }

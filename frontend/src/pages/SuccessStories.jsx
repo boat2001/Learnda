@@ -4,6 +4,8 @@ import { useAuth } from '../hooks/useAuth';
 import api from '../services/api';
 import FormModal from '../components/common/FormModal';
 import useHorizontalAutoScroll from '../hooks/useHorizontalAutoScroll';
+import PageHeader from '../components/common/PageHeader';
+import SectionHeadingIcon from '../components/common/SectionHeadingIcon';
 import './SharedPages.css';
 
 const getDisplayName = (user) =>
@@ -110,29 +112,18 @@ export default function SuccessStories() {
 
   return (
     <div className="page-shell success-page-shell">
-      <section className="page-hero page-hero-compact page-hero-lean hero-theme-community success-hero-lean">
-        <div className="hero-grid">
-          <div>
-            <span className="hero-tag">Student outcomes</span>
-            <h1 className="hero-title">Community success stories</h1>
-            <p className="hero-subtitle">
-              Real wins students have shared from lessons, files, practice questions, and campus learning.
-            </p>
-            <div className="hero-actions">
-              <button className="btn btn-primary" type="button" onClick={() => setShowStoryModal(true)}>
-                Share your story
-              </button>
-              <a className="btn btn-secondary" href="#community-stories">
-                Read stories <FiArrowRight aria-hidden />
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
+      <PageHeader icon="stories" title="Success stories" description="Real wins from Learnda learners.">
+        <button className="btn btn-primary" type="button" onClick={() => setShowStoryModal(true)}>
+          Share your story
+        </button>
+        <button className="btn btn-secondary" type="button" onClick={() => document.getElementById('community-stories')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}>
+          Read stories <FiArrowRight aria-hidden />
+        </button>
+      </PageHeader>
 
       <section className="page-section success-story-section" id="community-stories">
         <div className="section-heading">
-          <h2>Stories from the community</h2>
+          <h2><SectionHeadingIcon name="stories" /><span className="section-heading__title">Stories from the community</span></h2>
           <p>Every win is a reminder that consistent learning pays off.</p>
         </div>
 

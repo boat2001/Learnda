@@ -79,6 +79,22 @@ module.exports = (sequelize) => {
     }
   };
 
+  Plan.initializeFreePlan = async function() {
+    const [plan] = await Plan.findOrCreate({
+      where: { name: 'Basic Student' },
+      defaults: {
+        description: 'Free access to basic learning resources',
+        price: 0,
+        billing_cycle: 'monthly',
+        is_active: true,
+        max_pls_items: 10,
+        max_contributions: 0
+      }
+    });
+    await Plan.initializePlanFeatures(plan);
+    return plan;
+  };
+
   Plan.initializeDefaultPlans = async function() {
     const plans = [
       {
@@ -127,17 +143,24 @@ module.exports = (sequelize) => {
     const planConfig = SUBSCRIPTION_PLANS[plan.name.toUpperCase().replace(' ', '_')];
     
     if (planConfig && planConfig.features) {
-      for (const feature of planConfig.features) {
-        await sequelize.models.PlanFeature.findOrCreate({
-          where: {
-            plan_id: plan.id,
-            feature_key: feature.key
-          },
-          defaults: {
-            enabled: feature.enabled,
-            config: feature
-          }
-        });
+      // One read plus one insert instead of a findOrCreate transaction per feature;
+      // this runs on every boot, so per-feature round-trips delayed the server listening.
+      const { PlanFeature } = sequelize.models;
+      const existing = await PlanFeature.findAll({
+        where: { plan_id: plan.id },
+        attributes: ['feature_key']
+      });
+      const existingKeys = new Set(existing.map(row => row.feature_key));
+      const missing = planConfig.features
+        .filter(feature => !existingKeys.has(feature.key))
+        .map(feature => ({
+          plan_id: plan.id,
+          feature_key: feature.key,
+          enabled: feature.enabled,
+          config: feature.config || {}
+        }));
+      if (missing.length) {
+        await PlanFeature.bulkCreate(missing);
       }
     }
   };

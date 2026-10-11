@@ -49,7 +49,9 @@ if (r2Configured) {
 
 // ── Local disk fallback ────────────────────────────────────────────────────────
 const backendRoot = path.resolve(__dirname, '..', '..');
-const uploadDir = path.resolve(process.env.UPLOAD_DIR || path.join(backendRoot, 'uploads'));
+const uploadDir = path.resolve(process.env.UPLOAD_DIR || (process.env.VERCEL
+  ? path.join(require('os').tmpdir(), 'learnda-uploads')
+  : path.join(backendRoot, 'uploads')));
 if (!r2Configured && !fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir, { recursive: true });
 }

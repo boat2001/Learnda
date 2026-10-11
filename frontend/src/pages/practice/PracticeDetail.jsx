@@ -16,7 +16,6 @@ import { buildCoursePath, buildCourseRouteState } from '../../utils/courseRoutin
 import { recordLastActivity, ACTIVITY_TYPES } from '../../utils/lastActivity';
 import { getDisplayCourseCode } from '../../utils/courseCode';
 import { buildPracticeSessionPath } from '../../utils/practiceSession';
-import { getSamplePracticeItemsForCourse } from '../../utils/samplePracticePapers';
 import {
   buildPrelimProgressStorageKey,
   isCompletedPrelim,
@@ -161,29 +160,6 @@ const getCourseCreditsText = (course) => {
   return 'Credits N/A';
 };
 
-const mergeCourseData = (base, next) => {
-  if (!next) return base || null;
-  const merged = { ...(base || {}) };
-  Object.entries(next).forEach(([key, value]) => {
-    if (value === null || value === undefined || value === '') return;
-    merged[key] = value;
-  });
-  return merged;
-};
-
-const mergeUniqueItems = (...groups) => {
-  const seen = new Set();
-  return groups
-    .flat()
-    .filter((item) => {
-      if (!item) return false;
-      const key = String(item.id || item.title || '');
-      if (!key || seen.has(key)) return false;
-      seen.add(key);
-      return true;
-    });
-};
-
 const getQuizCount = (course = {}) =>
   Math.max(
     0,
@@ -285,6 +261,7 @@ export default function PracticeDetail() {
   const [quizItems, setQuizItems] = useState([]);
   const [examItems, setExamItems] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState('');
   const [animatedProgressPercent, setAnimatedProgressPercent] = useState(0);
   const [animatedCoveredPercents, setAnimatedCoveredPercents] = useState({
     prelims: 0,
@@ -339,67 +316,22 @@ export default function PracticeDetail() {
   }, [course?.id, courseIdParam, prelimProgressStorageKey]);
 
   const loadPracticeCourseData = async () => {
-    const storedCourse = location.state?.course || null;
-    const resolvedCourseId = courseIdParam || storedCourse?.id || null;
-
+    setLoading(true);
+    setLoadError('');
     try {
-      setLoading(true);
-      let courseData = storedCourse;
-
-      if (resolvedCourseId) {
-        const courseResponse = await api.subjects.getBySlug(resolvedCourseId).catch(() => null);
-        if (courseResponse?.data) {
-          courseData = mergeCourseData(storedCourse || {}, courseResponse.data);
-        }
-      }
-
-      if (!courseData && courseSlug) {
-        courseData = {
-          title: courseSlug
-            .split('-')
-            .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
-            .join(' '),
-          code: courseSlug.toUpperCase().slice(0, 6),
-          credits: 3,
-          description: 'Practice details will be available once this course is fully loaded.',
-          isPreview: true,
-        };
-      }
-
-      setCourse(courseData || null);
-
-      if (!courseData?.title) {
-        setQuizItems([]);
-        setExamItems([]);
-        return;
-      }
-
-      const courseFilterTitle = stripPracticeCourseTitleSuffix(courseData.title);
-
-      const [quizContentResponse, examContentResponse] = await Promise.all([
-        api.content.getAll({ type: 'quiz', course: courseFilterTitle }).catch(() => null),
-        api.content.getAll({ type: 'past_question', course: courseFilterTitle }).catch(() => null),
-      ]);
-
-      const extractContent = (response) =>
-        Array.isArray(response?.content) ? response.content :
-        Array.isArray(response?.data?.content) ? response.data.content : [];
-
-      const quizContent = extractContent(quizContentResponse).map(mapQuizContent);
-      const examContent = extractContent(examContentResponse).map((item) => ({
-        ...mapQuizContent(item),
-        destination: item.id ? buildPracticeSessionPath(item.id) : '/resources/past-exams',
-      }));
-      const sampleQuizContent = getSamplePracticeItemsForCourse(courseFilterTitle, 'quiz').map(mapQuizContent);
-      const sampleExamContent = getSamplePracticeItemsForCourse(courseFilterTitle, 'past_question').map((item) => ({
-        ...mapQuizContent(item),
-        destination: item.id ? buildPracticeSessionPath(item.id) : '/resources/past-exams',
-      }));
-
-      setQuizItems(mergeUniqueItems(quizContent, sampleQuizContent));
-      setExamItems(mergeUniqueItems(examContent, sampleExamContent));
+      const response = await api.subjects.getPractice(courseSlug);
+      const data = response?.data;
+      if (!data?.subject) throw new Error('Subject not found.');
+      setCourse({ ...data.subject, title: data.subject.name, class_level: data.class_level });
+      setQuizItems((data.quizzes || []).map(mapQuizContent));
+      setExamItems((data.papers || []).map(item => ({
+        ...mapQuizContent(item), destination: buildPracticeSessionPath(item.id),
+      })));
     } catch (error) {
-      console.error('Error loading practice course:', error);
+      setCourse(null);
+      setQuizItems([]);
+      setExamItems([]);
+      setLoadError(error.message || 'Could not load practice.');
     } finally {
       setLoading(false);
     }
@@ -755,8 +687,8 @@ export default function PracticeDetail() {
   if (!course) {
     return (
         <div className="course-not-found">
-          <h2>Practice Course Not Found</h2>
-          <p>The practice course you're looking for doesn't exist or has been removed.</p>
+          <h2>Practice Unavailable</h2>
+          <p>{loadError || 'Practice is unavailable for this subject.'}</p>
           <Link to={collectionBackLink.to} state={collectionBackLink.state} className="back-button">
             {collectionBackLink.label}
           </Link>

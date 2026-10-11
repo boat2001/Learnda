@@ -294,9 +294,9 @@
 }
 
 [data-theme="dark"] .plan-btn.current {
-  background: rgba(79, 179, 173, 0.16);
+  background: rgba(91, 149, 234, 0.16);
   color: #bfe8e4;
-  border-color: rgba(79, 179, 173, 0.28);
+  border-color: rgba(91, 149, 234, 0.28);
 }
 
 [data-theme="dark"] .current-badge {
@@ -330,8 +330,8 @@
   [data-theme="dark"] .pricing-page .plans-grid > .plan-card:nth-child(-n+2) .plan-features::after {
     background: linear-gradient(
       180deg,
-      rgba(79, 179, 173, 0.55) 0%,
-      rgba(79, 179, 173, 0.1) 100%
+      rgba(91, 149, 234, 0.55) 0%,
+      rgba(91, 149, 234, 0.1) 100%
     );
   }
 }

@@ -220,7 +220,7 @@ function parseNumberedQuestions(text) {
       continue;
     }
 
-    const option = line.match(/^([A-D])[\).:\-\s]+(.+)/i);
+    const option = line.match(/^([A-D])[).:\-\s]+(.+)/i);
     if (option && current) {
       current.options.push(option[2]);
       continue;

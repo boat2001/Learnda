@@ -1,345 +1,151 @@
-/* Learn page — subjects for the learner's own class.
- *
- * §8 asks for three different feels from one component tree. Rather than fork
- * the markup, the page sets `learn-page--playful | --visual | --structured`
- * plus a `data-level-group` attribute, and the differences live here as token
- * overrides: sizing, density, and how loud a card is.
- */
+.learn-page { display: grid; gap: var(--space-5); }
 
-.learn-page {
-  --subject-radius: 16px;
-  --subject-pad: 18px;
-  --subject-mark: 52px;
-  --subject-title: var(--font-size-lg);
+.learn-header { display: grid; gap: var(--space-1); }
 
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 24px 16px 96px;
+.learn-header__class {
+  justify-self: start;
+  padding: 3px 12px;
+  border-radius: var(--radius-full);
+  background: var(--brand-amber);
+  color: var(--brand-navy);
+  font-weight: 900;
+  font-size: 0.85rem;
 }
 
-/* Kindergarten: big, few, loud. No text walls, everything tappable. */
-.learn-page--playful {
-  --subject-radius: 28px;
-  --subject-pad: 28px;
-  --subject-mark: 88px;
-  --subject-title: 1.5rem;
-}
+.learn-header__title { margin-top: var(--space-2); font-size: clamp(1.8rem, 4vw, 2.4rem); font-weight: 800; }
+.learn-header__sub { margin: 0; color: var(--ink-soft); font-weight: 600; }
 
-/* Primary: visual, but with room for a line of description. */
-.learn-page--visual {
-  --subject-radius: 20px;
-  --subject-pad: 22px;
-  --subject-mark: 64px;
-  --subject-title: 1.15rem;
-}
-
-/* ── Header ──────────────────────────────────────────────────────────────── */
-
-.learn-header {
-  margin-bottom: 20px;
-}
-
-.learn-header__eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  margin: 0 0 6px;
-  padding: 5px 12px;
-  border-radius: 999px;
-  background: var(--color-primary-50);
-  color: var(--color-primary-700);
-  font-size: var(--font-size-sm);
-  font-weight: 600;
-}
-
-.learn-header__title {
-  margin: 0;
-  font-family: var(--font-family-heading);
-  font-size: 1.6rem;
-  line-height: 1.2;
-  color: var(--color-text-primary);
-}
-
-.learn-page--playful .learn-header__title { font-size: 2rem; }
-
-.learn-header__sub {
-  margin: 6px 0 0;
-  color: var(--color-text-secondary);
-  font-size: var(--font-size-sm);
-}
-
-/* ── Class ladder (§6.3) ─────────────────────────────────────────────────── */
-
-.class-ladder {
-  margin-bottom: 24px;
-}
+/* §6.3 class ladder */
+.class-ladder { display: grid; gap: var(--space-2); min-width: 0; }
 
 .class-ladder__list {
-  display: flex;
-  gap: 8px;
-  margin: 0;
-  padding: 0 0 6px;
   list-style: none;
-  /* The ladder can exceed the viewport on phones; it scrolls, the page never does. */
+  display: flex;
+  gap: var(--space-2);
   overflow-x: auto;
-  scrollbar-width: thin;
+  padding: 2px 2px var(--space-2);
+  scrollbar-width: none;
 }
+
+.class-ladder__list::-webkit-scrollbar { display: none; }
 
 .class-ladder__item {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 8px 14px;
-  border: 1px solid var(--color-border-default);
-  border-radius: 999px;
-  background: var(--color-bg-light);
-  color: var(--color-text-secondary);
-  font-size: var(--font-size-sm);
-  font-weight: 600;
+  min-height: 2.6rem;
+  padding: 0 var(--space-3);
+  border-radius: var(--radius-full);
+  border: 2px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  font-weight: 800;
+  font-size: 0.9rem;
   white-space: nowrap;
-  cursor: pointer;
-  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
 }
 
-.class-ladder__item:hover:not(:disabled) {
-  border-color: var(--color-primary-400);
-  color: var(--color-primary-700);
-}
+.class-ladder__item.is-revision:hover { border-color: var(--brand-green); }
+.class-ladder__item.is-revision .class-ladder__icon { color: var(--ink-green); }
 
 .class-ladder__item.is-active {
-  background: var(--color-primary-600);
-  border-color: var(--color-primary-600);
-  color: var(--color-text-on-primary);
+  background: var(--brand-navy);
+  border-color: var(--brand-navy);
+  color: #fff;
+  box-shadow: 0 3px 0 var(--brand-amber);
 }
 
-.class-ladder__item.is-revision {
+[data-theme="dark"] .class-ladder__item.is-active { background: var(--brand-amber); border-color: var(--brand-amber); color: var(--brand-navy); box-shadow: none; }
+
+.class-ladder__item.is-locked,
+.class-ladder__item:disabled {
+  opacity: 1;
+  background: transparent;
   border-style: dashed;
-}
-
-/* Locked classes stay visible but plainly out of reach (§6.3). */
-.class-ladder__item.is-locked {
-  background: var(--color-secondary-100);
-  border-color: var(--color-border-light);
-  color: var(--color-text-light);
+  color: var(--ink-faint);
   cursor: not-allowed;
 }
 
-.class-ladder__icon {
-  font-size: 0.95em;
-  opacity: 0.75;
-}
+.class-ladder__icon { font-size: 1rem; }
 
 .class-ladder__hint {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 6px;
-  margin: 8px 0 0;
-  color: var(--color-text-light);
-  font-size: var(--font-size-xs);
+  gap: 4px var(--space-4);
+  margin: 0;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--ink-faint);
 }
 
-/* ── Subject grid ────────────────────────────────────────────────────────── */
+.class-ladder__hint > svg,
+.class-ladder__hint span svg { vertical-align: -2px; margin-right: 4px; }
 
-.subject-grid {
-  display: grid;
-  grid-template-columns: repeat(var(--cards-per-row, 2), minmax(0, 1fr));
-  gap: 14px;
+.revision-banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-lg);
+  background: var(--tint-green);
+  color: var(--ink);
+  font-weight: 700;
 }
 
-.subject-groups { display: grid; gap: 28px; }
+.revision-banner > svg { font-size: 1.4rem; color: var(--ink-green); }
+.revision-banner span { flex: 1; min-width: 12rem; }
+.revision-banner button { font-weight: 800; color: var(--ink-green); text-decoration: underline; text-underline-offset: 3px; }
+
+/* Grids, per presentation mode (§8) */
+.subject-grid { display: grid; gap: var(--space-3); }
+.subject-grid--playful { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-4); }
+.subject-grid--visual { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.subject-grid--structured { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-2) var(--space-3); }
+
+.subject-groups { display: grid; gap: var(--space-6); }
+.subject-group { display: grid; gap: var(--space-3); }
 
 .subject-group__title {
-  margin: 0 0 12px;
-  font-family: var(--font-family-heading);
-  font-size: 1.05rem;
-  color: var(--color-text-primary);
+  font-family: var(--font-family-sans);
+  font-size: 0.85rem;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
 }
-
-.subject-card {
-  position: relative;
-  border: 1px solid var(--color-border-light);
-  border-radius: var(--subject-radius);
-  background: var(--color-bg-light);
-  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
-}
-
-.subject-card:hover {
-  transform: translateY(-2px);
-  border-color: var(--subject-accent);
-  box-shadow: 0 8px 24px rgba(31, 48, 73, 0.1);
-}
-
-.subject-card__link {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: var(--subject-pad);
-  color: inherit;
-  text-decoration: none;
-}
-
-/* Playful/visual modes stack the mark above the label so the picture leads. */
-.learn-page--playful .subject-card__link,
-.learn-page--visual .subject-card__link {
-  flex-direction: column;
-  text-align: center;
-  gap: 10px;
-}
-
-.subject-card__mark {
-  display: grid;
-  place-items: center;
-  flex-shrink: 0;
-  width: var(--subject-mark);
-  height: var(--subject-mark);
-  border-radius: 50%;
-  background: color-mix(in srgb, var(--subject-accent) 16%, transparent);
-  color: var(--subject-accent);
-  font-family: var(--font-family-heading);
-  font-size: calc(var(--subject-mark) * 0.34);
-  font-weight: 700;
-  letter-spacing: 0.02em;
-}
-
-.subject-card__emoji { font-size: calc(var(--subject-mark) * 0.46); }
-
-.subject-card__body { min-width: 0; }
-
-.subject-card__title {
-  margin: 0;
-  font-family: var(--font-family-heading);
-  font-size: var(--subject-title);
-  line-height: 1.25;
-  color: var(--color-text-primary);
-}
-
-.subject-card__desc {
-  margin: 4px 0 0;
-  color: var(--color-text-secondary);
-  font-size: var(--font-size-sm);
-  /* Two lines maximum: §8 bans text walls for young learners. */
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.subject-card__tag {
-  display: inline-block;
-  margin-top: 8px;
-  padding: 3px 9px;
-  border-radius: 999px;
-  background: var(--color-primary-50);
-  color: var(--color-primary-700);
-  font-size: var(--font-size-xs);
-  font-weight: 600;
-}
-
-.subject-card__chevron {
-  margin-left: auto;
-  flex-shrink: 0;
-  color: var(--color-text-light);
-}
-
-/* Tap-to-listen (§8). Large enough for a small hand: 44px minimum target. */
-.subject-card__listen {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  display: grid;
-  place-items: center;
-  width: 44px;
-  height: 44px;
-  border: none;
-  border-radius: 50%;
-  background: color-mix(in srgb, var(--subject-accent) 14%, transparent);
-  color: var(--subject-accent);
-  font-size: 1.35rem;
-  cursor: pointer;
-  transition: background 0.15s ease, transform 0.15s ease;
-}
-
-.subject-card__listen:hover { transform: scale(1.06); }
-.subject-card__listen:active { transform: scale(0.96); }
-
-/* ── Empty / loading ─────────────────────────────────────────────────────── */
 
 .learn-empty {
-  padding: 48px 24px;
-  border: 1px dashed var(--color-border-default);
-  border-radius: 20px;
-  text-align: center;
-  color: var(--color-text-secondary);
-}
-
-.learn-empty h2 {
-  margin: 0 0 8px;
-  font-family: var(--font-family-heading);
-  color: var(--color-text-primary);
-}
-
-.learn-page__skeleton {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
+  justify-items: center;
+  gap: var(--space-2);
+  padding: var(--space-7) var(--space-4);
+  text-align: center;
+  border-radius: var(--radius-xl);
+  border: 2px dashed var(--line-strong);
 }
+
+.learn-empty h2 { font-size: 1.4rem; }
+.learn-empty p { margin: 0 0 var(--space-2); color: var(--ink-soft); }
+
+.learn-page__skeleton { display: grid; grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr)); gap: var(--space-3); }
 
 .learn-page__skeleton-card {
-  height: 108px;
-  border-radius: 16px;
-  background: linear-gradient(
-    90deg,
-    var(--color-secondary-100) 25%,
-    var(--color-secondary-200) 37%,
-    var(--color-secondary-100) 63%
-  );
-  background-size: 400% 100%;
-  animation: learn-shimmer 1.4s ease infinite;
+  height: 7rem;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(90deg, var(--surface-sunken), var(--surface), var(--surface-sunken));
+  background-size: 200% 100%;
+  animation: learn-shimmer 1.2s linear infinite;
 }
 
-@keyframes learn-shimmer {
-  0% { background-position: 100% 50%; }
-  100% { background-position: 0 50%; }
+@keyframes learn-shimmer { to { background-position: -200% 0; } }
+
+@media (max-width: 960px) {
+  .subject-grid--visual { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .subject-grid--playful { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 
-/* ── Responsive ──────────────────────────────────────────────────────────── */
-
-@media (min-width: 720px) {
-  .learn-page { padding: 32px 24px 96px; }
-  .subject-grid { grid-template-columns: repeat(var(--cards-per-row, 3), minmax(0, 1fr)); }
-}
-
-@media (max-width: 480px) {
-  /* Kindergarten keeps two big tiles per row even on the smallest phones —
-     one-per-row would push subjects below the fold and hide the choice. */
-  .learn-page--structured .subject-grid { grid-template-columns: 1fr; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .subject-card,
-  .subject-card__listen { transition: none; }
-  .subject-card:hover { transform: none; }
-  .learn-page__skeleton-card { animation: none; }
-}
-
-/* ── Dark theme ──────────────────────────────────────────────────────────── */
-
-[data-theme="dark"] .subject-card,
-[data-theme="dark"] .class-ladder__item {
-  background: var(--color-secondary-800);
-  border-color: var(--color-secondary-700);
-}
-
-[data-theme="dark"] .subject-card__title,
-[data-theme="dark"] .learn-header__title,
-[data-theme="dark"] .subject-group__title { color: var(--color-text-on-dark); }
-
-[data-theme="dark"] .class-ladder__item.is-locked {
-  background: var(--color-secondary-900);
-  border-color: var(--color-secondary-800);
-}
-
-[data-theme="dark"] .learn-header__eyebrow {
-  background: color-mix(in srgb, var(--color-primary-600) 22%, transparent);
-  color: var(--color-primary-200);
+@media (max-width: 640px) {
+  .subject-grid--structured { grid-template-columns: 1fr; }
+  .subject-grid--playful { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-3); }
 }

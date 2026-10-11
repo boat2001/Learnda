@@ -62,13 +62,10 @@ export default function ClassPlacementPrompt({ mode = 'class', classLevel = null
     setSaving(true);
     setError('');
     try {
-      await api.request('/me/class-placement', {
-        method: 'PUT',
-        body: JSON.stringify({
+      await api.me.setClassPlacement({
           class_level: selected,
           pathway_id: needsPathway ? pathwayId : null,
           is_stem_school: needsPathway ? isStemSchool : false,
-        }),
       });
       onPlaced?.();
     } catch (err) {

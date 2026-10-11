@@ -15,13 +15,12 @@ import {
   FiUsers,
   FiHelpCircle,
   FiDownload,
-  FiShare2,
   FiUser,
   FiLogOut,
+  FiLogIn,
   FiTrendingUp,
   FiStar,
   FiAward,
-  FiUploadCloud,
   FiFileText,
   FiPlayCircle,
   FiClipboard,
@@ -52,6 +51,7 @@ import ConfirmModal from "../common/ConfirmModal";
 import CommunityForumPicker from "../community/CommunityForumPicker";
 import UserAvatar from "../common/UserAvatar";
 import { FEATURE_FLAGS } from "../../config/featureFlags";
+import { getClassLabel } from "../../constants/education";
 import "./Header.css";
 
 const LOGO_SRC = `${import.meta.env.BASE_URL}learnda-logo.webp`;
@@ -266,7 +266,7 @@ function GlobalSearchPanel({
       <div className="global-search-panel-head">
         <div>
           <strong>{hasQuery ? `Search results for "${trimmed}"` : "Search Learnda"}</strong>
-          <span>{hasQuery ? `${total} matches across learning content` : "Type at least 2 characters to search."}</span>
+          <span>{hasQuery ? `${total} found` : "Type at least 2 characters to search."}</span>
         </div>
         <button type="button" className="global-search-close" onClick={onClose} aria-label="Close search results">
           <FiX />
@@ -276,7 +276,7 @@ function GlobalSearchPanel({
       {!hasQuery ? (
         <div className="global-search-hint">
           <FiLayers />
-          <p>Find courses, text lessons, videos, files, practice sets, groups, and edutainment without leaving this page.</p>
+          <p>Find lessons, practice and notes for your class.</p>
         </div>
       ) : loading && total === 0 ? (
         <div className="global-search-loading">Searching...</div>
@@ -286,7 +286,7 @@ function GlobalSearchPanel({
         </div>
       ) : total === 0 ? (
         <div className="global-search-empty">
-          <p>No matching content yet.</p>
+          <p>Nothing found. Try a shorter word.</p>
           <button type="button" onClick={onClear}>Clear search</button>
         </div>
       ) : (
@@ -723,13 +723,15 @@ function Header({ onToggleSidebar, toggleButtonRef, currentTheme, onThemeToggle 
     run();
   }, [checkAuth, isAuthenticated, location.pathname, location.search, navigate, nextStep, trackEvent]);
 
+  // Under the wordmark: the learner's class once placed, otherwise the span
+  // of the school system Learnda covers.
+  const brandTagline = getClassLabel(user?.class_level) || "KG 1 to SHS 3";
+
   const menuItems = [
-    { text: "Download App",       icon: <FiDownload />,      action: () => { navigate("/download");     setShowMenu(false); } },
-    { text: "Invite Friends", icon: <FiShare2 />, action: () => { navigate("/invite-friends"); setShowMenu(false); } },
-    { text: "Create Content",     icon: <FiUploadCloud />,   action: () => { navigate("/create");           setShowMenu(false); } },
+    { text: "Get the app",        icon: <FiDownload />,      action: () => { navigate("/download");     setShowMenu(false); } },
     FEATURE_FLAGS.studyGroups && { text: "Study Groups", icon: <FiUsers />, action: () => { navigate("/groups"); setShowMenu(false); } },
     FEATURE_FLAGS.community && { type: "community-picker" },
-    { text: "User Manual",        icon: <FiHelpCircle />,    action: () => { navigate("/user-manual");      setShowMenu(false); } },
+    { text: "Help",               icon: <FiHelpCircle />,    action: () => { navigate("/user-manual");      setShowMenu(false); } },
   ].filter(Boolean);
 
   const handleAuthClick = (mode) => {
@@ -985,11 +987,8 @@ function Header({ onToggleSidebar, toggleButtonRef, currentTheme, onThemeToggle 
                   <img src={LOGO_DARK_SRC} alt="Learnda logo" className="logo-dark" />
                 </span>
                 <span className="brand-copy">
-                  <span className="brand-title-row">
-                    <span className="brand-text">Learnda</span>
-                    <span className="version-badge">v3</span>
-                  </span>
-                  <span className="brand-tagline">Learning Platform</span>
+                  <span className="brand-text">Learnda</span>
+                  <span className="brand-tagline">{brandTagline}</span>
                 </span>
               </Link>
             </div>
@@ -1000,7 +999,7 @@ function Header({ onToggleSidebar, toggleButtonRef, currentTheme, onThemeToggle 
               <FiSearch className="search-icon" />
               <input
                 type="text"
-                placeholder="Search lessons, files, courses..."
+                placeholder="Search your lessons"
                 className="search-input"
                 onFocus={() => handleSearchInputFocus("desktop")}
                 value={searchQuery}
@@ -1091,7 +1090,7 @@ function Header({ onToggleSidebar, toggleButtonRef, currentTheme, onThemeToggle 
                           navigate("/notifications");
                         }}
                       >
-                        View All Notifications
+                        See all notifications
                       </button>
                     </div>
                   )}
@@ -1115,7 +1114,7 @@ function Header({ onToggleSidebar, toggleButtonRef, currentTheme, onThemeToggle 
                           <FiSearch className="menu-search-icon" />
                           <input
                             type="text"
-                            placeholder="Search lessons, files, courses..."
+                            placeholder="Search your lessons"
                             className="menu-search-input"
                             onFocus={() => handleSearchInputFocus("menu")}
                             value={searchQuery}
@@ -1151,6 +1150,19 @@ function Header({ onToggleSidebar, toggleButtonRef, currentTheme, onThemeToggle 
                         {unreadNotifications > 0 && (
                           <span className="menu-item-meta">{unreadNotifications}</span>
                         )}
+                      </button>
+                    )}
+                    {!user && (
+                      <button
+                        className="menu-dropdown-item menu-login-item"
+                        onClick={() => {
+                          handleAuthClick("login");
+                          setShowMenu(false);
+                        }}
+                        type="button"
+                      >
+                        <span className="menu-icon"><FiLogIn /></span>
+                        Log in
                       </button>
                     )}
                     {menuItems.map((item, index) =>
@@ -1266,13 +1278,19 @@ function Header({ onToggleSidebar, toggleButtonRef, currentTheme, onThemeToggle 
               {!user && (
                 <div className="auth-buttons">
                   <button
+                    className="auth-button login-button"
+                    onClick={() => handleAuthClick("login")}
+                    type="button"
+                  >
+                    Log in
+                  </button>
+                  <button
                     className="auth-button register-button"
                     onClick={() => handleAuthClick("register")}
                     type="button"
-                    title="Create account"
                   >
-                    <FiUserPlus />
-                    <span>Get Started</span>
+                    <FiUserPlus aria-hidden="true" />
+                    <span>Join free</span>
                   </button>
                 </div>
               )}

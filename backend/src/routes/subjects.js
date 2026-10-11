@@ -7,6 +7,7 @@
 // ask this API for content above your class -- the scope is derived from the
 // learner's academic profile, never from a query parameter.
 const router = require('express').Router();
+const { Op, Sequelize } = require('sequelize');
 const { authenticate, optionalAuth } = require('../middleware/auth');
 const models = require('../models');
 const {
@@ -270,6 +271,34 @@ router.get('/:slug/lessons', authenticate, async (req, res) => {
     console.error('GET /subjects/:slug/lessons error:', error);
     return res.status(500).json({ success: false, error: 'Failed to load lessons' });
   }
+});
+
+router.get('/:slug/practice', authenticate, async (req, res) => {
+  const profile = await loadPlacement(req);
+  const { units, placement } = await getVisibleLearningUnits(models, profile);
+  if (!placement) return res.status(409).json({ success: false, error: 'Set your class to see practice.', needs_class_placement: true });
+  if (placement.levelGroup === LEVEL_GROUPS.KINDERGARTEN) return res.status(403).json({ success: false, error: 'Quizzes and exams are not available in Kindergarten.' });
+  const unit = units.find(item => item.slug === req.params.slug);
+  if (!unit) return res.status(404).json({ success: false, error: 'Subject not found' });
+  const classLevel = req.query.class_level || placement.classLevel;
+  if (!canOpenContent(placement.classLevel, classLevel)) return res.status(403).json({ success: false, error: 'That class is not open to you yet.' });
+  const items = await models.TextItem.findAll({
+    where: {
+      status: 'published', subtype: { [Op.in]: ['quiz', 'past_question'] },
+      [Op.and]: [
+        Sequelize.where(Sequelize.json('metadata.class_level_code'), classLevel),
+        { [Op.or]: [
+          Sequelize.where(Sequelize.json('metadata.learning_unit_id'), unit.id),
+          Sequelize.where(Sequelize.json('metadata.subject_slug'), unit.slug),
+        ] },
+      ],
+    }, order: [['created_at', 'ASC']],
+  });
+  res.json({ success: true, data: {
+    subject: serializeUnit(unit, placement.classLevel), class_level: classLevel,
+    quizzes: items.filter(item => item.subtype === 'quiz'),
+    papers: items.filter(item => item.subtype === 'past_question'),
+  } });
 });
 
 module.exports = router;
