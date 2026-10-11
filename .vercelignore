@@ -1,0 +1,11 @@
+.git
+.cache
+**/node_modules
+**/dist
+**/coverage
+**/.agents
+**/.env
+**/.env.*
+backend/uploads
+backend/last-notes
+**/*.log

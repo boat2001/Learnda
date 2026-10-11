@@ -116,3 +116,5 @@ NUL.*
 *.njsproj
 *.sln
 *.sw?
+
+.vercel
