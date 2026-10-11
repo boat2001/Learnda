@@ -36,7 +36,8 @@ export default function Layout() {
   };
 
   const [isMobile, setIsMobile] = useState(getInitialIsMobile);
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  // Desktop starts with the sidebar expanded; phones never render it.
+  const [sidebarOpen, setSidebarOpen] = useState(() => !getInitialIsMobile());
   const [themePreference, setThemePreference] = useState(getStoredThemePreference);
   const [theme, setTheme] = useState(() => resolveThemePreference(getStoredThemePreference()));
   const [featureLockModal, setFeatureLockModal] = useState({

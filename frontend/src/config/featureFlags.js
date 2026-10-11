@@ -4,5 +4,5 @@
 // full list of touch points and the re-enable checklist for each feature.
 export const FEATURE_FLAGS = {
   studyGroups: false,
-  community: false,
+  community: true,
 };

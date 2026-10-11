@@ -134,7 +134,7 @@ export default function GuestHome() {
           <p>Learnda moves with your child through school, one class each school year.</p>
         </header>
         <div className="landing-journey">
-          <ClassJourney />
+          <ClassJourney animate />
         </div>
         <div className="stage-grid">
           {STAGES.map((stage) => (

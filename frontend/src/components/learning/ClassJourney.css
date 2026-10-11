@@ -1,8 +1,48 @@
 .journey {
+  position: relative;
   list-style: none;
   display: grid;
   grid-template-columns: 2fr 6fr 3fr 3fr;
   gap: var(--space-2);
+}
+
+.journey--animated .journey__dot {
+  position: relative;
+  overflow: hidden;
+}
+
+.journey--animated .journey__dot::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--group);
+  transform: translateY(105%);
+  transition: transform 220ms ease-out;
+}
+
+.journey--animated .is-reached .journey__dot::before {
+  transform: translateY(0);
+}
+
+.journey__traveler {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid var(--surface);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--brand-amber) 20%, transparent);
+  pointer-events: none;
+  opacity: 0;
+  z-index: 1;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .journey__traveler { display: none; }
+  .journey--animated .journey__dot::before { transition: none; }
 }
 
 .journey__group {

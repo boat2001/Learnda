@@ -17,7 +17,7 @@ const icons = {
   socials: FiShare2, partnerships: FiBriefcase, privacy: FiShield,
   report: FiAlertCircle, spotlights: FiStar, stories: FiAward,
   terms: FiFileText, notifications: FiBell, blog: FiEdit3, manual: FiBookOpen,
-  password: FiKey, resources: FiFolder,
+  password: FiKey, resources: FiFolder, arena: FiAward,
 };
 
 // One logo wing colour per page, spread so pages that sit together (the
@@ -29,7 +29,7 @@ const TONES = {
   team: 'blue', roadmap: 'green', support: 'orange', plans: 'amber',
   join: 'green', events: 'orange', stories: 'amber', spotlights: 'blue',
   socials: 'orange', invite: 'green', notifications: 'blue', blog: 'orange',
-  investments: 'green', feature: 'amber', password: 'blue', resources: 'green',
+  investments: 'green', feature: 'amber', password: 'blue', resources: 'green', arena: 'orange',
 };
 
 export default function PageHeader({ title, description, icon = 'about', children }) {

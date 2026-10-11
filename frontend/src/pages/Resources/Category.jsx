@@ -18,7 +18,7 @@ const CATEGORY_META = {
   'course-outlines': {
     title: 'Course outlines',
     subtitle: 'Stay aligned with official syllabi and study checkpoints.',
-    categories: ['course_outline', 'curriculum_policy', 'course_notes'],
+    categories: ['course_outline', 'curriculum_policy'],
   },
   'past-exams': {
     title: 'Past exams',
@@ -33,7 +33,7 @@ const CATEGORY_META = {
   'answers-solutions': {
     title: 'Answers and solutions',
     subtitle: 'Review worked solutions for harder questions.',
-    categories: ['sample_questions', 'course_notes'],
+    categories: ['sample_questions'],
   },
 };
 

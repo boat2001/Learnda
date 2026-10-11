@@ -33,6 +33,7 @@ import './styles/global.css';
 const Home = lazy(() => import('./pages/Home'));
 const LearnIndex = lazy(() => import('./pages/learn'));
 const MySpace = lazy(() => import('./pages/MySpace'));
+const Arena = lazy(() => import('./pages/Arena'));
 const PracticeIndex = lazy(() => import('./pages/practice'));
 const PracticeDetail = lazy(() => import('./pages/practice/PracticeDetail'));
 const PracticeSession = lazy(() => import('./pages/practice/PracticeSession'));
@@ -536,6 +537,9 @@ function RouteTree() {
                         <MySpace />
                       </ProtectedRoute>
                     } />
+
+                    {/* Arena — learner competitions, in My Space's old nav slot. */}
+                    <Route path="arena" element={<Arena />} />
 
                     {/* PLS retired — old URLs redirect to Learn / Practice */}
                     <Route path="pls" element={<PlsRedirect base="/learn" />} />

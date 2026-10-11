@@ -232,6 +232,10 @@ const matchesSearchQuery = (haystack = '', query = '') => {
 
 const getFilesFromResponse = (response) => response?.files || response?.data?.files || [];
 
+// This page lists past questions only; course notes are left out.
+const isNotesFile = (file = {}) =>
+  /notes?$/i.test(toText(file?.category || file?.type || file?.file_category));
+
 const getResourceFileCardModel = (file = {}, index = 0, courseMetaMap = new Map(), fallbackCourses = []) => {
   const rawTitle = toText(file?.title || file?.file_name || `File ${index + 1}`);
   const rawCourseName = toText(file?.course || file?.course_name || file?.subject || 'General Studies');
@@ -394,7 +398,9 @@ export default function ResourcesIndex() {
 
   const mapFileList = useCallback(
     (files = [], courseMetaMap = new Map(), fallbackCourses = []) =>
-      files.map((file, index) => getResourceFileCardModel(file, index, courseMetaMap, fallbackCourses)),
+      files
+        .filter((file) => !isNotesFile(file))
+        .map((file, index) => getResourceFileCardModel(file, index, courseMetaMap, fallbackCourses)),
     []
   );
 
@@ -1020,7 +1026,7 @@ export default function ResourcesIndex() {
           <FiFolder />
         </div>
         <div className="learn-shell-header-copy">
-          <h1 className="header-sheen-copy" key={`resources-header-title-${headerSheenCycle}`}>Files</h1>
+          <h1 className="header-sheen-copy" key={`resources-header-title-${headerSheenCycle}`}>Past Questions</h1>
           <p className="header-sheen-copy" key={`resources-header-tagline-${headerSheenCycle}`}>
             "{RESOURCES_PAGE_QUOTE}"{' '}
             <span className="learn-shell-header-author">- {RESOURCES_PAGE_QUOTE_AUTHOR}</span>
